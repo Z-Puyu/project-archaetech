@@ -124,32 +124,76 @@ The technologies will be divided into three categories with consideration for fu
 
 #### Production Methods
 
+We plan to include two types of production methods for each productive building, namely **automated** and **manpowered**. 
 
+In the automated mode, the building is run by a centralised AI computer and the maintenance of the building consumes more energy.  The player also cannot manually override the output level, i.e., the building always functions at 100% capacity (this means at a time of resource shortage these buildings will continuously cause deficits). To increase the output of automated building, the only way is through upgrading technologies.
+
+In the manpowered mode, the building requires a certain number of Pops to be employed by the **jobs** it offers to fully function. Employed Pops require some amount of food and consumer goods to generate output, but the building itself requires less energy. The player can also adjust the output level between 50% to 125%. Pops have a probability of transforming into **experts**, which will bring an additional productivity bonus.
 
 #### Education & Leaders
 
+The player can build **educational institutions** to train regular Pops into experts in a certain industry at a higher conversion rate. Expert researchers can only appear via educational institutions.
 
+If an industry has at least one expert Pop employed, then there will be a chance of a **leader** spawning from the industry. The player can assign the leader to the respective building to further boost its productivity provided that the building is manpowered. The more experts an industry has, the higher the chance of a leader spawning.
 
 #### Ideologies & Policies
 
+As the nation grows, **ideologies** may emerge among the Pops. Ideologies are sets of value systems a Pop believes in. This may influence the behaviours of the Pops. For example, an environmentalist Pop may demand less consumer goods and refuse to work at heavy industries.
 
+The player will be prompted to choose a few among all ideologies present as the **mainstream** ideologies, which will give buffs and debuffs to the whole nation and increase the chances of these ideologies appearing among Pops.
+
+**Policies** are closely tied to ideologies and are unlocked mainly via researching humanities technologies. Policies define the rules in the sanctuary and may produce interesting effects in interaction with ideologies.
 
 #### Events
 
+**Events** are an integral element to create immersion. We plan to script a large number of flavour events which will randomly get triggered during the game process. These events help establish the storyline of the gameplay in a 4X game like ours. 
 
+The player will need to resolve each event by choosing one of the available options. Sometimes the options will bring about predictable outcomes, whereas other times the outcomes can be vague and unclear.
 
 #### Species Customisation
 
+The player may customise the species to play as before the game starts. This includes set the basic traits, custom race names and so on.
 
+PS. Most likely we don't need a very fancy system for this.
 
 ### Phase III: Quality-of-life Extensions
 
 #### Competitive AI Players
 
+Being the only player can be boring sometimes and some competition may make the game more dynamic and interactive. Therefore, we plan to implement AI sanctuary dwellers. They may come from different pre-apocalypse civilisations and have totally different traits.
 
+The human player should be able to do diplomacy with the AI players. Basic features of diplomacy will include:
+
+- Trade resources
+
+- Share technologies
+
+- Exchange chartered maps
+
+- Spy & sabotage
+
+We are still considering whether a war mechanic is needed.
 
 #### Late-Game Challenges
 
-
+Experienced players can get over-powered pretty quickly in 4X games like ours. To prevent late-game from becoming too boring, late-game challenges might be useful.
 
 #### Mini-quests & Achievements
+
+Based on the current condition of the player's sanctuary, we can dynamically provide a list of mini-tasks for the player to accomplish, so that the player will have a stronger sense of purpose while playing the game.
+
+## Coding Conventions
+
+- All variables and functions have their names spelt in **snake_case**.
+
+- All classes and game files have their names spelt in **PascalCase**.
+
+- Always use **type notations** for variable declaration and return type of functions.
+
+- Always use a **semi-colon** at the end of each statement.
+
+- Use **and**, **or**, **not** rather than **&&**, **||**, **!**.
+
+- No statement should be longer than **100 characters**.
+
+- Names of variables and functions should be **descriptive** and **no custom abbreviations** are allowed.
