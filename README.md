@@ -240,11 +240,13 @@ Based on the current condition of the player's sanctuary, we can dynamically pro
 
 - All classes and game files have their names spelt in **PascalCase**.
 
+- Folders should be named using **kebab-case**.
+
 - Always use the **self** keyword in class methods when referencing class attributes.
 
 - Always use **type notations** for variable declaration and (non-trivial) return type of functions.
 
-- Each line should contain only a single statement. Preferably, use a **semi-colon** at the end of each statement.
+- Each line should contain only a single statement. 
 
 - Use **and**, **or**, **not** rather than **&&**, **||**, **!**.
 
