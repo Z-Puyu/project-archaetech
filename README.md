@@ -6,11 +6,11 @@ We all love to play 4X strategy games. Most of the currently available 4X games,
 
 ## Background Story
 
-X is a planet which is capable of sustaining intelligent life forms. Unfortunately, however, the planet is harsh to its residents and annihilates civilisations at random intervals. As a result, the planet is full of archaelogical sites containing the relics and knowlegde of the civilisations in the ancient times.
+Intelligent life forms thrived on a planet. Unfortunately, however, the planet is harsh to its residents and annihilates civilisations at random intervals. As a result, the planet is full of archaelogical sites containing the relics and knowlegde of the civilisations in the ancient times.
 
 The player will role-play as a nation whose population has just awaken in a sanctuary built in order to shelter a selected minority from destructive catastrophes. Oblivious to the situation, the people decide to self-organise and make their way to explore the unknown world.
 
-## Features
+## Features (Subject to change)
 
 ### Phase I: Basic Gameplay
 
@@ -182,18 +182,76 @@ Experienced players can get over-powered pretty quickly in 4X games like ours. T
 
 Based on the current condition of the player's sanctuary, we can dynamically provide a list of mini-tasks for the player to accomplish, so that the player will have a stronger sense of purpose while playing the game.
 
+## Development Timeline
+
+#### Separation of Duties:
+
+- Luo Zhiyang: UI design
+
+- Ma Yirui: Gameplay programming
+
+- Zhang Puyu: Game design, gameplay programming
+
+#### 12.8 - 12.15
+
+- [ ] Map: smooth camera movement and zooming, tile selection.
+
+- [ ] Unit movement: unit selection, path-finding
+
+- [ ] Pops and resources: build database, basic pop growth
+
+- [ ] UI: main menu, in-game pause menu
+
+#### 12.16 - 12.22
+
+- [ ] Map: terrain, resource & building placement
+
+- [ ] Unit movement: terrain effects, resource collection
+
+- [ ] Pops and resources: buildings, jobs
+
+- [ ] UI: in-game data display (e.g. hovering windows, selection menus)
+
+#### 12.23 - 12.29
+
+- [ ] Map: random tilemap generation
+
+- [ ] Unit: formation and dismissal, health point
+
+- [ ] Production: resource transportation system, storage system
+
+- [ ] Technology: tech-tree, research mechanism
+
+- [ ] UI: textures, unit movement paths, highlighted texts
+
+#### 12.30 - 1.5
+
+- [ ] Event: event triggers, event effects
+
+- [ ] Map: fog-of-war
+
+- [ ] Pops and resources: resource consumption
+
+- [ ] UI: event windows
+
 ## Coding Conventions
 
 - All variables and functions have their names spelt in **snake_case**.
 
 - All classes and game files have their names spelt in **PascalCase**.
 
-- Always use **type notations** for variable declaration and return type of functions.
+- Always use the **self** keyword in class methods when referencing class attributes.
 
-- Always use a **semi-colon** at the end of each statement.
+- Always use **type notations** for variable declaration and (non-trivial) return type of functions.
+
+- Each line should contain only a single statement. Preferably, use a **semi-colon** at the end of each statement.
 
 - Use **and**, **or**, **not** rather than **&&**, **||**, **!**.
 
 - No statement should be longer than **100 characters**.
 
 - Names of variables and functions should be **descriptive** and **no custom abbreviations** are allowed.
+
+- `switch` statements should have a `default` branch always.
+
+- `while (true)` is **banned**.
