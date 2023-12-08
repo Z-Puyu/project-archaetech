@@ -1,5 +1,7 @@
 # Project: Archaetech
 
+## IMPORTANT: Do NOT push to `main`. ALL updates must be done in a separate branch. Do a PULL REQUEST before merging to `main`.
+
 ## Motivation
 
 We all love to play 4X strategy games. Most of the currently available 4X games, whether historical or fictional, tend to focus on advancing your civilisation **forwards** from a primitive era to a futuristic one. However, we would like to do some **reverse thinking** here: what if the nation you play as in a 4X game progresses not by **discovering the unknown of the future**, but by **digging out the lost legacies of a mysterious past**?
