@@ -1,13 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dgyp3l4utsj7s"]
+[gd_scene load_steps=9 format=3 uid="uid://dgyp3l4utsj7s"]
 
-[ext_resource type="Script" path="res://scripts/map/Map.gd" id="1_3x27s"]
+[ext_resource type="Script" path="res://common/Map.gd" id="1_3x27s"]
 [ext_resource type="Texture2D" uid="uid://csdm1hirudqb4" path="res://gfx/map-objects/tiles.png" id="1_8u1nl"]
-[ext_resource type="Script" path="res://scripts/common/World.gd" id="1_ihkiw"]
-[ext_resource type="Script" path="res://scripts/map/MainCamera.gd" id="3_iewd5"]
-[ext_resource type="Script" path="res://scripts/common/UI.gd" id="5_8m631"]
-[ext_resource type="Script" path="res://scripts/common/Calendar.gd" id="6_d6dak"]
-[ext_resource type="Script" path="res://scripts/common/WorldTimer.gd" id="7_1xsnr"]
-[ext_resource type="Script" path="res://scenes/ForDebug.gd" id="8_4itjd"]
+[ext_resource type="Script" path="res://common/World.gd" id="1_ihkiw"]
+[ext_resource type="Script" path="res://common/MainCamera.gd" id="3_iewd5"]
+[ext_resource type="PackedScene" uid="uid://dwmspwwtu1d2d" path="res://interface/InGameUI.tscn" id="6_8lgig"]
+[ext_resource type="Script" path="res://common/WorldTimer.gd" id="7_1xsnr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u45k1"]
 texture = ExtResource("1_8u1nl")
@@ -40,32 +38,6 @@ script = ExtResource("3_iewd5")
 [node name="WorldTimer" type="Timer" parent="."]
 script = ExtResource("7_1xsnr")
 
-[node name="UILayer" type="CanvasLayer" parent="."]
-script = ExtResource("5_8m631")
-
-[node name="Calendar" type="Label" parent="UILayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -210.0
-offset_top = 10.0
-offset_right = -133.0
-offset_bottom = 36.0
-grow_horizontal = 0
-scale = Vector2(2.52, 2.52)
-text = "2023/9/27"
-script = ExtResource("6_d6dak")
-
-[node name="ForDebug" type="Label" parent="UILayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -403.0
-offset_top = 28.0
-offset_right = -232.0
-offset_bottom = 54.0
-grow_horizontal = 0
-text = "Time elapse speed: 1X"
-script = ExtResource("8_4itjd")
+[node name="InGameUI" parent="." instance=ExtResource("6_8lgig")]
 
 [connection signal="timeout" from="WorldTimer" to="." method="_on_world_timer_timeout"]
