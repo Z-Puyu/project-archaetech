@@ -1,0 +1,22 @@
+{
+  "time_elapse_1": {
+	"desc": "Time Elapse Speed 1X",
+	"value": 1
+  },
+  "time_elapse_2": {
+	"desc": "Time Elapse Speed 2X",
+	"value": 0.8
+  },
+  "time_elapse_3": {
+	"desc": "Time Elapse Speed 3X",
+	"value": 0.6
+  },
+  "time_elapse_4": {
+	"desc": "Time Elapse Speed 4X",
+	"value": 0.4
+  },
+  "time_elapse_5": {
+	"desc": "Time Elapse Speed 5X",
+	"value": 0.2
+  }
+}
