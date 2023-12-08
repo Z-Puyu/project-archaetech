@@ -242,6 +242,8 @@ Based on the current condition of the player's sanctuary, we can dynamically pro
 
 - Folders should be named using **kebab-case**.
 
+- **Private** methods should have their names preceeded by an **underscore**.
+
 - Always use the **self** keyword in class methods when referencing class attributes.
 
 - Always use **type notations** for variable declaration and (non-trivial) return type of functions.
