@@ -17,7 +17,7 @@ func next_turn():
 
 func _on_world_timer_timeout():
 	self.days += 1
-	print("new day")
+	print(str("Day ", self.days))
 	if self.days % 30 == 0:
 		print("new month")
 		self.next_turn()

@@ -1,11 +1,19 @@
 extends Node
 
-var pop_count: int = 25
-var growth_rate: float = 0.05
-var pop_growth: float = 0.0
+var pop_count: int
+var growth_rate: float
+var pop_growth: float
+
+func _ready():
+	pop_count = 25
+	growth_rate = 0.05
+	pop_growth = 0.0
 
 func update():
-	self.pop_growth += self.growth_rate
+	var yearly_food: int = pop_count * 12
+	var growth_modifier: float = clamp(ResourceManager.resources["food"] as float / -\
+		(yearly_food * 3) as float, 0, 1.5)
+	pop_growth += growth_rate * growth_modifier
 	var real_growth: int = floor(self.pop_growth)
 	if real_growth != 0:
 		self.pop_growth -= real_growth

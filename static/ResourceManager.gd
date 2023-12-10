@@ -1,13 +1,16 @@
 extends Node
 
-var resources: Dictionary = {
-	"food": 500,
-	"wood": 500,
-	"mineral": 500
-}
+var resources: Dictionary
+
+func _ready():
+	resources = {
+		"food": 500,
+		"wood": 500,
+		"mineral": 500
+	}
 
 func add(type: String, qty: float):
-	if self.resources.has(type):
-		self.resources[type] += qty
+	if resources.has(type):
+		resources[type] += qty
 	else:
-		self.resources[type] = qty
+		resources[type] = qty
