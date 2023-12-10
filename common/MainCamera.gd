@@ -24,21 +24,24 @@ func _ready():
 func _process(delta: float):
 	var input_x: int = 0;
 	var input_y: int = 0;
-	if not Input.is_key_pressed(KEY_SHIFT) and Input.is_action_pressed("ui_arrow_key"): 
-		input_x = int(Input.is_action_pressed("ui_right")) - \
-				  int(Input.is_action_pressed("ui_left"));
-		input_y = int(Input.is_action_pressed("ui_down")) - \
-				  int(Input.is_action_pressed("ui_up"));
-	else:
-		x_threshold = get_viewport().size.x / 2 * x_margin * (zoom_factor);
-		y_threshold = get_viewport().size.y / 2 * y_margin * (zoom_factor);
-		var x_diff: float = (self.cursor_pos.x - self.position.x);
-		var y_diff: float = (self.cursor_pos.y - self.position.y);
-		input_x = (int(x_diff > x_threshold) - int(x_diff < -x_threshold)) * (absf(x_diff) / x_threshold);
-		input_y = (int(y_diff > y_threshold) - int(y_diff < -y_threshold)) * (absf(y_diff) / y_threshold);
+	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		if not Input.is_key_pressed(KEY_SHIFT) and Input.is_action_pressed("ui_arrow_key"): 
+			input_x = int(Input.is_action_pressed("ui_right")) - \
+					  int(Input.is_action_pressed("ui_left"));
+			input_y = int(Input.is_action_pressed("ui_down")) - \
+					  int(Input.is_action_pressed("ui_up"));
+		else:
+			x_threshold = get_viewport().size.x / 2 * x_margin * (zoom_factor);
+			y_threshold = get_viewport().size.y / 2 * y_margin * (zoom_factor);
+			var x_diff: float = (self.cursor_pos.x - self.position.x);
+			var y_diff: float = (self.cursor_pos.y - self.position.y);
+			input_x = (int(x_diff > x_threshold) - int(x_diff < -x_threshold)) * (absf(x_diff) / x_threshold);
+			input_y = (int(y_diff > y_threshold) - int(y_diff < -y_threshold)) * (absf(y_diff) / y_threshold);
 				
 	self.v_x = lerp(self.v_x, input_x * self.speed * (zoom_factor), 0.025);
 	self.v_y = lerp(self.v_y, input_y * self.speed * (zoom_factor), 0.025);
+	self.cursor_pos.x += self.v_x * delta;
+	self.cursor_pos.y += self.v_y * delta;
 	self.position.x += self.v_x * delta;
 	self.position.y += self.v_y * delta;
 	
