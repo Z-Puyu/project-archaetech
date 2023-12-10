@@ -4,7 +4,7 @@ const MAIN_LAYER: int = 0;
 const MAIN_ATLAS: int = 0;
 enum TILE_TYPE {PLAIN, OCEAN, FOREST, DESERT, MOUNTAIN};
 
-@onready var debugger: Label = $"../UILayer/ForDebug";
+# @onready var debugger: Label = $"../UILayer/ForDebug";
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

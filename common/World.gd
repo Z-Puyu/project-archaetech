@@ -1,18 +1,23 @@
 extends Node2D
 
-@onready var map: TileMap = $Map;
-@onready var calender: Label = $UILayer/Calendar;
+@onready var map: TileMap = $Map
+@onready var game_clock: Timer = GameManager.game_clock
+
+var days: int
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	self.days = 0;
+	self.game_clock.timeout.connect(self._on_world_timer_timeout)
 
+func next_turn():
+	var curr_pop_count: int = PopManager.pop_count
+	ResourceManager.add("food", -curr_pop_count)
+	print(ResourceManager.resources.get("food"))
+	PopManager.update()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-func next_turn() -> void:
-	pass
-
-func _on_world_timer_timeout() -> void:
-	self.next_turn();
+func _on_world_timer_timeout():
+	self.days += 1
+	print("new day")
+	if self.days % 30 == 0:
+		print("new month")
+		self.next_turn()
