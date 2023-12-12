@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 ResourceManager="*res://static/ResourceManager.gd"
 PopManager="*res://static/PopManager.gd"
 GameManager="*res://static/GameManager.gd"
+BuildingManager="*res://static/BuildingManager.gd"
 
 [editor]
 

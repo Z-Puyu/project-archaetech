@@ -14,6 +14,7 @@ func next_turn():
 	ResourceManager.add("food", -curr_pop_count)
 	print(ResourceManager.resources.get("food"))
 	PopManager.update()
+	BuildingManager.update()
 
 func _on_world_timer_timeout():
 	self.days += 1
