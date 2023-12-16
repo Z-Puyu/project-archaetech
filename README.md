@@ -196,23 +196,21 @@ Based on the current condition of the player's sanctuary, we can dynamically pro
 
 #### 12.8 - 12.15
 
-- [ ] Map: smooth camera movement and zooming, tile selection.
+- [x] Map: smooth camera movement and zooming, tile selection.
 
-- [ ] Unit movement: unit selection, path-finding
+- [x] Unit movement: unit selection
 
-- [ ] Pops and resources: build database, basic pop growth
-
-- [ ] UI: main menu, in-game pause menu
+- [x] Pops and resources: build database, basic pop growth
 
 #### 12.16 - 12.22
 
 - [ ] Map: terrain, resource & building placement
 
-- [ ] Unit movement: terrain effects, resource collection
+- [ ] Unit movement: path-finding, terrain effects, resource collection
 
-- [ ] Pops and resources: buildings, jobs
+- [ ] Pops and resources: buildings, jobs, employment
 
-- [ ] UI: in-game data display (e.g. hovering windows, selection menus)
+- [ ] UI: main menu, in-game pause menu, in-game data display (e.g. hovering windows, selection menus)
 
 #### 12.23 - 12.29
 
