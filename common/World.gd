@@ -6,7 +6,7 @@ extends Node2D
 var days: int
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.days = 0;
+	self.days = 0
 	self.game_clock.timeout.connect(self._on_world_timer_timeout)
 
 func next_turn():

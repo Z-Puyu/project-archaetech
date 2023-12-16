@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwmspwwtu1d2d"]
+[gd_scene load_steps=3 format=3 uid="uid://dwmspwwtu1d2d"]
 
 [ext_resource type="Script" path="res://interface/UI.gd" id="1_lp3ec"]
 [ext_resource type="Script" path="res://interface/Calendar.gd" id="2_gkfkx"]
