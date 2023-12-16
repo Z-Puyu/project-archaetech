@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqgtpy301ir2"]
+
+[ext_resource type="Texture2D" uid="uid://qdayjcnwae7i" path="res://icon.svg" id="1_2kiiq"]
+[ext_resource type="Script" path="res://common/buildings/ProductionBuilding.gd" id="1_gc6c8"]
+[ext_resource type="Script" path="res://common/buildings/BuildingData.gd" id="2_55v0p"]
+[ext_resource type="Script" path="res://common/buildings/Job.gd" id="2_d7c2w"]
+[ext_resource type="Script" path="res://common/buildings/ProductionMethod.gd" id="2_ikn61"]
+
+[sub_resource type="Resource" id="Resource_1eonr"]
+script = ExtResource("2_d7c2w")
+name = ""
+input = {}
+output = {}
+
+[sub_resource type="Resource" id="Resource_eewcp"]
+script = ExtResource("2_ikn61")
+name = "default"
+recipe = {
+SubResource("Resource_1eonr"): 2
+}
+
+[sub_resource type="Resource" id="Resource_srr84"]
+script = ExtResource("2_55v0p")
+name = "Logging Camp"
+width = 1
+height = 1
+cost = {
+"mineral": 10,
+"wood": 20
+}
+time_to_build = 5
+production_methods = Array[ExtResource("2_ikn61")]([SubResource("Resource_eewcp")])
+activated_production_method = SubResource("Resource_eewcp")
+
+[node name="ForestryBuilding" type="Node2D"]
+script = ExtResource("1_gc6c8")
+data = SubResource("Resource_srr84")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.34, 0.34)
+texture = ExtResource("1_2kiiq")

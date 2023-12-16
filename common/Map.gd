@@ -4,7 +4,7 @@ const MAIN_LAYER: int = 0;
 const MAIN_ATLAS: int = 0;
 enum TILE_TYPE {PLAIN, OCEAN, FOREST, DESERT, MOUNTAIN};
 
-@onready var debugger: Label = $"../UILayer/ForDebug";
+# @onready var debugger: Label = $"../UILayer/ForDebug";
 @onready var InGameUI = get_tree().root.get_node("World").get_node("InGameUI").get_node("UILayer").get_node("InfoPanel");
 var grid: Dictionary = {};
 

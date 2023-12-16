@@ -12,8 +12,15 @@ config_version=5
 
 config/name="Project-Archaetech"
 run/main_scene="res://common/world.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+ResourceManager="*res://static/ResourceManager.gd"
+PopManager="*res://static/PopManager.gd"
+GameManager="*res://static/GameManager.gd"
+BuildingManager="*res://static/BuildingManager.gd"
 
 [editor]
 

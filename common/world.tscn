@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgyp3l4utsj7s"]
+[gd_scene load_steps=8 format=3 uid="uid://dgyp3l4utsj7s"]
 
 [ext_resource type="Script" path="res://common/Map.gd" id="1_3x27s"]
 [ext_resource type="Texture2D" uid="uid://csdm1hirudqb4" path="res://gfx/map-objects/tiles.png" id="1_8u1nl"]
 [ext_resource type="Script" path="res://common/World.gd" id="1_ihkiw"]
 [ext_resource type="Script" path="res://common/MainCamera.gd" id="3_iewd5"]
 [ext_resource type="PackedScene" uid="uid://dwmspwwtu1d2d" path="res://interface/InGameUI.tscn" id="6_8lgig"]
-[ext_resource type="Script" path="res://common/WorldTimer.gd" id="7_1xsnr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u45k1"]
 texture = ExtResource("1_8u1nl")
@@ -42,9 +41,4 @@ drag_right_margin = 0.75
 drag_bottom_margin = 0.75
 script = ExtResource("3_iewd5")
 
-[node name="WorldTimer" type="Timer" parent="."]
-script = ExtResource("7_1xsnr")
-
 [node name="InGameUI" parent="." instance=ExtResource("6_8lgig")]
-
-[connection signal="timeout" from="WorldTimer" to="." method="_on_world_timer_timeout"]

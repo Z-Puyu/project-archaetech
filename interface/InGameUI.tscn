@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwmspwwtu1d2d"]
+[gd_scene load_steps=6 format=3 uid="uid://dwmspwwtu1d2d"]
 
 [ext_resource type="Script" path="res://interface/UI.gd" id="1_lp3ec"]
 [ext_resource type="Script" path="res://interface/Calendar.gd" id="2_gkfkx"]
-[ext_resource type="Script" path="res://interface/ForDebug.gd" id="3_dqsj8"]
 [ext_resource type="Script" path="res://interface/Info.gd" id="4_kdhwk"]
 [ext_resource type="Script" path="res://interface/NewUnit.gd" id="5_cdlgm"]
 [ext_resource type="Script" path="res://interface/UnitSelection.gd" id="6_q7puf"]
@@ -31,18 +30,6 @@ scale = Vector2(2.52, 2.52)
 text = "2023/9/27"
 script = ExtResource("2_gkfkx")
 metadata/_edit_use_anchors_ = true
-
-[node name="ForDebug" type="Label" parent="UILayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -403.0
-offset_top = 28.0
-offset_right = -232.0
-offset_bottom = 54.0
-grow_horizontal = 0
-text = "Time elapse speed: 1X"
-script = ExtResource("3_dqsj8")
 
 [node name="InfoPanel" type="Control" parent="UILayer"]
 layout_mode = 3
