@@ -3,6 +3,9 @@ extends Node
 var game_clock: Timer
 var speed_level: int
 var config: Dictionary
+var days: int = 0
+
+signal new_month
 
 func _ready():
 	# Set up timer
@@ -13,6 +16,7 @@ func _ready():
 	game_clock.set_autostart(true)
 	GameManager.add_child(game_clock)
 	speed_level = 1
+	game_clock.timeout.connect(_on_world_timer_timeout)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
@@ -28,3 +32,17 @@ func _input(event: InputEvent) -> void:
 				speed_level = clamp(speed_level - 1, 1, 5)	
 				game_clock.set_wait_time(config[str("time_elapse_", speed_level)]["value"])
 				print("Speed down")
+				
+func next_turn():
+	var curr_pop_count: int = PopManager.pop_count
+	ResourceManager.add({ResourceManager.FOOD: -curr_pop_count})
+	print("Remaining food: %f" % ResourceManager.resources.get(ResourceManager.FOOD))
+	PopManager.update()
+
+func _on_world_timer_timeout():
+	self.days += 1
+	print(str("Day ", self.days))
+	if self.days % 30 == 0:
+		print("new month")
+		next_turn()
+		new_month.emit()

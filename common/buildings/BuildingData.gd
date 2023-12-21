@@ -1,6 +1,4 @@
-extends Resource
-
-class_name BuildingData
+class_name BuildingData extends Resource
 
 @export var name: String
 # @export var built_texture: Texture
