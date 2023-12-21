@@ -1,5 +1,4 @@
-extends Object
-class_name CellData
+class_name CellData extends Object
 
 var pos: Vector2;
 

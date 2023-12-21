@@ -35,14 +35,14 @@ func _input(event: InputEvent) -> void:
 				
 func next_turn():
 	var curr_pop_count: int = PopManager.pop_count
-	ResourceManager.add("food", -curr_pop_count)
-	print(ResourceManager.resources.get("food"))
+	ResourceManager.add({ResourceManager.FOOD: -curr_pop_count})
+	print("Remaining food: %f" % ResourceManager.resources.get(ResourceManager.FOOD))
 	PopManager.update()
-	BuildingManager.update()
 
 func _on_world_timer_timeout():
 	self.days += 1
 	print(str("Day ", self.days))
 	if self.days % 30 == 0:
 		print("new month")
+		next_turn()
 		new_month.emit()
