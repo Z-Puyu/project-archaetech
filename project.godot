@@ -11,16 +11,10 @@ config_version=5
 [application]
 
 config/name="Project-Archaetech"
-<<<<<<< Updated upstream
-run/main_scene="res://common/world.tscn"
-=======
 run/main_scene="res://common/main.tscn"
->>>>>>> Stashed changes
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
-<<<<<<< Updated upstream
-=======
 [autoload]
 
 ResourceManager="*res://static/ResourceManager.gd"
@@ -28,12 +22,12 @@ PopManager="*res://static/PopManager.gd"
 GameManager="*res://static/GameManager.gd"
 BuildingManager="*res://static/BuildingManager.gd"
 
+
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
->>>>>>> Stashed changes
 [editor]
 
 movie_writer/movie_file="D:/Project-Archaetech/Recording.avi"

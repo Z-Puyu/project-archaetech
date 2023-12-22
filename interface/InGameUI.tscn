@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwmspwwtu1d2d"]
+[gd_scene load_steps=5 format=3 uid="uid://dwmspwwtu1d2d"]
 
 [ext_resource type="Script" path="res://interface/UI.gd" id="1_lp3ec"]
 [ext_resource type="Script" path="res://interface/Calendar.gd" id="2_gkfkx"]
-[ext_resource type="Script" path="res://interface/ForDebug.gd" id="3_dqsj8"]
 [ext_resource type="Script" path="res://interface/Info.gd" id="4_kdhwk"]
-[ext_resource type="Script" path="res://interface/NewUnit.gd" id="5_cdlgm"]
 [ext_resource type="Script" path="res://interface/UnitSelection.gd" id="6_q7puf"]
 
 [node name="InGameUI" type="Control"]
@@ -32,18 +30,6 @@ text = "2023/9/27"
 script = ExtResource("2_gkfkx")
 metadata/_edit_use_anchors_ = true
 
-[node name="ForDebug" type="Label" parent="UILayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -403.0
-offset_top = 28.0
-offset_right = -232.0
-offset_bottom = 54.0
-grow_horizontal = 0
-text = "Time elapse speed: 1X"
-script = ExtResource("3_dqsj8")
-
 [node name="InfoPanel" type="Control" parent="UILayer"]
 layout_mode = 3
 anchors_preset = 0
@@ -60,19 +46,12 @@ offset_right = 380.0
 offset_bottom = 239.0
 color = Color(0.0862745, 0.25098, 0.329412, 0.352941)
 
-[node name="Building" type="Label" parent="UILayer/InfoPanel"]
+[node name="Info" type="Label" parent="UILayer/InfoPanel"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 8.0
 offset_right = 365.0
 offset_bottom = 31.0
-
-[node name="Units" type="Label" parent="UILayer/InfoPanel"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 41.0
-offset_right = 319.0
-offset_bottom = 127.0
 
 [node name="NewUnit" type="Button" parent="UILayer/InfoPanel"]
 layout_mode = 0
@@ -81,7 +60,14 @@ offset_top = 200.0
 offset_right = 112.0
 offset_bottom = 227.0
 text = "New Unit"
-script = ExtResource("5_cdlgm")
+
+[node name="NewBuilding" type="Button" parent="UILayer/InfoPanel"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 200.0
+offset_right = 230.0
+offset_bottom = 231.0
+text = "New Building"
 
 [node name="UnitSelection" type="Control" parent="UILayer"]
 layout_mode = 3
