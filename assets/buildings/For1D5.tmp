@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqgtpy301ir2"]
+
+[ext_resource type="Script" path="res://common/buildings/ProductionBuilding.gd" id="1_5j6vv"]
+[ext_resource type="Texture2D" uid="uid://qdayjcnwae7i" path="res://icon.svg" id="2_c62ao"]
+[ext_resource type="Script" path="res://common/buildings/ProductionMethod.gd" id="2_ctvx2"]
+[ext_resource type="Script" path="res://common/buildings/BuildingData.gd" id="3_mphjg"]
+
+[sub_resource type="GDScript" id="GDScript_kqqfe"]
+script/source = "class_name Job extends Node
+
+@export var data: JobData
+"
+
+[sub_resource type="Resource" id="Resource_aip8k"]
+script = SubResource("GDScript_kqqfe")
+
+[sub_resource type="Resource" id="Resource_4yt3j"]
+script = ExtResource("2_ctvx2")
+name = "Basic"
+recipe = {
+SubResource("Resource_aip8k"): 2
+}
+
+[sub_resource type="Resource" id="Resource_650cd"]
+script = ExtResource("3_mphjg")
+name = "Forestry Hut"
+width = 1
+height = 1
+cost = {}
+time_to_build = 0
+production_methods = Array[ExtResource("2_ctvx2")]([SubResource("Resource_4yt3j")])
+activated_production_method = SubResource("Resource_4yt3j")
+
+[node name="ForestryBuilding" type="Node2D"]
+script = ExtResource("1_5j6vv")
+data = SubResource("Resource_650cd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.34, 0.34)
+texture = ExtResource("2_c62ao")

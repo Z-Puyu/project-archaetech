@@ -184,6 +184,14 @@ Experienced players can get over-powered pretty quickly in 4X games like ours. T
 
 Based on the current condition of the player's sanctuary, we can dynamically provide a list of mini-tasks for the player to accomplish, so that the player will have a stronger sense of purpose while playing the game.
 
+## Class Diagram
+
+[PlantUML](//www.plantuml.com/plantuml/png/hLTBR-Cs4BxhLn0vsSNwiaSXCBRT00iKkqNGz74e5W8jJcokAP8bXycwHVvxIOgYQ4a6TAWFWJsFRsQ-UKZvO94QT9sex9bBJGtjYE0IyAA1Q2KkuSUIJXaygKhJzaoFGEwUa29loIUX3bIGfzPmZVQE_5iH_sa5jPPyeXryeTARco1FdwENDgrGxRacl_4EJDPO3S0Q0IyWQi8bPaNhZ6aOHQZ9ZyRGorzU-JLh9RmsdP9uscnhyiIFaeeh7QEN1Oq5R324RsBOpHXsMtX_nm4w2j-AwdvoN30kZ_CA3qdJ1DviJK2wRgRqyWVU8bUIcilz7z2YCk_vkmoxpnxqXN913mAQPLykyHrvz7q1zjI2XFqrRrRJLncoKOTlDVb5CNZ_a2qyDzOp_epNXF_jm7coFtFfGJzpY_UztmWTKND2c-7B463EDsLiDDVAbp3M77YQKCz00C8DZqc7GeFd_NbKUjuQhNJJAYSdzHwDUiLJO-A8FGj5PofjrD60jLEraz1feIx0Cc8E55mN4liLh7AcNLWDapJbuCoKryqVm1ueqdTzRlkIymrzVeOMWJNh_KTwhTDQN3RVrA4cFwj3R-IJQbwLEOEnawQTg6r0AdSyROPeDRcES03PdZfgped8BTdjoK4fCQFfTybnJf7pqZazIN5ZfzBH281VbzOgkFv_AnML4NCJ_WpwvTiKB9PdEw_072bHzLRrHFsfZ629eexgS5M57ouT1LmsyU0wNfEFIg9H8Zjwc-HsD9pTuEuZ215Qjw_6ya74aHgJ7Y2pTS9Dp1RyHt6-5ldQHJ62j-DoNAJb8VB1wC6YeIrEJd6AohpH21rTWhXVr0uaNfMQvvhBj3fXk3VRqUTw0RQvs3922YqzrxxHQ8QQBFy72fvYIrebVPFWEpe3FQlAuksj71CBpwi6LNyLHvgqKSn5twO3F2cMAN_CcYzHqTDFlUG5cfbRJQRsGwapnQrovxKPQBc6supd44cw7fbBxN3TCLGErzZcN4hb-eJoOsm-eM7so-cCWZoPd6Nab47Mhuz-TKMg_3wLxkpgENkh-dlomsuN3qJjlIHIBcqLVWRnNKVbvIxlUc6IVRDHNit2ACkyNJQO8fNo4d0sYIjyoZ9B-ndMw9F7yLRUjysyQ6q2cK9lkyOe0uRnA6t2xw2FYYd0z4rrjzkNVOaFB4keP65PbM4zNBRkF_i8lMnUl6hT5oqbTR0mZgCbwOMX6efSjWyvMzT1X4zt3UpuwbEL_rBifdN4nwijxdoFafiSldeGEyCPOGPPJPnc5C76ZD0aWFXUN7q0oLmd_WC0)
+
+<img src="file:///C:/Users/Zhang%20Puyu/Downloads/hLTBR-Cs4BxhLn0vsSNwiaSXCBRT00iKkqNGz74e5W8jJcokAP8bXycwHVvxIOgYQ4a6TAWFWJsFRsQ-UKZvO94QT9sex9bBJGtjYE0IyAA1Q2KkuSUIJXaygKhJzaoFGEwUa29loIUX3bIGfzPmZVQE_5iH_sa5jPPyeXryeTARco1FdwENDgrGxRacl_4EJDPO3S0Q0IyWQ.png" title="" alt="hLTBR-Cs4BxhLn0vsSNwiaSXCBRT00iKkqNGz74e5W8jJcokAP8bXycwHVvxIOgYQ4a6TAWFWJsFRsQ-UKZvO94QT9sex9bBJGtjYE0IyAA1Q2KkuSUIJXaygKhJzaoFGEwUa29loIUX3bIGfzPmZVQE_5iH_sa5jPPyeXryeTARco1FdwENDgrGxRacl_4EJDPO3S0Q0IyWQ.png" data-align="center">
+
+
+
 ## Development Timeline
 
 #### Separation of Duties:
@@ -208,7 +216,7 @@ Based on the current condition of the player's sanctuary, we can dynamically pro
 
 - [ ] Unit movement: path-finding, terrain effects, resource collection
 
-- [ ] Pops and resources: buildings, jobs, employment
+- [x] Pops and resources: buildings, jobs, employment
 
 - [ ] UI: main menu, in-game pause menu, in-game data display (e.g. hovering windows, selection menus)
 
@@ -246,7 +254,9 @@ Based on the current condition of the player's sanctuary, we can dynamically pro
 
 - Always use the **self** keyword in class methods when referencing class attributes.
 
-- Always use **type notations** for variable declaration and (non-trivial) return type of functions.
+- Always use **type notations** for variable declaration and (non-void) return type of functions.
+
+- Semi-colons are **not** used.
 
 - Each line should contain only a single statement. 
 
@@ -256,6 +266,16 @@ Based on the current condition of the player's sanctuary, we can dynamically pro
 
 - Names of variables and functions should be **descriptive** and **no custom abbreviations** are allowed.
 
-- `switch` statements should have a `default` branch always.
+- `match` statements should always have a default `_` branch.
 
 - `while (true)` is **banned**.
+
+- When declaring new classes, write `class A extends B` in a **single line**.
+
+- Custom scripts and resources are placed under **common** folder while packed scenes (assets) are placed under **assets** folder.
+
+- To avoid confusion in syntaxes, retrieving from dictionaries will use **Dictionary::get**  method instead of accessing by index.
+
+- `to_string` and `_to_string` methods are called implicitly.
+
+- Use `Signal::connect`  and `Signal::emit` to manage signals (this is the new Godot 4 syntax).
