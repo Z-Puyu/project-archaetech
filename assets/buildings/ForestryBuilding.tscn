@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://qdayjcnwae7i" path="res://icon.svg" id="2_c62ao"]
 [ext_resource type="Script" path="res://common/buildings/ProductionMethod.gd" id="2_ctvx2"]
 [ext_resource type="Script" path="res://common/buildings/BuildingData.gd" id="3_mphjg"]
-[ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/WoodResource.tres" id="4_ybhv7"]
+[ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/basic/WoodResource.tres" id="4_ptska"]
 
 [sub_resource type="Resource" id="Resource_rthfi"]
 script = ExtResource("2_ctvx2")
@@ -20,7 +20,7 @@ name = "Logging Camp"
 width = 1
 height = 1
 cost = {
-ExtResource("4_ybhv7"): 100
+ExtResource("4_ptska"): 100
 }
 time_to_build = 10
 production_methods = Array[ExtResource("2_ctvx2")]([SubResource("Resource_rthfi")])

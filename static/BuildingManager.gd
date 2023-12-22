@@ -3,6 +3,7 @@ extends Node
 enum BUILING_TYPES {
 	FORESTRY
 }
+
 var buildings: Dictionary # [Vector2i, Node]
 var available_buildings: Dictionary # [Integer, PackedScene]
 var curr_spawning_obj: Node2D
@@ -60,6 +61,9 @@ func next_day():
 	for q in queues:
 		if not q.is_empty():
 			var new_building: Node2D = q.peek_front()
+			while not under_construction.has(new_building):
+				q.pop_front()
+				new_building = q.peek_front()
 			under_construction[new_building] -= 1
 			if under_construction[new_building] == 0:
 				q.pop_front()

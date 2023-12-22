@@ -14,8 +14,7 @@ func _ready():
 	self.map.tile_selected.connect(self.unit_selector.create_entries)
 	self.new_unit.pressed.connect(self.map.new_unit)
 	self.new_building.pressed.connect(self.map.new_building)
-	BuildingManager.spawn_building.connect(self.spawn_building)
+	BuildingManager.spawn_building.connect(self.add_child)
 
-func spawn_building(building: Node2D):
-	# building.translate(map.map_to_local(map.curr_selected))
-	self.add_child(building)
+#func spawn_building(building: Node2D):
+#	self.add_child(building)
