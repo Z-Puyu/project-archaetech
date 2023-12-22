@@ -62,10 +62,12 @@ func new_unit():
 		
 func new_building():
 	if (true): 
-		var curr_cell: CellData = self.grid[self.curr_selected]
-		BuildingManager.add_building(self.curr_selected, 0)
-		curr_cell.building = BuildingManager.buildings[self.curr_selected]
-		self.tile_selected.emit(grid[self.curr_selected]);
+		var cell_pos: Vector2i = self.curr_selected
+		var local_coords: Vector2 = self.map_to_local(cell_pos)
+		var curr_cell: CellData = self.grid[cell_pos]
+		BuildingManager.add_building(cell_pos, local_coords, 0)
+		curr_cell.building = BuildingManager.buildings[cell_pos]
+		self.tile_selected.emit(grid[cell_pos]);
 
 func _to_string():
 	return str(grid);

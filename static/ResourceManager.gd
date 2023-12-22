@@ -1,5 +1,16 @@
 extends Node
 
+enum resource_types {
+	COMMON_RAW,
+	RARE_RAW,
+	ENERGY,
+	CONSUMER,
+	INDUSTRIAL,
+	RESEARCH,
+	LUXUARY,
+	HIGH_END
+}
+
 const FOOD: Variant = preload("res://common/resources/FoodResource.tres")
 const WODD: Variant = preload("res://common/resources/WoodResource.tres")
 const MINERAL: Variant = preload("res://common/resources/MineralResource.tres")

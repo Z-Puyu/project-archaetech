@@ -17,5 +17,5 @@ func _ready():
 	BuildingManager.spawn_building.connect(self.spawn_building)
 
 func spawn_building(building: Node2D):
-	building.translate(map.map_to_local(map.curr_selected))
+	# building.translate(map.map_to_local(map.curr_selected))
 	self.add_child(building)
