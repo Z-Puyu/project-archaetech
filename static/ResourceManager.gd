@@ -11,9 +11,9 @@ enum resource_types {
 	HIGH_END
 }
 
-const FOOD = preload("res://common/resources/collectibles/FoodResource.tres")
-const WODD = preload("res://common/resources/collectibles/WoodResource.tres")
-const MINERAL = preload("res://common/resources/collectibles/MineralResource.tres")
+const FOOD = preload("res://common/resources/basic/FoodResource.tres")
+const WODD = preload("res://common/resources/basic/WoodResource.tres")
+const MINERAL = preload("res://common/resources/basic/MineralResource.tres")
 var resources: Dictionary
 
 func _ready():

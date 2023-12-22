@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://common/buildings/ProductionBuilding.gd" id="1_5j6vv"]
 [ext_resource type="Resource" uid="uid://bvtxum4q5uj0v" path="res://common/jobs/WoodcutterJob.tres" id="2_abv27"]
-[ext_resource type="Texture2D" uid="uid://qdayjcnwae7i" path="res://icon.svg" id="2_c62ao"]
 [ext_resource type="Script" path="res://common/buildings/ProductionMethod.gd" id="2_ctvx2"]
 [ext_resource type="Script" path="res://common/buildings/BuildingData.gd" id="3_mphjg"]
 [ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/basic/WoodResource.tres" id="4_ptska"]
+[ext_resource type="Texture2D" uid="uid://bfdfuv51e64ww" path="res://gfx/map-objects/buildings/ForestryBuilding.png" id="5_ap3gh"]
 
 [sub_resource type="Resource" id="Resource_rthfi"]
 script = ExtResource("2_ctvx2")
@@ -17,6 +17,7 @@ ExtResource("2_abv27"): 2
 [sub_resource type="Resource" id="Resource_f3a54"]
 script = ExtResource("3_mphjg")
 name = "Logging Camp"
+icon = ExtResource("5_ap3gh")
 width = 1
 height = 1
 cost = {
@@ -31,5 +32,4 @@ script = ExtResource("1_5j6vv")
 data = SubResource("Resource_f3a54")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.34, 0.34)
-texture = ExtResource("2_c62ao")
+texture = ExtResource("5_ap3gh")

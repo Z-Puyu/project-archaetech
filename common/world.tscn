@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dwmspwwtu1d2d" path="res://interface/InGameUI.tscn" id="6_8lgig"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u45k1"]
+resource_name = "MAIN_LAYER"
 texture = ExtResource("1_8u1nl")
 margins = Vector2i(10, 10)
 separation = Vector2i(10, 0)
