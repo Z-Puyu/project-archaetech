@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="BuildingData" load_steps=6 format=3 uid="uid://c30c0sshkh4ys"]
+
+[ext_resource type="Resource" uid="uid://bvtxum4q5uj0v" path="res://common/jobs/WoodcutterJob.tres" id="1_x0gsh"]
+[ext_resource type="Script" path="res://common/buildings/BuildingData.gd" id="1_xx76p"]
+[ext_resource type="Script" path="res://common/buildings/ProductionMethod.gd" id="2_6rnoi"]
+[ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/WoodResource.tres" id="3_31gcr"]
+
+[sub_resource type="Resource" id="Resource_sdvks"]
+script = ExtResource("2_6rnoi")
+name = "Basic"
+recipe = {
+ExtResource("1_x0gsh"): 2
+}
+
+[resource]
+script = ExtResource("1_xx76p")
+name = "Logging Camp"
+width = 1
+height = 1
+cost = {
+ExtResource("3_31gcr"): 100
+}
+time_to_build = 10
+production_methods = Array[ExtResource("2_6rnoi")]([SubResource("Resource_sdvks")])
+activated_production_method = SubResource("Resource_sdvks")

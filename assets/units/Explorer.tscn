@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://be6dib7yby1eg"]
+
+[ext_resource type="Script" path="res://common/units/Explorer.gd" id="1_88nln"]
+[ext_resource type="Texture2D" uid="uid://cwtfdb6jceq3e" path="res://gfx/map-objects/Explorer.png" id="2_ji2vs"]
+
+[node name="Explorer" type="Node2D"]
+script = ExtResource("1_88nln")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ji2vs")
