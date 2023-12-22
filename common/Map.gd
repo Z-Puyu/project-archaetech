@@ -65,9 +65,9 @@ func new_building():
 		var cell_pos: Vector2i = self.curr_selected
 		var local_coords: Vector2 = self.map_to_local(cell_pos)
 		var curr_cell: CellData = self.grid[cell_pos]
-		BuildingManager.add_building(cell_pos, local_coords, 0)
-		curr_cell.building = BuildingManager.buildings[cell_pos]
-		self.tile_selected.emit(grid[cell_pos]);
+		if BuildingManager.add_building(cell_pos, local_coords, 0):
+			curr_cell.building = BuildingManager.buildings[cell_pos]
+			self.tile_selected.emit(grid[cell_pos]);
 
 func _to_string():
 	return str(grid);

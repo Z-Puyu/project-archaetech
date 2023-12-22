@@ -27,7 +27,16 @@ func add(affected_resources: Dictionary):
 	for type in affected_resources:
 		if resources.has(type):
 			resources[type] += affected_resources[type]
-			print("%s has changed by %d" % [type.name, affected_resources[type]])
+			print("%s has increased by %d" % [type.name, affected_resources[type]])
+		else:
+			resources[type] = affected_resources[type]
+	print(resources)
+	
+func consume(affected_resources: Dictionary):
+	for type in affected_resources:
+		if resources.has(type):
+			resources[type] -= affected_resources[type]
+			print("%s has decreased by %d" % [type.name, affected_resources[type]])
 		else:
 			resources[type] = affected_resources[type]
 	print(resources)

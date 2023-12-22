@@ -8,7 +8,7 @@ func _ready():
 	for job in jobs.keys():
 		self.employment[job] = 0
 	GameManager.new_month.connect(self.work)
-	
+
 func work():
 	print(str(self._to_string(), " is working "))
 	# Process each job in the building sequentially
