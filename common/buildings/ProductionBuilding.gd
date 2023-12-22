@@ -26,5 +26,14 @@ func employ(job: JobData):
 	PopManager.unemployed -= recruitment
 	print("%s has employed %d new workers" % [self, recruitment])
 
+func can_be_built() -> bool:
+	var cost: Dictionary = self.data.cost
+	for resource in cost.keys():
+		if not ResourceManager.has_enough(resource, cost.get(resource)):
+			print("%s is insufficient! Currently has %f but needs %d!" % [resource, ResourceManager.resources.get(resource), cost.get(resource)])
+			return false
+	print("%s can be built!" % self)
+	return true
+
 func _to_string() -> String:
 	return str(self.data.name, " with production method ", self.data.activated_production_method.name)
