@@ -5,7 +5,7 @@ var pos: Vector2;
 
 var units: Array[UnitData] = [];
 
-var buildings: Array[String] = ["none"];
+var buildings: Node2D = null;
 
 var units_count: Array[int] = [0];
 
