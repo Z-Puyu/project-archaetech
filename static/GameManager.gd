@@ -22,6 +22,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if Input.is_action_just_pressed("ui_select"):
 			game_clock.set_paused(not game_clock.paused)
+			if game_clock.paused:
+				get_tree().change_scene_to_file("res://interface/PauseMenu.tscn")
 			print("Paused" if game_clock.paused else "Un-paused")
 		if Input.is_key_pressed(KEY_SHIFT):
 			if Input.is_action_pressed("ui_up"):

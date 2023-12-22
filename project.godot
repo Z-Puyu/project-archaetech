@@ -22,7 +22,6 @@ PopManager="*res://static/PopManager.gd"
 GameManager="*res://static/GameManager.gd"
 BuildingManager="*res://static/BuildingManager.gd"
 
-
 [display]
 
 window/stretch/mode="canvas_items"
