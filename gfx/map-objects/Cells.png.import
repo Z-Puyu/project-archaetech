@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfdfuv51e64ww"
-path="res://.godot/imported/ForestryBuilding.png-2d2f054597820d2acfe999d92e8f98a0.ctex"
+uid="uid://boohv8wkfp05h"
+path="res://.godot/imported/Cells.png-205414c4a62321be1eda8d92faa181c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/map-objects/buildings/ForestryBuilding.png"
-dest_files=["res://.godot/imported/ForestryBuilding.png-2d2f054597820d2acfe999d92e8f98a0.ctex"]
+source_file="res://gfx/map-objects/Cells.png"
+dest_files=["res://.godot/imported/Cells.png-205414c4a62321be1eda8d92faa181c1.ctex"]
 
 [params]
 

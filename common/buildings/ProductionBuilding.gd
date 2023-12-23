@@ -21,7 +21,7 @@ func work():
 			employ(job)
 	
 func employ(job: JobData):
-	var num_positions: int = self.self.max_employment.get(job)
+	var num_positions: int = self.max_employment.get(job)
 	var demand = num_positions - employment.get(job)
 	var recruitment = min(demand, PopManager.unemployed)
 	employment[job] += recruitment
