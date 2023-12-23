@@ -34,7 +34,7 @@ func add_building(pos: Vector2i, coords: Vector2, type: int):
 			else:
 				# User Validation panel needed here
 				delete_building(pos) 
-		var obj: Node2D = curr_spawning_obj.duplicate()
+		var obj: Node2D = curr_spawning_obj.duplicate(8)
 		buildings[pos] = obj
 		obj.translate(coords)
 		if queue.is_empty():

@@ -1,11 +1,11 @@
-extends Object
-class_name CellData
+class_name CellData extends Object
+
 
 var pos: Vector2;
 
 var units: Array[UnitData] = [];
 
-var buildings: Node2D = null;
+var building: Node2D = null;
 
 var units_count: Array[int] = [0];
 
