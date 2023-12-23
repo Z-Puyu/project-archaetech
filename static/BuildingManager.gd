@@ -12,7 +12,7 @@ var curr_spawning_obj: int
 # var under_construction: Dictionary
 var construction_queue: ConstructionQueue
 
-signal spawn_building(building: Node2D, pos: Vector2i)
+signal spawn_building(building: Building, pos: Vector2i)
 
 func _ready():
 	buildings = {}
@@ -20,11 +20,12 @@ func _ready():
 	construction_queue = ConstructionQueue.new(2)
 	spawn_building.connect(on_building_complete)
 
-func add_building(pos: Vector2i, coords: Vector2, type: int) -> bool:
+func add_building(tile_data: TileData, pos: Vector2i, coords: Vector2, type: int) -> bool:
 	# Note that pos is the local map coordinates
 	curr_spawning_obj = type
-	var obj: Node2D = available_buildings.get(curr_spawning_obj).instantiate()
-	if obj.can_be_built():
+	var obj: Building = available_buildings.get(curr_spawning_obj).instantiate()
+	print(obj.data.required_terrains.size())
+	if obj.can_be_built(tile_data):
 		if buildings.has(pos):
 			print(str("Cell ", pos, " already has a building!"))
 			var building: Node = buildings.get(pos)
@@ -47,7 +48,7 @@ func add_building(pos: Vector2i, coords: Vector2, type: int) -> bool:
 	return false
 		
 func delete_building(pos: Vector2i):
-	var building: Node2D = buildings.get(pos)
+	var building: Building = buildings.get(pos)
 	if building != null:
 		buildings.erase(pos)
 		remove_child(building)
@@ -55,5 +56,5 @@ func delete_building(pos: Vector2i):
 	else:
 		print(str("Cell ", pos, " has no building!"))
 				
-func on_building_complete(building: Node2D, pos: Vector2i):
+func on_building_complete(building: Building, pos: Vector2i):
 	buildings[pos] = building

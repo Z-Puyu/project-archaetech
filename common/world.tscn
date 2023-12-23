@@ -1,9 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgyp3l4utsj7s"]
+[gd_scene load_steps=13 format=3 uid="uid://dgyp3l4utsj7s"]
 
 [ext_resource type="Script" path="res://common/Map.gd" id="1_3x27s"]
 [ext_resource type="Texture2D" uid="uid://csdm1hirudqb4" path="res://gfx/map-objects/tiles.png" id="1_8u1nl"]
 [ext_resource type="Script" path="res://common/World.gd" id="1_ihkiw"]
+[ext_resource type="Resource" uid="uid://bce52sx4o7sel" path="res://common/terrain/PlainTerrain.tres" id="2_e14fj"]
+[ext_resource type="Resource" uid="uid://dbtwq3h3rpn27" path="res://common/terrain/OceanTerrain.tres" id="3_87gj5"]
 [ext_resource type="Script" path="res://common/MainCamera.gd" id="3_iewd5"]
+[ext_resource type="Resource" uid="uid://dxbx5g0bdwsaj" path="res://common/terrain/ForestTerrain.tres" id="4_32k2g"]
+[ext_resource type="Resource" uid="uid://bfuicndnh6uun" path="res://common/terrain/DesertTerrain.tres" id="5_ilre5"]
+[ext_resource type="Resource" uid="uid://obr3cg2hliic" path="res://common/terrain/MountainTerrain.tres" id="6_6uuyl"]
 [ext_resource type="PackedScene" uid="uid://dwmspwwtu1d2d" path="res://interface/InGameUI.tscn" id="6_8lgig"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u45k1"]
@@ -13,15 +18,22 @@ margins = Vector2i(10, 10)
 separation = Vector2i(10, 0)
 texture_region_size = Vector2i(100, 100)
 0:0/0 = 0
+0:0/0/custom_data_0 = ExtResource("2_e14fj")
 1:0/0 = 0
+1:0/0/custom_data_0 = ExtResource("3_87gj5")
 2:0/0 = 0
+2:0/0/custom_data_0 = ExtResource("4_32k2g")
 3:0/0 = 0
+3:0/0/custom_data_0 = ExtResource("5_ilre5")
 4:0/0 = 0
+4:0/0/custom_data_0 = ExtResource("6_6uuyl")
 5:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_usiub"]
 tile_shape = 3
 tile_size = Vector2i(100, 100)
+custom_data_layer_0/name = "terrain"
+custom_data_layer_0/type = 24
 sources/0 = SubResource("TileSetAtlasSource_u45k1")
 
 [node name="World" type="Node2D"]

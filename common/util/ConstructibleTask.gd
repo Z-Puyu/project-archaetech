@@ -19,6 +19,7 @@ func pause():
 func progress():
 	self._days_remaining -= 1
 	if self._days_remaining == 0:
-		BuildingManager.spawn_building.emit(self.value(), self._pos)
+		if self.value() is Building:
+			BuildingManager.spawn_building.emit(self.value(), self._pos)
 		GameManager.game_clock.timeout.disconnect(self.progress)
 		self.terminate.emit(self)

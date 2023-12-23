@@ -1,14 +1,12 @@
-class_name CellData extends Object
+class_name Cell extends Resource
 
-var pos: Vector2;
+var pos: Vector2i;
 
 var units: Array[UnitData] = [];
-
-var building: Node2D;
-
+var building: Building;
 var units_count: Array[int] = [0];
 
-func _init(_pos: Vector2):
+func _init(_pos: Vector2i):
 	pos = _pos;
 	
 func _to_string():
