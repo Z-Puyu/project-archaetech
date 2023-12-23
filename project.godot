@@ -28,11 +28,6 @@ UnitManager="*res://static/UnitManager.gd"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
-[display]
-
-window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
-
 [editor]
 
 movie_writer/movie_file="D:/Project-Archaetech/Recording.avi"
