@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://dxbx5g0bdwsaj" path="res://common/terrain/ForestTerrain.tres" id="4_32k2g"]
 [ext_resource type="Resource" uid="uid://bfuicndnh6uun" path="res://common/terrain/DesertTerrain.tres" id="5_ilre5"]
 [ext_resource type="Resource" uid="uid://obr3cg2hliic" path="res://common/terrain/MountainTerrain.tres" id="6_6uuyl"]
-[ext_resource type="PackedScene" uid="uid://dwmspwwtu1d2d" path="res://interface/InGameUI.tscn" id="6_8lgig"]
+[ext_resource type="PackedScene" uid="uid://dwmspwwtu1d2d" path="res://interface/core/InGameUI.tscn" id="6_8lgig"]
 [ext_resource type="Texture2D" uid="uid://7hlea4wwm3aw" path="res://gfx/map-objects/Buildings.png" id="8_uv15q"]
 [ext_resource type="PackedScene" uid="uid://bbo3jv31tl7l4" path="res://assets/buildings/BaseBuilding.tscn" id="12_nvb0h"]
 

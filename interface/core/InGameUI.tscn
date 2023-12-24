@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwmspwwtu1d2d"]
 
-[ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/ResourcePanel.tscn" id="1_0xkas"]
-[ext_resource type="PackedScene" uid="uid://co81lv0s2uhl" path="res://interface/Calendar.tscn" id="2_lfric"]
+[ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/core/ResourcePanel.tscn" id="1_0xkas"]
+[ext_resource type="PackedScene" uid="uid://co81lv0s2uhl" path="res://interface/core/Calendar.tscn" id="2_lfric"]
 [ext_resource type="Script" path="res://interface/Info.gd" id="4_kdhwk"]
 [ext_resource type="Script" path="res://interface/UnitSelection.gd" id="6_q7puf"]
 

@@ -18,10 +18,9 @@ var origin: Vector2 = self.position
 var x_threshold: float;
 var y_threshold: float;
 
-func _ready():
-	pass
-
 func _process(delta: float):
+	if GameManager.game_is_paused:
+		return
 	var input_x: int = 0;
 	var input_y: int = 0;
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):

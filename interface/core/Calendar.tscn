@@ -1,18 +1,18 @@
 [gd_scene load_steps=22 format=3 uid="uid://co81lv0s2uhl"]
 
-[ext_resource type="Texture2D" uid="uid://po3dr40i2drq" path="res://gfx/interface/UIDifferentFree03Wenrexa/MiniPanel06.jpg" id="1_vr6wc"]
-[ext_resource type="Texture2D" uid="uid://cmfbp7uj15d7t" path="res://gfx/interface/icons/general/pause-button.svg" id="2_ypugb"]
-[ext_resource type="Texture2D" uid="uid://b1evecr0j88w2" path="res://gfx/interface/icons/general/play-button.svg" id="3_1j5tm"]
-[ext_resource type="Script" path="res://interface/PauseButton.gd" id="3_ueqbl"]
-[ext_resource type="Script" path="res://interface/Date.gd" id="5_di1va"]
-[ext_resource type="Script" path="res://interface/Speed.gd" id="6_3fbml"]
-[ext_resource type="Script" path="res://interface/SpeedUp.gd" id="6_iup2f"]
-[ext_resource type="Texture2D" uid="uid://dmaqxcehyk7dv" path="res://gfx/interface/icons/general/plus-sign.png" id="7_iggyr"]
-[ext_resource type="Script" path="res://interface/SpeedDown.gd" id="8_4kh4w"]
-[ext_resource type="Texture2D" uid="uid://t3c7n8cbmj6l" path="res://gfx/interface/icons/general/minus-sign.png" id="8_lhrog"]
+[ext_resource type="Texture2D" uid="uid://po3dr40i2drq" path="res://gfx/interface/UIDifferentFree03Wenrexa/MiniPanel06.jpg" id="1_iq0av"]
+[ext_resource type="Texture2D" uid="uid://b1evecr0j88w2" path="res://gfx/interface/icons/general/play-button.svg" id="2_q2odd"]
+[ext_resource type="Texture2D" uid="uid://cmfbp7uj15d7t" path="res://gfx/interface/icons/general/pause-button.svg" id="3_jhav5"]
+[ext_resource type="Script" path="res://interface/core/PauseButton.gd" id="4_4biju"]
+[ext_resource type="Script" path="res://interface/core/Date.gd" id="5_sdcn5"]
+[ext_resource type="Script" path="res://interface/core/Speed.gd" id="6_6laoq"]
+[ext_resource type="Script" path="res://interface/core/SpeedUp.gd" id="7_wslr6"]
+[ext_resource type="Texture2D" uid="uid://dmaqxcehyk7dv" path="res://gfx/interface/icons/general/plus-sign.png" id="8_igwqo"]
+[ext_resource type="Script" path="res://interface/core/SpeedDown.gd" id="9_06jgv"]
+[ext_resource type="Texture2D" uid="uid://t3c7n8cbmj6l" path="res://gfx/interface/icons/general/minus-sign.png" id="10_6vqcq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kchcp"]
-texture = ExtResource("1_vr6wc")
+texture = ExtResource("1_iq0av")
 
 [sub_resource type="InputEventKey" id="InputEventKey_ligec"]
 device = -1
@@ -74,9 +74,9 @@ grow_vertical = 2
 scale = Vector2(0.1, 0.1)
 toggle_mode = true
 shortcut = SubResource("Shortcut_rc8dd")
-texture_normal = ExtResource("3_1j5tm")
-texture_pressed = ExtResource("2_ypugb")
-script = ExtResource("3_ueqbl")
+texture_normal = ExtResource("2_q2odd")
+texture_pressed = ExtResource("3_jhav5")
+script = ExtResource("4_4biju")
 
 [node name="Date" type="Label" parent="."]
 layout_mode = 1
@@ -91,7 +91,7 @@ grow_vertical = 2
 text = "0 year 0 month 1 day
 since Awakening"
 horizontal_alignment = 1
-script = ExtResource("5_di1va")
+script = ExtResource("5_sdcn5")
 
 [node name="Speed" type="Panel" parent="."]
 layout_mode = 1
@@ -106,7 +106,7 @@ offset_bottom = 40.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_coc72")
-script = ExtResource("6_3fbml")
+script = ExtResource("6_6laoq")
 
 [node name="SpeedUp" type="Button" parent="Speed"]
 layout_mode = 1
@@ -122,7 +122,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_exrur")
 shortcut = SubResource("Shortcut_v6g31")
 text = "
 "
-script = ExtResource("6_iup2f")
+script = ExtResource("7_wslr6")
 
 [node name="SpeedUpIcon" type="TextureRect" parent="Speed/SpeedUp"]
 layout_mode = 1
@@ -138,7 +138,7 @@ offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_iggyr")
+texture = ExtResource("8_igwqo")
 
 [node name="CurrentSpeed" type="Label" parent="Speed"]
 layout_mode = 1
@@ -173,7 +173,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_exrur")
 shortcut = SubResource("Shortcut_jw1il")
 text = "
 "
-script = ExtResource("8_4kh4w")
+script = ExtResource("9_06jgv")
 
 [node name="SpeedDownIcon" type="TextureRect" parent="Speed/SpeedDown"]
 layout_mode = 1
@@ -189,4 +189,4 @@ offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_lhrog")
+texture = ExtResource("10_6vqcq")
