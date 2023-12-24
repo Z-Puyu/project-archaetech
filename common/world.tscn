@@ -82,3 +82,7 @@ script = ExtResource("3_iewd5")
 
 [node name="BaseBuilding" parent="." instance=ExtResource("12_nvb0h")]
 employment = {}
+offset_left = 568.0
+offset_top = 475.0
+offset_right = 568.0
+offset_bottom = 475.0
