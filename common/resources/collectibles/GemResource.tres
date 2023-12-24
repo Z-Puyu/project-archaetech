@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://dqd55xijfan2w"]
+
+[ext_resource type="Script" path="res://common/resources/ResourceData.gd" id="1_vbqw3"]
+
+[resource]
+script = ExtResource("1_vbqw3")
+name = "Gem"
+desc = ""
+type = 1

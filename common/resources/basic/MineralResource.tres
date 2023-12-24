@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://bwgb83yp08q3s"]
+
+[ext_resource type="Script" path="res://common/resources/ResourceData.gd" id="1_x3wnc"]
+
+[resource]
+script = ExtResource("1_x3wnc")
+name = "Minerals"
+desc = ""
+type = 0

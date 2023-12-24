@@ -1,4 +1,4 @@
-class_name Vertex extends RefCounted
+class_name Vertex extends Node
 
 var _value: Variant
 var _next: Vertex
