@@ -3,15 +3,14 @@ class_name ProductionBuilding extends Building
 const Building = preload("res://common/buildings/Building.gd")
 const LocalStorage = preload("res://common/buildings/LocalStorage.gd")
 
-@export var employment: Dictionary
-var warehouse: LocalStorage
+var employment: Dictionary
+@onready var warehouse: LocalStorage = $Warehouse
 var max_employment: Dictionary
 var output: Dictionary
 var net_output: Dictionary
 var transport_network: Array[TransportRoute]
 
 func _ready():
-	self.warehouse = LocalStorage.new()
 	var jobs: Dictionary = self.data.activated_production_method.recipe
 	for job in jobs.keys():
 		self.max_employment[job] = jobs.get(job)
@@ -31,6 +30,7 @@ func work():
 			self.employ(job)
 	for route in transport_network:
 		route.transport()
+	self.warehouse.reset()
 			
 func employ(job: JobData):
 	var num_positions: int = self.max_employment.get(job)

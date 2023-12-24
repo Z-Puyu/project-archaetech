@@ -1,8 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqgtpy301ir2"]
+[gd_scene load_steps=4 format=3 uid="uid://cqgtpy301ir2"]
 
 [ext_resource type="Script" path="res://common/buildings/ProductionBuilding.gd" id="1_5j6vv"]
 [ext_resource type="Resource" uid="uid://c30c0sshkh4ys" path="res://common/buildings/ForestryBuilding.tres" id="2_fo031"]
+[ext_resource type="Script" path="res://common/buildings/LocalStorage.gd" id="3_yu8hy"]
 
 [node name="ForestryBuilding" type="Node2D"]
 script = ExtResource("1_5j6vv")
 data = ExtResource("2_fo031")
+
+[node name="Warehouse" type="Node2D" parent="."]
+script = ExtResource("3_yu8hy")

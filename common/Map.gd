@@ -22,8 +22,6 @@ enum terrains {
 	MOUNTAIN
 }
 
-# @onready var debugger: Label = $"../UILayer/ForDebug";
-@onready var InGameUI = get_tree().root.get_node("World/InGameUI/UILayer/InfoPanel")
 var grid: Dictionary # [Vector2i, Cell]
 
 signal tile_selected(cell: Cell)
@@ -56,7 +54,7 @@ func _ready():
 	BuildingManager.spawn_building.connect(self.spawn_building)
 		
 
-func _input(event: InputEvent):
+func _unhandled_input(event: InputEvent):
 	if event is InputEventMouse:
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 			var global_cursor_pos: Vector2 = self.make_input_local(event).position
@@ -81,7 +79,8 @@ func _input(event: InputEvent):
 				print(f_str);
 			self.clear_layer(self.layers.UI)
 			self.set_cell(self.layers.UI, self.curr_selected, self.atlases.CELLS, Vector2i(5, 0))
-			self.tile_selected.emit(grid[self.curr_selected])
+			if grid.has(self.curr_selected):
+				self.tile_selected.emit(grid[self.curr_selected])
 			
 
 func new_unit():
@@ -96,7 +95,9 @@ func new_building():
 		var cell_pos: Vector2i = self.curr_selected
 		var local_coords: Vector2 = self.map_to_local(cell_pos)
 		var curr_cell: Cell = self.grid.get(cell_pos)
+		print(self.curr_selected)
 		var tile_data: TileData = self.get_cell_tile_data(self.layers.LAND, self.curr_selected)
+		print(self.curr_selected)
 		if BuildingManager.add_building(tile_data, cell_pos, local_coords, 0):
 			curr_cell.building = BuildingManager.buildings.get(cell_pos)
 			self.tile_selected.emit(self.grid.get(cell_pos));

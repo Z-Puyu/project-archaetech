@@ -1,16 +1,13 @@
-[gd_resource type="Resource" script_class="JobData" load_steps=4 format=3 uid="uid://bvtxum4q5uj0v"]
+[gd_resource type="Resource" script_class="JobData" load_steps=3 format=3 uid="uid://bvtxum4q5uj0v"]
 
 [ext_resource type="Script" path="res://common/jobs/JobData.gd" id="1_6g6vd"]
-[ext_resource type="Resource" uid="uid://b53ptr1nt1kyo" path="res://common/resources/basic/FoodResource.tres" id="1_tw3j4"]
 [ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/basic/WoodResource.tres" id="2_d3kip"]
 
 [resource]
 script = ExtResource("1_6g6vd")
 name = "Woodcutter"
 desc = ""
-input = {
-ExtResource("1_tw3j4"): 0.5
-}
+input = {}
 output = {
 ExtResource("2_d3kip"): 3.0
 }

@@ -6,6 +6,8 @@ extends Node2D
 @onready var new_unit = $UILayer/InGameUI/InfoPanel/NewUnit
 @onready var new_building = $UILayer/InGameUI/InfoPanel/NewBuilding
 @onready var unit_selector = $UILayer/InGameUI/UnitSelection/ScrollContainer/VBoxContainer
+@onready var player_base: BaseBuilding = $BaseBuilding
+@onready var resource_panel: ResourcePanel = $UILayer/InGameUI/ResourcePanel
 var days: int 
 
 func _ready():
@@ -16,6 +18,8 @@ func _ready():
 	self.new_building.pressed.connect(self.map.new_building)
 	BuildingManager.spawn_building.connect(self.add_child)
 	UnitManager.spawn_unit.connect(self.spawn_unit)
+	ResourceManager.qty_updated.connect(self.resource_panel.update)
+	self.player_base.main_storage_changed.connect(resource_panel.update)
 	
 func spawn_unit(unit: Node2D):
 	unit.translate(map.map_to_local(map.curr_selected))

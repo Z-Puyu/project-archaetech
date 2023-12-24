@@ -1,4 +1,4 @@
-class_name LocalStorage
+class_name LocalStorage extends Node2D
 
 enum resource_types {
 	COMMON_RAW,
@@ -18,12 +18,13 @@ var resources: Dictionary
 var storage_limit: Array[int]
 var monthly_output: Dictionary
 
+signal qty_updated(res: ResourceData, new_qty: float)
+
 func _init():
 	self.resources = {}
 	self.storage_limit = []
 	for resource_type in self.resource_types:
 		self.storage_limit.append(200)
-	print(self.storage_limit)
 
 func add(affected_resources: Dictionary):
 	for type in affected_resources:
@@ -34,13 +35,16 @@ func add(affected_resources: Dictionary):
 		var net_amount: float = self.resources.get(type) + affected_resources.get(type)
 		self.resources[type] = min(net_amount, self.storage_limit[type.type])
 		print("%s has increased by %d" % [type.name, min(net_amount, self.storage_limit[type.type])])
+		self.qty_updated.emit(type, self.resources.get(type))
 	print(self.resources)
+	
 	
 func consume(affected_resources: Dictionary):
 	for type in affected_resources:
 		if self.has_enough(type, affected_resources[type]):
 			self.resources[type] -= affected_resources[type]
 			print("%s has decreased by %d" % [type.name, affected_resources[type]])
+			self.qty_updated.emit(type, self.resources.get(type))
 		else:
 			print("Not enough %s to consume" % type.name)
 	print(self.resources)
@@ -49,7 +53,7 @@ func take_away(resources: Dictionary) -> Dictionary:
 	var taken: Dictionary = {}
 	for res in resources:
 		var proportion: float = resources.get(res)
-		var amount_taken = self.output[res] * proportion
+		var amount_taken = self.monthly_output[res] * proportion
 		if taken.has(res):
 			taken[res] += amount_taken
 		else:
@@ -83,6 +87,9 @@ func supply(job: JobData, num_workers: int):
 			self.monthly_output[res] = output[res] * k * num_workers
 	self.consume(input)
 	self.add(self.monthly_output)
+	
+func reset():
+	self.monthly_output = {}
 		
 func has_enough(type: ResourceData, benchmark: float) -> bool:
 	return self.resources[type] >= benchmark

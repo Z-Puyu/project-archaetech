@@ -83,3 +83,4 @@ script = ExtResource("3_iewd5")
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="InGameUI" parent="UILayer" instance=ExtResource("6_8lgig")]
+mouse_filter = 2
