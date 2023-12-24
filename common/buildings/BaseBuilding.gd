@@ -1,23 +1,22 @@
-class_name ProductionBuilding extends Building
+class_name BaseBuilding extends Building
 
 const Building = preload("res://common/buildings/Building.gd")
 const LocalStorage = preload("res://common/buildings/LocalStorage.gd")
 
-@export var employment: Dictionary
-var warehouse: LocalStorage
+var employment: Dictionary
+@onready var warehouse: Node = get_tree().root.get_node("/root/ResourceManager")
 var max_employment: Dictionary
 var output: Dictionary
 var net_output: Dictionary
 var transport_network: Array[TransportRoute]
 
 func _ready():
-	self.warehouse = LocalStorage.new()
 	var jobs: Dictionary = self.data.activated_production_method.recipe
 	for job in jobs.keys():
 		self.max_employment[job] = jobs.get(job)
+		self.employment[job] = jobs.get(job)
 	GameManager.new_month.connect(self.work)
 	self.transport_network = []
-	print(self.employment)
 
 func work():
 	print(str(self._to_string(), " is working "))
@@ -51,3 +50,4 @@ func new_route(to: Building, level: int, resources: Dictionary):
 
 func _to_string() -> String:
 	return str(self.data.name, " with production method ", self.data.activated_production_method.name)
+

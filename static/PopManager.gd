@@ -13,7 +13,7 @@ func _ready():
 
 func update():
 	var yearly_food: int = pop_count * 12
-	var growth_modifier: float = clamp(ResourceManager.resources[ResourceManager.FOOD] as float / -\
+	var growth_modifier: float = clamp(ResourceManager.get_resources().get(ResourceManager.FOOD) as float / -\
 		(yearly_food * 3) as float, 0, 1.5)
 	pop_growth += growth_rate * growth_modifier
 	var real_growth: int = floor(self.pop_growth)

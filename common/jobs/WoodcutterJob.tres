@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_6g6vd")
 name = "Woodcutter"
+desc = ""
 input = {
 ExtResource("1_tw3j4"): 0.5
 }

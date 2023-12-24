@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_y34wj")
-name = ""
+name = "Research Point"
 desc = ""
-type = 0
+type = 5

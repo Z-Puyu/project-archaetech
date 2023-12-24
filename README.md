@@ -190,8 +190,6 @@ Based on the current condition of the player's sanctuary, we can dynamically pro
 
 <img src="file:///C:/Users/Zhang%20Puyu/Downloads/hLTBR-Cs4BxhLn0vsSNwiaSXCBRT00iKkqNGz74e5W8jJcokAP8bXycwHVvxIOgYQ4a6TAWFWJsFRsQ-UKZvO94QT9sex9bBJGtjYE0IyAA1Q2KkuSUIJXaygKhJzaoFGEwUa29loIUX3bIGfzPmZVQE_5iH_sa5jPPyeXryeTARco1FdwENDgrGxRacl_4EJDPO3S0Q0IyWQ.png" title="" alt="hLTBR-Cs4BxhLn0vsSNwiaSXCBRT00iKkqNGz74e5W8jJcokAP8bXycwHVvxIOgYQ4a6TAWFWJsFRsQ-UKZvO94QT9sex9bBJGtjYE0IyAA1Q2KkuSUIJXaygKhJzaoFGEwUa29loIUX3bIGfzPmZVQE_5iH_sa5jPPyeXryeTARco1FdwENDgrGxRacl_4EJDPO3S0Q0IyWQ.png" data-align="center">
 
-
-
 ## Development Timeline
 
 #### Separation of Duties:
@@ -212,7 +210,7 @@ Based on the current condition of the player's sanctuary, we can dynamically pro
 
 #### 12.16 - 12.22
 
-- [ ] Map: terrain, resource & building placement
+- [x] Map: terrain, resource & building placement
 
 - [ ] Unit movement: path-finding, terrain effects, resource collection
 
@@ -241,6 +239,87 @@ Based on the current condition of the player's sanctuary, we can dynamically pro
 - [ ] Pops and resources: resource consumption
 
 - [ ] UI: event windows
+
+## Development Dairies
+
+### # 1: Setting up Basic Systems
+
+As compared to many other genres of games, a simulation/strategy game has a particularly heavy focus on game data management. In a game like ours, player's interaction with the keyboard is minimal in contrast to, say, an action game where the player is constantly engaged in character control. Therefore, recognising the importance of data management, we did not rush to creating various game assets, but instead focused on designing a reasonable and well-structured game manager to store and process the various data crucial to our game's functionalities.
+
+First, to create the RTS aspects of our game, we used a `Timer` as the game clock. Every emission of the `timeout` signal corresponds to one tick (i.e. one game day). To reduce computational burden, we will update most of the game data once every 30 game days, which is a standard practice in many RTS games.
+
+One of the core systems in a simulation game is the buildings and its interaction with population, which is what keeps the game economy running dynamically. Therefore, the very first task we embarked on was to build global manager scripts for **population, resources and buildings**.
+
+The population management has been fairly simple as of the current stage. We first keep track of a total population count and another count for the *unemployed* population. There is also a base growth rate by which a progress bar will grow per game day, and when the progress bar hits the maximum, we will increment the population count.
+
+Next is **resources**. Initially, we thought of keeping a dictionary of resources with the keys being the names and the values being the amount, so the initial resource manager looks like this:
+
+```gdscript
+class_name ResourceManager extends Node
+
+var resources: Dictionary
+
+func add(resource_name: String, amount: float):
+    if resources.has(resource_name):
+        resources[resource_name] += amount
+    else:
+        resources[resource_name] = amount
+
+func has_enough(resource_name: String, amount: float) -> bool:
+    if resources.has(resource_name):
+        return resources[resource_name] >= amount
+    return false
+```
+
+However, this brings about many inconveniences. First and foremost, in this design, the only connection between our manager and the actual resource objects in the game is the resource names, which is extremely not extensible. For example, if we were to categorise resources into different types, rarities, etc. (which is highly likely), we will then need to use their names as keys to reference from a bunch of different databases, which is also bug-prone.
+
+The solution we arrived is to wrap each resource as a stand-alone Godot custom `ResourceData` resource script. Godot keeps these custom resources as global objects and each resource will contain all the immutable information about that particular resource object. As such, we can easily use `ResourceData` as the keys to store and access the resources.
+
+**Buildings** form the core of our game's economy and we did spend a lot of time on its design. In the very initial version, we use an array to store all the buildings which have been constructed by the player. We let our `BuildingManager` receive the `new_month` signal from the game clock, such that for every 30 game days, the manager iterates through the list of buildings and produce the resources, like this:
+
+```gdscript
+func on_new_month():
+    for building in buildings:
+        building.produce()
+```
+
+We soon realised that this was far from optimal. For one, not all buildings necessarily generate resources (maybe some only give buffs to others), so some function calls will be redundant. Next, the linear performance of an array degenerates when the list of buildings grows as the game progresses. Therefore, we have two targets: first, **auto-detecting which buildings produce resources** and second, **finding a way to process all buildings without using a global list**.
+
+We solved this problem by using custom signals. In the revamped version, the `BuildingManager` still keeps track of all buildings in a dictionary with the buildings' positions as keys, but the logic for resource generation is moved to each building object itself. We created a custom class `Building` which contains
+
+- A name,
+
+- A cost of construction, and
+
+- A duration to build
+
+Then, we let `ProductionBuilding` extend from `Building`, which additionally has
+
+- A list of jobs available, and
+
+- A method `work()` to generate new resources based on the employment status
+
+Now, each `ProductionBuilding` is connected to the `new_month` signal from the game clock, which triggers the `work()` method.
+
+### # 2: Spawning System
+
+With the data management set up, the next task is to build the spawning system to add the buildings and other objects to our game's scene tree. We wanted to make this system as generic as possible from the very beginning, so that it can be used to spawn not only buildings, but other similar objects such as units (which can be built in a similar manner).
+
+The first thing we noticed is that Godot does not have a built-in linked list structure, so we built our own to conveniently implement a construction queue. In the initial version, when the player build a new building in a map tile, we would instantiate a building object at that cell. Then, we would augment the building with its waiting time to build as a pair and enqueue the pair. At each game day, we would call `queue.peek_front().progress()` to decrement the waiting time by one day. If the waiting time has reduced to 0, we will `pop_front()` from the queue and add the building object to the scene tree.
+
+The pitfall of this implementation is obvious: it only supports constructing one building at a time. To construct multiple tasks concurrently, we have tried to use an array of queues. However, there was another problem: suppose we have $n$ parallel construction queues but the $n$-th task completes first. The inituitive thing here is to move the $(n + 1)$-th enqueued task to the head of the $n$-th queue, but there is no way to know which queue and which position this task is currently at! Nevertheless, an array of queues faces the same degenerating performance issue so we decided to discard this design.
+
+To improve our design, we decided to analyse the functionalities of the ideal construction queue:
+
+- The queue needs to be able to pop out any task which has completed, regardless of its location, while maintaining compactness: this means we need a linked list - if each task is a vertex in the linked list, we can then efficiently pop out any one of them.
+
+- The queue needs to update multiple tasks at once while knowing how many tasks can be carried on concurrently at maximum, so that other tasks will wait for the completion of earlier ones: how about **dividing the queue into two parts**, `active` and `inactive`?
+
+- We cannot use a loop to update all active tasks: so each task must be able to update itself!
+
+To build such a system, we first created a class called `ConstructibleTask` which extends `Vertex` used in linked lists. Each `ConstructibleTask` takes in a game object as its value plus a property `days_remaining`. 
+
+We also built a `ConstructionQueue` class using two doubly linked lists called `active` and `inactive`. The nodes of the linked lists are all `ConstructibleTask`. Each task in the `active` list receives `timeout` signal from the game clock. When detecting the signal, it decrement `days_remaining` until it becomes 0.  Once that happens, the `ConstructibleTask` will tell `ConstructionQueue` to pop it from the linked list, retrieve the game object wrapped inside it and add it into the scene tree. If there are empty slots in the `active` list, we call `active.push_back(inactive.pop_front())` to transfer an inactive task into the active list. 
 
 ## Coding Conventions
 

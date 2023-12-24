@@ -1,12 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqgtpy301ir2"]
+[gd_scene load_steps=3 format=3 uid="uid://cqgtpy301ir2"]
 
 [ext_resource type="Script" path="res://common/buildings/ProductionBuilding.gd" id="1_5j6vv"]
 [ext_resource type="Resource" uid="uid://c30c0sshkh4ys" path="res://common/buildings/ForestryBuilding.tres" id="2_fo031"]
-[ext_resource type="Texture2D" uid="uid://bfdfuv51e64ww" path="res://gfx/map-objects/ForestryBuilding.png" id="5_ap3gh"]
 
 [node name="ForestryBuilding" type="Node2D"]
 script = ExtResource("1_5j6vv")
 data = ExtResource("2_fo031")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("5_ap3gh")

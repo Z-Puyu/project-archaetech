@@ -11,11 +11,21 @@ var curr_spawning_obj: int
 # var max_capacity: int
 # var under_construction: Dictionary
 var construction_queue: ConstructionQueue
+var _player_base: Dictionary
 
 signal spawn_building(building: Building, pos: Vector2i)
 
 func _ready():
 	buildings = {}
+	_player_base = {
+		Vector2i(0, 0): null,
+		Vector2i(1, 0): null,
+		Vector2i(-1, 0): null,
+		Vector2i(-1, -1): null,
+		Vector2i(0, -1): null,
+		Vector2i(-1, 1): null,
+		Vector2i(0, 1): null
+	}
 	available_buildings[0] = load("res://assets/buildings/ForestryBuilding.tscn")
 	construction_queue = ConstructionQueue.new(2)
 	spawn_building.connect(on_building_complete)
@@ -25,7 +35,7 @@ func add_building(tile_data: TileData, pos: Vector2i, coords: Vector2, type: int
 	curr_spawning_obj = type
 	var obj: Building = available_buildings.get(curr_spawning_obj).instantiate()
 	print(obj.data.required_terrains.size())
-	if obj.can_be_built(tile_data):
+	if obj.can_be_built(tile_data) and not _player_base.has(pos):
 		if buildings.has(pos):
 			print(str("Cell ", pos, " already has a building!"))
 			var building: Node = buildings.get(pos)
@@ -45,6 +55,7 @@ func add_building(tile_data: TileData, pos: Vector2i, coords: Vector2, type: int
 		# under_construction[obj] = obj.data.time_to_build
 		# queues[under_construction.size() % max_capacity].push_back(obj)
 		return true
+	print("The tile is player base")
 	return false
 		
 func delete_building(pos: Vector2i):

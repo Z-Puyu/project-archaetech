@@ -30,10 +30,24 @@ signal tile_selected(cell: Cell)
 var curr_selected: Vector2i
 
 func _ready():
-	self.grid = {}
+	const BASE = preload("res://assets/buildings/BaseBuilding.tscn")
+	var base: BaseBuilding = BASE.instantiate()
+	self.grid = {
+		Vector2i(0, 0): Cell.new(Vector2i(0, 0)),
+		Vector2i(1, 0): Cell.new(Vector2i(1, 0)),
+		Vector2i(-1, 0): Cell.new(Vector2i(-1, 0)),
+		Vector2i(-1, -1): Cell.new(Vector2i(-1, -1)),
+		Vector2i(0, -1): Cell.new(Vector2i(0, -1)),
+		Vector2i(-1, 1): Cell.new(Vector2i(-1, 1)),
+		Vector2i(0, 1): Cell.new(Vector2i(0, 1))
+	}
+	for coords in self.grid:
+		self.grid.get(coords).building = base.duplicate()
 	var land_cells = self.get_used_cells(self.layers.LAND)
 	var water_cells = self.get_used_cells(self.layers.WATER)
 	for coords in land_cells:
+		if self.grid.has(coords):
+			continue
 		self.grid[coords] = Cell.new(coords)
 	for coords in water_cells:
 		if self.grid.has(coords):

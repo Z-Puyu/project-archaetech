@@ -36,7 +36,7 @@ func _input(event: InputEvent) -> void:
 func next_turn():
 	var curr_pop_count: int = PopManager.pop_count
 	ResourceManager.add({ResourceManager.FOOD: -curr_pop_count})
-	print("Remaining food: %f" % ResourceManager.resources.get(ResourceManager.FOOD))
+	print("Remaining food: %f" % ResourceManager.get_resources().get(ResourceManager.FOOD))
 	PopManager.update()
 
 func _on_world_timer_timeout():

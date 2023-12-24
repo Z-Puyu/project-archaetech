@@ -1,16 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://dgyp3l4utsj7s"]
+[gd_scene load_steps=16 format=3 uid="uid://dgyp3l4utsj7s"]
 
 [ext_resource type="Script" path="res://common/Map.gd" id="1_3x27s"]
 [ext_resource type="Script" path="res://common/World.gd" id="1_ihkiw"]
 [ext_resource type="Resource" uid="uid://bce52sx4o7sel" path="res://common/terrain/PlainTerrain.tres" id="2_e14fj"]
 [ext_resource type="Texture2D" uid="uid://boohv8wkfp05h" path="res://gfx/map-objects/Cells.png" id="2_ic231"]
 [ext_resource type="Resource" uid="uid://dbtwq3h3rpn27" path="res://common/terrain/OceanTerrain.tres" id="3_87gj5"]
-[ext_resource type="Texture2D" uid="uid://bfdfuv51e64ww" path="res://gfx/map-objects/ForestryBuilding.png" id="3_a4ltn"]
 [ext_resource type="Script" path="res://common/MainCamera.gd" id="3_iewd5"]
 [ext_resource type="Resource" uid="uid://dxbx5g0bdwsaj" path="res://common/terrain/ForestTerrain.tres" id="4_32k2g"]
 [ext_resource type="Resource" uid="uid://bfuicndnh6uun" path="res://common/terrain/DesertTerrain.tres" id="5_ilre5"]
 [ext_resource type="Resource" uid="uid://obr3cg2hliic" path="res://common/terrain/MountainTerrain.tres" id="6_6uuyl"]
 [ext_resource type="PackedScene" uid="uid://dwmspwwtu1d2d" path="res://interface/InGameUI.tscn" id="6_8lgig"]
+[ext_resource type="Texture2D" uid="uid://7hlea4wwm3aw" path="res://gfx/map-objects/Buildings.png" id="8_uv15q"]
+[ext_resource type="PackedScene" uid="uid://bbo3jv31tl7l4" path="res://assets/buildings/BaseBuilding.tscn" id="12_nvb0h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rb80s"]
 resource_name = "CELLS"
@@ -30,9 +31,12 @@ texture_region_size = Vector2i(64, 64)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j4etx"]
 resource_name = "BUILDINGS"
-texture = ExtResource("3_a4ltn")
-texture_region_size = Vector2i(64, 64)
+texture = ExtResource("8_uv15q")
+texture_region_size = Vector2i(32, 16)
+0:0/size_in_atlas = Vector2i(2, 4)
 0:0/0 = 0
+2:0/size_in_atlas = Vector2i(6, 10)
+2:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_usiub"]
 tile_shape = 3
@@ -48,11 +52,11 @@ script = ExtResource("1_ihkiw")
 [node name="Map" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_usiub")
 format = 2
-layer_0/name = "Buildings"
-layer_0/z_index = 4
-layer_1/name = "UI"
-layer_1/z_index = 5
-layer_1/tile_data = PackedInt32Array()
+layer_0/name = "UI"
+layer_0/z_index = 5
+layer_1/name = "Buildings"
+layer_1/z_index = 4
+layer_1/tile_data = PackedInt32Array(0, 131073, 0)
 layer_2/name = "Map Objects"
 layer_2/z_index = 3
 layer_2/tile_data = PackedInt32Array()
@@ -75,3 +79,6 @@ drag_bottom_margin = 0.75
 script = ExtResource("3_iewd5")
 
 [node name="InGameUI" parent="." instance=ExtResource("6_8lgig")]
+
+[node name="BaseBuilding" parent="." instance=ExtResource("12_nvb0h")]
+employment = {}
