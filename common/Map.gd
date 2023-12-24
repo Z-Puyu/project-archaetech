@@ -56,7 +56,7 @@ func _ready():
 	BuildingManager.spawn_building.connect(self.spawn_building)
 		
 
-func _unhandled_input(event: InputEvent):
+func _input(event: InputEvent):
 	if event is InputEventMouse:
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 			var global_cursor_pos: Vector2 = self.make_input_local(event).position

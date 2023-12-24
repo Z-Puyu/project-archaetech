@@ -78,11 +78,8 @@ drag_right_margin = 0.75
 drag_bottom_margin = 0.75
 script = ExtResource("3_iewd5")
 
-[node name="InGameUI" parent="." instance=ExtResource("6_8lgig")]
-
 [node name="BaseBuilding" parent="." instance=ExtResource("12_nvb0h")]
-employment = {}
-offset_left = 568.0
-offset_top = 475.0
-offset_right = 568.0
-offset_bottom = 475.0
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="InGameUI" parent="UILayer" instance=ExtResource("6_8lgig")]

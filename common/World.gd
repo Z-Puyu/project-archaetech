@@ -2,10 +2,10 @@ extends Node2D
 
 @onready var map: TileMap = $Map
 @onready var game_clock: Timer = GameManager.game_clock
-@onready var info: Control = $InGameUI/UILayer/InfoPanel
-@onready var new_unit = $InGameUI/UILayer/InfoPanel/NewUnit
-@onready var new_building = $InGameUI/UILayer/InfoPanel/NewBuilding
-@onready var unit_selector = $InGameUI/UILayer/UnitSelection/ScrollContainer/VBoxContainer
+@onready var info: Control = $UILayer/InGameUI/InfoPanel
+@onready var new_unit = $UILayer/InGameUI/InfoPanel/NewUnit
+@onready var new_building = $UILayer/InGameUI/InfoPanel/NewBuilding
+@onready var unit_selector = $UILayer/InGameUI/UnitSelection/ScrollContainer/VBoxContainer
 var days: int 
 
 func _ready():

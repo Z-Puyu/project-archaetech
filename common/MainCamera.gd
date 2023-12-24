@@ -45,7 +45,7 @@ func _process(delta: float):
 	self.position.x += self.v_x * delta;
 	self.position.y += self.v_y * delta;
 	
-func _unhandled_input(event: InputEvent):
+func _input(event: InputEvent):
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("wheel_up"):
 			self.zoom.x *= (1 + 0.01 * self.zoom_speed);
