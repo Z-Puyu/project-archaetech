@@ -39,34 +39,27 @@ offset_right = 1150.0
 offset_bottom = 646.0
 script = ExtResource("4_kdhwk")
 
-[node name="ColorRect" type="ColorRect" parent="UILayer/InfoPanel"]
-z_index = -1
-layout_mode = 0
-offset_right = 380.0
-offset_bottom = 239.0
-color = Color(0.0862745, 0.25098, 0.329412, 0.352941)
-
 [node name="Info" type="Label" parent="UILayer/InfoPanel"]
 layout_mode = 0
-offset_left = 16.0
+offset_left = 131.0
 offset_top = 8.0
 offset_right = 365.0
-offset_bottom = 31.0
+offset_bottom = 233.0
 
 [node name="NewUnit" type="Button" parent="UILayer/InfoPanel"]
 layout_mode = 0
-offset_left = 7.0
-offset_top = 200.0
-offset_right = 112.0
-offset_bottom = 227.0
+offset_left = -772.0
+offset_top = 171.0
+offset_right = -667.0
+offset_bottom = 238.0
 text = "New Unit"
 
 [node name="NewBuilding" type="Button" parent="UILayer/InfoPanel"]
 layout_mode = 0
-offset_left = 119.0
-offset_top = 200.0
-offset_right = 230.0
-offset_bottom = 231.0
+offset_left = -656.0
+offset_top = 172.0
+offset_right = -545.0
+offset_bottom = 237.0
 text = "New Building"
 
 [node name="UnitSelection" type="Control" parent="UILayer"]
