@@ -4,7 +4,6 @@
 [ext_resource type="FontFile" uid="uid://dkp338r6uj7b3" path="res://common/poppins/Poppins-Black.otf" id="2_4nigh"]
 [ext_resource type="FontFile" uid="uid://ck5f4if2e1xn0" path="res://common/poppins/Poppins-BlackItalic.otf" id="3_1h8lh"]
 [ext_resource type="PackedScene" uid="uid://c3crljkr8gv36" path="res://interface/bg.tscn" id="4_jekre"]
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_14rym")
 
@@ -43,6 +42,5 @@ Archaetech"
 horizontal_alignment = 1
 
 [node name="BG" parent="." instance=ExtResource("4_jekre")]
-
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

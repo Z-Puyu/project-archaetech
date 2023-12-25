@@ -105,5 +105,6 @@ func new_building():
 func spawn_building(building: Building, pos: Vector2i):
 	self.set_cell(self.layers.BUILDINGS, pos, self.atlases.BUILDINGS, building.data.map_object)
 
+
 func _to_string():
 	return str(grid);
