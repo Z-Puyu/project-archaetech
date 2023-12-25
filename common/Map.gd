@@ -56,8 +56,7 @@ func new_unit():
 	if (true):  #资源限制？
 		var cell = self.grid[self.curr_selected]
 		print(cell.units_count);
-		cell.units.append(UnitData.new(self.curr_selected, cell.units_count[0] + 1));
-		cell.units_count[0] += 1;
+		UnitManager.new_unit(self.curr_selected, 0);
 		self.tile_selected.emit(grid[self.curr_selected]);
 		
 func new_building():

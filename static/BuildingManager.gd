@@ -38,6 +38,7 @@ func add_building(pos: Vector2i, coords: Vector2, type: int) -> bool:
 			else:
 				# User Validation panel needed here
 				delete_building(pos) 
+
 		var obj: Node2D = curr_spawning_obj.duplicate()
 		ResourceManager.consume(obj.data.cost)
 		buildings[pos] = obj
