@@ -6,7 +6,9 @@ extends Node2D
 @onready var new_unit = $InGameUI/UILayer/InfoPanel/NewUnit
 @onready var new_building = $InGameUI/UILayer/InfoPanel/NewBuilding
 @onready var unit_selector = $InGameUI/UILayer/UnitSelection/ScrollContainer/VBoxContainer
+@onready var PathFinder = preload("res://static/PathFinder.gd");
 var days: int 
+var pf: PathFinder;
 
 func _ready():
 	self.days = 0
@@ -16,6 +18,8 @@ func _ready():
 	self.new_building.pressed.connect(self.map.new_building)
 	BuildingManager.spawn_building.connect(self.spawn_building)
 	UnitManager.spawn_unit.connect(self.spawn_unit)
+	pf = PathFinder.new(map);
+	print(pf.find(map.grid[Vector2i(0,0)], map.grid[Vector2i(1,2)]))
 
 func spawn_building(building: Node2D):
 	# building.translate(map.map_to_local(map.curr_selected))
