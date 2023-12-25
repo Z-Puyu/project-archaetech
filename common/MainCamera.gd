@@ -18,10 +18,9 @@ var origin: Vector2 = self.position
 var x_threshold: float;
 var y_threshold: float;
 
-func _ready():
-	pass
-
 func _process(delta: float):
+	if GameManager.game_is_paused:
+		return
 	var input_x: int = 0;
 	var input_y: int = 0;
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
@@ -45,7 +44,7 @@ func _process(delta: float):
 	self.position.x += self.v_x * delta;
 	self.position.y += self.v_y * delta;
 	
-func _unhandled_input(event: InputEvent):
+func _input(event: InputEvent):
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("wheel_up"):
 			self.zoom.x *= (1 + 0.01 * self.zoom_speed);

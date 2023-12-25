@@ -1,0 +1,192 @@
+[gd_scene load_steps=22 format=3 uid="uid://co81lv0s2uhl"]
+
+[ext_resource type="Texture2D" uid="uid://po3dr40i2drq" path="res://gfx/interface/UIDifferentFree03Wenrexa/MiniPanel06.jpg" id="1_iq0av"]
+[ext_resource type="Texture2D" uid="uid://b1evecr0j88w2" path="res://gfx/interface/icons/general/play-button.svg" id="2_q2odd"]
+[ext_resource type="Texture2D" uid="uid://cmfbp7uj15d7t" path="res://gfx/interface/icons/general/pause-button.svg" id="3_jhav5"]
+[ext_resource type="Script" path="res://interface/core/PauseButton.gd" id="4_4biju"]
+[ext_resource type="Script" path="res://interface/core/Date.gd" id="5_sdcn5"]
+[ext_resource type="Script" path="res://interface/core/Speed.gd" id="6_6laoq"]
+[ext_resource type="Script" path="res://interface/core/SpeedUp.gd" id="7_wslr6"]
+[ext_resource type="Texture2D" uid="uid://dmaqxcehyk7dv" path="res://gfx/interface/icons/general/plus-sign.png" id="8_igwqo"]
+[ext_resource type="Script" path="res://interface/core/SpeedDown.gd" id="9_06jgv"]
+[ext_resource type="Texture2D" uid="uid://t3c7n8cbmj6l" path="res://gfx/interface/icons/general/minus-sign.png" id="10_6vqcq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kchcp"]
+texture = ExtResource("1_iq0av")
+
+[sub_resource type="InputEventKey" id="InputEventKey_ligec"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_rc8dd"]
+events = [SubResource("InputEventKey_ligec")]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_coc72"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_exrur"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_4s12q"]
+device = -1
+shift_pressed = true
+keycode = 4194320
+
+[sub_resource type="InputEventKey" id="InputEventKey_qw5nh"]
+device = -1
+keycode = 61
+unicode = 61
+
+[sub_resource type="Shortcut" id="Shortcut_v6g31"]
+events = [SubResource("InputEventKey_4s12q"), SubResource("InputEventKey_qw5nh")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_nlxoy"]
+device = -1
+shift_pressed = true
+keycode = 4194322
+
+[sub_resource type="InputEventKey" id="InputEventKey_qin16"]
+device = -1
+keycode = 45
+unicode = 45
+
+[sub_resource type="Shortcut" id="Shortcut_jw1il"]
+events = [SubResource("InputEventKey_nlxoy"), SubResource("InputEventKey_qin16")]
+
+[node name="Calendar" type="Panel"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_bottom = 80.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_kchcp")
+
+[node name="PauseButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -25.0
+offset_right = 527.0
+offset_bottom = 487.0
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+toggle_mode = true
+shortcut = SubResource("Shortcut_rc8dd")
+texture_normal = ExtResource("2_q2odd")
+texture_pressed = ExtResource("3_jhav5")
+script = ExtResource("4_4biju")
+
+[node name="Date" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 69.0
+offset_top = -11.5
+offset_right = 109.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "0 year 0 month 1 day
+since Awakening"
+horizontal_alignment = 1
+script = ExtResource("5_sdcn5")
+
+[node name="Speed" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_coc72")
+script = ExtResource("6_6laoq")
+
+[node name="SpeedUp" type="Button" parent="Speed"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_top = 5.0
+offset_right = 25.0
+offset_bottom = 30.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_exrur")
+shortcut = SubResource("Shortcut_v6g31")
+text = "
+"
+script = ExtResource("7_wslr6")
+
+[node name="SpeedUpIcon" type="TextureRect" parent="Speed/SpeedUp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -9.0
+offset_right = 24.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_igwqo")
+
+[node name="CurrentSpeed" type="Label" parent="Speed"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -12.5
+offset_right = 25.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "1x"
+horizontal_alignment = 1
+
+[node name="SpeedDown" type="Button" parent="Speed"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -30.0
+offset_right = 25.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_exrur")
+shortcut = SubResource("Shortcut_jw1il")
+text = "
+"
+script = ExtResource("9_06jgv")
+
+[node name="SpeedDownIcon" type="TextureRect" parent="Speed/SpeedDown"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -9.0
+offset_right = 24.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_6vqcq")

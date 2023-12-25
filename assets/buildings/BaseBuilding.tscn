@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbo3jv31tl7l4"]
+
+[ext_resource type="Script" path="res://common/buildings/BaseBuilding.gd" id="1_f7suj"]
+[ext_resource type="Resource" uid="uid://g2dbyo6bjdue" path="res://common/buildings/BaseBuilding.tres" id="2_dyjx6"]
+
+[node name="BaseBuilding" type="Node2D"]
+script = ExtResource("1_f7suj")
+data = ExtResource("2_dyjx6")

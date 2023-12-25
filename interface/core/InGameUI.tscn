@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwmspwwtu1d2d"]
+
+[ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/core/ResourcePanel.tscn" id="1_0xkas"]
+[ext_resource type="PackedScene" uid="uid://co81lv0s2uhl" path="res://interface/core/Calendar.tscn" id="2_lfric"]
+[ext_resource type="Script" path="res://interface/Info.gd" id="4_kdhwk"]
+[ext_resource type="Script" path="res://interface/UnitSelection.gd" id="6_q7puf"]
+
+[node name="InGameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResourcePanel" parent="." instance=ExtResource("1_0xkas")]
+layout_mode = 0
+
+[node name="Calendar" parent="." instance=ExtResource("2_lfric")]
+layout_mode = 1
+
+[node name="InfoPanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 773.0
+offset_top = 410.0
+offset_right = 1150.0
+offset_bottom = 646.0
+script = ExtResource("4_kdhwk")
+
+[node name="ColorRect" type="ColorRect" parent="InfoPanel"]
+z_index = -1
+layout_mode = 0
+offset_right = 380.0
+offset_bottom = 239.0
+color = Color(0.0862745, 0.25098, 0.329412, 0.352941)
+
+[node name="Info" type="Label" parent="InfoPanel"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 8.0
+offset_right = 365.0
+offset_bottom = 233.0
+
+[node name="NewUnit" type="Button" parent="InfoPanel"]
+layout_mode = 0
+offset_left = -772.0
+offset_top = 171.0
+offset_right = -667.0
+offset_bottom = 238.0
+text = "New Unit"
+
+[node name="NewBuilding" type="Button" parent="InfoPanel"]
+layout_mode = 0
+offset_left = -656.0
+offset_top = 172.0
+offset_right = -545.0
+offset_bottom = 237.0
+text = "New Building"
+
+[node name="UnitSelection" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 120.0
+offset_right = 85.0
+offset_bottom = 570.0
+
+[node name="ColorRect" type="ColorRect" parent="UnitSelection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0862745, 0.25098, 0.329412, 0.352941)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UnitSelection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UnitSelection/ScrollContainer"]
+custom_minimum_size = Vector2(75, 450)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_q7puf")

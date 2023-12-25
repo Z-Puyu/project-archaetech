@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-func create_entries(_data: CellData):
+func create_entries(_data: Cell):
 	for i in self.get_children():
 		self.remove_child(i)
 		i.queue_free()
