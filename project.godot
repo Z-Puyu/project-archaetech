@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Project-Archaetech"
-run/main_scene="res://common/world.tscn"
+run/main_scene="res://common/main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,6 +22,11 @@ PopManager="*res://static/PopManager.gd"
 GameManager="*res://static/GameManager.gd"
 BuildingManager="*res://static/BuildingManager.gd"
 UnitManager="*res://static/UnitManager.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [display]
 
