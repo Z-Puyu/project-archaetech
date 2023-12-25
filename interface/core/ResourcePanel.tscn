@@ -1,0 +1,120 @@
+[gd_scene load_steps=14 format=3 uid="uid://px7ujblhnr2w"]
+
+[ext_resource type="Texture2D" uid="uid://po3dr40i2drq" path="res://gfx/interface/UIDifferentFree03Wenrexa/MiniPanel06.jpg" id="1_tmvf3"]
+[ext_resource type="Script" path="res://interface/core/ResourcePanel.gd" id="2_vjq16"]
+[ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/basic/WoodResource.tres" id="3_8maes"]
+[ext_resource type="Resource" uid="uid://bwgb83yp08q3s" path="res://common/resources/basic/MineralResource.tres" id="4_dam50"]
+[ext_resource type="Resource" uid="uid://b53ptr1nt1kyo" path="res://common/resources/basic/FoodResource.tres" id="5_38pip"]
+[ext_resource type="Resource" uid="uid://cbkgfv0dq0h8t" path="res://common/resources/Research/ResearchPointResource.tres" id="6_ttk8h"]
+[ext_resource type="Script" path="res://interface/core/ResourceInfo.gd" id="7_8rire"]
+[ext_resource type="Texture2D" uid="uid://cnotgn47ma5cn" path="res://gfx/interface/icons/resources/wood.svg" id="7_yj1lk"]
+[ext_resource type="Texture2D" uid="uid://1s8bbheq3wix" path="res://gfx/interface/icons/resources/rock.svg" id="8_idhig"]
+[ext_resource type="Texture2D" uid="uid://har6jruc3kj3" path="res://gfx/interface/icons/resources/food.svg" id="9_l02lg"]
+[ext_resource type="Texture2D" uid="uid://0lucvecjmx6u" path="res://gfx/interface/icons/resources/research.svg" id="10_n87ro"]
+[ext_resource type="Texture2D" uid="uid://b34c68xim74qf" path="res://gfx/interface/icons/resources/metals.svg" id="11_1g777"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_44gcu"]
+texture = ExtResource("1_tmvf3")
+modulate_color = Color(1, 1, 1, 0.752941)
+
+[node name="ResourcePanel" type="Panel"]
+offset_right = 500.0
+offset_bottom = 75.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_44gcu")
+script = ExtResource("2_vjq16")
+info_boxes = {
+ExtResource("3_8maes"): NodePath("ResourcesList/Wood"),
+ExtResource("4_dam50"): NodePath("ResourcesList/Mineral"),
+ExtResource("5_38pip"): NodePath("ResourcesList/Food"),
+ExtResource("6_ttk8h"): NodePath("ResourcesList/SecondaryResources/FirstRow/ResearchPoint")
+}
+
+[node name="ResourcesList" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -25.0
+offset_right = 338.0
+offset_bottom = 25.0
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="Wood" type="HBoxContainer" parent="ResourcesList"]
+layout_mode = 2
+script = ExtResource("7_8rire")
+
+[node name="WoodIcon" type="TextureRect" parent="ResourcesList/Wood"]
+layout_mode = 2
+texture = ExtResource("7_yj1lk")
+expand_mode = 2
+
+[node name="WoodQty" type="Label" parent="ResourcesList/Wood"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "500"
+
+[node name="Mineral" type="HBoxContainer" parent="ResourcesList"]
+layout_mode = 2
+script = ExtResource("7_8rire")
+
+[node name="MineralIcon" type="TextureRect" parent="ResourcesList/Mineral"]
+layout_mode = 2
+texture = ExtResource("8_idhig")
+expand_mode = 2
+
+[node name="MineralQty" type="Label" parent="ResourcesList/Mineral"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "500"
+
+[node name="Food" type="HBoxContainer" parent="ResourcesList"]
+layout_mode = 2
+script = ExtResource("7_8rire")
+
+[node name="FoodIcon" type="TextureRect" parent="ResourcesList/Food"]
+layout_mode = 2
+texture = ExtResource("9_l02lg")
+expand_mode = 2
+
+[node name="FoodQty" type="Label" parent="ResourcesList/Food"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "500"
+
+[node name="SecondaryResources" type="VBoxContainer" parent="ResourcesList"]
+layout_mode = 2
+
+[node name="FirstRow" type="HBoxContainer" parent="ResourcesList/SecondaryResources"]
+layout_mode = 2
+
+[node name="ResearchPoint" type="HBoxContainer" parent="ResourcesList/SecondaryResources/FirstRow"]
+layout_mode = 2
+script = ExtResource("7_8rire")
+
+[node name="ResearchPointIcon" type="TextureRect" parent="ResourcesList/SecondaryResources/FirstRow/ResearchPoint"]
+layout_mode = 2
+texture = ExtResource("10_n87ro")
+expand_mode = 2
+
+[node name="ResearchPointQty\'" type="Label" parent="ResourcesList/SecondaryResources/FirstRow/ResearchPoint"]
+layout_mode = 2
+text = "0"
+
+[node name="SecondRow" type="HBoxContainer" parent="ResourcesList/SecondaryResources"]
+layout_mode = 2
+
+[node name="Metals" type="HBoxContainer" parent="ResourcesList/SecondaryResources/SecondRow"]
+layout_mode = 2
+script = ExtResource("7_8rire")
+
+[node name="MetalsIcon" type="TextureRect" parent="ResourcesList/SecondaryResources/SecondRow/Metals"]
+layout_mode = 2
+texture = ExtResource("11_1g777")
+expand_mode = 2
+
+[node name="MetalsQty" type="Label" parent="ResourcesList/SecondaryResources/SecondRow/Metals"]
+layout_mode = 2
+text = "0"

@@ -11,7 +11,7 @@ func _ready():
 func _process(delta):
 	pass
 
-func showInfo(_data: CellData):
+func showInfo(_data: Cell):
 	self.visible = true
 	#print(UnitManager.units.keys())
 	#print(_data.pos)

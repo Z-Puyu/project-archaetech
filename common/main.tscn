@@ -1,23 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://gphw47g6xeqo"]
+[gd_scene load_steps=5 format=3 uid="uid://gphw47g6xeqo"]
 
 [ext_resource type="Script" path="res://common/main.gd" id="1_14rym"]
-
+[ext_resource type="FontFile" uid="uid://dkp338r6uj7b3" path="res://common/poppins/Poppins-Black.otf" id="2_4nigh"]
+[ext_resource type="FontFile" uid="uid://ck5f4if2e1xn0" path="res://common/poppins/Poppins-BlackItalic.otf" id="3_1h8lh"]
+[ext_resource type="PackedScene" uid="uid://c3crljkr8gv36" path="res://interface/bg.tscn" id="4_jekre"]
 [node name="Main" type="Node2D"]
 script = ExtResource("1_14rym")
 
 [node name="Play" type="Button" parent="."]
-offset_left = 426.0
-offset_top = 104.0
-offset_right = 634.0
-offset_bottom = 222.0
+offset_left = 172.0
+offset_top = 437.0
+offset_right = 380.0
+offset_bottom = 555.0
+theme_override_fonts/font = ExtResource("2_4nigh")
 text = "Play"
 
 [node name="Quit" type="Button" parent="."]
-offset_left = 426.0
-offset_top = 358.0
-offset_right = 634.0
-offset_bottom = 476.0
+offset_left = 820.0
+offset_top = 434.0
+offset_right = 1028.0
+offset_bottom = 552.0
+theme_override_fonts/font = ExtResource("2_4nigh")
 text = "Quit"
 
+[node name="TextEdit" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 278.0
+offset_top = 123.0
+offset_right = 900.0
+offset_bottom = 406.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_1h8lh")
+theme_override_font_sizes/font_size = 100
+text = "Project 
+Archaetech"
+horizontal_alignment = 1
+
+[node name="BG" parent="." instance=ExtResource("4_jekre")]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://cl112lb4467rc"]
+
+[ext_resource type="Script" path="res://common/resources/ResourceData.gd" id="1_cvs5d"]
+
+[resource]
+script = ExtResource("1_cvs5d")
+name = ""
+desc = ""
+type = 0
