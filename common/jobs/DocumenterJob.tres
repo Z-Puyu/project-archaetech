@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="JobData" load_steps=3 format=3 uid="uid://erd1xs2snxqo"]
 
 [ext_resource type="Script" path="res://common/jobs/JobData.gd" id="1_krech"]
-[ext_resource type="Resource" uid="uid://cbkgfv0dq0h8t" path="res://common/resources/Research/ResearchPointResource.tres" id="1_lc7uc"]
+[ext_resource type="Resource" uid="uid://cbkgfv0dq0h8t" path="res://common/resources/research/ResearchPointResource.tres" id="1_lc7uc"]
 
 [resource]
 script = ExtResource("1_krech")

@@ -18,14 +18,17 @@ var monthly_output: Dictionary
 const FOOD = preload("res://common/resources/basic/FoodResource.tres")
 const WODD = preload("res://common/resources/basic/WoodResource.tres")
 const MINERAL = preload("res://common/resources/basic/MineralResource.tres")
+const RESEARCH = preload("res://common/resources/research/ResearchPointResource.tres")
 
 signal qty_updated(res: ResourceData, new_qty: float)
+signal tech_progress(research_point: int)
 
 func _ready():
 	resources = {
 		FOOD: 500,
 		WODD: 500,
-		MINERAL: 500
+		MINERAL: 500,
+		RESEARCH: 0
 	}
 	storage_limit.append(10000)
 	storage_limit.append(5000)
@@ -97,6 +100,8 @@ func supply(job: JobData, num_workers: int):
 			monthly_output[res] = output[res] * k * num_workers
 	consume(input)
 	add(monthly_output)
+	if monthly_output.has(RESEARCH):
+		tech_progress.emit(monthly_output.get(RESEARCH))
 	
 func reset():
 	monthly_output = {}
