@@ -22,8 +22,8 @@ func _ready():
 	UnitManager.spawn_unit.connect(self.spawn_unit)
 	ResourceManager.qty_updated.connect(self.resource_panel.update)
 	self.player_base.main_storage_changed.connect(resource_panel.update)
-	var pf: PathFinder = PathFinder.new(map)
-	print(pf.find(map.grid[Vector2i(0,0)], map.grid[Vector2i(1,2)]))
+	pf = PathFinder.new(map);
+	UnitManager.new_unit(Vector2i(1,1), 0);
 	
 func _unhandled_input(event: InputEvent):
 	if GameManager.game_is_paused:

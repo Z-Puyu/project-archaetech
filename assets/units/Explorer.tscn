@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://b0fs7hjq7eekl" path="res://common/units/Explorer.tres" id="2_qmr3n"]
 
 [node name="Explorer" type="Node2D"]
+show_behind_parent = true
 script = ExtResource("1_88nln")
 data = ExtResource("2_qmr3n")
 
