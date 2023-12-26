@@ -43,10 +43,10 @@ func _potential_neighbours(cell: Cell):
 	var result: Array = [];
 	if cell.pos.y % 2 == 0:
 		for each in neighbour_yeven:
-			result.append(cell.pos + each);
+			result.append(cell.pos + (each as Vector2i));
 	else:
 		for each in neighbour_yodd:
-			result.append(cell.pos + each);
+			result.append(cell.pos + (each as Vector2i));
 	return result;
 	
 func _add_point(cell: Cell):
