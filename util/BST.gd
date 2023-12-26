@@ -65,7 +65,7 @@ func successor(T: BSTVertex):
 			par = cur.parent;
 		if par == null:
 			return -1;
-		return par.key;
+		return par;
 			
 func predecessor(T: BSTVertex):
 	if(T.left != null):
@@ -93,9 +93,9 @@ func delete(T: BSTVertex, v: Variant):
 			T.left.parent = T.parent;          
 			T = T.left;
 		else:
-			var successor = successor(v)
-			T.key = successor;
-			T.right = delete(T.right, successor);
+			var successor = successor(self.search(self.root, v));
+			T = successor;
+			T.right = delete(T.right, successor.value);
 	elif(T.value < v):
 		T.right = delete(T.right, v);
 	else:

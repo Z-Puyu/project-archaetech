@@ -23,6 +23,8 @@ enum terrains {
 }
 
 var grid: Dictionary # [Vector2i, Cell]
+var land_navigable: Dictionary # [Vector2i, Cell]
+var water_navigable: Dictionary # [Vector2i, Cell]
 
 signal tile_selected(cell: Cell)
 var curr_selected: Vector2i
@@ -39,6 +41,7 @@ func _ready():
 		Vector2i(-1, 1): Cell.new(Vector2i(-1, 1)),
 		Vector2i(0, 1): Cell.new(Vector2i(0, 1))
 	}
+	self.land_navigable = self.grid.duplicate(true);
 	for coords in self.grid:
 		self.grid.get(coords).building = base.duplicate()
 	var land_cells = self.get_used_cells(self.layers.LAND)
@@ -47,10 +50,12 @@ func _ready():
 		if self.grid.has(coords):
 			continue
 		self.grid[coords] = Cell.new(coords)
+		self.land_navigable[coords] = Cell.new(coords)
 	for coords in water_cells:
 		if self.grid.has(coords):
 			continue
 		self.grid[coords] = Cell.new(coords)
+		self.water_navigable[coords] = Cell.new(coords)
 	BuildingManager.spawn_building.connect(self.spawn_building)
 		
 
@@ -95,9 +100,7 @@ func new_building():
 		var cell_pos: Vector2i = self.curr_selected
 		var local_coords: Vector2 = self.map_to_local(cell_pos)
 		var curr_cell: Cell = self.grid.get(cell_pos)
-		print(self.curr_selected)
 		var tile_data: TileData = self.get_cell_tile_data(self.layers.LAND, self.curr_selected)
-		print(self.curr_selected)
 		if BuildingManager.add_building(tile_data, cell_pos, local_coords, 0):
 			curr_cell.building = BuildingManager.buildings.get(cell_pos)
 			self.tile_selected.emit(self.grid.get(cell_pos));

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_dwj0x")
 type = 0
-speed = 0.5
+speed = 1.0
 is_worker = false
 passenger_capacity = 0
 production_cost = {}
