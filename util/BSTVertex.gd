@@ -12,4 +12,4 @@ func _init(v: Variant, other: Variant = null):
 	self.other = other;
 
 func _to_string():
-	return str(value);
+	return str("[", self.value, "]");
