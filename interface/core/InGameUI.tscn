@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwmspwwtu1d2d"]
+[gd_scene load_steps=9 format=3 uid="uid://dwmspwwtu1d2d"]
 
 [ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/core/ResourcePanel.tscn" id="1_0xkas"]
 [ext_resource type="PackedScene" uid="uid://co81lv0s2uhl" path="res://interface/core/Calendar.tscn" id="2_lfric"]
+[ext_resource type="Script" path="res://interface/core/NewUnit.gd" id="4_3x6to"]
+[ext_resource type="Script" path="res://interface/core/NewBuilding.gd" id="4_4caic"]
+[ext_resource type="PackedScene" uid="uid://djn3qpeneucjf" path="res://interface/unit_menu.tscn" id="4_47sl4"]
 [ext_resource type="Script" path="res://interface/Info.gd" id="4_kdhwk"]
+[ext_resource type="PackedScene" uid="uid://dup5ujurhlwff" path="res://interface/building_menu.tscn" id="5_us3dj"]
 [ext_resource type="Script" path="res://interface/UnitSelection.gd" id="6_q7puf"]
 
 [node name="InGameUI" type="Control"]
@@ -49,6 +53,9 @@ offset_top = 171.0
 offset_right = -667.0
 offset_bottom = 238.0
 text = "New Unit"
+script = ExtResource("4_3x6to")
+
+[node name="UnitMenu" parent="InfoPanel/NewUnit" instance=ExtResource("4_47sl4")]
 
 [node name="NewBuilding" type="Button" parent="InfoPanel"]
 layout_mode = 0
@@ -57,6 +64,9 @@ offset_top = 172.0
 offset_right = -545.0
 offset_bottom = 237.0
 text = "New Building"
+script = ExtResource("4_4caic")
+
+[node name="BuildingMenu" parent="InfoPanel/NewBuilding" instance=ExtResource("5_us3dj")]
 
 [node name="UnitSelection" type="Control" parent="."]
 layout_mode = 3
@@ -89,3 +99,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("6_q7puf")
+
+[connection signal="pressed" from="InfoPanel/NewUnit" to="InfoPanel/NewUnit" method="_on_pressed"]
+[connection signal="pressed" from="InfoPanel/NewBuilding" to="InfoPanel/NewBuilding" method="_on_pressed"]
