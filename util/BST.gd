@@ -14,31 +14,35 @@ func search(T: BSTVertex, value: Variant):
 	else:
 		return self.search(T.left, value);
 		
-func insert(T: BSTVertex, value: Variant):
+func insert(T: BSTVertex, value: Variant, other: Variant = null):
 	if (T == null):
-		return BSTVertex.new(value);
+		return BSTVertex.new(value, other);
 		
 	if (T.value < value):
-		T.right = self.insert(T.right, value);
+		T.right = self.insert(T.right, value, other);
 	else:
-		T.left = self.insert(T.left, value);
+		T.left = self.insert(T.left, value, other);
 	
 	return T;
 	
 func inorder(T: BSTVertex):
 	var result: Array[BSTVertex] = []
 	if (T == null):
-		return;
-	result += inorder(T.left);
+		return null;
+	var left = inorder(T.left);
+	var right = inorder(T.right);
+	if left != null:
+		result += left;
 	result += [T];
-	result += inorder(T.right);
+	if right != null:
+		result += right;
 	return result;
 	
 func findMin(T: BSTVertex):
 	if (T == null):
 		return "no result";
 	elif (T.left == null):
-		return T.value;
+		return T;
 	else:
 		return findMin(T.left);
 
@@ -46,7 +50,7 @@ func findMax(T: BSTVertex):
 	if (T == null):
 		return "no result";
 	elif (T.right == null):
-		return T.value;
+		return T;
 	else:
 		return findMin(T.right);
 		
@@ -61,7 +65,7 @@ func successor(T: BSTVertex):
 			par = cur.parent;
 		if par == null:
 			return -1;
-		return par.key;
+		return par;
 			
 func predecessor(T: BSTVertex):
 	if(T.left != null):
@@ -79,7 +83,7 @@ func predecessor(T: BSTVertex):
 func delete(T: BSTVertex, v: Variant):
 	if(T == null):
 		return T;
-	if(T.key == v):
+	if(T.value == v):
 		if(T.left == null and T.right == null):
 			T = null;
 		elif(T.left == null and T.right != null):
@@ -89,10 +93,10 @@ func delete(T: BSTVertex, v: Variant):
 			T.left.parent = T.parent;          
 			T = T.left;
 		else:
-			var successor = successor(v)
-			T.key = successor;
-			T.right = delete(T.right, successor);
-	elif(T.key < v):
+			var successor = successor(self.search(self.root, v));
+			T = successor;
+			T.right = delete(T.right, successor.value);
+	elif(T.value < v):
 		T.right = delete(T.right, v);
 	else:
 		T.left = delete(T.left, v);
@@ -107,10 +111,10 @@ func BSTsearch(v):
 		return res;
 	return "no result";
 
-func BSTinsert(v: Variant):
-	root = insert(root, v);
+func BSTinsert(v: Variant, other: Variant):
+	root = insert(root, v, other);
 
-func BSTinoder():
+func BSTinorder():
 	return inorder(root);
 	
 func BSTfindMin():
@@ -142,3 +146,6 @@ func getHeight(T: BSTVertex):
 
 func BSTgetHeight():
 	return getHeight(root);
+
+func is_empty():
+	return self.root == null;
