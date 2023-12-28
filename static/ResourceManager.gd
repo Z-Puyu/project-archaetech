@@ -47,20 +47,20 @@ func add(affected_resources: Dictionary):
 			resources[type] = 0
 		var net_amount: float = resources.get(type) + affected_resources.get(type)
 		resources[type] = min(net_amount, storage_limit[type.type])
-		print("%s has increased by %d" % [type.name, min(net_amount, storage_limit[type.type])])
+		# # print("%s has increased by %d" % [type.name, min(net_amount, storage_limit[type.type])])
 		qty_updated.emit(type, resources.get(type))
-	print(resources)
+	# # print(resources)
 	
 	
 func consume(affected_resources: Dictionary):
 	for type in affected_resources:
 		if has_enough(type, affected_resources[type]):
 			resources[type] -= affected_resources[type]
-			print("%s has decreased by %d" % [type.name, affected_resources[type]])
+			# # print("%s has decreased by %d" % [type.name, affected_resources[type]])
 			qty_updated.emit(type, resources.get(type))
-		else:
-			print("Not enough %s to consume" % type.name)
-	print(resources)
+		# else:
+			# print("Not enough %s to consume" % type.name)
+	# print(resources)
 	
 func take_away(resources: Dictionary) -> Dictionary:
 	var taken: Dictionary = {}
@@ -77,14 +77,14 @@ func take_away(resources: Dictionary) -> Dictionary:
 		
 func supply(job: JobData, num_workers: int):
 	if num_workers <= 0:
-		print("There is no workers in the job %s" % job)
+		# print("There is no workers in the job %s" % job)
 		return
 	var k = 1
 	var input: Dictionary = job.input.duplicate(true)
 	for res in input.keys():
 		if resources[res] < 1:
 			# We use < 1 to avoid (possible) float point precision issues
-			print("There is insufficient %s! %s cannot produce anything." % [res.name, job.name])
+			# print("There is insufficient %s! %s cannot produce anything." % [res.name, job.name])
 			return
 		input[res] *= num_workers
 		# Find the maximal possible proportion of production 

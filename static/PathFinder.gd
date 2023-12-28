@@ -31,7 +31,7 @@ func _init(map: TileMap):
 	self.UNIT_LENGTH = map.map_to_local(Vector2i(0,0)).distance_to(map.map_to_local(Vector2i(0,1)));
 	for each in map.land_navigable.values():
 		self.add_point(each);
-	print(nodes)	
+	# print(nodes)	
 
 func _compute_cost(from_cell: Cell, to_cell: Cell) -> float:
 	return map.get_cell_tile_data(map.layers.LAND, to_cell.pos).get_custom_data("terrain").time_to_traverse;

@@ -24,13 +24,11 @@ func employ():
 	var recruitment: int = min(demand, PopManager.unemployed)
 	self._curr_manpower += recruitment
 	PopManager.unemployed -= recruitment
-	print("%s has employed %d new workers" % [self, recruitment])
+	# print("%s has employed %d new workers" % [self, recruitment])
 	
 func transport():
 	var maintenance: float = self._maintenance[self._curr_manpower] * self._curr_manpower
-	if not ResourceManager.has_enough(ResourceManager.FOOD, maintenance):
-		print("Not enough food to maintain this route!")
-	else:
+	if ResourceManager.has_enough(ResourceManager.FOOD, maintenance):
 		ResourceManager.consume({ResourceManager.FOOD: maintenance})
 		var resources: Dictionary = self._from.take_away(self.target_resources)
 		self._to.store(resources)

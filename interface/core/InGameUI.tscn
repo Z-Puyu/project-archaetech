@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwmspwwtu1d2d"]
+[gd_scene load_steps=6 format=3 uid="uid://dwmspwwtu1d2d"]
 
 [ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/core/ResourcePanel.tscn" id="1_0xkas"]
 [ext_resource type="PackedScene" uid="uid://co81lv0s2uhl" path="res://interface/core/Calendar.tscn" id="2_lfric"]
 [ext_resource type="Script" path="res://interface/Info.gd" id="4_kdhwk"]
+[ext_resource type="PackedScene" uid="uid://dw3duqsv2ocqc" path="res://interface/buildings/BuildingInfo.tscn" id="4_slldm"]
 [ext_resource type="Script" path="res://interface/UnitSelection.gd" id="6_q7puf"]
 
 [node name="InGameUI" type="Control"]
@@ -28,6 +29,12 @@ offset_right = 1150.0
 offset_bottom = 646.0
 script = ExtResource("4_kdhwk")
 
+[node name="BuildingInfo" parent="InfoPanel" instance=ExtResource("4_slldm")]
+visible = false
+layout_mode = 1
+offset_top = 10.0
+offset_bottom = 110.0
+
 [node name="ColorRect" type="ColorRect" parent="InfoPanel"]
 z_index = -1
 layout_mode = 0
@@ -36,6 +43,7 @@ offset_bottom = 239.0
 color = Color(0.0862745, 0.25098, 0.329412, 0.352941)
 
 [node name="Info" type="Label" parent="InfoPanel"]
+visible = false
 layout_mode = 0
 offset_left = 16.0
 offset_top = 8.0

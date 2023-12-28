@@ -14,6 +14,7 @@ var _technologies: Array[Tech] # This is a connected DAG :O
 var _selector: RandomSelector
 var _researchable: Array[Tech]
 var _unlocked: Dictionary
+var _focus: Tech
 
 func _ready():
 	for tech in ALL_TECHNOLOGIES:
@@ -28,7 +29,11 @@ func _ready():
 	
 func _research(available_points: int):
 	var progress: Dictionary = {}
-	print("Available: " + str(available_points))
+	# print("Available: " + str(available_points))
+	# The focused tech will guarantee to receive one third of research points
+	if _focus != null:
+		progress[_focus] += floor(0.33 * available_points)
+		available_points -= floor(0.33 * available_points)
 	# Now we distribute n identical balls to r distinct boxes :O
 	for research_point in available_points:
 		var to: Tech = _selector.select()
@@ -38,10 +43,10 @@ func _research(available_points: int):
 			progress[to] = 1
 	for tech in _researchable:
 		tech.progress = min(tech.progress + progress.get(tech), tech.cost)
-		print(tech.name + " gets " + str(min(progress.get(tech), tech.cost - tech.progress + progress.get(tech))) + " progress")
+		# print(tech.name + " gets " + str(min(progress.get(tech), tech.cost - tech.progress + progress.get(tech))) + " progress")
 		if tech.progress == tech.cost:
 			_unlock(tech)
-			print("unlocked " + tech.name + "!")
+			# print("unlocked " + tech.name + "!")
 				
 func _unlock(tech: Tech):
 	_unlocked[tech] = null

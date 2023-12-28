@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://dw3duqsv2ocqc"]
+
+[ext_resource type="Script" path="res://interface/buildings/BuildingInfo.gd" id="1_hfjuu"]
+[ext_resource type="Script" path="res://interface/core/DynamicIcon.gd" id="2_ro52x"]
+[ext_resource type="Script" path="res://interface/core/DynamicLabel.gd" id="3_o6xsx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwxao"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yvlaa"]
+font_size = 10
+
+[node name="BuildingInfo" type="Panel"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.0
+offset_right = 181.0
+offset_bottom = 100.0
+grow_horizontal = 2
+script = ExtResource("1_hfjuu")
+
+[node name="IconFrame" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fwxao")
+
+[node name="Icon" type="TextureRect" parent="IconFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+script = ExtResource("2_ro52x")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 50.0
+offset_bottom = 19.0
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_yvlaa")
+script = ExtResource("3_o6xsx")
+
+[node name="ProductionInfo" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -31.0
+offset_right = 50.0
+offset_bottom = -8.0
+grow_vertical = 0
+script = ExtResource("3_o6xsx")
+
+[node name="LocalStorage" type="Label" parent="."]
+layout_mode = 1
+offset_left = 60.0
+offset_top = 10.0
+offset_right = 100.0
+offset_bottom = 33.0
+script = ExtResource("3_o6xsx")

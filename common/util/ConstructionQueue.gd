@@ -22,7 +22,7 @@ func remove(task: ConstructibleTask):
 		self._inactive.pop(task)
 	# remove_child(task)
 	task.queue_free()
-	print("removed task")
+	# print("removed task")
 	self._refresh_active()
 	
 func enqueue(task: ConstructibleTask):
@@ -34,7 +34,7 @@ func enqueue(task: ConstructibleTask):
 		self._inactive.offer_last(task)
 	
 func _refresh_active():
-	print(("Currently %d" + " active tasks remaining") % self._active.size())
+	# print(("Currently %d" + " active tasks remaining") % self._active.size())
 	while self._active.size() > self.max_active_size:
 		var task: ConstructibleTask = self._active.poll_last()
 		task.pause()

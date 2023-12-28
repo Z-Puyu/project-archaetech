@@ -3,6 +3,7 @@ extends Node2D
 @onready var map: TileMap = $Map
 @onready var game_clock: Timer = GameManager.game_clock
 @onready var info: Control = $UILayer/InGameUI/InfoPanel
+@onready var building_panel: Panel = $UILayer/InGameUI/InfoPanel/BuildingInfo
 @onready var new_unit = $UILayer/InGameUI/InfoPanel/NewUnit
 @onready var new_building = $UILayer/InGameUI/InfoPanel/NewBuilding
 @onready var unit_selector = $UILayer/InGameUI/UnitSelection/ScrollContainer/VBoxContainer

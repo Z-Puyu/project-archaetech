@@ -34,10 +34,10 @@ func add_building(tile_data: TileData, pos: Vector2i, coords: Vector2, type: int
 	# Note that pos is the local map coordinates
 	curr_spawning_obj = type
 	var obj: Building = available_buildings.get(curr_spawning_obj).instantiate()
-	print(obj.data.required_terrains.size())
+	# print(obj.data.required_terrains.size())
 	if obj.can_be_built(tile_data) and not _player_base.has(pos):
 		if buildings.has(pos):
-			print(str("Cell ", pos, " already has a building!"))
+			# print(str("Cell ", pos, " already has a building!"))
 			var building: Node = buildings.get(pos)
 			if building is ConstructibleTask:
 				# If the building is under construction, we return the cost
@@ -55,7 +55,7 @@ func add_building(tile_data: TileData, pos: Vector2i, coords: Vector2, type: int
 		# under_construction[obj] = obj.data.time_to_build
 		# queues[under_construction.size() % max_capacity].push_back(obj)
 		return true
-	print("The tile is player base")
+	# print("The tile is player base")
 	return false
 		
 func delete_building(pos: Vector2i):
@@ -64,8 +64,8 @@ func delete_building(pos: Vector2i):
 		buildings.erase(pos)
 		remove_child(building)
 		building.queue_free()
-	else:
-		print(str("Cell ", pos, " has no building!"))
+	# else:
+		# print(str("Cell ", pos, " has no building!"))
 				
 func on_building_complete(building: Building, pos: Vector2i):
 	buildings[pos] = building

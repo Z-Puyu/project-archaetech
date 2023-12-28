@@ -23,7 +23,7 @@ func _ready():
 	
 
 func work():
-	print(str(self._to_string(), " is working "))
+	# print(str(self._to_string(), " is working "))
 	# Process each job in the building sequentially
 	for job in self.max_employment.keys():
 		if not self.employment.has(job):
@@ -42,7 +42,7 @@ func employ(job: JobData):
 	var recruitment = min(demand, PopManager.unemployed)
 	employment[job] += recruitment
 	PopManager.unemployed -= recruitment
-	print("%s has employed %d new workers" % [self, recruitment])
+	# print("%s has employed %d new workers" % [self, recruitment])
 	
 func take_away(resources: Dictionary) -> Dictionary:
 	return ResourceManager.take_away(resources)
