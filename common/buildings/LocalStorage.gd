@@ -21,6 +21,7 @@ var monthly_output: Dictionary
 signal qty_updated(res: ResourceData, new_qty: float)
 
 func _init():
+	self.monthly_output = {}
 	self.resources = {}
 	self.storage_limit = []
 	for resource_type in self.resource_types:
@@ -36,7 +37,8 @@ func add(affected_resources: Dictionary):
 		self.resources[type] = min(net_amount, self.storage_limit[type.type])
 		# print("%s has increased by %d" % [type.name, min(net_amount, self.storage_limit[type.type])])
 		self.qty_updated.emit(type, self.resources.get(type))
-	print(self.resources)
+		print("add" + str(self.monthly_output))
+	# print(self.resources)
 	
 	
 func consume(affected_resources: Dictionary):
@@ -51,9 +53,12 @@ func consume(affected_resources: Dictionary):
 	
 func take_away(resources: Dictionary) -> Dictionary:
 	var taken: Dictionary = {}
+	var remaining: Dictionary = self.monthly_output.duplicate(true)
 	for res in resources:
 		var proportion: float = resources.get(res)
-		var amount_taken = self.monthly_output[res] * proportion
+		print("Monthly" + str(self.monthly_output))
+		var amount_taken = self.monthly_output.get(res) * proportion
+		remaining[res] -= amount_taken
 		if taken.has(res):
 			taken[res] += amount_taken
 		else:
@@ -87,8 +92,10 @@ func supply(job: JobData, num_workers: int):
 			self.monthly_output[res] = output[res] * k * num_workers
 	self.consume(input)
 	self.add(self.monthly_output)
+	print("supply" + str(self.monthly_output))
 	
 func reset():
+	print("Reset")
 	self.monthly_output = {}
 		
 func has_enough(type: ResourceData, benchmark: float) -> bool:

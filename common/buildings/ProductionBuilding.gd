@@ -17,6 +17,7 @@ func _ready():
 	self.transport_network = []
 	var building_panel: Panel = get_node("/root/World/UILayer/InGameUI/InfoPanel/BuildingInfo")
 	self.show_building_info.connect(building_panel.show_info)
+	self.select.connect(get_node("../Cursor").on_select_building)
 	# print(self.employment)
 
 func work():
@@ -37,6 +38,13 @@ func work():
 		"output": self.output,
 		"local_storage": self.warehouse.resources
 	})
+	# THIS IS FOR DEBUG PURPOSE ONLY!!!
+	if self.transport_network.is_empty():
+		if not self.output.keys().is_empty():
+			for key in self.output.keys():
+				if not key is ResourceData:
+					print(key.name + " is not ResourceData")
+			self.new_route(get_node("../BaseBuilding"), 1, self.output.keys())
 			
 func employ(job: JobData):
 	var num_positions: int = self.max_employment.get(job)
@@ -52,8 +60,10 @@ func take_away(resources: Dictionary) -> Dictionary:
 func store(resources: Dictionary):
 	self.warehouse.add(resources)
 	
-func new_route(to: Building, level: int, resources: Dictionary):
-	self.add_child(TransportRoute.new(to, level, resources))
+func new_route(to: Building, level: int, resources: Array):
+	var route: TransportRoute = TransportRoute.new(to, level, resources)
+	self.transport_network.append(route)
+	self.add_child(route)
 	
 func show_info():
 	self.show_building_info.emit({
