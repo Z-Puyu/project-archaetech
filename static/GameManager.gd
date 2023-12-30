@@ -24,7 +24,7 @@ func _ready():
 func next_turn():
 	var curr_pop_count: int = PopManager.pop_count
 	ResourceManager.add({ResourceManager.FOOD: -curr_pop_count})
-	print("Remaining food: %f" % ResourceManager.resources.get(ResourceManager.FOOD))
+	# print("Remaining food: %f" % ResourceManager.resources.get(ResourceManager.FOOD))
 	PopManager.update()
 	
 func pause_game():
@@ -44,18 +44,18 @@ func _on_speed_up():
 	if not game_is_paused:
 		speed_level = clamp(speed_level + 1, 1, 5)	
 		game_clock.set_wait_time(config[str("time_elapse_", speed_level)]["value"])
-		print("Speed up to %s" % game_clock.wait_time)
+		# print("Speed up to %s" % game_clock.wait_time)
 	
 func _on_speed_down():
 	if not game_is_paused:
 		speed_level = clamp(speed_level - 1, 1, 5)	
 		game_clock.set_wait_time(config[str("time_elapse_", speed_level)]["value"])
-		print("Speed down")
+		# print("Speed down")
 
 func _on_world_timer_timeout():
 	self.days += 1
-	print(str("Day ", self.days))
+	# print(str("Day ", self.days))
 	if self.days % 30 == 0:
-		print("new month")
+		# print("new month")
 		next_turn()
 		new_month.emit()

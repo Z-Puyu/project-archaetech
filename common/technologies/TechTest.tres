@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TechData" load_steps=3 format=3 uid="uid://camdmmqopjpx0"]
+
+[ext_resource type="Resource" uid="uid://c30c0sshkh4ys" path="res://common/buildings/ForestryBuilding.tres" id="1_6wwh8"]
+[ext_resource type="Script" path="res://common/technologies/Tech.gd" id="2_mqyj0"]
+
+[resource]
+script = ExtResource("2_mqyj0")
+name = "Test"
+desc = ""
+type = 0
+prerequisites = {}
+cost = 100
+weight = 10
+rewards = [ExtResource("1_6wwh8")]

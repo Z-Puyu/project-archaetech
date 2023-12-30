@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://oru6o70jr2sp"]
+
+[ext_resource type="Texture2D" uid="uid://civxrxa74spp1" path="res://gfx/interface/icons/technologies/card.png" id="1_nem4n"]
+[ext_resource type="Texture2D" uid="uid://dcqqw5d3iidgs" path="res://gfx/interface/icons/technologies/card_pressed.png" id="2_vf3l4"]
+[ext_resource type="Texture2D" uid="uid://bdrie3ys1831p" path="res://gfx/interface/icons/technologies/card_activated.png" id="3_so153"]
+[ext_resource type="Script" path="res://common/technologies/TechTreeNode.gd" id="4_8be04"]
+
+[node name="TechTreeNode" type="TextureButton"]
+offset_right = 8.0
+offset_bottom = 8.0
+texture_normal = ExtResource("1_nem4n")
+texture_pressed = ExtResource("2_vf3l4")
+texture_hover = ExtResource("3_so153")
+texture_focused = ExtResource("3_so153")
+script = ExtResource("4_8be04")

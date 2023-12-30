@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/basic/WoodResource.tres" id="3_8maes"]
 [ext_resource type="Resource" uid="uid://bwgb83yp08q3s" path="res://common/resources/basic/MineralResource.tres" id="4_dam50"]
 [ext_resource type="Resource" uid="uid://b53ptr1nt1kyo" path="res://common/resources/basic/FoodResource.tres" id="5_38pip"]
-[ext_resource type="Resource" uid="uid://cbkgfv0dq0h8t" path="res://common/resources/Research/ResearchPointResource.tres" id="6_ttk8h"]
+[ext_resource type="Resource" uid="uid://cbkgfv0dq0h8t" path="res://common/resources/research/ResearchPointResource.tres" id="6_iigvp"]
 [ext_resource type="Script" path="res://interface/core/ResourceInfo.gd" id="7_8rire"]
 [ext_resource type="Texture2D" uid="uid://cnotgn47ma5cn" path="res://gfx/interface/icons/resources/wood.svg" id="7_yj1lk"]
 [ext_resource type="Texture2D" uid="uid://1s8bbheq3wix" path="res://gfx/interface/icons/resources/rock.svg" id="8_idhig"]
@@ -27,7 +27,7 @@ info_boxes = {
 ExtResource("3_8maes"): NodePath("ResourcesList/Wood"),
 ExtResource("4_dam50"): NodePath("ResourcesList/Mineral"),
 ExtResource("5_38pip"): NodePath("ResourcesList/Food"),
-ExtResource("6_ttk8h"): NodePath("ResourcesList/SecondaryResources/FirstRow/ResearchPoint")
+ExtResource("6_iigvp"): NodePath("ResourcesList/SecondaryResources/FirstRow/ResearchPoint")
 }
 
 [node name="ResourcesList" type="HBoxContainer" parent="."]

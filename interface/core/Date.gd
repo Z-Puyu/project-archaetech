@@ -11,7 +11,7 @@ func next_day():
 	if self.date[2] == 31:
 		self.date[1] += 1
 		self.date[2] = 1
-		print(self.date[2])
+		# print(self.date[2])
 		if self.date[1] == 12:
 			self.date[0] += 1
 			self.date[1] = 0

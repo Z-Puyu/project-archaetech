@@ -2,7 +2,7 @@ class_name PauseMenuOverlay extends Control
 
 func is_to_be_blocked(event: InputEvent) -> bool:
 	if event is InputEventMouse:
-		return true
+		return false
 	if event.is_action("go_back") or event.is_action("toggle_pause") or event.is_action("close"):
 		return false
 	return true
