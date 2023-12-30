@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwmspwwtu1d2d"]
+[gd_scene load_steps=9 format=3 uid="uid://dwmspwwtu1d2d"]
 
 [ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/core/ResourcePanel.tscn" id="1_0xkas"]
 [ext_resource type="PackedScene" uid="uid://co81lv0s2uhl" path="res://interface/core/Calendar.tscn" id="2_lfric"]
 [ext_resource type="Script" path="res://interface/core/NewUnit.gd" id="4_3x6to"]
 [ext_resource type="Script" path="res://interface/core/NewBuilding.gd" id="4_4caic"]
-[ext_resource type="Texture2D" uid="uid://cgchs35ncnvqs" path="res://gfx/interface/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-003.png" id="4_7kwqw"]
 [ext_resource type="PackedScene" uid="uid://djn3qpeneucjf" path="res://interface/unit_menu.tscn" id="4_47sl4"]
 [ext_resource type="Script" path="res://interface/Info.gd" id="4_kdhwk"]
 [ext_resource type="PackedScene" uid="uid://dup5ujurhlwff" path="res://interface/building_menu.tscn" id="5_us3dj"]
@@ -33,17 +32,12 @@ offset_right = 1150.0
 offset_bottom = 646.0
 script = ExtResource("4_kdhwk")
 
-[node name="ColorRect" type="NinePatchRect" parent="InfoPanel"]
+[node name="ColorRect" type="ColorRect" parent="InfoPanel"]
 z_index = -1
 layout_mode = 0
-offset_left = 3.0
 offset_right = 380.0
 offset_bottom = 239.0
-texture = ExtResource("4_7kwqw")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
+color = Color(0.0862745, 0.25098, 0.329412, 0.352941)
 
 [node name="Info" type="Label" parent="InfoPanel"]
 layout_mode = 0
@@ -82,18 +76,14 @@ offset_top = 120.0
 offset_right = 85.0
 offset_bottom = 570.0
 
-[node name="ColorRect" type="NinePatchRect" parent="UnitSelection"]
+[node name="ColorRect" type="ColorRect" parent="UnitSelection"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_7kwqw")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
+color = Color(0.0862745, 0.25098, 0.329412, 0.352941)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UnitSelection"]
 layout_mode = 1

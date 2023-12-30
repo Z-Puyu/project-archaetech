@@ -2,6 +2,8 @@ extends Button
 
 @onready var building_menu = $BuildingMenu
 
+
+
 func _ready():
 	building_menu.hide()
 

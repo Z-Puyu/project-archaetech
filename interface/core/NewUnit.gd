@@ -2,7 +2,6 @@ extends Button
 
 @onready var unit_menu = $UnitMenu
 
-
 func _ready():
 	unit_menu.hide()
 

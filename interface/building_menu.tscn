@@ -15,12 +15,26 @@ offset_bottom = 413.0
 
 [node name="Panel" type="Panel" parent="Control"]
 layout_mode = 1
-offset_left = -3.0
-offset_top = -24.0
-offset_right = 265.0
-offset_bottom = 251.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HScrollBar" type="HScrollBar" parent="Control/Panel"]
-layout_mode = 0
-offset_right = 266.0
-offset_bottom = 276.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
