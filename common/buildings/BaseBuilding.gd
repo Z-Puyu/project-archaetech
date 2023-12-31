@@ -50,7 +50,7 @@ func take_away(resources: Dictionary) -> Dictionary:
 func store(resources: Dictionary):
 	ResourceManager.add(resources)
 	
-func new_route(to: Building, level: int, resources: Dictionary):
+func new_route(to: Building, level: int, resources: Array[ResourceData]):
 	self.add_child(TransportRoute.new(to, level, resources))
 	
 func update_resource_panel(res: ResourceData, new_qty: float):

@@ -43,10 +43,10 @@ func _research(available_points: int):
 			progress[to] = 1
 	for tech in _researchable:
 		tech.progress = min(tech.progress + progress.get(tech), tech.cost)
-		# print(tech.name + " gets " + str(min(progress.get(tech), tech.cost - tech.progress + progress.get(tech))) + " progress")
+		print(tech.name + " gets " + str(min(progress.get(tech), tech.cost - tech.progress + progress.get(tech))) + " progress")
 		if tech.progress == tech.cost:
 			_unlock(tech)
-			# print("unlocked " + tech.name + "!")
+			print("unlocked " + tech.name + "!")
 				
 func _unlock(tech: Tech):
 	_unlocked[tech] = null
