@@ -1,5 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwmspwwtu1d2d"]
-
+[gd_scene load_steps=10 format=3 uid="uid://dwmspwwtu1d2d"]
 
 [ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/core/ResourcePanel.tscn" id="1_0xkas"]
 [ext_resource type="PackedScene" uid="uid://co81lv0s2uhl" path="res://interface/core/Calendar.tscn" id="2_lfric"]
@@ -8,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cgchs35ncnvqs" path="res://gfx/interface/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-003.png" id="4_7kwqw"]
 [ext_resource type="PackedScene" uid="uid://djn3qpeneucjf" path="res://interface/unit_menu.tscn" id="4_47sl4"]
 [ext_resource type="Script" path="res://interface/Info.gd" id="4_kdhwk"]
-[ext_resource type="PackedScene" uid="uid://dw3duqsv2ocqc" path="res://interface/buildings/BuildingInfo.tscn" id="4_slldm"]
 [ext_resource type="Script" path="res://interface/UnitSelection.gd" id="6_q7puf"]
+[ext_resource type="PackedScene" uid="uid://dup5ujurhlwff" path="res://interface/BuildingMenu.tscn" id="8_1wx18"]
 
 [node name="InGameUI" type="Control"]
 layout_mode = 3
@@ -34,7 +33,6 @@ offset_top = 410.0
 offset_right = 1150.0
 offset_bottom = 646.0
 script = ExtResource("4_kdhwk")
-
 
 [node name="ColorRect" type="NinePatchRect" parent="InfoPanel"]
 z_index = -1
@@ -82,7 +80,7 @@ offset_bottom = 237.0
 text = "New Building"
 script = ExtResource("4_4caic")
 
-[node name="BuildingMenu" parent="InfoPanel/NewBuilding" instance=ExtResource("5_us3dj")]
+[node name="BuildingMenu" parent="InfoPanel/NewBuilding" instance=ExtResource("8_1wx18")]
 
 [node name="UnitSelection" type="Control" parent="."]
 layout_mode = 1
