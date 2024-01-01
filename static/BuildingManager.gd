@@ -1,71 +1,64 @@
 extends Node
 
-enum BUILING_TYPES {
-	FORESTRY
-}
+var available_buildings: Dictionary:
+	get:
+		return available_buildings
+var curr_spawning_obj: String:
+	set(id):
+		curr_spawning_obj = id
+	get:
+		return curr_spawning_obj
+var under_construction: Dictionary:
+	get:
+		return under_construction
+var construction_queue: ConstructionQueue:
+	get:
+		return construction_queue
+var selected_cell: Cell:
+	set(cell):
+		selected_cell = cell
+	get:
+		return selected_cell
+var curr_cell_data: TileData:
+	set(data):
+		curr_cell_data = data
+	get:
+		return curr_cell_data
 
-var buildings: Dictionary # [Vector2i, Node]
-var available_buildings: Dictionary # [Integer, PackedScene]
-var curr_spawning_obj: int
-# var queues: Array[LinkedList]
-# var max_capacity: int
-# var under_construction: Dictionary
-var construction_queue: ConstructionQueue
-var _player_base: Dictionary
-
-signal spawn_building(building: Building, pos: Vector2i)
+signal spawn_building(building: Building)
 
 func _ready():
-	buildings = {}
-	_player_base = {
-		Vector2i(0, 0): null,
-		Vector2i(1, 0): null,
-		Vector2i(-1, 0): null,
-		Vector2i(-1, -1): null,
-		Vector2i(0, -1): null,
-		Vector2i(-1, 1): null,
-		Vector2i(0, 1): null
-	}
-	available_buildings[0] = load("res://assets/buildings/ForestryBuilding.tscn")
+	available_buildings["building-forestry-1"] = load("res://assets/buildings/ForestryBuilding.tscn")
 	construction_queue = ConstructionQueue.new(2)
-	spawn_building.connect(on_building_complete)
+	Events.cell_selected.connect(func(cell, data): 
+		selected_cell = cell
+		curr_cell_data = data
+	)
 
-func add_building(tile_data: TileData, pos: Vector2i, coords: Vector2, type: int) -> bool:
+func add_building(id: String):
 	# Note that pos is the local map coordinates
-	curr_spawning_obj = type
+	curr_spawning_obj = id
 	var obj: Building = available_buildings.get(curr_spawning_obj).instantiate()
-	# print(obj.data.required_terrains.size())
-	if obj.can_be_built(tile_data) and not _player_base.has(pos):
-		if buildings.has(pos):
-			# print(str("Cell ", pos, " already has a building!"))
-			var building: Node = buildings.get(pos)
-			if building is ConstructibleTask:
-				# If the building is under construction, we return the cost
-				# User Validation panel needed here
-				ResourceManager.add(building.value().data.cost)
-				buildings.erase(building)
-			else:
-				# User Validation panel needed here
-				delete_building(pos) 
+	if obj.can_be_built(curr_cell_data, selected_cell):
+		if under_construction.has(selected_cell.pos):
+			var task: ConstructibleTask = under_construction.get(selected_cell.pos)
+			# If the building is under construction, we return the cost
+			# User Validation panel needed here
+			ResourceManager.add(task.value().data.cost)
+			under_construction.erase(task)
+			construction_queue.remove(task)
+		elif selected_cell.building != null:
+			# User Validation panel needed here
+			delete_building(selected_cell) 
 		ResourceManager.consume(obj.data.cost)
-		obj.translate(coords)
-		var task: ConstructibleTask = ConstructibleTask.new(obj, pos)
-		buildings[pos] = task
-		construction_queue.enqueue(task)
-		# under_construction[obj] = obj.data.time_to_build
-		# queues[under_construction.size() % max_capacity].push_back(obj)
-		return true
-	# print("The tile is player base")
-	return false
+		obj.translate(selected_cell.local_coords)
+		obj.set_z_index(1)
+		var new_task: ConstructibleTask = ConstructibleTask.new(obj, selected_cell)
+		construction_queue.enqueue(new_task)
 		
-func delete_building(pos: Vector2i):
-	var building: Building = buildings.get(pos)
+func delete_building(location: Cell):
+	var building: Building = location.building
 	if building != null:
-		buildings.erase(pos)
 		remove_child(building)
 		building.queue_free()
-	# else:
-		# print(str("Cell ", pos, " has no building!"))
-				
-func on_building_complete(building: Building, pos: Vector2i):
-	buildings[pos] = building
+		location.building = null

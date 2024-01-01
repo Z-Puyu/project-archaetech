@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://px7ujblhnr2w"]
+[gd_scene load_steps=16 format=3 uid="uid://px7ujblhnr2w"]
 
 [ext_resource type="Texture2D" uid="uid://po3dr40i2drq" path="res://gfx/interface/UIDifferentFree03Wenrexa/MiniPanel06.jpg" id="1_tmvf3"]
 [ext_resource type="Script" path="res://interface/core/ResourcePanel.gd" id="2_vjq16"]
@@ -6,8 +6,10 @@
 [ext_resource type="Resource" uid="uid://bwgb83yp08q3s" path="res://common/resources/basic/MineralResource.tres" id="4_dam50"]
 [ext_resource type="Resource" uid="uid://b53ptr1nt1kyo" path="res://common/resources/basic/FoodResource.tres" id="5_38pip"]
 [ext_resource type="Resource" uid="uid://cbkgfv0dq0h8t" path="res://common/resources/research/ResearchPointResource.tres" id="6_iigvp"]
-[ext_resource type="Script" path="res://interface/core/ResourceInfo.gd" id="7_8rire"]
+[ext_resource type="Script" path="res://interface/DynamicResourceLabel.gd" id="7_aqdua"]
+[ext_resource type="Script" path="res://interface/core/PopLabel.gd" id="7_fruax"]
 [ext_resource type="Texture2D" uid="uid://cnotgn47ma5cn" path="res://gfx/interface/icons/resources/wood.svg" id="7_yj1lk"]
+[ext_resource type="Texture2D" uid="uid://dqudts52iyvon" path="res://gfx/interface/icons/pops/person.svg" id="8_4uvyi"]
 [ext_resource type="Texture2D" uid="uid://1s8bbheq3wix" path="res://gfx/interface/icons/resources/rock.svg" id="8_idhig"]
 [ext_resource type="Texture2D" uid="uid://har6jruc3kj3" path="res://gfx/interface/icons/resources/food.svg" id="9_l02lg"]
 [ext_resource type="Texture2D" uid="uid://0lucvecjmx6u" path="res://gfx/interface/icons/resources/research.svg" id="10_n87ro"]
@@ -18,7 +20,7 @@ texture = ExtResource("1_tmvf3")
 modulate_color = Color(1, 1, 1, 0.752941)
 
 [node name="ResourcePanel" type="Panel"]
-offset_right = 500.0
+offset_right = 455.0
 offset_bottom = 75.0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_44gcu")
@@ -42,44 +44,57 @@ offset_bottom = 25.0
 grow_vertical = 2
 theme_override_constants/separation = 25
 
+[node name="Pop" type="HBoxContainer" parent="ResourcesList"]
+layout_mode = 2
+script = ExtResource("7_fruax")
+
+[node name="Icon" type="TextureRect" parent="ResourcesList/Pop"]
+layout_mode = 2
+texture = ExtResource("8_4uvyi")
+expand_mode = 2
+
+[node name="DynamicLabel" type="Label" parent="ResourcesList/Pop"]
+layout_mode = 2
+size_flags_horizontal = 0
+
 [node name="Wood" type="HBoxContainer" parent="ResourcesList"]
 layout_mode = 2
-script = ExtResource("7_8rire")
+script = ExtResource("7_aqdua")
 
-[node name="WoodIcon" type="TextureRect" parent="ResourcesList/Wood"]
+[node name="Icon" type="TextureRect" parent="ResourcesList/Wood"]
 layout_mode = 2
 texture = ExtResource("7_yj1lk")
 expand_mode = 2
 
-[node name="WoodQty" type="Label" parent="ResourcesList/Wood"]
+[node name="DynamicLabel" type="Label" parent="ResourcesList/Wood"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "500"
 
 [node name="Mineral" type="HBoxContainer" parent="ResourcesList"]
 layout_mode = 2
-script = ExtResource("7_8rire")
+script = ExtResource("7_aqdua")
 
-[node name="MineralIcon" type="TextureRect" parent="ResourcesList/Mineral"]
+[node name="Icon" type="TextureRect" parent="ResourcesList/Mineral"]
 layout_mode = 2
 texture = ExtResource("8_idhig")
 expand_mode = 2
 
-[node name="MineralQty" type="Label" parent="ResourcesList/Mineral"]
+[node name="DynamicLabel" type="Label" parent="ResourcesList/Mineral"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "500"
 
 [node name="Food" type="HBoxContainer" parent="ResourcesList"]
 layout_mode = 2
-script = ExtResource("7_8rire")
+script = ExtResource("7_aqdua")
 
-[node name="FoodIcon" type="TextureRect" parent="ResourcesList/Food"]
+[node name="Icon" type="TextureRect" parent="ResourcesList/Food"]
 layout_mode = 2
 texture = ExtResource("9_l02lg")
 expand_mode = 2
 
-[node name="FoodQty" type="Label" parent="ResourcesList/Food"]
+[node name="DynamicLabel" type="Label" parent="ResourcesList/Food"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "500"
@@ -92,14 +107,14 @@ layout_mode = 2
 
 [node name="ResearchPoint" type="HBoxContainer" parent="ResourcesList/SecondaryResources/FirstRow"]
 layout_mode = 2
-script = ExtResource("7_8rire")
+script = ExtResource("7_aqdua")
 
-[node name="ResearchPointIcon" type="TextureRect" parent="ResourcesList/SecondaryResources/FirstRow/ResearchPoint"]
+[node name="Icon" type="TextureRect" parent="ResourcesList/SecondaryResources/FirstRow/ResearchPoint"]
 layout_mode = 2
 texture = ExtResource("10_n87ro")
 expand_mode = 2
 
-[node name="ResearchPointQty\'" type="Label" parent="ResourcesList/SecondaryResources/FirstRow/ResearchPoint"]
+[node name="DynamicLabel" type="Label" parent="ResourcesList/SecondaryResources/FirstRow/ResearchPoint"]
 layout_mode = 2
 text = "0"
 
@@ -108,13 +123,13 @@ layout_mode = 2
 
 [node name="Metals" type="HBoxContainer" parent="ResourcesList/SecondaryResources/SecondRow"]
 layout_mode = 2
-script = ExtResource("7_8rire")
+script = ExtResource("7_aqdua")
 
-[node name="MetalsIcon" type="TextureRect" parent="ResourcesList/SecondaryResources/SecondRow/Metals"]
+[node name="Icon" type="TextureRect" parent="ResourcesList/SecondaryResources/SecondRow/Metals"]
 layout_mode = 2
 texture = ExtResource("11_1g777")
 expand_mode = 2
 
-[node name="MetalsQty" type="Label" parent="ResourcesList/SecondaryResources/SecondRow/Metals"]
+[node name="DynamicLabel" type="Label" parent="ResourcesList/SecondaryResources/SecondRow/Metals"]
 layout_mode = 2
 text = "0"

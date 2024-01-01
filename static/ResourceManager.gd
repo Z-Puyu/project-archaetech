@@ -41,9 +41,7 @@ func _ready():
 	
 func add(affected_resources: Dictionary):
 	for type in affected_resources:
-		var amount: float = affected_resources.get(type)
 		if not resources.has(type):
-			amount = 0
 			resources[type] = 0
 		var net_amount: float = resources.get(type) + affected_resources.get(type)
 		resources[type] = min(net_amount, storage_limit[type.type])

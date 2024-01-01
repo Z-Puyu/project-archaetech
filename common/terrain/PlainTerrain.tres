@@ -8,6 +8,7 @@
 [resource]
 script = ExtResource("1_yyqh3")
 type = 0
+name = "Plains"
 time_to_traverse = 3
 impassible = false
 harmful = false

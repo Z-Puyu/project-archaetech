@@ -1,19 +1,24 @@
 class_name Cell extends Node
 
-var pos: Vector2i;
+var pos: Vector2i:
+	get:
+		return pos
+var local_coords: Vector2:
+	get:
+		return local_coords
+var units: Array:
+	get: 
+		return units
+var building: Building:
+	set(new_building):
+		building = new_building
+	get:
+		return building
 
-var units: Array[UnitData] = [];
-var building: Building;
-var units_count: Array[int] = [0];
-
-func _init(_pos: Vector2i):
-	pos = _pos;
-	
-func set_building(building: Building):
-	self.building = building
-
-func get_building() -> Building:
-	return self.building
+func _init(pos: Vector2i, local_coords: Vector2):
+	self.pos = pos
+	self.local_coords = local_coords
+	self.units = []
 	
 func _to_string():
 	return "position: %s\nbuidling: %s\nunits: %s\n" % [self.pos, self.building, self.units]

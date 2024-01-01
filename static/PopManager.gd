@@ -1,9 +1,31 @@
 extends Node
 
-var pop_count: int
-var growth_rate: float
-var pop_growth: float
-var unemployed: int
+var pop_count: int:
+	set(count):
+		pop_count = count
+		changed.emit()
+	get:
+		return pop_count
+var growth_rate: float:
+	set(rate):
+		growth_rate = rate
+	get:
+		return growth_rate
+var pop_growth: float:
+	set(progress):
+		pop_growth = progress
+		pop_grown.emit()
+	get:
+		return pop_growth
+var unemployed: int:
+	set(count):
+		unemployed = count
+		changed.emit()
+	get:
+		return unemployed
+
+signal changed
+signal pop_grown
 
 func _ready():
 	pop_count = 25

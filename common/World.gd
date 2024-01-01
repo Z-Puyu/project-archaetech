@@ -1,6 +1,6 @@
-extends Node2D
+class_name World extends Node2D
 
-@onready var map: TileMap = $Map
+@onready var map: Map = $Map
 @onready var game_clock: Timer = GameManager.game_clock
 @onready var info: Control = $UILayer/InGameUI/InfoPanel
 @onready var building_panel: Panel = $UILayer/InGameUI/InfoPanel/BuildingInfo
@@ -11,20 +11,20 @@ extends Node2D
 @onready var resource_panel: ResourcePanel = $UILayer/InGameUI/ResourcePanel
 const PAUSE_MENU = preload("res://interface/core/PauseMenu.tscn")
 var days: int 
-var pf: PathFinder;
+var pf: PathFinder
 
 func _ready():
 	self.days = 0
-	self.map.tile_selected.connect(self.info.showInfo)
-	self.map.tile_selected.connect(self.unit_selector.create_entries)
+	#self.map.tile_selected.connect(self.info.showInfo)
+	#self.map.tile_selected.connect(self.unit_selector.create_entries)
 	self.new_unit.pressed.connect(self.map.new_unit)
-	self.new_building.pressed.connect(self.map.new_building)
+	#self.new_building.pressed.connect(self.map.new_building)
 	BuildingManager.spawn_building.connect(self.add_child)
 	UnitManager.spawn_unit.connect(self.spawn_unit)
 	ResourceManager.qty_updated.connect(self.resource_panel.update)
 	self.player_base.main_storage_changed.connect(resource_panel.update)
-	pf = PathFinder.new(map);
-	UnitManager.new_unit(Vector2i(1,1), 0);
+	pf = PathFinder.new(map)
+	UnitManager.new_unit(Vector2i(1,1), 0)
 	
 func _unhandled_input(event: InputEvent):
 	if GameManager.game_is_paused:

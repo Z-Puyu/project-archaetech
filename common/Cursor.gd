@@ -4,42 +4,48 @@ const Building = preload("res://common/buildings/Building.gd")
 
 enum mode {
 	NORMAL,
-	CREATE_ROUTE
+	CREATE_ROUTE,
+	BUILD
 }
 
 signal click(cell: Cell)
 signal moved(new_pos: Vector2i)
 
-var _curr_mode: int
-var _map: Map
-var _grid: Dictionary
-var _cell: Vector2i
+var curr_mode: int:
+	set(mode):
+		curr_mode = mode
+	get:
+		return curr_mode
+var map: Map
+var grid: Dictionary
+var cell: Vector2i
 var _selected_building: Building
+var pick_up: Node
 
 # When the cursor enters the scene tree, we snap its position to the centre of the cell and we
 # initialise the timer with our ui_cooldown variable.
 func _ready():
-	self._curr_mode = self.mode.NORMAL
-	self._cell = Vector2i.ZERO
+	self.curr_mode = self.mode.NORMAL
+	self.cell = Vector2i.ZERO
 	
 func initialise():
 	self._map = get_node("/root/World/Map")
-	self._grid = self._map.grid
+	self.grid = self._map.grid
 	self.set_position(self._map.map_to_local(self._cell))
 	
 func set_cell(cell: Vector2i):
-	self._cell = cell
+	self.cell = cell
 	
 func get_cell() -> Vector2i:
 	return self._cell
 
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseMotion:
-		if self._map != null:
+		if self.map != null:
 			self._cell = self._map.local_to_map(event.position)
-	elif event.is_action_pressed("left_click"):
+	#elif event.is_action_pressed("left_click"):
 		# Signal the World to handle input.
-		self.click.emit(self._cell)
+		#self.click.emit(self._cell)
 		
 func on_select_building(building: Building):
 	self._selected_building = building

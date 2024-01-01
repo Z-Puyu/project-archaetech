@@ -11,5 +11,5 @@ func apply(text: Variant):
 			print(key)
 			parsed += str(key, ": ", text.get(key), ", ")
 	else:
-		parsed = text
+		parsed = str(text)
 	self.set_text(parsed)

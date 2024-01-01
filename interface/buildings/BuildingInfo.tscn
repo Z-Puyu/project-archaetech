@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dw3duqsv2ocqc"]
+[gd_scene load_steps=6 format=3 uid="uid://tk3rk44j88w1"]
 
 [ext_resource type="Script" path="res://interface/buildings/BuildingInfo.gd" id="1_hfjuu"]
 [ext_resource type="Script" path="res://interface/core/DynamicIcon.gd" id="2_ro52x"]

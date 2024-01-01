@@ -11,12 +11,15 @@ enum resource_types {
 	HIGH_END
 }
 
-#const FOOD = preload("res://common/resources/basic/FoodResource.tres")
-#const WODD = preload("res://common/resources/basic/WoodResource.tres")
-#const MINERAL = preload("res://common/resources/basic/MineralResource.tres")
-var resources: Dictionary
-var storage_limit: Array[int]
-var monthly_output: Dictionary
+var resources: Dictionary:
+	get:
+		return resources
+var storage_limit: Array[int]:
+	get: 
+		return storage_limit
+var monthly_output: Dictionary:
+	get:
+		return monthly_output
 
 signal qty_updated(res: ResourceData, new_qty: float)
 
@@ -45,11 +48,7 @@ func consume(affected_resources: Dictionary):
 	for type in affected_resources:
 		if self.has_enough(type, affected_resources[type]):
 			self.resources[type] -= affected_resources[type]
-			# print("%s has decreased by %d" % [type.name, affected_resources[type]])
 			self.qty_updated.emit(type, self.resources.get(type))
-		# else:
-			# print("Not enough %s to consume" % type.name)
-	# print(self.resources)
 	
 func take_away(resources: Dictionary) -> Dictionary:
 	var taken: Dictionary = {}

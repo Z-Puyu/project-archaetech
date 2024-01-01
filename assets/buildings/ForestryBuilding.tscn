@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqgtpy301ir2"]
+[gd_scene load_steps=5 format=3 uid="uid://cqgtpy301ir2"]
 
 [ext_resource type="Script" path="res://common/buildings/ProductionBuilding.gd" id="1_5j6vv"]
 [ext_resource type="Resource" uid="uid://c30c0sshkh4ys" path="res://common/buildings/ForestryBuilding.tres" id="2_fo031"]
 [ext_resource type="Script" path="res://common/buildings/LocalStorage.gd" id="3_yu8hy"]
+[ext_resource type="Texture2D" uid="uid://bfdfuv51e64ww" path="res://gfx/map-objects/ForestryBuilding.png" id="4_uh8ag"]
 
 [node name="ForestryBuilding" type="Node2D"]
 script = ExtResource("1_5j6vv")
@@ -10,3 +11,11 @@ data = ExtResource("2_fo031")
 
 [node name="Warehouse" type="Node2D" parent="."]
 script = ExtResource("3_yu8hy")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Texture" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("4_uh8ag")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-22, 22, 6, 22, 6, 11, 22, 11, 22, -13, 5, -13, -2, -20, -14, -20, -22, -12)

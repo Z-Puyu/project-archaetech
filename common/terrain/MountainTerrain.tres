@@ -15,6 +15,7 @@
 [resource]
 script = ExtResource("1_ffjt5")
 type = 4
+name = "Mountains"
 time_to_traverse = 15
 impassible = false
 harmful = false

@@ -17,6 +17,7 @@ ExtResource("1_x0gsh"): 2
 [resource]
 script = ExtResource("1_xx76p")
 name = "Logging Camp"
+id = "building-forestry-1"
 icon = ExtResource("4_17pww")
 map_object = Vector2i(0, 0)
 width = 1

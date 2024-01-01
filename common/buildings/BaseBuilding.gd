@@ -20,6 +20,7 @@ func _ready():
 		self.employ(job)
 	GameManager.new_month.connect(self.work)
 	self.transport_network = []
+	$Area2D.input_event.connect(self._on_click)
 	
 
 func work():
@@ -59,3 +60,6 @@ func update_resource_panel(res: ResourceData, new_qty: float):
 func _to_string() -> String:
 	return str(self.data.name, " with production method ", self.data.activated_production_method.name)
 
+func _on_click(viewport: Viewport, event: InputEvent, shape_idx: int):
+	if event.is_action_pressed("left_click"):
+		Events.show_building_info.emit(self)

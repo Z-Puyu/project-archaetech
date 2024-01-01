@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjkb506vylf4r"
-path="res://.godot/imported/ItemDisable.png-cafbdc01066c0eff9fd89a7d87a5fb92.ctex"
+uid="uid://df7vwhvteohu"
+path="res://.godot/imported/button_rnd_green_pressed.png-13f7647ca41397f5110f3d78ddfc6538.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/interface/Assets Wenrexa UI Sci-Fi Minimalism #01/СommonElement/ItemDisable.png"
-dest_files=["res://.godot/imported/ItemDisable.png-cafbdc01066c0eff9fd89a7d87a5fb92.ctex"]
+source_file="res://gfx/interface/button_round/gray background/button_rnd_green_pressed.png"
+dest_files=["res://.godot/imported/button_rnd_green_pressed.png-13f7647ca41397f5110f3d78ddfc6538.ctex"]
 
 [params]
 

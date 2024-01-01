@@ -1,14 +1,18 @@
 class_name ConstructibleTask extends Vertex
 
-var _days_remaining: int
-var _pos: Vector2i
+var days_remaining: int:
+	set(days):
+		days_remaining = days
+	get:
+		return days_remaining
+var location: Cell
 
 signal terminate(task: ConstructibleTask)
 
-func _init(obj: Node2D, pos: Vector2i):
+func _init(obj: Node2D, location: Cell):
 	super._init(obj)
-	self._days_remaining = obj.data.time_to_build
-	self._pos = pos
+	self.days_remaining = obj.data.time_to_build
+	self.location = location
 	
 func start():
 	GameManager.game_clock.timeout.connect(self.progress)
@@ -17,9 +21,10 @@ func pause():
 	GameManager.game_clock.timeout.disconnect(self.progress)
 
 func progress():
-	self._days_remaining -= 1
-	if self._days_remaining == 0:
+	self.days_remaining -= 1
+	if self.days_remaining == 0:
 		if self.value() is Building:
-			BuildingManager.spawn_building.emit(self.value(), self._pos)
+			self.location.building = self.value()
+			BuildingManager.spawn_building.emit(self.value())
 		GameManager.game_clock.timeout.disconnect(self.progress)
 		self.terminate.emit(self)

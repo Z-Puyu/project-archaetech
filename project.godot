@@ -23,9 +23,11 @@ UnitManager="*res://static/UnitManager.gd"
 PopManager="*res://static/PopManager.gd"
 ResourceManager="*res://static/ResourceManager.gd"
 BuildingManager="*res://static/BuildingManager.gd"
+Events="*res://static/Events.gd"
 
 [display]
 
+window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

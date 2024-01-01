@@ -3,22 +3,27 @@ class_name ProductionBuilding extends Building
 const Building = preload("res://common/buildings/Building.gd")
 const LocalStorage = preload("res://common/buildings/LocalStorage.gd")
 
-var employment: Dictionary
-@onready var warehouse: LocalStorage = $Warehouse
-var max_employment: Dictionary
-var transport_network: Array[TransportRoute]
-var output: Dictionary
+var employment: Dictionary:
+	get:
+		return employment if employment != null else {}
+@onready var warehouse: LocalStorage = $Warehouse:
+	get:
+		return warehouse
+var max_employment: Dictionary:
+	get:
+		return max_employment if max_employment != null else {}
+var transport_network: Array[TransportRoute]:
+	get:
+		return transport_network if transport_network != null else []
+var output: Dictionary:
+	get: return output if output != null else {}
 
 func _ready():
 	var jobs: Dictionary = self.data.activated_production_method.recipe
 	for job in jobs.keys():
 		self.max_employment[job] = jobs.get(job)
 	GameManager.new_month.connect(self.work)
-	self.transport_network = []
-	var building_panel: Panel = get_node("/root/World/UILayer/InGameUI/InfoPanel/BuildingInfo")
-	self.show_building_info.connect(building_panel.show_info)
-	self.select.connect(get_node("../Cursor").on_select_building)
-	# print(self.employment)
+	$Area2D.input_event.connect(self._on_click)
 
 func work():
 	# print(str(self._to_string(), " is working "))
@@ -34,10 +39,7 @@ func work():
 	for route in transport_network:
 		route.transport()
 	self.warehouse.reset()
-	self.show_building_info.emit({
-		"output": self.output,
-		"local_storage": self.warehouse.resources
-	})
+	Events.show_building_info.emit(self)
 	# THIS IS FOR DEBUG PURPOSE ONLY!!!
 	if self.transport_network.is_empty():
 		if not self.output.keys().is_empty():
@@ -65,13 +67,9 @@ func new_route(to: Building, level: int, resources: Array):
 	self.transport_network.append(route)
 	self.add_child(route)
 	
-func show_info():
-	self.show_building_info.emit({
-		"name": self.data.name,
-		"icon": self.data.icon,
-		"output": self.output,
-		"local_storage": self.warehouse.resources
-	})
+func _on_click(viewport: Viewport, event: InputEvent, shape_idx: int):
+	if event.is_action_pressed("left_click"):
+		Events.show_building_info.emit(self)
 
 func _to_string() -> String:
 	return str(self.data.name, " with production method ", self.data.activated_production_method.name)
