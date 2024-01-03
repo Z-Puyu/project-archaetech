@@ -5,7 +5,7 @@ class_name DynamicResourceLabel extends HBoxContainer
 
 func update(icon: Texture2D, amount: float):
 	self._icon.set_texture(icon)
-	self._amount.apply(amount)
+	self._amount.update_info(amount)
 
 func set_text(amount: String):
 	self._amount.set_text(amount)

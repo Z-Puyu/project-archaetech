@@ -1,77 +1,103 @@
-[gd_scene load_steps=6 format=3 uid="uid://tk3rk44j88w1"]
+[gd_scene load_steps=13 format=3 uid="uid://tk3rk44j88w1"]
 
 [ext_resource type="Script" path="res://interface/buildings/BuildingInfo.gd" id="1_hfjuu"]
+[ext_resource type="Texture2D" uid="uid://cspy5k65v6guc" path="res://gfx/interface/overlays/MiniPanel01.jpg" id="1_yo2nh"]
 [ext_resource type="Script" path="res://interface/core/DynamicIcon.gd" id="2_ro52x"]
+[ext_resource type="Texture2D" uid="uid://bfdfuv51e64ww" path="res://gfx/map-objects/ForestryBuilding.png" id="3_5bd70"]
 [ext_resource type="Script" path="res://interface/core/DynamicLabel.gd" id="3_o6xsx"]
+[ext_resource type="Script" path="res://interface/core/DynamicResourceInfo.gd" id="6_501oj"]
+[ext_resource type="Texture2D" uid="uid://b1qneotb641pc" path="res://gfx/interface/UIDifferentFree03Wenrexa/Button01.png" id="10_ej3ph"]
+[ext_resource type="Texture2D" uid="uid://bvcas7k4escon" path="res://gfx/interface/overlays/Button01Pressed.png" id="11_ik561"]
+[ext_resource type="Texture2D" uid="uid://se6n5605jfcq" path="res://gfx/interface/overlays/Button01Hover.png" id="12_x2k6h"]
+[ext_resource type="Texture2D" uid="uid://dmaqxcehyk7dv" path="res://gfx/interface/icons/general/plus-sign.png" id="13_uya25"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwxao"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6r5wk"]
+texture = ExtResource("1_yo2nh")
 
 [sub_resource type="LabelSettings" id="LabelSettings_yvlaa"]
-font_size = 10
+font_size = 24
 
-[node name="BuildingInfo" type="Panel"]
-anchors_preset = 5
+[node name="BuildingInfo" type="PanelContainer"]
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -181.0
-offset_right = 181.0
-offset_bottom = 100.0
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_6r5wk")
 script = ExtResource("1_hfjuu")
 
-[node name="IconFrame" type="Panel" parent="."]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 50.0
-offset_bottom = 50.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fwxao")
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 20
 
-[node name="Icon" type="TextureRect" parent="IconFrame"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_5bd70")
+script = ExtResource("2_ro52x")
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_yvlaa")
+script = ExtResource("3_o6xsx")
+
+[node name="InfoList" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MonthlyOutput" type="HFlowContainer" parent="MarginContainer/VBoxContainer/InfoList"]
+layout_mode = 2
+size_flags_vertical = 0
+script = ExtResource("6_501oj")
+
+[node name="LocalStorage" type="Label" parent="MarginContainer/VBoxContainer/InfoList"]
+layout_mode = 2
+script = ExtResource("3_o6xsx")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/InfoList"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/InfoList/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NewRouteButton" type="TextureButton" parent="MarginContainer/VBoxContainer/InfoList/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+texture_normal = ExtResource("10_ej3ph")
+texture_pressed = ExtResource("11_ik561")
+texture_hover = ExtResource("12_x2k6h")
+texture_disabled = ExtResource("11_ik561")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/InfoList/ScrollContainer/VBoxContainer/NewRouteButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -15.0
-offset_top = -15.0
-offset_right = 15.0
-offset_bottom = 15.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-expand_mode = 1
-script = ExtResource("2_ro52x")
-
-[node name="Name" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 10.0
-offset_top = 5.0
-offset_right = 50.0
-offset_bottom = 19.0
-grow_vertical = 2
-label_settings = SubResource("LabelSettings_yvlaa")
-script = ExtResource("3_o6xsx")
-
-[node name="ProductionInfo" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = -31.0
-offset_right = 50.0
-offset_bottom = -8.0
-grow_vertical = 0
-script = ExtResource("3_o6xsx")
-
-[node name="LocalStorage" type="Label" parent="."]
-layout_mode = 1
-offset_left = 60.0
-offset_top = 10.0
-offset_right = 100.0
-offset_bottom = 33.0
-script = ExtResource("3_o6xsx")
+texture = ExtResource("13_uya25")

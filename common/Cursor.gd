@@ -50,7 +50,6 @@ func _unhandled_input(event: InputEvent):
 func on_select_building(building: Building):
 	self._selected_building = building
 	self._curr_mode = self.mode.CREATE_ROUTE
-	print("Creating route")
 	
 func get_selected_building() -> Building:
 	return self._selected_building

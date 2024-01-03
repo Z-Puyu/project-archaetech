@@ -3,9 +3,7 @@ class_name World extends Node2D
 @onready var map: Map = $Map
 @onready var game_clock: Timer = GameManager.game_clock
 @onready var info: Control = $UILayer/InGameUI/InfoPanel
-@onready var building_panel: Panel = $UILayer/InGameUI/InfoPanel/BuildingInfo
 @onready var new_unit = $UILayer/InGameUI/InfoPanel/NewUnit
-@onready var new_building = $UILayer/InGameUI/InfoPanel/NewBuilding
 @onready var unit_selector = $UILayer/InGameUI/UnitSelection/ScrollContainer/VBoxContainer
 @onready var player_base: BaseBuilding = $BaseBuilding
 @onready var resource_panel: ResourcePanel = $UILayer/InGameUI/ResourcePanel
@@ -15,10 +13,7 @@ var pf: PathFinder
 
 func _ready():
 	self.days = 0
-	#self.map.tile_selected.connect(self.info.showInfo)
-	#self.map.tile_selected.connect(self.unit_selector.create_entries)
 	self.new_unit.pressed.connect(self.map.new_unit)
-	#self.new_building.pressed.connect(self.map.new_building)
 	BuildingManager.spawn_building.connect(self.add_child)
 	UnitManager.spawn_unit.connect(self.spawn_unit)
 	ResourceManager.qty_updated.connect(self.resource_panel.update)

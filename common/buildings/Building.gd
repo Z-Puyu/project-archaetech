@@ -15,3 +15,11 @@ func can_be_built(tile_data: TileData, location: Cell) -> bool:
 		if not ResourceManager.has_enough(resource, cost.get(resource)):
 			return false
 	return true
+	
+func _on_click(viewport: Viewport, event: InputEvent, shape_idx: int):
+	if event.is_action_pressed("left_click"):
+		if GameManager.game_mode == GameManager.GAME_MODES.BUILD_ROUTE:
+			Events.add_route.emit(self)
+		else:
+			Events.show_building_info.emit(self)
+			Events.toggle_modal.emit("building")

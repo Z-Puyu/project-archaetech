@@ -9,7 +9,6 @@ var info: Label
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.hide()
-	self.info = $Info
 	Events.cell_selected.connect(self.show_cell_info)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -59,6 +59,5 @@ func add_building(id: String):
 func delete_building(location: Cell):
 	var building: Building = location.building
 	if building != null:
-		remove_child(building)
 		building.queue_free()
 		location.building = null

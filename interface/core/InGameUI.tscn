@@ -64,17 +64,6 @@ patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
 
-[node name="BuildingInfo" parent="InfoPanel" instance=ExtResource("5_ci4fi")]
-layout_mode = 1
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -176.5
-offset_top = -112.0
-offset_right = 176.5
-offset_bottom = -12.0
-grow_vertical = 0
-
 [node name="NewUnit" type="Button" parent="InfoPanel"]
 layout_mode = 0
 offset_left = -772.0
@@ -131,7 +120,6 @@ script = ExtResource("6_q7puf")
 
 [node name="Modal" type="CanvasLayer" parent="."]
 layer = 2
-visible = false
 script = ExtResource("10_mmjag")
 
 [node name="Backdrop" type="Control" parent="Modal"]
@@ -144,7 +132,23 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("11_btrfl")
 
+[node name="BuildingInfo" parent="Modal/Backdrop" instance=ExtResource("5_ci4fi")]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
 [node name="BuildingMenu" parent="Modal/Backdrop" instance=ExtResource("8_1wx18")]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

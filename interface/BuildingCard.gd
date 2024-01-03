@@ -17,7 +17,7 @@ func initialise(building: Building):
 	self.building = building.data.id
 	self.icon.set_texture(icon)
 	self.building_name.set_text(building_name)
-	self.cost.initialise(cost)
+	self.cost.update_info(cost)
 
 func _on_pressed():
 	BuildingManager.add_building(self.building)
