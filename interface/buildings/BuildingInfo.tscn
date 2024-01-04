@@ -61,14 +61,31 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Employment" type="Label" parent="MarginContainer/VBoxContainer/InfoList"]
+layout_mode = 2
+script = ExtResource("3_o6xsx")
+
+[node name="MonthlyOutputLabel" type="Label" parent="MarginContainer/VBoxContainer/InfoList"]
+layout_mode = 2
+text = "Last month, this building has produced:"
+
 [node name="MonthlyOutput" type="HFlowContainer" parent="MarginContainer/VBoxContainer/InfoList"]
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("6_501oj")
 
-[node name="LocalStorage" type="Label" parent="MarginContainer/VBoxContainer/InfoList"]
+[node name="LocalStorageLabel" type="Label" parent="MarginContainer/VBoxContainer/InfoList"]
 layout_mode = 2
-script = ExtResource("3_o6xsx")
+text = "Local storage:"
+
+[node name="LocalStorage" type="HFlowContainer" parent="MarginContainer/VBoxContainer/InfoList"]
+layout_mode = 2
+size_flags_vertical = 0
+script = ExtResource("6_501oj")
+
+[node name="TransportRoutesLabel" type="Label" parent="MarginContainer/VBoxContainer/InfoList"]
+layout_mode = 2
+text = "Connected transport routes:"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/InfoList"]
 layout_mode = 2

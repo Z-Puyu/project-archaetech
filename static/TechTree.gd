@@ -11,7 +11,7 @@ enum tech_types {
 }
 
 var _technologies: Array[Tech] # This is a connected DAG :O
-var _selector: RandomSelector
+var selector: CSharpScript
 var _researchable: Array[Tech]
 var _unlocked: Dictionary
 var _focus: Tech
@@ -24,7 +24,8 @@ func _ready():
 	var weights: Array[int] = []
 	for tech in _researchable:
 		weights.append(tech.weight)
-	_selector = RandomSelector.new(_researchable, weights)
+	var random_selector = load("res://util/RandomSelector.cs")
+	selector = random_selector.new()
 	ResourceManager.tech_progress.connect(_research)
 	
 func _research(available_points: int):

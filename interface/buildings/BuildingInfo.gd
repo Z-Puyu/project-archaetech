@@ -1,10 +1,12 @@
 class_name BuildingInfo extends PanelContainer
 
 const CARD = preload("res://interface/buildings/TransportRoute.tscn")
+const Pair = preload("res://util/Pair.gd")
 
 @onready var components: Dictionary = {
 	"name": $MarginContainer/VBoxContainer/Header/Name,
 	"icon": $MarginContainer/VBoxContainer/Header/Icon,
+	"employment": $MarginContainer/VBoxContainer/InfoList/Employment,
 	"output": $MarginContainer/VBoxContainer/InfoList/MonthlyOutput,
 	"local_storage": $MarginContainer/VBoxContainer/InfoList/LocalStorage,
 	"new_route_button": $MarginContainer/VBoxContainer/InfoList/ScrollContainer/VBoxContainer/NewRouteButton
@@ -15,6 +17,18 @@ var cached_buildings: Dictionary:
 		return cached_buildings
 
 func _ready():
+	components.get("employment").use_parser(func(text: Pair):
+		if text.first() is Dictionary and text.second() is Dictionary:
+			var curr: Dictionary = text.first()
+			var max: Dictionary = text.second()
+			var parsed: String = ""
+			for job in curr.keys():
+				var denominator: int = max.get(job)
+				var numerator: int = curr.get(job)
+				parsed += str(job.name, ": ", numerator, "/", denominator, " ")
+			return parsed	
+		return "No employment data available"
+	)
 	Events.show_building_info.connect(self._open)
 	Events.add_route_ui.connect(self._add_route)
 	self.cached_buildings = {}
@@ -32,6 +46,7 @@ func _show_info(building: Building):
 	var info: Dictionary = {
 		"name": building.data.name,
 		"icon": building.data.icon,
+		"employment": Pair.new(building.employment, building.max_employment),
 		"output": building.output,
 		"local_storage": {} if building is BaseBuilding else building.warehouse.resources
 	}
