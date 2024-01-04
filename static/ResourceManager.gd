@@ -1,5 +1,6 @@
 extends Node
 
+const ResearchPointResource = preload("res://common/resources/research/ResearchPointResource.tres")
 enum resource_types {
 	COMMON_RAW,
 	RARE_RAW,
@@ -11,54 +12,32 @@ enum resource_types {
 	HIGH_END
 }
 
-var resources: Dictionary
-var storage_limit: Array[int]
+@export var resources: Dictionary
+@export var storage_limit: Array[int]
 var monthly_output: Dictionary
-
-const FOOD = preload("res://common/resources/basic/FoodResource.tres")
-const WODD = preload("res://common/resources/basic/WoodResource.tres")
-const MINERAL = preload("res://common/resources/basic/MineralResource.tres")
-const RESEARCH = preload("res://common/resources/research/ResearchPointResource.tres")
 
 signal qty_updated(res: ResourceData, new_qty: float)
 signal tech_progress(research_point: int)
 
 func _ready():
-	resources = {
-		FOOD: 500,
-		WODD: 500,
-		MINERAL: 500,
-		RESEARCH: 0
-	}
-	storage_limit.append(10000)
-	storage_limit.append(5000)
-	storage_limit.append(5000)
-	storage_limit.append(10000)
-	storage_limit.append(10000)
-	storage_limit.append(100000)
-	storage_limit.append(2000)
-	storage_limit.append(1000)
+	tech_progress.connect(get_node("/root/TechManager").Research)
 	
 func add(affected_resources: Dictionary):
 	for type in affected_resources:
 		if not resources.has(type):
 			resources[type] = 0
-		var net_amount: float = resources.get(type) + affected_resources.get(type)
-		resources[type] = min(net_amount, storage_limit[type.type])
-		# # print("%s has increased by %d" % [type.name, min(net_amount, storage_limit[type.type])])
+		if type == ResearchPointResource:
+			resources[type] = affected_resources.get(type)
+		else:
+			var net_amount: float = resources.get(type) + affected_resources.get(type)
+			resources[type] = min(net_amount, storage_limit[type.type])
 		qty_updated.emit(type, resources.get(type))
-	# # print(resources)
-	
 	
 func consume(affected_resources: Dictionary):
 	for type in affected_resources:
 		if has_enough(type, affected_resources[type]):
 			resources[type] -= affected_resources[type]
-			# # print("%s has decreased by %d" % [type.name, affected_resources[type]])
 			qty_updated.emit(type, resources.get(type))
-		# else:
-			# print("Not enough %s to consume" % type.name)
-	# print(resources)
 	
 func take_away(resources: Dictionary) -> Dictionary:
 	var taken: Dictionary = {}
@@ -75,7 +54,6 @@ func take_away(resources: Dictionary) -> Dictionary:
 		
 func supply(job: JobData, num_workers: int):
 	if num_workers <= 0:
-		# print("There is no workers in the job %s" % job)
 		return
 	var k = 1
 	var input: Dictionary = job.input.duplicate(true)
@@ -98,11 +76,11 @@ func supply(job: JobData, num_workers: int):
 			monthly_output[res] = output[res] * k * num_workers
 	consume(input)
 	add(monthly_output)
-	if monthly_output.has(RESEARCH):
-		tech_progress.emit(monthly_output.get(RESEARCH))
+	if monthly_output.has(ResearchPointResource):
+		tech_progress.emit(monthly_output.get(ResearchPointResource))
 	
 func reset():
 	monthly_output = {}
 		
 func has_enough(type: ResourceData, benchmark: float) -> bool:
-	return resources[type] >= benchmark
+	return resources.has(type) and resources.get(type) >= benchmark

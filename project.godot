@@ -23,13 +23,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://static/GameManager.gd"
-TechTree="*res://static/TechTree.gd"
-UnitManager="*res://static/UnitManager.gd"
-PopManager="*res://static/PopManager.gd"
-ResourceManager="*res://static/ResourceManager.gd"
-BuildingManager="*res://static/BuildingManager.gd"
 Events="*res://static/Events.gd"
+GameManager="*res://static/GameManager.tscn"
+ResourceManager="*res://static/ResourceManager.tscn"
+PopManager="*res://static/PopManager.tscn"
+BuildingManager="*res://static/BuildingManager.tscn"
+TechManager="*res://static/TechManager.tscn"
+UnitManager="*res://static/UnitManager.gd"
 
 [display]
 
@@ -44,6 +44,10 @@ project/assembly_name="Project-Archaetech"
 [editor]
 
 movie_writer/movie_file="D:/Project-Archaetech/Recording.avi"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/MonoCustomResourceRegistry/plugin.cfg")
 
 [filesystem]
 

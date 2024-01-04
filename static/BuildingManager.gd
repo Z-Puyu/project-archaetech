@@ -1,6 +1,7 @@
 extends Node
+# This has the potential to be re-written with C#
 
-var available_buildings: Dictionary:
+@export var available_buildings: Dictionary:
 	get:
 		return available_buildings
 var curr_spawning_obj: String:
@@ -28,7 +29,6 @@ var curr_cell_data: TileData:
 signal spawn_building(building: Building)
 
 func _ready():
-	available_buildings["building-forestry-1"] = load("res://assets/buildings/ForestryBuilding.tscn")
 	construction_queue = ConstructionQueue.new(2)
 	Events.cell_selected.connect(func(cell, data): 
 		selected_cell = cell

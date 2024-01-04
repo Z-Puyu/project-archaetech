@@ -1,0 +1,19 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyyehx7gakumb"]
+
+[ext_resource type="Script" path="res://static/ResourceManager.gd" id="1_2b3xu"]
+[ext_resource type="Resource" uid="uid://b53ptr1nt1kyo" path="res://common/resources/basic/FoodResource.tres" id="2_ydedb"]
+[ext_resource type="Resource" uid="uid://bwgb83yp08q3s" path="res://common/resources/basic/MineralResource.tres" id="3_yh3uv"]
+[ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/basic/WoodResource.tres" id="4_gfcu5"]
+[ext_resource type="Resource" uid="uid://bruxu2nwuar3j" path="res://common/resources/collectibles/MetalsResource.tres" id="5_ooxt3"]
+[ext_resource type="Resource" uid="uid://cbkgfv0dq0h8t" path="res://common/resources/research/ResearchPointResource.tres" id="6_0ot3t"]
+
+[node name="ResourceManager" type="Node"]
+script = ExtResource("1_2b3xu")
+resources = {
+ExtResource("2_ydedb"): 500.0,
+ExtResource("3_yh3uv"): 500.0,
+ExtResource("4_gfcu5"): 500.0,
+ExtResource("5_ooxt3"): 0.0,
+ExtResource("6_0ot3t"): 0.0
+}
+storage_limit = Array[int]([10000, 5000, 5000, 10000, 10000, 100000000, 2000, 1000])

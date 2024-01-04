@@ -1,5 +1,4 @@
 using C5;
-using Godot.Collections;
 using System;
 
 namespace ProjectArchaetech {
@@ -17,34 +16,35 @@ namespace ProjectArchaetech {
         }
 
         public T Select() {
+            Console.WriteLine(this.totalWeight);
             double r = this.rand.NextDouble() * this.totalWeight;
+            Console.WriteLine((int) r);
+            Console.WriteLine(items);
             return this.items.WeakPredecessor((int) r).Value;
         }
 
-        public void AddItems(params KeyValuePair<int, T>[] items) {
+        public void Add(params KeyValuePair<int, T>[] items) {
             foreach (KeyValuePair<int, T> item in items) {
-                this.items.Add(this.totalWeight + item.Key, item.Value);
-                this.lookUp.Add(item.Value, this.totalWeight + item.Key);
+                this.items.Add(this.totalWeight, item.Value);
+                this.lookUp.Add(item.Value, this.totalWeight);
                 this.totalWeight += item.Key;
+                Console.WriteLine(this.totalWeight);
             }
         }
 
-        public void RemoveItem(T item) {
+        public void Remove(T item) {
             if (this.lookUp.Contains(item)) {
                 int key = this.lookUp[item]; // Get the cumulative weight of this item.
-                KeyValuePair<int, T> prev;
-                int weight = key;
-                if (this.items.TryPredecessor(key, out prev)) {
-                    // If there is a predecessor, calculate the weight.
-                    weight -= prev.Key;
-                }
                 this.items.Remove(key); // Remove this item.
                 KeyValuePair<int, T> next;
-                while (this.items.TrySuccessor(key, out next)) {
-                    // For every higher entry, rectify the weights.
-                    this.items.Remove(key);
-                    key = next.Key - weight;
-                    this.items.Add(key, next.Value);
+                if (this.items.TrySuccessor(key, out next)) {
+                    // If the item has at least one successor, 
+                    // We calculate by how much should the successors be shifted down.
+                    int diff = next.Key - key;
+                    do {
+                        this.items.Remove(next.Key);
+                        this.items.Add(next.Key - diff, next.Value);
+                    } while (this.items.TrySuccessor(key, out next));
                 }
             }
         }

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://kgwdt0d0ljf1"]
+
+[ext_resource type="Script" path="res://static/TechManager.cs" id="1_wvkc8"]
+[ext_resource type="Resource" uid="uid://dqcf4jirbnjue" path="res://common/technologies/TestTech.tres" id="2_5jidj"]
+
+[node name="TechManager" type="Node"]
+script = ExtResource("1_wvkc8")
+allTechnologies = Array[Object]([ExtResource("2_5jidj")])
