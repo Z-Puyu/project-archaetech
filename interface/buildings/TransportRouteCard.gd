@@ -2,7 +2,7 @@ class_name TransportRouteCard extends TextureButton
 
 @onready var res: HFlowContainer = $MarginContainer/HBoxContainer/VBoxContainer/TransportedResources
 
-func initialise(data: TransportRoute):
+func initialise(data: CSharpScript):
 	var icon = $MarginContainer/HBoxContainer/Icon
 	var label = $MarginContainer/HBoxContainer/VBoxContainer/DestinationLabel
 	icon.set_texture(data.to.data.icon)

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="BuildingData" load_steps=6 format=3 uid="uid://g2dbyo6bjdue"]
 
 [ext_resource type="Resource" uid="uid://erd1xs2snxqo" path="res://common/jobs/DocumenterJob.tres" id="1_5p86u"]
-[ext_resource type="Script" path="res://common/buildings/BuildingData.gd" id="1_6ot3g"]
-[ext_resource type="Script" path="res://common/buildings/ProductionMethod.gd" id="1_bej1o"]
+[ext_resource type="Script" path="res://common/buildings/BuildingData.cs" id="1_6ot3g"]
+[ext_resource type="Script" path="res://common/buildings/ProductionMethod.cs" id="1_bej1o"]
 [ext_resource type="Texture2D" uid="uid://bscbqdogi4shx" path="res://gfx/map-objects/BaseBuilding.png" id="3_6io1h"]
 
-[sub_resource type="Resource" id="Resource_em508"]
+[sub_resource type="Resource" id="Resource_b3kdp"]
 script = ExtResource("1_bej1o")
 name = "Basic"
 recipe = {
@@ -20,7 +20,6 @@ icon = ExtResource("3_6io1h")
 width = 3
 height = 2
 cost = {}
-required_terrains = {}
-time_to_build = 0
-production_methods = Array[ExtResource("1_bej1o")]([SubResource("Resource_em508")])
-activated_production_method = SubResource("Resource_em508")
+requiredTerrains = null
+timeToBuild = 0
+productionMethods = Array[Object]([SubResource("Resource_b3kdp")])

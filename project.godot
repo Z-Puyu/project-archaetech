@@ -23,12 +23,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Events="*res://static/Events.gd"
-GameManager="*res://static/GameManager.tscn"
-ResourceManager="*res://static/ResourceManager.tscn"
-PopManager="*res://static/PopManager.tscn"
-BuildingManager="*res://static/BuildingManager.tscn"
-TechManager="*res://static/TechManager.tscn"
+Global="*res://static/Global.tscn"
 UnitManager="*res://static/UnitManager.gd"
 
 [display]

@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://3rmd6tq8ddxh"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://3rmd6tq8ddxh"]
 
-[ext_resource type="Script" path="res://common/resources/ResourceData.gd" id="1_i12d3"]
+[ext_resource type="Script" path="res://common/resources/ResourceData.cs" id="1_i12d3"]
 
 [resource]
 script = ExtResource("1_i12d3")
-name = ""
+name = "Rubber"
 desc = ""
-type = 0
+type = 1

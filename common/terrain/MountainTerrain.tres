@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://cwrb3kbkyep81" path="res://common/resources/collectibles/GameResource.tres" id="6_3yytw"]
 [ext_resource type="Resource" uid="uid://0uu8f7ixqojq" path="res://common/resources/collectibles/FruitsResource.tres" id="7_hkg7k"]
 [ext_resource type="Resource" uid="uid://510e1hm7b75n" path="res://common/resources/collectibles/FuelResource.tres" id="8_aaqyp"]
-[ext_resource type="Resource" uid="uid://ttkaj4va1qbj" path="res://common/resources/collectibles/ClayResource.tres" id="9_wdxwi"]
+[ext_resource type="Resource" uid="uid://djfp1kq53ckcc" path="res://common/resources/collectibles/ClayResource.tres" id="9_wdxwi"]
 [ext_resource type="Resource" uid="uid://d01aflin4f3gb" path="res://common/resources/collectibles/HerbsResources.tres" id="10_jxmxc"]
 
 [resource]

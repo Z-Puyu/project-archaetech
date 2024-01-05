@@ -1,11 +1,11 @@
 class_name TransportRouteUI extends HBoxContainer
-
-var route: TransportRoute
+const TransportRoute: CSharpScript = preload("res://common/buildings/TransportRoute.cs")
+var route: CSharpScript
 
 func _ready():
 	$DeleteButton.pressed.connect(self.delete)
 	
-func initialise(data: TransportRoute):
+func initialise(data: CSharpScript):
 	self.route = data
 	$TransportRouteCard.initialise(data)
 	var option_button: OptionButton = $TransportRouteCard/MarginContainer/HBoxContainer/VBoxContainer/OptionButton

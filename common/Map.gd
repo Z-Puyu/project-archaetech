@@ -30,17 +30,16 @@ signal cell_selected(data: TileData)
 var curr_selected: Vector2i
 
 func _ready():
-	const BASE = preload("res://assets/buildings/BaseBuilding.tscn")
-	var base: BaseBuilding = BASE.instantiate()
+	var base = get_node("/root/World/BaseBuilding")
 	self.grid = Grid.new()
 	self.grid.add({
-		Vector2i(0, 0): Cell.new(Vector2i(0, 0), self.map_to_local(Vector2i(0, 0))),
-		Vector2i(1, 0): Cell.new(Vector2i(1, 0), self.map_to_local(Vector2i(1, 0))),
-		Vector2i(-1, 0): Cell.new(Vector2i(-1, 0), self.map_to_local(Vector2i(-1, 0))),
-		Vector2i(-1, -1): Cell.new(Vector2i(-1, -1), self.map_to_local(Vector2i(-1, -1))),
-		Vector2i(0, -1): Cell.new(Vector2i(0, -1), self.map_to_local(Vector2i(0, -1))),
-		Vector2i(-1, 1): Cell.new(Vector2i(-1, 1), self.map_to_local(Vector2i(-1, 1))),
-		Vector2i(0, 1): Cell.new(Vector2i(0, 1), self.map_to_local(Vector2i(0, 1)))
+		Vector2i(0, 0): GDCell.new(Vector2i(0, 0), self.map_to_local(Vector2i(0, 0))),
+		Vector2i(1, 0): GDCell.new(Vector2i(1, 0), self.map_to_local(Vector2i(1, 0))),
+		Vector2i(-1, 0): GDCell.new(Vector2i(-1, 0), self.map_to_local(Vector2i(-1, 0))),
+		Vector2i(-1, -1): GDCell.new(Vector2i(-1, -1), self.map_to_local(Vector2i(-1, -1))),
+		Vector2i(0, -1): GDCell.new(Vector2i(0, -1), self.map_to_local(Vector2i(0, -1))),
+		Vector2i(-1, 1): GDCell.new(Vector2i(-1, 1), self.map_to_local(Vector2i(-1, 1))),
+		Vector2i(0, 1): GDCell.new(Vector2i(0, 1), self.map_to_local(Vector2i(0, 1)))
 	})
 	self.land_navigable = self.grid.cells.duplicate(true);
 	for coords in self.grid.cells.keys():
@@ -50,13 +49,13 @@ func _ready():
 	for coords in land_cells:
 		if self.grid.cells.has(coords):
 			continue
-		var cell: Cell = Cell.new(coords, self.map_to_local(coords))
+		var cell: GDCell = GDCell.new(coords, self.map_to_local(coords))
 		self.grid.add(cell)
 		self.land_navigable[coords] = cell
 	for coords in water_cells:
 		if self.grid.cells.has(coords):
 			continue
-		var cell: Cell = Cell.new(coords, self.map_to_local(coords))
+		var cell: GDCell = GDCell.new(coords, self.map_to_local(coords))
 		self.grid.add(cell)
 		self.land_navigable[coords] = cell
 	#self.cell_selected.connect(func(cell, data): Events.cell_selected.emit(cell, data))
@@ -69,7 +68,7 @@ func _unhandled_input(event: InputEvent):
 			var tile_data: TileData = self.get_cell_tile_data(self.layers.LAND, self.curr_selected)
 			var selected_cell: Cell = self.grid.get_cell(self.curr_selected)
 			if tile_data != null:
-				Events.cell_selected.emit(selected_cell, tile_data)
+				Global.EventBus.cell_selected.emit(selected_cell, tile_data)
 				var terrain: TerrainData = tile_data.get_custom_data("terrain")
 			self.clear_layer(self.layers.UI)
 			self.set_cell(self.layers.UI, self.curr_selected, self.atlases.CELLS, Vector2i(5, 0))

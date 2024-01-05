@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="BuildingData" load_steps=8 format=3 uid="uid://c30c0sshkh4ys"]
 
 [ext_resource type="Resource" uid="uid://bvtxum4q5uj0v" path="res://common/jobs/WoodcutterJob.tres" id="1_x0gsh"]
-[ext_resource type="Script" path="res://common/buildings/BuildingData.gd" id="1_xx76p"]
-[ext_resource type="Script" path="res://common/buildings/ProductionMethod.gd" id="2_6rnoi"]
+[ext_resource type="Script" path="res://common/buildings/BuildingData.cs" id="1_xx76p"]
+[ext_resource type="Script" path="res://common/buildings/ProductionMethod.cs" id="2_6rnoi"]
 [ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/basic/WoodResource.tres" id="3_31gcr"]
 [ext_resource type="Texture2D" uid="uid://bfdfuv51e64ww" path="res://gfx/map-objects/ForestryBuilding.png" id="4_17pww"]
 [ext_resource type="Resource" uid="uid://dxbx5g0bdwsaj" path="res://common/terrain/ForestTerrain.tres" id="4_xbmfo"]

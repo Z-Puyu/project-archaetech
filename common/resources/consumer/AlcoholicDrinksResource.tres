@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://bubrvvogmhx34"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bubrvvogmhx34"]
 
-[ext_resource type="Script" path="res://common/resources/ResourceData.gd" id="1_q6dwf"]
+[ext_resource type="Script" path="res://common/resources/ResourceData.cs" id="1_q6dwf"]
 
 [resource]
 script = ExtResource("1_q6dwf")
-name = ""
+name = "Alcoholic drinks"
 desc = ""
-type = 0
+type = 3

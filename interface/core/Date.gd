@@ -4,7 +4,7 @@ var date: Array[int]
 
 func _ready():
 	self.date = [0, 0, 1]
-	GameManager.game_clock.timeout.connect(self.next_day)
+	Global.GameManager.GameClock.Timeout.connect(self.next_day)
 
 func next_day():
 	self.date[2] += 1

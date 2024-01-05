@@ -1,4 +1,4 @@
-class_name Cell extends Node
+class_name GDCell extends Node
 
 var pos: Vector2i:
 	get:

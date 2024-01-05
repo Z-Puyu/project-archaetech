@@ -6,7 +6,7 @@ class_name Speed extends Panel
 var _speed: int
 
 func _ready():
-	self._speed = GameManager.speed_level
+	self._speed = Global.GameManager.GameClock.SpeedLevel
 	self.speed_up_button.pressed.connect(self._on_speed_up)
 	self.speed_down_button.pressed.connect(self._on_speed_down)
 

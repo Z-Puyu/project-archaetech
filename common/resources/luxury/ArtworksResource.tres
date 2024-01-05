@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://bwarweisgfs5"]
 
-[ext_resource type="Script" path="res://common/resources/ResourceData.gd" id="1_ibc5g"]
+[ext_resource type="Script" path="res://common/resources/ResourceData.cs" id="1_ibc5g"]
 
 [resource]
 script = ExtResource("1_ibc5g")
-name = ""
+name = "Artworks"
 desc = ""
-type = 0
+type = 6

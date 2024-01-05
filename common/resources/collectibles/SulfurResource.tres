@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_r2jwt")
-name = ""
+name = "Sulfur"
 desc = ""
 type = 0

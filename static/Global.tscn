@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://vc66sd4cmivh"]
+
+[ext_resource type="Script" path="res://static/Global.cs" id="1_sedta"]
+[ext_resource type="Script" path="res://static/GameManager.cs" id="2_6b2el"]
+[ext_resource type="Script" path="res://static/GameClock.cs" id="3_57q27"]
+[ext_resource type="Script" path="res://static/ResourceManager.cs" id="3_i3j5a"]
+[ext_resource type="Script" path="res://static/PopManager.cs" id="4_yijwq"]
+[ext_resource type="Script" path="res://static/BuildingManager.cs" id="5_a6whb"]
+[ext_resource type="Script" path="res://static/TechManager.cs" id="6_e54ax"]
+[ext_resource type="Script" path="res://static/Events.cs" id="7_6xm40"]
+
+[node name="Global" type="Node"]
+script = ExtResource("1_sedta")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("2_6b2el")
+
+[node name="GameClock" type="Timer" parent="GameManager"]
+wait_time = 2.0
+autostart = true
+script = ExtResource("3_57q27")
+config = {
+1: 2.0,
+2: 1.5,
+3: 1.0,
+4: 0.5,
+5: 0.25
+}
+
+[node name="ResourceManager" type="Node" parent="."]
+script = ExtResource("3_i3j5a")
+
+[node name="PopManager" type="Node" parent="."]
+script = ExtResource("4_yijwq")
+
+[node name="BuildingManager" type="Node" parent="."]
+script = ExtResource("5_a6whb")
+
+[node name="TechManager" type="Node" parent="."]
+script = ExtResource("6_e54ax")
+
+[node name="Events" type="Node" parent="."]
+script = ExtResource("7_6xm40")

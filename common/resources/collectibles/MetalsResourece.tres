@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceData" load_steps=3 format=3 uid="uid://b8ytojekckg03"]
+
+[ext_resource type="Texture2D" uid="uid://b34c68xim74qf" path="res://gfx/interface/icons/resources/metals.svg" id="1_ktchi"]
+[ext_resource type="Script" path="res://common/resources/ResourceData.cs" id="1_q1fcs"]
+
+[resource]
+script = ExtResource("1_q1fcs")
+name = "Metals"
+desc = ""
+icon = ExtResource("1_ktchi")
+type = 0
