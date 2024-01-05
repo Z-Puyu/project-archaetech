@@ -2,9 +2,11 @@ using System;
 using Godot;
 using Godot.Collections;
 using ProjectArchaetech.interfaces;
+using ProjectArchaetech.resource;
 using ProjectArchaetech.resources;
 
 namespace ProjectArchaetech.common {
+    [GlobalClass]
     public partial class TransportRoute : Node2D, IManable, IFunctionable {
         private LogisticBuilding from;
         private LogisticBuilding to;

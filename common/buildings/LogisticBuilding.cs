@@ -1,13 +1,13 @@
-using System;
 using C5;
 using Godot;
 using Godot.Collections;
 using ProjectArchaetech.common.util;
 using ProjectArchaetech.interfaces;
-using ProjectArchaetech.resources;
+using ProjectArchaetech.resource;
 
 namespace ProjectArchaetech.common {
-    public abstract partial class LogisticBuilding : ManableBuilding, IFunctionable, IRecyclable {
+    [GlobalClass]
+    public partial class LogisticBuilding : ManableBuilding, IFunctionable, IRecyclable {
         [Export]
         public static Array<TransportRouteSpecification> specs { set; get; }
         protected HashDictionary<LogisticBuilding, TransportRoute> inPaths;

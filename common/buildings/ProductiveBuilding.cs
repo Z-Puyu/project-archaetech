@@ -1,9 +1,11 @@
 using C5;
+using Godot;
 using Godot.Collections;
 using ProjectArchaetech.interfaces;
 using ProjectArchaetech.resources;
 
 namespace ProjectArchaetech.common {
+    [GlobalClass]
     public partial class ProductiveBuilding : LogisticBuilding, IFunctionable {
         private ProductionMethod activePM;
 

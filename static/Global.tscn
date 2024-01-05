@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://vc66sd4cmivh"]
+[gd_scene load_steps=10 format=3 uid="uid://vc66sd4cmivh"]
 
 [ext_resource type="Script" path="res://static/Global.cs" id="1_sedta"]
 [ext_resource type="Script" path="res://static/GameManager.cs" id="2_6b2el"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://static/BuildingManager.cs" id="5_a6whb"]
 [ext_resource type="Script" path="res://static/TechManager.cs" id="6_e54ax"]
 [ext_resource type="Script" path="res://static/Events.cs" id="7_6xm40"]
+[ext_resource type="Resource" uid="uid://dqcf4jirbnjue" path="res://common/technologies/TestTech.tres" id="8_kr6ok"]
 
 [node name="Global" type="Node"]
 script = ExtResource("1_sedta")
@@ -38,6 +39,7 @@ script = ExtResource("5_a6whb")
 
 [node name="TechManager" type="Node" parent="."]
 script = ExtResource("6_e54ax")
+allTechnologies = Array[Object]([ExtResource("8_kr6ok")])
 
 [node name="Events" type="Node" parent="."]
 script = ExtResource("7_6xm40")

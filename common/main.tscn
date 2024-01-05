@@ -1,27 +1,29 @@
 [gd_scene load_steps=5 format=3 uid="uid://gphw47g6xeqo"]
 
-[ext_resource type="Script" path="res://common/main.gd" id="1_14rym"]
-[ext_resource type="FontFile" uid="uid://dkp338r6uj7b3" path="res://common/poppins/Poppins-Black.otf" id="2_4nigh"]
-[ext_resource type="FontFile" uid="uid://ck5f4if2e1xn0" path="res://common/poppins/Poppins-BlackItalic.otf" id="3_1h8lh"]
-[ext_resource type="PackedScene" uid="uid://c3crljkr8gv36" path="res://interface/bg.tscn" id="4_jekre"]
+[ext_resource type="Script" path="res://common/Main.gd" id="1_qm8eu"]
+[ext_resource type="FontFile" uid="uid://dkp338r6uj7b3" path="res://common/poppins/Poppins-Black.otf" id="2_6rpn4"]
+[ext_resource type="FontFile" uid="uid://ck5f4if2e1xn0" path="res://common/poppins/Poppins-BlackItalic.otf" id="3_f5otp"]
+[ext_resource type="PackedScene" uid="uid://c3crljkr8gv36" path="res://interface/bg.tscn" id="4_21gj2"]
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_14rym")
+script = ExtResource("1_qm8eu")
 
-[node name="Play" type="Button" parent="."]
+[node name="PlayButton" type="Button" parent="."]
+unique_name_in_owner = true
 offset_left = 172.0
 offset_top = 437.0
 offset_right = 380.0
 offset_bottom = 555.0
-theme_override_fonts/font = ExtResource("2_4nigh")
+theme_override_fonts/font = ExtResource("2_6rpn4")
 text = "Play"
 
-[node name="Quit" type="Button" parent="."]
+[node name="QuitButton" type="Button" parent="."]
+unique_name_in_owner = true
 offset_left = 820.0
 offset_top = 434.0
 offset_right = 1028.0
 offset_bottom = 552.0
-theme_override_fonts/font = ExtResource("2_4nigh")
+theme_override_fonts/font = ExtResource("2_6rpn4")
 text = "Quit"
 
 [node name="TextEdit" type="Label" parent="."]
@@ -36,13 +38,10 @@ offset_right = 900.0
 offset_bottom = 406.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_1h8lh")
+theme_override_fonts/font = ExtResource("3_f5otp")
 theme_override_font_sizes/font_size = 100
 text = "Project 
 Archaetech"
 horizontal_alignment = 1
 
-[node name="BG" parent="." instance=ExtResource("4_jekre")]
-
-[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[node name="BG" parent="." instance=ExtResource("4_21gj2")]

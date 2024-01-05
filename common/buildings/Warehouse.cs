@@ -5,6 +5,7 @@ using Godot.Collections;
 using ProjectArchaetech.resources;
 
 namespace ProjectArchaetech.common {
+	[GlobalClass]
 	public partial class Warehouse : Node {
 		[Export]
 		public Dictionary<ResourceData, double> resources { get; set; }

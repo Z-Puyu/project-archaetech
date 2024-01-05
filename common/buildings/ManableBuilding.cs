@@ -1,10 +1,12 @@
 using System;
 using C5;
+using Godot;
 using Godot.Collections;
 using ProjectArchaetech.interfaces;
 using ProjectArchaetech.resources;
 
 namespace ProjectArchaetech.common {
+    [GlobalClass]
     // Encapsulates a building which can recruit workers.
     public abstract partial class ManableBuilding : Building, IManable {
         protected HashDictionary<JobData, int> employmentCap;

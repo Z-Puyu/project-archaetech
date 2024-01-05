@@ -33,18 +33,20 @@ namespace ProjectArchaetech {
 		public override void _Ready() {
 			// Get static references to the singletons.
 			grave = new Queue<Node>();
-			gameManager = this.GetNode<GameManager>("/root/GameManager");
-			resManager = this.GetNode<ResourceManager>("/root/ResourceManager");
-			popManager = this.GetNode<PopManager>("/root/PopManager");
-			buildManager = this.GetNode<BuildingManager>("/root/BuildingManager");
-			eventBus = this.GetNode<Events>("/root/Events");
-			techTree = this.GetNode<TechManager>("/root/TechManager");
+			gameManager = this.GetNode<GameManager>("GameManager");
+			resManager = this.GetNode<ResourceManager>("ResourceManager");
+			popManager = this.GetNode<PopManager>("PopManager");
+			buildManager = this.GetNode<BuildingManager>("BuildingManager");
+			eventBus = this.GetNode<Events>("Events");
+			techTree = this.GetNode<TechManager>("TechManager");
 
 			// Connect events.
 			resManager.TechProgress += techTree.Research;
 			eventBus.CellSelected += buildManager.SetCell;
 			gameManager.NewMonth += ClearDeadObjects;
 		}
+
+		public bool IsGamePaused() => GameState == GameMode.Paused;
 
 		public void PauseGame() {
 			GameManager.GameClock.Paused = true;

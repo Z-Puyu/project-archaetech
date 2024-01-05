@@ -1,8 +1,10 @@
 using Godot;
 using Godot.Collections;
+using MonoCustomResourceRegistry;
 using ProjectArchaetech.resources;
 
-namespace ProjectArchaetech.common {
+namespace ProjectArchaetech.resource {
+    [RegisteredType(nameof(Tech), "", nameof(Resource)), GlobalClass]
     public partial class TransportRouteSpecification : Resource {
         [Export]
         public string name { set; get; }
