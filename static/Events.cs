@@ -5,9 +5,14 @@ using Godot;
 using ProjectArchaetech.common;
 
 namespace ProjectArchaetech {
+	[GlobalClass]
 	public partial class Events : Node {
-		private HashDictionary<Type, HashSet<EventHandler>> subscribers;
+		private readonly HashDictionary<Type, HashSet<EventHandler>> subscribers;
 
+		public Events() {
+			this.subscribers = new HashDictionary<Type, HashSet<EventHandler>>();
+		}
+		
 		public void Subscribe<T>(EventHandler eventHandler) where T : EventArgs {
 			// First, we retrieve the event type.
 			Type eventType = typeof(T);

@@ -1,18 +1,19 @@
 using Godot;
 
 namespace ProjectArchaetech {
+	[GlobalClass]
 	public partial class GameManager : Node {
-		private Timer gameClock;
+		private GameClock gameClock;
 		private int nDays;
 
-		public Timer GameClock { get => gameClock; private set => gameClock = value; }
+		public GameClock GameClock { get => gameClock; private set => gameClock = value; }
 		public int NDays { get => nDays; private set => nDays = value; }
 
 		[Signal]
 		public delegate void NewMonthEventHandler();
 
 		public override void _Ready() {
-			this.GameClock = this.GetChild<Timer>(0);
+			this.GameClock = (GameClock) this.GetChild<Timer>(0);
 			this.GameClock.Timeout += this.OnWorldTimerTimeout;
 		}
 

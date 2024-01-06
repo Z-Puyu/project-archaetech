@@ -8,7 +8,7 @@ var building: String:
 		return building
 
 func _ready():
-	self.pressed.connect(self._on_pressed)
+	self.pressed.connect(func(): Global.AddBuilding.emit(self.building))
 
 func initialise(building: Building):
 	var icon: Texture2D = building.data.icon
@@ -18,6 +18,3 @@ func initialise(building: Building):
 	self.icon.set_texture(icon)
 	self.building_name.set_text(building_name)
 	self.cost.update_info(cost)
-
-func _on_pressed():
-	BuildingManager.add_building(self.building)

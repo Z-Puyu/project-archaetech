@@ -4,9 +4,10 @@ using ProjectArchaetech.common;
 using ProjectArchaetech.common.util;
 
 namespace ProjectArchaetech {
+	[GlobalClass]
 	public partial class BuildingManager : Node {
 		[Export]
-		private Dictionary<string, PackedScene> availableBuildings { set; get; }
+		public Dictionary<string, PackedScene> AvailableBuildings { set; get; }
 
 		private string spawningObjId;
 		private ConstructionQueue<Building> constructionQueue;
@@ -19,6 +20,10 @@ namespace ProjectArchaetech {
 		public Cell SelectedCell { get => selectedCell; set => selectedCell = value; }
 		public TileData TileData { get => tileData; set => tileData = value; }
 
+		public BuildingManager() {
+			this.AvailableBuildings = new Dictionary<string, PackedScene>();
+		}
+
 		public override void _Ready() {
 			this.constructionQueue = new ConstructionQueue<Building>(2);
 		}
@@ -30,7 +35,7 @@ namespace ProjectArchaetech {
 
 		public void AddBuilding(string id) {
 			this.SpawningObjId = id;
-			Building obj = (Building) this.availableBuildings[this.SpawningObjId].Instantiate();
+			Building obj = (Building) this.AvailableBuildings[this.SpawningObjId].Instantiate();
 			if (obj.CanBeBuilt(this.TileData, this.SelectedCell)) {
 				if (this.ConstructionQueue.RemoveAt(
 					this.SelectedCell, out ConstructibleTask<Building> task

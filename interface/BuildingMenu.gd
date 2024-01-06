@@ -6,10 +6,11 @@ class_name BuildingMenu extends PanelContainer
 }
 
 func _ready():
-	for obj in BuildingManager.available_buildings.values():
-		var building: Building = obj.instantiate()
+	var building_manager: BuildingManager = get_node("/root/Global/BuildingManager")
+	for uid in building_manager.AvailableBuildings.keys():
+		var building: Building = building_manager.AvailableBuildings.get(uid).instantiate()
 		self.add(building, self._tabs.get("all"))
-		if building is ProductionBuilding:
+		if building is ProductiveBuilding:
 			self.add(building, self._tabs.get("production"))
 		building.queue_free()
 	self.hide()

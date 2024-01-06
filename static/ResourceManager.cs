@@ -3,6 +3,7 @@ using ProjectArchaetech.common;
 using ProjectArchaetech.resources;
 
 namespace ProjectArchaetech {
+	[GlobalClass]
 	public partial class ResourceManager : Warehouse {
 		[Export]
 		public ResourceData rpResource { set; get; }

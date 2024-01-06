@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://tqqdnaih1wys"]
+
+[ext_resource type="Texture2D" uid="uid://b4pwo1yk7shar" path="res://gfx/interface/icons/general/button_rnd_grayscale.png" id="1_t4f32"]
+[ext_resource type="Texture2D" uid="uid://doi4skv8n2jvq" path="res://gfx/interface/icons/general/button_rnd_pressed_grayscale.png" id="2_pd1cn"]
+[ext_resource type="Script" path="res://interface/core/NewBuildingButton.gd" id="3_rbqal"]
+[ext_resource type="Texture2D" uid="uid://btrvavqd3rcn3" path="res://gfx/interface/icons/general/gear-hammer.svg" id="4_s6yxh"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_mifbo"]
+allow_unpress = true
+
+[node name="ModalButtonGroup" type="CanvasLayer"]
+layer = 3
+
+[node name="NewBuildingButton" type="TextureButton" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 154.0
+offset_top = -50.0
+offset_right = 204.0
+grow_vertical = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_mifbo")
+texture_normal = ExtResource("1_t4f32")
+texture_pressed = ExtResource("2_pd1cn")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("3_rbqal")
+
+[node name="Icon" type="TextureRect" parent="NewBuildingButton"]
+modulate = Color(1, 1, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_s6yxh")
+expand_mode = 1

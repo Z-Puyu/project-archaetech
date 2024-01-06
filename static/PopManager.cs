@@ -4,6 +4,7 @@ using Godot.Collections;
 using ProjectArchaetech.resources;
 
 namespace ProjectArchaetech {
+	[GlobalClass]
 	public partial class PopManager : Node {
 		// These define how much one Pop consumes per month 
 		// for each of the edible resources.
@@ -59,15 +60,14 @@ namespace ProjectArchaetech {
 			// We first compute how much food is needed if all Pops only consume basic food
 			int yearlyFood = this.PopCount * 12;
 			double foodStorage = 0.0;
-			ResourceManager resManager = this.GetNode<ResourceManager>("/root/ResourceManager");
 			foreach (ResourceData foodType in this.primaryFoodChoices) {
-				if (resManager.resources.ContainsKey(foodType)) {
+				if (Global.ResManager.resources.ContainsKey(foodType)) {
 					// Convert the food stores into basic food and aggregate
-					double stores = resManager.resources[foodType];
+					double stores = Global.ResManager.resources[foodType];
 					foodStorage += stores / primaryFoodDemands[foodType];
 				}
 			}
-			int nUnfed = this.ConsumeFood(resManager);
+			int nUnfed = this.ConsumeFood(Global.ResManager);
 			double growthModifier = 1.0;
 			if (nUnfed != 0) {
 				double starvation = nUnfed / this.PopCount;

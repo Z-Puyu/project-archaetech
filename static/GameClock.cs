@@ -3,6 +3,7 @@ using Godot.Collections;
 using System;
 
 namespace ProjectArchaetech {
+	[GlobalClass]
 	public partial class GameClock : Timer {
 		[Export]
 		public Dictionary<int, double> config { set; get; }

@@ -1,12 +1,14 @@
 class_name PopLabel extends HBoxContainer
+const PopManager = preload("res://static/PopManager.cs")
 
 @onready var label: Label = $DynamicLabel
+@onready var pops: PopManager = get_node("/root/Global/PopManager")
 
 func _ready():
-	Global.PopManager.changed.connect(self._on_pop_change)
-	self.label.set_text(str(PopManager.unemployed, " / ", PopManager.pop_count))
+	self.pops.PopCountChanged.connect(self._on_pop_change)
+	self.label.set_text(str(pops.NUnemployed, " / ", pops.PopCount))
 
 func _on_pop_change():
-	var total: int = Global.PopManager.pop_count
-	var labour: int = Global.PopManager.unemployed
+	var total: int = self.pops.PopCount
+	var labour: int = self.pops.NUnemployed
 	self.label.set_text(str(labour, " / ", total))

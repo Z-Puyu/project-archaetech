@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dwmspwwtu1d2d"]
 
 [ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/core/ResourcePanel.tscn" id="1_0xkas"]
+[ext_resource type="Script" path="res://interface/core/InGameUI.gd" id="1_ujdhx"]
 [ext_resource type="PackedScene" uid="uid://co81lv0s2uhl" path="res://interface/core/Calendar.tscn" id="2_lfric"]
-[ext_resource type="PackedScene" uid="uid://dql6n32tqb566" path="res://interface/core/InfoPanel.tscn" id="3_8a0qw"]
 [ext_resource type="PackedScene" uid="uid://tk3rk44j88w1" path="res://interface/buildings/BuildingInfo.tscn" id="5_ci4fi"]
 [ext_resource type="PackedScene" uid="uid://dup5ujurhlwff" path="res://interface/BuildingMenu.tscn" id="8_1wx18"]
 [ext_resource type="Script" path="res://interface/core/ModalBackdrop.gd" id="10_mmjag"]
@@ -16,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ujdhx")
 
 [node name="ResourcePanel" parent="." instance=ExtResource("1_0xkas")]
 layout_mode = 0
@@ -23,20 +24,6 @@ offset_right = 668.0
 
 [node name="Calendar" parent="." instance=ExtResource("2_lfric")]
 layout_mode = 1
-
-[node name="InfoPanel" parent="." instance=ExtResource("3_8a0qw")]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -377.0
-offset_top = -236.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 0
-grow_vertical = 0
 
 [node name="Modal" type="CanvasLayer" parent="."]
 layer = 2

@@ -40,10 +40,11 @@ func _process(delta: float):
 			input_y = int(Input.is_action_pressed("ui_down")) - \
 					  int(Input.is_action_pressed("ui_up"));
 		else:
-			x_threshold = get_viewport().size.x / 2 * x_margin * (zoom_factor);
-			y_threshold = get_viewport().size.y / 2 * y_margin * (zoom_factor);
+			x_threshold = get_viewport().size.x / 2 * x_margin / (zoom_factor);
+			y_threshold = get_viewport().size.y / 2 * y_margin / (zoom_factor);
 			var x_diff: float = (self.cursor_pos.x - self.position.x);
 			var y_diff: float = (self.cursor_pos.y - self.position.y);
+			#print(self.zoom_factor)
 			input_x = (int(x_diff > x_threshold) - int(x_diff < -x_threshold)) * (absf(x_diff) / x_threshold);
 			input_y = (int(y_diff > y_threshold) - int(y_diff < -y_threshold)) * (absf(y_diff) / y_threshold);
 
@@ -55,6 +56,8 @@ func _process(delta: float):
 	self.position.y += self.v_y * delta;
 	
 func _unhandled_input(event: InputEvent):
+	if event.is_action_pressed("space_bar_pressed"):
+		print("HI from " + str(self))
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("wheel_up"):
 			self.zoom.x *= (1 + 0.01 * self.zoom_speed);

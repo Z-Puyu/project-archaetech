@@ -1,4 +1,5 @@
 class_name ResourcePanel extends Panel
+const ResourceData = preload("res://common/resources/ResourceData.cs")
 
 @export var info_boxes: Dictionary = {}
 
