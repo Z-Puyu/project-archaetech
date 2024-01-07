@@ -15,7 +15,7 @@ namespace ProjectArchaetech.common.util {
 			this.maxActiveSize = maxActiveSize;
 		}
 
-		public int MaxActiveSize { get => MaxActiveSize; set => MaxActiveSize = value; }
+		public int MaxActiveSize { get => maxActiveSize; set => maxActiveSize = value; }
 
 		public int Size() {
 			return this.active.Count + this.inactive.Count;
@@ -30,6 +30,7 @@ namespace ProjectArchaetech.common.util {
 				this.inactive.InsertFirst(task);
 			}
 			this.constructionSites.Add(task.Location, task);
+			this.AddChild(task);
 		}
 
 		public void Remove(ConstructibleTask<T> task) {
@@ -72,6 +73,18 @@ namespace ProjectArchaetech.common.util {
 		public void ExpandBy(int size) {
 			this.MaxActiveSize += 1;
 			this.Refresh();
+		}
+
+		public override string ToString() {
+			string active = "{";
+			string inactive = "{";
+			foreach (ConstructibleTask<T> t in this.active) {
+				active += (t.ToString() + " -> ");
+			}
+			foreach (ConstructibleTask<T> t in this.inactive) {
+				inactive += (t.ToString() + " -> ");
+			}
+			return active + "}\n" + inactive + "}";
 		}
 	}
 }

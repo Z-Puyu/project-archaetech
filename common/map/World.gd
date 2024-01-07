@@ -1,6 +1,7 @@
 class_name World extends Node2D
 const Map = preload("res://common/map/Map.cs")
 const PauseMenu = preload("res://interface/core/PauseMenu.gd")
+const BaseBuilding = preload("res://common/buildings/BaseBuilding.cs")
 
 @onready var map: Map = $Map
 @onready var pause_menu: PauseMenu = load("res://interface/core/PauseMenu.tscn").instantiate()

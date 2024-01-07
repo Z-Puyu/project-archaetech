@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://static/TechManager.cs" id="6_e54ax"]
 [ext_resource type="Resource" uid="uid://b53ptr1nt1kyo" path="res://common/resources/basic/FoodResource.tres" id="7_36sjg"]
 [ext_resource type="Resource" uid="uid://bwgb83yp08q3s" path="res://common/resources/basic/MineralResource.tres" id="7_a4o3q"]
-[ext_resource type="PackedScene" uid="uid://dvtrin5dw4fxj" path="res://assets/buildings/BaseBuilding.tscn" id="7_r8pgp"]
 [ext_resource type="Resource" uid="uid://dqcf4jirbnjue" path="res://common/technologies/TestTech.tres" id="8_kr6ok"]
 [ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/basic/WoodResource.tres" id="8_rsype"]
 [ext_resource type="Resource" uid="uid://0uu8f7ixqojq" path="res://common/resources/collectibles/FruitsResource.tres" id="8_wbr7w"]
@@ -18,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://otg0hkf6gu3m" path="res://common/resources/collectibles/SeafoodResource.tres" id="10_hoi58"]
 [ext_resource type="Resource" uid="uid://bb4cb626326h1" path="res://common/resources/consumer/ProcessedFoodResource.tres" id="11_lnhlp"]
 [ext_resource type="Resource" uid="uid://bubrvvogmhx34" path="res://common/resources/consumer/AlcoholicDrinksResource.tres" id="12_rn820"]
+[ext_resource type="PackedScene" uid="uid://cqgtpy301ir2" path="res://assets/buildings/ForestryBuilding.tscn" id="16_nnsr8"]
 
 [node name="Global" type="Node"]
 script = ExtResource("1_sedta")
@@ -68,7 +68,7 @@ PrimaryFoodChoices = Array[Object]([ExtResource("11_lnhlp"), ExtResource("7_36sj
 [node name="BuildingManager" type="Node" parent="."]
 script = ExtResource("5_a6whb")
 AvailableBuildings = {
-"builidng-forestry-1": ExtResource("7_r8pgp")
+"building-forestry-1": ExtResource("16_nnsr8")
 }
 
 [node name="TechManager" type="Node" parent="."]

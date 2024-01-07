@@ -18,7 +18,7 @@ namespace ProjectArchaetech {
 		}
 
 		private void NextTurn() {
-			this.GetNode<EventBus>("/root/EventBus").Publish(this, new NewMonthEvent());
+			Global.EventBus.Publish(this, new NewMonthEvent());
 		}
 
 		private void OnWorldTimerTimeout() {

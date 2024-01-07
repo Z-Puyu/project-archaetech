@@ -2,6 +2,7 @@ using System;
 using C5;
 using Godot;
 using Godot.Collections;
+using static ProjectArchaetech.events.EventBus;
 
 namespace ProjectArchaetech.common {
 	[GlobalClass]
@@ -34,20 +35,6 @@ namespace ProjectArchaetech.common {
 		public Cell CurrSelection { get => currSelection; set => currSelection = value; }
 
 		public Dictionary<Vector2I, Cell> Grid => grid;
-
-		private class CellSelectedEvent : EventArgs {
-			private readonly TileData data;
-			private readonly Cell cell;
-
-			public CellSelectedEvent(Cell cell, TileData data) {
-				this.cell = cell;
-				this.data = data;
-			}
-
-			public TileData Data => data;
-
-			public Cell Cell => cell;
-		}
 
 		public Map() {
 			this.grid = new Dictionary<Vector2I, Cell>();
@@ -82,7 +69,9 @@ namespace ProjectArchaetech.common {
 		public override void _UnhandledInput(InputEvent e) {
 			if (e is InputEventMouse) {
 				if (e.IsActionPressed("left_click")) {
-					this.SelectCell(e);
+					if (Global.GameState != Global.GameMode.BuildRoute) {
+						this.SelectCell(e);
+					}
 				}
 			}
 		}

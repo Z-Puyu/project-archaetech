@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://co81lv0s2uhl"]
+[gd_scene load_steps=19 format=3 uid="uid://co81lv0s2uhl"]
 
 [ext_resource type="Texture2D" uid="uid://po3dr40i2drq" path="res://gfx/interface/UIDifferentFree03Wenrexa/MiniPanel06.jpg" id="1_iq0av"]
 [ext_resource type="Texture2D" uid="uid://b1evecr0j88w2" path="res://gfx/interface/icons/general/play-button.svg" id="2_q2odd"]
 [ext_resource type="Texture2D" uid="uid://cmfbp7uj15d7t" path="res://gfx/interface/icons/general/pause-button.svg" id="3_jhav5"]
-[ext_resource type="Script" path="res://interface/core/PauseButton.gd" id="4_4biju"]
 [ext_resource type="Script" path="res://interface/core/Date.gd" id="5_sdcn5"]
 [ext_resource type="Script" path="res://interface/core/Speed.gd" id="6_6laoq"]
 [ext_resource type="Texture2D" uid="uid://dmaqxcehyk7dv" path="res://gfx/interface/icons/general/plus-sign.png" id="8_igwqo"]
@@ -60,6 +59,7 @@ grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_kchcp")
 
 [node name="PauseButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -74,7 +74,6 @@ toggle_mode = true
 shortcut = SubResource("Shortcut_rc8dd")
 texture_normal = ExtResource("2_q2odd")
 texture_pressed = ExtResource("3_jhav5")
-script = ExtResource("4_4biju")
 
 [node name="Date" type="Label" parent="."]
 layout_mode = 1

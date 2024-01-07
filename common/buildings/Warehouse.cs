@@ -32,8 +32,14 @@ namespace ProjectArchaetech.common {
 			if (!this.Resources.ContainsKey(res)) {
 				this.Resources[res] = 0;
 			} else {
-				double netAmount = this.Resources[res] + amount;
-				this.Resources[res] = Math.Min(netAmount, this.StorageLimit[(int) res.type]);
+				if (res.type == ResourceType.Research) {
+					// Research points do not need to be transported
+					// so they will be directly credited into global warehouse.
+					Global.ResManager.Resources[res] += amount;
+				} else {
+					double netAmount = this.Resources[res] + amount;
+					this.Resources[res] = Math.Min(netAmount, this.StorageLimit[(int) res.type]);
+				}
 			}
 		}
 
@@ -110,22 +116,13 @@ namespace ProjectArchaetech.common {
 				if (!this.MonthlyOutput.ContainsKey(res)) {
 					this.MonthlyOutput[res] = 0;
 				}
-				if (res.type == ResourceType.Research) {
-					// Research points do not need to be transported
-					// so they will be directly credited into global warehouse.
-					Global.ResManager.Add(res, output[res] * k * nWorkers);
-				} else {
-					this.MonthlyOutput[res] += output[res] * k * nWorkers;
-				}
+				this.MonthlyOutput[res] += output[res] * k * nWorkers;
 			}
 			this.Consume(input);
 			this.Add(this.MonthlyOutput);
 		}
 
 		public virtual void Reset() {
-			foreach (ResourceData res in this.MonthlyOutput.Keys) {
-				this.EmitSignal(SignalName.ResourceQtyUpdated, res, this.Resources[res]);
-			}
 			this.MonthlyOutput.Clear();
 		}
 	}

@@ -41,7 +41,7 @@ namespace ProjectArchaetech {
 			foreach (Tech tech in this.Researchable) {
 				this.Selector.Add(new C5.KeyValuePair<int, Tech>(tech.weight, tech));
 			}
-			this.GetNode<EventBus>("/root/EventBus").Subscribe<TechProgressEvent>((sender, e) => 
+			Global.EventBus.Subscribe<TechProgressEvent>((sender, e) => 
 				this.Research(((TechProgressEvent) e).AvailablePoints));
 		}
 

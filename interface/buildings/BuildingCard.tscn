@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b1qneotb641pc" path="res://gfx/interface/UIDifferentFree03Wenrexa/Button01.png" id="1_cmu8g"]
 [ext_resource type="Texture2D" uid="uid://bvcas7k4escon" path="res://gfx/interface/overlays/Button01Pressed.png" id="2_fg5sw"]
 [ext_resource type="Texture2D" uid="uid://se6n5605jfcq" path="res://gfx/interface/overlays/Button01Hover.png" id="3_40vaj"]
-[ext_resource type="Script" path="res://interface/BuildingCard.gd" id="4_suwul"]
+[ext_resource type="Script" path="res://interface/buildings/BuildingCard.gd" id="4_suwul"]
 [ext_resource type="Texture2D" uid="uid://mbc7n51pd8ae" path="res://gfx/interface/overlays/panel-border-000.png" id="5_nsodm"]
 [ext_resource type="Texture2D" uid="uid://bfdfuv51e64ww" path="res://gfx/map-objects/ForestryBuilding.png" id="6_phehv"]
 [ext_resource type="Script" path="res://interface/core/DynamicResourceInfo.gd" id="7_t85is"]

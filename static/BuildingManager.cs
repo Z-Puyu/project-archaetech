@@ -1,7 +1,9 @@
+using System;
 using Godot;
 using Godot.Collections;
 using ProjectArchaetech.common;
 using ProjectArchaetech.common.util;
+using static ProjectArchaetech.events.EventBus;
 
 namespace ProjectArchaetech {
 	[GlobalClass]
@@ -26,11 +28,12 @@ namespace ProjectArchaetech {
 
 		public override void _Ready() {
 			this.constructionQueue = new ConstructionQueue<Building>(2);
+			this.AddChild(this.constructionQueue);
 		}
 
-		public void SetCell(Cell cell, TileData data) {
-			this.SelectedCell = cell;
-			this.TileData = data;
+		public void SetCell(CellSelectedEvent e) {
+			this.SelectedCell = e.Cell;
+			this.TileData = e.Data;
 		}
 
 		public void AddBuilding(string id) {
@@ -41,19 +44,20 @@ namespace ProjectArchaetech {
 					this.SelectedCell, out ConstructibleTask<Building> task
 				)) {
 					// There is a building under construction at the cell.
-					this.resManager.Add(task.Value.data.cost);
+					this.resManager.Add(task.Value.data.Cost);
 					this.ConstructionQueue.Remove(task);
 				}
-				else {
+				else if (this.SelectedCell.Building != null) {
 					// No construction going on, so remove the existing one.
 					DeleteBuilding(this.SelectedCell);
 				}
-				this.resManager.Consume(obj.data.cost);
+				Global.ResManager.Consume(obj.data.Cost);
 				obj.Translate(this.SelectedCell.LocalCoords);
 				obj.ZIndex = 1;
 				ConstructibleTask<Building> newTask = new ConstructibleTask<Building>(
-					obj, this.SelectedCell, obj.data.timeToBuild
+					obj, this.SelectedCell, obj.data.TimeToBuild
 				);
+				newTask.Translate(this.SelectedCell.LocalCoords);
 				this.ConstructionQueue.Enqueue(newTask);
 			}
 		}

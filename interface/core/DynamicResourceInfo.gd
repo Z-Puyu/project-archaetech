@@ -4,6 +4,8 @@ const ResourceData = preload("res://common/resources/ResourceData.cs")
 
 const LABEL = preload("res://interface/buildings/DynamicResourceLabel.tscn")
 var info: Dictionary:
+	set(dict):
+		info = dict
 	get:
 		return info
 
@@ -11,6 +13,7 @@ func _ready():
 	self.info = {}
 
 func update_info(new_info: Dictionary):
+	print(new_info)
 	for key in new_info:
 		if not self.info.has(key):
 			add_resource(key, new_info.get(key))
@@ -31,3 +34,8 @@ func add_resource(resource: ResourceData, qty: float):
 	self.info[resource] = label
 	self.add_child(label)
 	label.update(resource.icon, qty)
+	
+func clear():
+	self.info = {}
+	for label in self.get_children():
+		self.remove_child(label)

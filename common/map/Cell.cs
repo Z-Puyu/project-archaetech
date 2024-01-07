@@ -23,10 +23,10 @@ namespace ProjectArchaetech.common {
 		public Building Building { get => building; set => building = value; }
 
 		public override string ToString() {
-			return String.Format(
+			return string.Format(
 				"Cell %s at %s with %d units and building %s", 
 				this.Pos.ToString(), this.LocalCoords.ToString(), 
-				this.Units.Count, this.Building.ToString()
+				this.Units.Count, this.Building == null ? "EMPTY" : this.Building.ToString()
 			);
 		}
 	}

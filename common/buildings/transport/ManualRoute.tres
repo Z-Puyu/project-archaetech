@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TransportRouteSpecification" load_steps=3 format=3 uid="uid://df1cre7yi1r55"]
+
+[ext_resource type="Resource" uid="uid://b53ptr1nt1kyo" path="res://common/resources/basic/FoodResource.tres" id="1_c86r4"]
+[ext_resource type="Script" path="res://common/buildings/transport/TransportRouteSpecification.cs" id="1_w011j"]
+
+[resource]
+script = ExtResource("1_w011j")
+Name = "Manual"
+Desc = ""
+MaintenanceType = ExtResource("1_c86r4")
+MaintenanceCost = Array[float]([0.0, 0.25, 0.5, 1.0, 1.5, 2.0])
+Capacity = Array[float]([0.0, 0.2, 0.3, 0.4, 0.5, 0.75])

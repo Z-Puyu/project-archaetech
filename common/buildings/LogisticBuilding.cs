@@ -9,7 +9,7 @@ namespace ProjectArchaetech.common {
     [GlobalClass]
     public partial class LogisticBuilding : ManableBuilding {
         [Export]
-        public static Array<TransportRouteSpecification> specs { set; get; }
+        public Array<TransportRouteSpecification> Specs { set; get; }
         protected HashDictionary<LogisticBuilding, TransportRoute> inPaths;
         protected HashDictionary<LogisticBuilding, TransportRoute> outPaths;
 
@@ -26,9 +26,10 @@ namespace ProjectArchaetech.common {
         }
 
         public void LinkTo(LogisticBuilding to) {
-            TransportRoute route = new TransportRoute(this, to, specs[0]);
+            TransportRoute route = new TransportRoute(this, to, this.Specs[0]);
             this.outPaths.Add(to, route);
             to.inPaths.Add(this, route);
+            this.GetNode<Global>("/root/Global").EmitSignal(Global.SignalName.TransportRouteAdded, route);
         }
 
         public Array<TransportRoute> GetOutwardRoutes() {
@@ -38,8 +39,14 @@ namespace ProjectArchaetech.common {
         protected override void OnClick(Node viewport, InputEvent e, long shapeIdx) {
             if (e.IsActionPressed("left_click")) {
                 if (Global.GameState == Global.GameMode.BuildRoute) {
-                    if (Global.PickUp is LogisticBuilding && !object.ReferenceEquals(Global.PickUp, this)) {
+                    if (Global.PickUp is not LogisticBuilding) {
+                        GD.PushError("The source building does not support transport routes!" +
+                            "(You should not be seeing this normally)");
+                        return;
+                    }
+                    if (!object.ReferenceEquals(Global.PickUp, this)) {
                         ((LogisticBuilding) Global.PickUp).LinkTo(this);
+                        Global.GameState = Global.GameMode.Normal;
                     } else {
                         GD.PushError("No valid source found!");
                     }

@@ -15,11 +15,12 @@ namespace ProjectArchaetech.common {
 			Global.EventBus.Subscribe<NewMonthEvent>((sender, e) => this.Work());
 		}
 
-        public override void Work() {
+		public override void Work() {
 			// Clear the research point record as it is not cumulative.
 			Global.ResManager.ClearRp();
 			Global.EventBus.Publish(this, new ProcessingBuildingsEvent());
-            base.Work();
-        }
-    }
+			base.Work();
+			Global.ResManager.SendWarehouseInfo();
+		}
+	}
 }

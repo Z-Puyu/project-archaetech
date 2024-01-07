@@ -45,15 +45,15 @@ namespace ProjectArchaetech.common {
 			}
 			// More features in the future.
 			foreach (ResourceData res in this.Resources.Keys) {
-				this.Resources[res] = this.Spec.capacity[this.Manpower];
+				this.Resources[res] = this.Spec.Capacity[this.Manpower];
 			}
 		}
 
 		public void Work() {
-			double maintenanceCost = this.Spec.maintenanceCost[this.Manpower] * this.Manpower;
-			if (Global.ResManager.HasEnough(this.Spec.maintenanceType, maintenanceCost)) {
-				Global.ResManager.Consume(this.Spec.maintenanceType, maintenanceCost);
-				this.to.Store(this.from.Take(Resources));
+			double maintenanceCost = this.Spec.MaintenanceCost[this.Manpower] * this.Manpower;
+			if (Global.ResManager.HasEnough(this.Spec.MaintenanceType, maintenanceCost)) {
+				Global.ResManager.Consume(this.Spec.MaintenanceType, maintenanceCost);
+				this.to.Store(this.from.Take(this.Resources));
 			}
 			if (this.Manpower < this.level) {
 				this.Recruit();

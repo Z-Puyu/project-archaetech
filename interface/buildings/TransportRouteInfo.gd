@@ -1,5 +1,5 @@
 class_name TransportRouteInfo extends HBoxContainer
-const TransportRoute = preload("res://common/buildings/TransportRoute.cs")
+const TransportRoute = preload("res://common/buildings/transport/TransportRoute.cs")
 var route: TransportRoute
 
 func _ready():

@@ -16,18 +16,28 @@ namespace ProjectArchaetech {
 		public Dictionary<ResourceData, double> SecondaryFoodDemands { set; get; } 
 		[Export]
 		public Array<ResourceData> PrimaryFoodChoices { set; get; }
-		public int PopCount { get => popCount; set => popCount = value; }
+		public int PopCount { 
+			get => popCount; 
+			set {
+				popCount = value;
+				Global.EventBus.Publish(this, new PopCountUpdatedEvent()); 
+			}
+		}
 		public double GrowthRate { get => growthRate; set => growthRate = value; }
 		public double GrowthProgress { get => growthProgress; set => growthProgress = value; }
-		public int NUnemployed { get => nUnemployed; set => nUnemployed = value; }
+		public int NUnemployed { 
+			get => nUnemployed; 
+			set {
+				nUnemployed = value;
+				Global.EventBus.Publish(this, new PopCountUpdatedEvent()); 
+			}
+		}
 
 		private int popCount;
 		private double growthRate;
 		private double growthProgress;
 		private int nUnemployed;
 	
-		[Signal]
-		public delegate void PopCountChangedEventHandler();
 		[Signal]
 		public delegate void PopGrewEventHandler();
 
@@ -42,7 +52,7 @@ namespace ProjectArchaetech {
 			this.GrowthRate = 0.05;
 			this.GrowthProgress = 0.0;
 			this.NUnemployed = 25;
-			this.GetNode<EventBus>("/root/EventBus").Subscribe<NewMonthEvent>((sender, e) => this.Update());
+			Global.EventBus.Subscribe<NewMonthEvent>((sender, e) => this.Update());
 		}
 
 		private int ConsumeFood() {

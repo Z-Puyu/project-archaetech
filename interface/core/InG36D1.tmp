@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://tk3rk44j88w1" path="res://interface/buildings/BuildingInfo.tscn" id="5_ci4fi"]
 [ext_resource type="PackedScene" uid="uid://dup5ujurhlwff" path="res://interface/BuildingMenu.tscn" id="8_1wx18"]
 [ext_resource type="Texture2D" uid="uid://b4pwo1yk7shar" path="res://gfx/interface/icons/general/button_rnd_grayscale.png" id="9_khciy"]
-[ext_resource type="Script" path="res://interface/core/Modal.gd" id="10_mmjag"]
+[ext_resource type="Script" path="res://interface/core/ModalBackdrop.gd" id="10_mmjag"]
 [ext_resource type="Texture2D" uid="uid://doi4skv8n2jvq" path="res://gfx/interface/icons/general/button_rnd_pressed_grayscale.png" id="10_oowsg"]
 [ext_resource type="Script" path="res://interface/core/Backdrop.gd" id="11_btrfl"]
 [ext_resource type="Texture2D" uid="uid://btrvavqd3rcn3" path="res://gfx/interface/icons/general/gear-hammer.svg" id="11_vdjfq"]
@@ -50,13 +50,10 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="Modal" type="CanvasLayer" parent="."]
-unique_name_in_owner = true
 layer = 2
-visible = false
 script = ExtResource("10_mmjag")
 
 [node name="Backdrop" type="Control" parent="Modal"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -32,8 +32,7 @@ namespace ProjectArchaetech {
             if (this.lookUp.Contains(item)) {
                 int key = this.lookUp[item]; // Get the cumulative weight of this item.
                 this.items.Remove(key); // Remove this item.
-                KeyValuePair<int, T> next;
-                if (this.items.TrySuccessor(key, out next)) {
+                if (this.items.TrySuccessor(key, out KeyValuePair<int, T> next)) {
                     // If the item has at least one successor, 
                     // We calculate by how much should the successors be shifted down.
                     int diff = next.Key - key;

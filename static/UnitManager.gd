@@ -5,7 +5,7 @@ enum UNIT_TYPES{
 }
 
 const Explorer = preload("res://common/units/Explorer.gd")
-const uuid = preload("res://util/uuid.gd");
+const uuid = preload("res://util/uuid.gd")
 
 var units: Dictionary = {}; #<pos: Vector2, Dictionary<id:int, unit: Node2D>>
 var available_units: Dictionary;  #<int, PackedScene>	

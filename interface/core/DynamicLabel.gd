@@ -23,3 +23,6 @@ func update_info(text: Variant, alt_parser: Callable = Callable()):
 		self.set_text(self.parser.call(text))
 	else:
 		self.set_text(alt_parser.call(text))
+		
+func clear():
+	self.set_text("")

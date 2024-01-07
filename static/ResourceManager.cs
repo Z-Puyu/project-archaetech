@@ -20,8 +20,15 @@ namespace ProjectArchaetech {
 		}
 
 		public override void Reset() {
-			Global.EventBus.Publish(this, new TechProgressEvent((int) this.Resources[this.RpResource]));
 			base.Reset();
+		}
+
+		public void SendWarehouseInfo() {
+			Global.EventBus.Publish(this, new TechProgressEvent((int) this.Resources[this.RpResource]));
+			foreach (ResourceData res in this.MonthlyOutput.Keys) {
+				Console.WriteLine(res + " : " + this.Resources[res]);
+				this.EmitSignal(Warehouse.SignalName.ResourceQtyUpdated, res, this.Resources[res]);
+			}
 		}
 	}
 }
