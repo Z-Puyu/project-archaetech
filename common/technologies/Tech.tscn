@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://uaby6a8k753d"]
+
+[ext_resource type="Resource" uid="uid://dqcf4jirbnjue" path="res://common/technologies/TestTech.tres" id="2_g5gjs"]
+
+[sub_resource type="GDScript" id="GDScript_uckww"]
+script/source = "extends Node2D
+
+@export var data: Tech
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="Tech" type="Node2D"]
+script = SubResource("GDScript_uckww")
+data = ExtResource("2_g5gjs")

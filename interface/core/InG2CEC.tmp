@@ -1,0 +1,129 @@
+[gd_scene load_steps=13 format=3 uid="uid://dwmspwwtu1d2d"]
+
+[ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/core/ResourcePanel.tscn" id="1_0xkas"]
+[ext_resource type="Script" path="res://interface/core/InGameUI.gd" id="1_iumxe"]
+[ext_resource type="PackedScene" uid="uid://co81lv0s2uhl" path="res://interface/core/Calendar.tscn" id="2_lfric"]
+[ext_resource type="PackedScene" uid="uid://dql6n32tqb566" path="res://interface/core/InfoPanel.tscn" id="3_8a0qw"]
+[ext_resource type="PackedScene" uid="uid://tk3rk44j88w1" path="res://interface/buildings/BuildingInfo.tscn" id="5_ci4fi"]
+[ext_resource type="PackedScene" uid="uid://dup5ujurhlwff" path="res://interface/BuildingMenu.tscn" id="8_1wx18"]
+[ext_resource type="Texture2D" uid="uid://b4pwo1yk7shar" path="res://gfx/interface/icons/general/button_rnd_grayscale.png" id="9_khciy"]
+[ext_resource type="Script" path="res://interface/core/ModalBackdrop.gd" id="10_mmjag"]
+[ext_resource type="Texture2D" uid="uid://doi4skv8n2jvq" path="res://gfx/interface/icons/general/button_rnd_pressed_grayscale.png" id="10_oowsg"]
+[ext_resource type="Script" path="res://interface/core/Backdrop.gd" id="11_btrfl"]
+[ext_resource type="Texture2D" uid="uid://btrvavqd3rcn3" path="res://gfx/interface/icons/general/gear-hammer.svg" id="11_vdjfq"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_xo7pg"]
+allow_unpress = true
+
+[node name="InGameUI" type="Control"]
+layout_direction = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iumxe")
+
+[node name="ResourcePanel" parent="." instance=ExtResource("1_0xkas")]
+layout_mode = 0
+offset_right = 668.0
+
+[node name="Calendar" parent="." instance=ExtResource("2_lfric")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="InfoPanel" parent="." instance=ExtResource("3_8a0qw")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -377.0
+offset_top = -236.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Modal" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource("10_mmjag")
+
+[node name="Backdrop" type="Control" parent="Modal"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("11_btrfl")
+
+[node name="BuildingInfo" parent="Modal/Backdrop" instance=ExtResource("5_ci4fi")]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="BuildingMenu" parent="Modal/Backdrop" instance=ExtResource("8_1wx18")]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ModalButtonGroup" type="CanvasLayer" parent="."]
+
+[node name="NewBuildingButton" type="TextureButton" parent="ModalButtonGroup"]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 154.0
+offset_top = -50.0
+offset_right = 204.0
+grow_vertical = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_xo7pg")
+texture_normal = ExtResource("9_khciy")
+texture_pressed = ExtResource("10_oowsg")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="ModalButtonGroup/NewBuildingButton"]
+modulate = Color(1, 1, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_vdjfq")
+expand_mode = 1

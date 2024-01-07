@@ -1,41 +1,41 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwmspwwtu1d2d"]
+[gd_scene load_steps=13 format=3 uid="uid://dwmspwwtu1d2d"]
 
 [ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/core/ResourcePanel.tscn" id="1_0xkas"]
+[ext_resource type="Script" path="res://interface/core/InGameUI.gd" id="1_iumxe"]
 [ext_resource type="PackedScene" uid="uid://co81lv0s2uhl" path="res://interface/core/Calendar.tscn" id="2_lfric"]
-[ext_resource type="Script" path="res://interface/core/NewUnit.gd" id="4_3x6to"]
-[ext_resource type="Script" path="res://interface/core/NewBuilding.gd" id="4_4caic"]
-[ext_resource type="Texture2D" uid="uid://cgchs35ncnvqs" path="res://gfx/interface/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-003.png" id="4_7kwqw"]
-[ext_resource type="PackedScene" uid="uid://djn3qpeneucjf" path="res://interface/unit_menu.tscn" id="4_47sl4"]
-[ext_resource type="Script" path="res://interface/Info.gd" id="4_kdhwk"]
-[ext_resource type="Script" path="res://interface/UnitSelection.gd" id="6_q7puf"]
+[ext_resource type="PackedScene" uid="uid://dql6n32tqb566" path="res://interface/core/InfoPanel.tscn" id="3_8a0qw"]
+[ext_resource type="PackedScene" uid="uid://tk3rk44j88w1" path="res://interface/buildings/BuildingInfo.tscn" id="5_ci4fi"]
 [ext_resource type="PackedScene" uid="uid://dup5ujurhlwff" path="res://interface/BuildingMenu.tscn" id="8_1wx18"]
+[ext_resource type="Texture2D" uid="uid://b4pwo1yk7shar" path="res://gfx/interface/icons/general/button_rnd_grayscale.png" id="9_khciy"]
+[ext_resource type="Script" path="res://interface/core/Modal.gd" id="10_mmjag"]
+[ext_resource type="Texture2D" uid="uid://doi4skv8n2jvq" path="res://gfx/interface/icons/general/button_rnd_pressed_grayscale.png" id="10_oowsg"]
+[ext_resource type="Script" path="res://interface/core/Backdrop.gd" id="11_btrfl"]
+[ext_resource type="Texture2D" uid="uid://btrvavqd3rcn3" path="res://gfx/interface/icons/general/gear-hammer.svg" id="11_vdjfq"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_xo7pg"]
+allow_unpress = true
 
 [node name="InGameUI" type="Control"]
+layout_direction = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_iumxe")
 
 [node name="ResourcePanel" parent="." instance=ExtResource("1_0xkas")]
 layout_mode = 0
-offset_right = 382.0
+offset_right = 668.0
 
 [node name="Calendar" parent="." instance=ExtResource("2_lfric")]
+unique_name_in_owner = true
 layout_mode = 1
 
-[node name="InfoPanel" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 773.0
-offset_top = 410.0
-offset_right = 1150.0
-offset_bottom = 646.0
-script = ExtResource("4_kdhwk")
-
-[node name="ColorRect" type="NinePatchRect" parent="InfoPanel"]
-z_index = -1
+[node name="InfoPanel" parent="." instance=ExtResource("3_8a0qw")]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -43,84 +43,90 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -377.0
-offset_top = -239.0
+offset_top = -236.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = ExtResource("4_7kwqw")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
 
-[node name="Info" type="Label" parent="InfoPanel"]
+[node name="Modal" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 2
 visible = false
-layout_mode = 0
-offset_left = 18.0
-offset_top = 8.0
-offset_right = 365.0
-offset_bottom = 233.0
+script = ExtResource("10_mmjag")
 
-[node name="NewUnit" type="Button" parent="InfoPanel"]
-layout_mode = 0
-offset_left = -772.0
-offset_top = 171.0
-offset_right = -667.0
-offset_bottom = 238.0
-text = "New Unit"
-script = ExtResource("4_3x6to")
+[node name="Backdrop" type="Control" parent="Modal"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("11_btrfl")
 
-[node name="UnitMenu" parent="InfoPanel/NewUnit" instance=ExtResource("4_47sl4")]
-
-[node name="NewBuilding" type="Button" parent="InfoPanel"]
-layout_mode = 0
-offset_left = -656.0
-offset_top = 172.0
-offset_right = -545.0
-offset_bottom = 237.0
-text = "New Building"
-script = ExtResource("4_4caic")
-
-[node name="BuildingMenu" parent="InfoPanel/NewBuilding" instance=ExtResource("8_1wx18")]
-
-[node name="UnitSelection" type="Control" parent="."]
+[node name="BuildingInfo" parent="Modal/Backdrop" instance=ExtResource("5_ci4fi")]
+visible = false
 layout_mode = 1
-anchors_preset = 4
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="BuildingMenu" parent="Modal/Backdrop" instance=ExtResource("8_1wx18")]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ModalButtonGroup" type="CanvasLayer" parent="."]
+
+[node name="NewBuildingButton" type="TextureButton" parent="ModalButtonGroup"]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 154.0
+offset_top = -50.0
+offset_right = 204.0
+grow_vertical = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_xo7pg")
+texture_normal = ExtResource("9_khciy")
+texture_pressed = ExtResource("10_oowsg")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="ModalButtonGroup/NewBuildingButton"]
+modulate = Color(1, 1, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -225.0
-offset_right = 75.0
-offset_bottom = 225.0
-grow_vertical = 2
-
-[node name="ColorRect" type="NinePatchRect" parent="UnitSelection"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_7kwqw")
-patch_margin_left = 20
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UnitSelection"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UnitSelection/ScrollContainer"]
-custom_minimum_size = Vector2(75, 450)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-script = ExtResource("6_q7puf")
-
-[connection signal="pressed" from="InfoPanel/NewUnit" to="InfoPanel" method="_on_new_unit_pressed"]
-[connection signal="pressed" from="InfoPanel/NewUnit" to="InfoPanel/NewUnit" method="_on_pressed"]
-[connection signal="pressed" from="InfoPanel/NewBuilding" to="InfoPanel" method="_on_new_building_pressed"]
-[connection signal="pressed" from="InfoPanel/NewBuilding" to="InfoPanel/NewBuilding" method="_on_pressed"]
+texture = ExtResource("11_vdjfq")
+expand_mode = 1

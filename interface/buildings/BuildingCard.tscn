@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqetkfgeawl1e"]
+
+[ext_resource type="Texture2D" uid="uid://b1qneotb641pc" path="res://gfx/interface/UIDifferentFree03Wenrexa/Button01.png" id="1_cmu8g"]
+[ext_resource type="Texture2D" uid="uid://bvcas7k4escon" path="res://gfx/interface/overlays/Button01Pressed.png" id="2_fg5sw"]
+[ext_resource type="Texture2D" uid="uid://se6n5605jfcq" path="res://gfx/interface/overlays/Button01Hover.png" id="3_40vaj"]
+[ext_resource type="Script" path="res://interface/buildings/BuildingCard.gd" id="4_suwul"]
+[ext_resource type="Texture2D" uid="uid://mbc7n51pd8ae" path="res://gfx/interface/overlays/panel-border-000.png" id="5_nsodm"]
+[ext_resource type="Texture2D" uid="uid://bfdfuv51e64ww" path="res://gfx/map-objects/ForestryBuilding.png" id="6_phehv"]
+[ext_resource type="Script" path="res://interface/core/DynamicResourceInfo.gd" id="7_t85is"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vvh4q"]
+texture = ExtResource("5_nsodm")
+modulate_color = Color(0.247059, 0.27451, 0.282353, 1)
+
+[node name="BuildingCard" type="TextureButton"]
+custom_minimum_size = Vector2(0, 100)
+texture_normal = ExtResource("1_cmu8g")
+texture_pressed = ExtResource("2_fg5sw")
+texture_hover = ExtResource("3_40vaj")
+texture_disabled = ExtResource("2_fg5sw")
+stretch_mode = 0
+script = ExtResource("4_suwul")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -37.5
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="Building" type="HBoxContainer" parent="MarginContainer"]
+layout_direction = 2
+layout_mode = 2
+
+[node name="IconFrame" type="Panel" parent="MarginContainer/Building"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_vvh4q")
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Building/IconFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_phehv")
+
+[node name="Info" type="VBoxContainer" parent="MarginContainer/Building"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="MarginContainer/Building/Info"]
+layout_mode = 2
+text = "Logging Camp"
+
+[node name="Cost" type="HFlowContainer" parent="MarginContainer/Building/Info"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 3
+script = ExtResource("7_t85is")

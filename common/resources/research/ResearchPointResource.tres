@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://cbkgfv0dq0h8t"]
+[gd_resource type="Resource" script_class="ResourceData" load_steps=3 format=3 uid="uid://cbkgfv0dq0h8t"]
 
-[ext_resource type="Script" path="res://common/resources/ResourceData.gd" id="1_y34wj"]
+[ext_resource type="Script" path="res://common/resources/ResourceData.cs" id="1_bskfw"]
+[ext_resource type="Texture2D" uid="uid://0lucvecjmx6u" path="res://gfx/interface/icons/resources/research.svg" id="1_dchw7"]
 
 [resource]
-script = ExtResource("1_y34wj")
+script = ExtResource("1_bskfw")
 name = "Research Point"
 desc = ""
+icon = ExtResource("1_dchw7")
 type = 5

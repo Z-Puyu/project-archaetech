@@ -9,6 +9,7 @@
 [resource]
 script = ExtResource("1_qqevl")
 type = 2
+name = "Forest"
 time_to_traverse = 8
 impassible = false
 harmful = false

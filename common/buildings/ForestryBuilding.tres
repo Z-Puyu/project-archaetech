@@ -1,13 +1,12 @@
-[gd_resource type="Resource" script_class="BuildingData" load_steps=8 format=3 uid="uid://c30c0sshkh4ys"]
+[gd_resource type="Resource" script_class="BuildingData" load_steps=7 format=3 uid="uid://c30c0sshkh4ys"]
 
 [ext_resource type="Resource" uid="uid://bvtxum4q5uj0v" path="res://common/jobs/WoodcutterJob.tres" id="1_x0gsh"]
-[ext_resource type="Script" path="res://common/buildings/BuildingData.gd" id="1_xx76p"]
-[ext_resource type="Script" path="res://common/buildings/ProductionMethod.gd" id="2_6rnoi"]
+[ext_resource type="Script" path="res://common/buildings/BuildingData.cs" id="1_xx76p"]
+[ext_resource type="Script" path="res://common/buildings/ProductionMethod.cs" id="2_6rnoi"]
 [ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/basic/WoodResource.tres" id="3_31gcr"]
 [ext_resource type="Texture2D" uid="uid://bfdfuv51e64ww" path="res://gfx/map-objects/ForestryBuilding.png" id="4_17pww"]
-[ext_resource type="Resource" uid="uid://dxbx5g0bdwsaj" path="res://common/terrain/ForestTerrain.tres" id="4_xbmfo"]
 
-[sub_resource type="Resource" id="Resource_sdvks"]
+[sub_resource type="Resource" id="Resource_c1oix"]
 script = ExtResource("2_6rnoi")
 name = "Basic"
 recipe = {
@@ -16,17 +15,15 @@ ExtResource("1_x0gsh"): 2
 
 [resource]
 script = ExtResource("1_xx76p")
-name = "Logging Camp"
-icon = ExtResource("4_17pww")
-map_object = Vector2i(0, 0)
-width = 1
-height = 1
-cost = {
+Name = "Logging Camp"
+Desc = ""
+Id = "building-forestry-1"
+Icon = ExtResource("4_17pww")
+Width = 1
+Height = 1
+Cost = {
 ExtResource("3_31gcr"): 100
 }
-required_terrains = {
-ExtResource("4_xbmfo"): null
-}
-time_to_build = 10
-production_methods = Array[ExtResource("2_6rnoi")]([SubResource("Resource_sdvks")])
-activated_production_method = SubResource("Resource_sdvks")
+RequiredTerrains = {}
+TimeToBuild = 10
+ProductionMethods = Array[Object]([SubResource("Resource_c1oix")])

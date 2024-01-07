@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhom6ocb2rr58"]
+
+[ext_resource type="Script" path="res://interface/map/CellInfo.gd" id="1_rjlfa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yvlaa"]
+font_size = 10
+
+[node name="CellInfo" type="Panel"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.0
+offset_right = 181.0
+offset_bottom = 100.0
+grow_horizontal = 2
+script = ExtResource("1_rjlfa")
+
+[node name="Terrain" type="Label" parent="."]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 24.0
+label_settings = SubResource("LabelSettings_yvlaa")

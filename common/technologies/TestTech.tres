@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Tech" load_steps=2 format=3 uid="uid://dqcf4jirbnjue"]
+
+[ext_resource type="Script" path="res://common/technologies/Tech.cs" id="1_82r7s"]
+
+[resource]
+script = ExtResource("1_82r7s")
+name = "Test"
+desc = ""
+type = 0
+prerequisites = null
+children = null
+cost = 100
+progress = 0
+weight = 10
+rewards = null

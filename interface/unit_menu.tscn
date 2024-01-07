@@ -1,9 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://djn3qpeneucjf"]
-
-[ext_resource type="Script" path="res://interface/BuildingMenu.gd" id="1_fk8gw"]
+[gd_scene format=3 uid="uid://djn3qpeneucjf"]
 
 [node name="Menu" type="CanvasLayer"]
-script = ExtResource("1_fk8gw")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

@@ -8,30 +8,45 @@
 
 config_version=5
 
+[MonoCustomResourceRegistry]
+
+ClassPrefix=""
+SearchType=0
+ResourceScriptDirectories=["res://"]
+
 [application]
 
 config/name="Project-Archaetech"
-run/main_scene="res://common/main.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
+run/main_scene="res://common/Main.tscn"
+config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://static/GameManager.gd"
-TechTree="*res://static/TechTree.gd"
+EventBus="res://static/EventBus.cs"
+Global="*res://static/Global.tscn"
 UnitManager="*res://static/UnitManager.gd"
-PopManager="*res://static/PopManager.gd"
-ResourceManager="*res://static/ResourceManager.gd"
-BuildingManager="*res://static/BuildingManager.gd"
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[dotnet]
+
+project/assembly_name="Project-Archaetech"
+
 [editor]
 
 movie_writer/movie_file="D:/Project-Archaetech/Recording.avi"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/MonoCustomResourceRegistry/plugin.cfg", "res://addons/ppc/plugin.cfg")
+
+[filesystem]
+
+import/blender/enabled=false
 
 [input]
 
@@ -127,6 +142,15 @@ close={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194308,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
+space_bar_pressed={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
+]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [rendering]
 

@@ -1,0 +1,76 @@
+[gd_scene load_steps=19 format=3 uid="uid://vc66sd4cmivh"]
+
+[ext_resource type="Script" path="res://static/Global.cs" id="1_sedta"]
+[ext_resource type="Script" path="res://static/GameManager.cs" id="2_6b2el"]
+[ext_resource type="Script" path="res://static/GameClock.cs" id="3_57q27"]
+[ext_resource type="Script" path="res://static/ResourceManager.cs" id="3_i3j5a"]
+[ext_resource type="Script" path="res://static/PopManager.cs" id="4_yijwq"]
+[ext_resource type="Script" path="res://static/BuildingManager.cs" id="5_a6whb"]
+[ext_resource type="Resource" uid="uid://cbkgfv0dq0h8t" path="res://common/resources/research/ResearchPointResource.tres" id="5_la1sv"]
+[ext_resource type="Script" path="res://static/TechManager.cs" id="6_e54ax"]
+[ext_resource type="Resource" uid="uid://b53ptr1nt1kyo" path="res://common/resources/basic/FoodResource.tres" id="7_36sjg"]
+[ext_resource type="Resource" uid="uid://bwgb83yp08q3s" path="res://common/resources/basic/MineralResource.tres" id="7_a4o3q"]
+[ext_resource type="Resource" uid="uid://dqcf4jirbnjue" path="res://common/technologies/TestTech.tres" id="8_kr6ok"]
+[ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/basic/WoodResource.tres" id="8_rsype"]
+[ext_resource type="Resource" uid="uid://0uu8f7ixqojq" path="res://common/resources/collectibles/FruitsResource.tres" id="8_wbr7w"]
+[ext_resource type="Resource" uid="uid://cwrb3kbkyep81" path="res://common/resources/collectibles/GameResource.tres" id="9_qfcwm"]
+[ext_resource type="Resource" uid="uid://otg0hkf6gu3m" path="res://common/resources/collectibles/SeafoodResource.tres" id="10_hoi58"]
+[ext_resource type="Resource" uid="uid://bb4cb626326h1" path="res://common/resources/consumer/ProcessedFoodResource.tres" id="11_lnhlp"]
+[ext_resource type="Resource" uid="uid://bubrvvogmhx34" path="res://common/resources/consumer/AlcoholicDrinksResource.tres" id="12_rn820"]
+[ext_resource type="PackedScene" uid="uid://cqgtpy301ir2" path="res://assets/buildings/ForestryBuilding.tscn" id="16_nnsr8"]
+
+[node name="Global" type="Node"]
+script = ExtResource("1_sedta")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("2_6b2el")
+
+[node name="GameClock" type="Timer" parent="GameManager"]
+wait_time = 2.0
+autostart = true
+script = ExtResource("3_57q27")
+config = {
+1: 2.0,
+2: 1.5,
+3: 1.0,
+4: 0.5,
+5: 0.25
+}
+
+[node name="ResourceManager" type="Node" parent="."]
+script = ExtResource("3_i3j5a")
+RpResource = ExtResource("5_la1sv")
+Resources = {
+ExtResource("7_36sjg"): 500.0,
+ExtResource("7_a4o3q"): 500.0,
+ExtResource("8_rsype"): 500.0
+}
+StorageLimit = Array[int]([10000, 5000, 1000, 5000, 5000, 100000000, 2000, 2000])
+
+[node name="PopManager" type="Node" parent="."]
+script = ExtResource("4_yijwq")
+PrimaryFoodDemands = {
+ExtResource("7_36sjg"): 1.0,
+ExtResource("8_wbr7w"): 2.5,
+ExtResource("9_qfcwm"): 0.8,
+ExtResource("10_hoi58"): 0.8,
+ExtResource("11_lnhlp"): 0.25
+}
+SecondaryFoodDemands = {
+ExtResource("8_wbr7w"): 1.0,
+ExtResource("9_qfcwm"): 0.5,
+ExtResource("10_hoi58"): 0.5,
+ExtResource("12_rn820"): 0.25,
+ExtResource("11_lnhlp"): 0.5
+}
+PrimaryFoodChoices = Array[Object]([ExtResource("11_lnhlp"), ExtResource("7_36sjg"), ExtResource("9_qfcwm"), ExtResource("10_hoi58"), ExtResource("8_wbr7w")])
+
+[node name="BuildingManager" type="Node" parent="."]
+script = ExtResource("5_a6whb")
+AvailableBuildings = {
+"building-forestry-1": ExtResource("16_nnsr8")
+}
+
+[node name="TechManager" type="Node" parent="."]
+script = ExtResource("6_e54ax")
+allTechnologies = Array[Object]([ExtResource("8_kr6ok")])

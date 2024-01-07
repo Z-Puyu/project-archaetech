@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="JobData" load_steps=3 format=3 uid="uid://bvtxum4q5uj0v"]
 
-[ext_resource type="Script" path="res://common/jobs/JobData.gd" id="1_6g6vd"]
+[ext_resource type="Script" path="res://common/jobs/JobData.cs" id="1_6g6vd"]
 [ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/basic/WoodResource.tres" id="2_d3kip"]
 
 [resource]

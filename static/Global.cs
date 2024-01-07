@@ -1,0 +1,147 @@
+using System;
+using System.Collections.Generic;
+using Godot;
+using ProjectArchaetech.common;
+using ProjectArchaetech.events;
+using static ProjectArchaetech.events.EventBus;
+
+namespace ProjectArchaetech {
+	public partial class Global : Node {
+		public enum GameMode {
+			Normal,
+			Paused,
+			Build,
+			BuildRoute
+		}
+
+		private static Queue<Node> grave;
+		private static GameManager gameManager;
+		private static ResourceManager resManager;
+		private static PopManager popManager;
+		private static BuildingManager buildManager;
+		private static EventBus eventBus;
+		private static TechManager techTree;
+		private static GameMode gameState;
+		private static Node pickUp;
+		private static bool gameClockWasPaused;
+
+		public static GameManager GameManager { get => gameManager; }
+		public static ResourceManager ResManager { get => resManager; }
+		public static PopManager PopManager { get => popManager; }
+		public static BuildingManager BuildManager { get => buildManager; }
+		public static EventBus EventBus { get => eventBus; }
+		public static TechManager TechTree { get => techTree; }
+		public static GameMode GameState { get => gameState; set => gameState = value; }
+		public static Queue<Node> Grave { get => grave; set => grave = value; }
+		public static Node PickUp { get => pickUp; set => pickUp = value; }
+		public static bool GameClockWasPaused { get => gameClockWasPaused; set => gameClockWasPaused = value; }
+
+		// We define the following signals to communicate between GDscript and C#
+		// Modal-related
+		[Signal]
+		public delegate void OpeningModalUIEventHandler(string windowName);
+		[Signal]
+		public delegate void ClosingModalUIEventHandler();
+		[Signal]
+		public delegate void OpeningBuildingMenuEventHandler();
+		[Signal]
+		public delegate void EnteringRouteConstructionModeEventHandler();
+		[Signal]
+		public delegate void ExitingRouteConstructionModeEventHandler();
+		[Signal]
+		public delegate void TransportRouteAddedEventHandler(TransportRoute route);
+
+		[Signal]
+		public delegate void NewMonthEventHandler();
+		[Signal]
+		public delegate void PickingUpObjEventHandler(Node gameObj);
+		[Signal]
+		public delegate void AddingBuildingEventHandler(string buildingId);
+		[Signal]
+		public delegate void CellSelectedEventHandler(Cell cell, TileData tileData);
+		
+		
+		[Signal]
+		public delegate void DeletedGameObjEventHandler(Node node);
+		[Signal]
+		public delegate void PopCountUpdatedEventHandler(int total, int labour);
+
+		public Global() {
+			eventBus = new EventBus();
+		}
+
+		public override void _Ready() {
+			// Get static references to the singletons.
+			this.AddChild(eventBus);
+			grave = new Queue<Node>();
+			gameManager = this.GetNode<GameManager>("GameManager");
+			resManager = this.GetNode<ResourceManager>("ResourceManager");
+			popManager = this.GetNode<PopManager>("PopManager");
+			buildManager = this.GetNode<BuildingManager>("BuildingManager");
+			techTree = this.GetNode<TechManager>("TechManager");
+
+			// Connect events.
+			EventBus.Subscribe<NewMonthEvent>((sender, e) => ClearDeadObjects());
+			EventBus.Subscribe<CellSelectedEvent>((sender, e) => BuildManager.SetCell((CellSelectedEvent) e));
+			EventBus.Subscribe<PopCountUpdatedEvent>((sender, e) => this.EmitSignal(
+				SignalName.PopCountUpdated, PopManager.PopCount, PopManager.NUnemployed
+			));
+			
+			this.PickingUpObj += gameObj => PickUp = gameObj;
+			this.AddingBuilding += buildingId => BuildManager.AddBuilding(buildingId);
+			this.DeletedGameObj += node => Grave.Enqueue(node);
+			this.OpeningBuildingMenu += OnOpeningConstructionMenu;
+			this.EnteringRouteConstructionMode += () => GameState = GameMode.BuildRoute;
+			this.ExitingRouteConstructionMode += () => GameState = GameMode.Normal;
+		}
+
+		private static void OnOpeningConstructionMenu() {
+			if (PickUp is Cell) {
+				GameState = GameMode.Build;
+			}
+		}
+		public bool IsGamePaused() => GameState == GameMode.Paused;
+
+		public void PauseGame() {
+			GameClockWasPaused = GameManager.GameClock.Paused;
+			GameManager.GameClock.Paused = true;
+			GameState = GameMode.Paused;
+		}
+
+		public void ResumeGame() {
+			GameManager.GameClock.Paused = GameManager.GameClock.Paused;
+			GameState = GameMode.Normal;
+		}
+		
+		public void PauseTime() {
+			GameManager.GameClock.Paused = true;
+		}
+		
+		public void ResumeTime() {
+			GameManager.GameClock.Paused = false;
+		}
+		
+		public void SpeedUpGame() {
+			GameManager.GameClock.SpeedUp();
+		}
+		
+		public void SlowDownGame() {
+			GameManager.GameClock.SlowDown();
+		}
+
+		public static void ClearDeadObjects() {
+			while (Grave.TryDequeue(out Node obj)) {
+				obj.QueueFree();
+			}
+		}
+
+		// The following methods should only be used by GDScript classes.
+		public Node GetPickUp() {
+			return PickUp;
+		}
+
+		public bool IsBuildingTransportRoutes() {
+			return GameState == GameMode.BuildRoute;
+		}
+	}
+}
