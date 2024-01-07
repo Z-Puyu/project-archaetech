@@ -1,4 +1,7 @@
+using System;
 using Godot;
+using ProjectArchaetech.events;
+using static ProjectArchaetech.events.EventBus;
 
 namespace ProjectArchaetech {
 	[GlobalClass]
@@ -9,23 +12,20 @@ namespace ProjectArchaetech {
 		public GameClock GameClock { get => gameClock; private set => gameClock = value; }
 		public int NDays { get => nDays; private set => nDays = value; }
 
-		[Signal]
-		public delegate void NewMonthEventHandler();
-
 		public override void _Ready() {
 			this.GameClock = (GameClock) this.GetChild<Timer>(0);
 			this.GameClock.Timeout += this.OnWorldTimerTimeout;
 		}
 
 		private void NextTurn() {
-			Global.PopManager.Update();
+			this.GetNode<EventBus>("/root/EventBus").Publish(this, new NewMonthEvent());
 		}
 
 		private void OnWorldTimerTimeout() {
 			this.NDays += 1;
 			if (this.NDays % 30 == 0) {
 				this.NextTurn();
-				this.EmitSignal(SignalName.NewMonth);
+				this.GetParent<Global>().EmitSignal(Global.SignalName.NewMonth);
 			}
 		}
 	}

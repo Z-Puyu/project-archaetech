@@ -1,21 +1,27 @@
+using System;
 using Godot;
 using ProjectArchaetech.common;
+using ProjectArchaetech.events;
 using ProjectArchaetech.resources;
+using static ProjectArchaetech.events.EventBus;
 
 namespace ProjectArchaetech {
 	[GlobalClass]
 	public partial class ResourceManager : Warehouse {
 		[Export]
-		public ResourceData rpResource { set; get; }
+		public ResourceData RpResource { set; get; }
 
-		public delegate void TechProgressEventHandler(int researchPoints);
-		public event TechProgressEventHandler TechProgress;
+		public ResourceManager() : base() {
+			this.RpResource = null;
+		}
+
+		public void ClearRp() {
+			this.Resources[RpResource] = 0;
+		}
 
 		public override void Reset() {
-			if (this.MonthlyOutput.Contains(this.rpResource)) {
-				this.TechProgress.Invoke((int) this.MonthlyOutput[this.rpResource]);
-			}
-			this.MonthlyOutput.Clear();
+			Global.EventBus.Publish(this, new TechProgressEvent((int) this.Resources[this.RpResource]));
+			base.Reset();
 		}
 	}
 }

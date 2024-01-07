@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dgyp3l4utsj7s"]
+[gd_scene load_steps=16 format=3 uid="uid://dgyp3l4utsj7s"]
 
 [ext_resource type="Script" path="res://common/map/World.gd" id="1_igip7"]
 [ext_resource type="Resource" uid="uid://bce52sx4o7sel" path="res://common/terrain/PlainTerrain.tres" id="2_01hs4"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://7hlea4wwm3aw" path="res://gfx/map-objects/Buildings.png" id="8_0arc8"]
 [ext_resource type="Script" path="res://common/map/Map.cs" id="9_x8mba"]
 [ext_resource type="Script" path="res://common/map/MainCamera.gd" id="10_b0jpv"]
+[ext_resource type="PackedScene" uid="uid://dvtrin5dw4fxj" path="res://assets/buildings/BaseBuilding.tscn" id="11_jqtdp"]
 [ext_resource type="PackedScene" uid="uid://dwmspwwtu1d2d" path="res://interface/core/InGameUI.tscn" id="11_r7sat"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rb80s"]
@@ -47,6 +48,7 @@ sources/0 = SubResource("TileSetAtlasSource_rb80s")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_igip7")
+default_player_base = Array[Vector2i]([Vector2i(0, 0), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(-1, 1), Vector2i(-1, -1), Vector2i(0, 1), Vector2i(0, -1)])
 
 [node name="Map" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_usiub")
@@ -75,6 +77,10 @@ drag_bottom_margin = 0.75
 script = ExtResource("10_b0jpv")
 x_margin = 0.95
 y_margin = 0.95
+
+[node name="BaseBuilding" parent="." instance=ExtResource("11_jqtdp")]
+z_index = 1
+position = Vector2(32, 32)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 

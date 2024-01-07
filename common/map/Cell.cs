@@ -4,7 +4,7 @@ using Godot;
 
 namespace ProjectArchaetech.common {
 	[GlobalClass]
-	public partial class Cell : RefCounted {
+	public partial class Cell : Node {
 		private Vector2I pos;
 		private Vector2 localCoords;
 		private List<Node> units;

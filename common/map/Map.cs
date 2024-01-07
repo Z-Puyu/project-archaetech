@@ -26,22 +26,27 @@ namespace ProjectArchaetech.common {
 			Mountains
 		}
 
-		[Export]
-		private Dictionary<Vector2I, Cell> grid;
+		private readonly Dictionary<Vector2I, Cell> grid;
 		private readonly HashDictionary<Vector2I, Cell> navigableLand;
 		private readonly HashDictionary<Vector2I, Cell> navigableWater;
 		private Cell currSelection;
 
 		public Cell CurrSelection { get => currSelection; set => currSelection = value; }
 
-		class CellSelectedEvent : EventArgs {
-			private readonly TileData data;
+		public Dictionary<Vector2I, Cell> Grid => grid;
 
-			public CellSelectedEvent(TileData data) {
+		private class CellSelectedEvent : EventArgs {
+			private readonly TileData data;
+			private readonly Cell cell;
+
+			public CellSelectedEvent(Cell cell, TileData data) {
+				this.cell = cell;
 				this.data = data;
 			}
 
 			public TileData Data => data;
+
+			public Cell Cell => cell;
 		}
 
 		public Map() {
@@ -54,16 +59,16 @@ namespace ProjectArchaetech.common {
 			Array<Vector2I> landCells = this.GetUsedCells((int) Layer.Land);
 			foreach (Vector2I pt in landCells) {
 				Cell cell = new Cell(pt, this.MapToLocal(pt));
-				if (!this.grid.ContainsKey(pt)) {
-					this.grid.Add(pt, cell);
+				if (!this.Grid.ContainsKey(pt)) {
+					this.Grid.Add(pt, cell);
 				}
 				this.navigableLand.Add(pt, cell);
 			}
 			Array<Vector2I> waterCells = this.GetUsedCells((int) Layer.Water);
 			foreach (Vector2I pt in waterCells) {
 				Cell cell = new Cell(pt, this.MapToLocal(pt));
-				if (!this.grid.ContainsKey(pt)) {
-					this.grid.Add(pt, cell);
+				if (!this.Grid.ContainsKey(pt)) {
+					this.Grid.Add(pt, cell);
 				}
 				this.navigableWater.Add(pt, cell);
 			}
@@ -72,10 +77,6 @@ namespace ProjectArchaetech.common {
 					.GetNode<Global>("/root/Global")
 					.EmitSignal(Global.SignalName.CellSelected, ((CellSelectedEvent) e).Data)
 			);
-		}
-
-		public void EmitCellEvent(TileData tileData) {
-			
 		}
 
 		public override void _UnhandledInput(InputEvent e) {
@@ -89,15 +90,15 @@ namespace ProjectArchaetech.common {
 		private void SelectCell(InputEvent e) {
 			Vector2 mousePos = ((InputEventMouse) this.MakeInputLocal(e)).Position;
 			Vector2I mapCoords = this.LocalToMap(mousePos);
-			if (this.grid.ContainsKey(mapCoords)) {
-				this.CurrSelection = this.grid[mapCoords];
+			if (this.Grid.ContainsKey(mapCoords)) {
+				this.CurrSelection = this.Grid[mapCoords];
 				TileData tileData = this.GetCellTileData((int) Layer.Land, mapCoords)
 					?? this.GetCellTileData((int) Layer.Water, mapCoords);
 				if (tileData != null) {
 					this.ClearLayer((int) Layer.UI);
 					this.SetCell((int) Layer.UI, this.CurrSelection.Pos, 
 						(int) Atlas.Cells, new Vector2I(5, 0));
-					Global.EventBus.Publish(this, new CellSelectedEvent(tileData));
+					Global.EventBus.Publish(this, new CellSelectedEvent(this.CurrSelection, tileData));
 				}
 			}
 		}

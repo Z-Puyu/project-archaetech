@@ -1,4 +1,6 @@
 class_name BuildingMenu extends PanelContainer
+const Building = preload("res://common/buildings/Building.cs")
+const BuildingManager = preload("res://static/BuildingManager.cs")
 
 @onready var _tabs: Dictionary = {
 	"all": $TabContainer/All/ScrollContainer/VBoxContainer,

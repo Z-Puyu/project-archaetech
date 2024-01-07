@@ -1,4 +1,6 @@
 class_name DynamicResourceInfo extends HFlowContainer
+const DynamicResourceLabel = preload("res://interface/DynamicResourceLabel.gd")
+const ResourceData = preload("res://common/resources/ResourceData.cs")
 
 const LABEL = preload("res://interface/buildings/DynamicResourceLabel.tscn")
 var info: Dictionary:

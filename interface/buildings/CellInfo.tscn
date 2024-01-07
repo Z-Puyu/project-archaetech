@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgrwtvvjgvdio"]
+[gd_scene load_steps=3 format=3 uid="uid://bhom6ocb2rr58"]
 
 [ext_resource type="Script" path="res://interface/map/CellInfo.gd" id="1_rjlfa"]
 

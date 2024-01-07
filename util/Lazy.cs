@@ -8,7 +8,7 @@ namespace ProjectArchaetech.util {
         private readonly Supplier<T> producer;
         private T value;
 
-        public T Value { get => this.Value ?? this.producer.Invoke(); }
+        public T Value => this.value ?? this.producer.Invoke();
 
         private Lazy(Supplier<T> producer , T value) {
             this.producer = producer;

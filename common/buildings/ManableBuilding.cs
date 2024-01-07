@@ -1,22 +1,42 @@
 using System;
-using C5;
 using Godot;
 using Godot.Collections;
 using ProjectArchaetech.interfaces;
 using ProjectArchaetech.resources;
+using ProjectArchaetech.util;
+using static ProjectArchaetech.events.EventBus;
 
 namespace ProjectArchaetech.common {
     [GlobalClass]
     // Encapsulates a building which can recruit workers.
-    public abstract partial class ManableBuilding : Building, IManable {
-        protected HashDictionary<JobData, int> employmentCap;
-        protected HashDictionary<JobData, int> workers;
+    public abstract partial class ManableBuilding : Building, IManable, IFunctionable {
+        private readonly Dictionary<JobData, int> employmentCap;
+        private readonly Dictionary<JobData, int> workers;
         protected Warehouse warehouse;
 
+        protected Dictionary<JobData, int> EmploymentCap => employmentCap;
+
+        protected Dictionary<JobData, int> Workers => workers;
+
         public ManableBuilding() {
-            this.employmentCap = new HashDictionary<JobData, int>();
-            this.workers = new HashDictionary<JobData, int>();
+            this.employmentCap = new Dictionary<JobData, int>();
+            this.workers = new Dictionary<JobData, int>();
             this.warehouse = new Warehouse();
+        }
+
+        public override void _Ready() {
+            base._Ready();
+            if (this is not BaseBuilding) {
+                Global.EventBus.Subscribe<ProcessingBuildingsEvent>((sender, e) => this.Work());
+            }   
+        }
+
+        public Pair GetEmploymentData() {
+            return new Pair(this.Workers, this.EmploymentCap);
+        }
+
+        public Dictionary<ResourceData, double> GetOutput() {
+            return this.warehouse.MonthlyOutput;
         }
 
         public void Store(Dictionary<ResourceData, double> resources) {
@@ -28,10 +48,25 @@ namespace ProjectArchaetech.common {
         }
 
         public void Recruit(JobData job) {
-            int shortage = this.employmentCap[job] - this.workers[job];
-            int nRecruited = Math.Min(shortage, Global.PopManager.NUnemployed);
-            this.workers[job] += nRecruited;
-            Global.PopManager.NUnemployed -= nRecruited;
+            if (!this.Workers.ContainsKey(job)) {
+                this.Workers[job] = 0;
+            } else if (this.Workers[job] < this.EmploymentCap[job]) {
+                int shortage = this.EmploymentCap[job] - this.Workers[job];
+                int nRecruited = Math.Min(shortage, Global.PopManager.NUnemployed);
+                this.Workers[job] += nRecruited;
+                Global.PopManager.NUnemployed -= nRecruited;
+            }
+        }
+
+        public virtual void Work() {
+            foreach (JobData job in this.EmploymentCap.Keys) {
+                this.Recruit(job);
+            }
+        }
+
+        public override void Disable(){
+            Global.EventBus.Unsubscribe<NewMonthEvent>((sender, e) => this.Work());
+            base.Disable();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace ProjectArchaetech.common.util {
         private Cell location;
         private readonly T value;
 
-        public T Value { get => Value; }
+        public T Value => value;
         public int DaysRemaining { get => daysRemaining; set => daysRemaining = value; }
         public Cell Location { get => location; }
 

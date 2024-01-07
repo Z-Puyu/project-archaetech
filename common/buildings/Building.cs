@@ -1,20 +1,20 @@
+using System;
 using Godot;
 using Godot.Collections;
+using ProjectArchaetech.common.util;
 using ProjectArchaetech.resources;
 
 namespace ProjectArchaetech.common {
 	[GlobalClass]
-	public abstract partial class Building : Node2D {
+	public abstract partial class Building : Node2D, IRecyclable {
 		[Export]
 		public BuildingData data { set; get; }
 
-		[Signal]
-		public delegate void showBuildingInfoEventHandler(Dictionary<string, Building> info);
-		[Signal]
-		public delegate void selectedEventHandler(Building building);
+		protected class DisplayingBuildingUIEvent : EventArgs { }
 
 		public override void _Ready() {
 			this.GetNode<Area2D>("Area2D").InputEvent += this.OnClick;
+			Global.EventBus.Subscribe<DisplayingBuildingUIEvent>(this.NotifyUI);
 		}
 
 		public bool CanBeBuilt(TileData tile, Cell location) {
@@ -37,10 +37,20 @@ namespace ProjectArchaetech.common {
 		protected virtual void OnClick(Node viewport, InputEvent e, long shapeIdx) {
 			if (e.IsActionPressed("left_click")) {
 				if (Global.GameState != Global.GameMode.BuildRoute) {
-					Global.EventBus.EmitSignal(Events.SignalName.DisplayingBuildingUI, this);
-					Global.EventBus.EmitSignal(Events.SignalName.ModalToggled, "building");
+					Global.EventBus.Publish(this, new DisplayingBuildingUIEvent());
 				}
 			}
+		}
+
+		private void NotifyUI(object sender, EventArgs e) {
+			Global global = ((Building) sender).GetNode<Global>("/root/Global");
+			global.EmitSignal(Global.SignalName.DisplayingBuildingUI, this);
+			global.EmitSignal(Global.SignalName.ModalToggledUI, "building");
+		}
+
+		public virtual void Disable() {
+			Global.EventBus.Unsubscribe<DisplayingBuildingUIEvent>(this.NotifyUI);
+			Global.Grave.Enqueue(this);
 		}
 	}
 }

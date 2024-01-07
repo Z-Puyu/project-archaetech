@@ -116,7 +116,7 @@ expand_mode = 2
 
 [node name="DynamicLabel" type="Label" parent="ResourcesList/SecondaryResources/FirstRow/ResearchPoint"]
 layout_mode = 2
-text = "0"
+text = "+ 0"
 
 [node name="SecondRow" type="HBoxContainer" parent="ResourcesList/SecondaryResources"]
 layout_mode = 2

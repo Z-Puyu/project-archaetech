@@ -8,34 +8,33 @@ namespace ProjectArchaetech.common {
 	[GlobalClass]
 	public partial class Warehouse : Node {
 		[Export]
-		public Dictionary<ResourceData, double> resources { get; set; }
+		public Dictionary<ResourceData, double> Resources { get; set; }
 		[Export]
-		public Array<int> storageLimit { set; get; }
-		protected HashDictionary<ResourceData, double> monthlyOutput;
+		public Array<int> StorageLimit { set; get; }
+		protected Dictionary<ResourceData, double> monthlyOutput;
 
-		public HashDictionary<ResourceData, double> MonthlyOutput { get => monthlyOutput; }
+		public Dictionary<ResourceData, double> MonthlyOutput { get => monthlyOutput; }
 
 		[Signal] 
-		public delegate void QtyUpdatedEventHandler(ResourceData res, double newQty);
+		public delegate void ResourceQtyUpdatedEventHandler(ResourceData res, double newQty);
 
-		public override void _Ready() {
-			this.monthlyOutput = new HashDictionary<ResourceData, double>();
+		public Warehouse() {
+			this.Resources = new Dictionary<ResourceData, double>();
+			this.StorageLimit = new Array<int>();
+			this.monthlyOutput = new Dictionary<ResourceData, double>();
 		}
 
 		public bool HasEnough(ResourceData res, double benchmark) {
-			return this.resources.ContainsKey(res) && this.resources[res] >= benchmark;
+			return this.Resources.ContainsKey(res) && this.Resources[res] >= benchmark;
 		}
 
 		public void Add(ResourceData res, double amount) {
-			if (res.type == ResourceType.Research) {
-				resources[res] = amount;
-			 } else if (!this.resources.ContainsKey(res)) {
-				this.resources[res] = 0;
+			if (!this.Resources.ContainsKey(res)) {
+				this.Resources[res] = 0;
 			} else {
-				double netAmount = this.resources[res] + amount;
-				this.resources[res] = Math.Min(netAmount, this.storageLimit[(int) res.type]);
+				double netAmount = this.Resources[res] + amount;
+				this.Resources[res] = Math.Min(netAmount, this.StorageLimit[(int) res.type]);
 			}
-			this.EmitSignal(SignalName.QtyUpdated, res, this.resources[res]);
 		}
 
 		public void Add(Dictionary<ResourceData, double> affectedResources) {
@@ -58,8 +57,7 @@ namespace ProjectArchaetech.common {
 
 		public void Consume(ResourceData res, double amount) {
 			if (this.HasEnough(res, amount)) {
-				this.resources[res] -= amount;
-				this.EmitSignal(SignalName.QtyUpdated, res, this.resources[res]);
+				this.Resources[res] -= amount;
 			}
 		}
 
@@ -78,7 +76,7 @@ namespace ProjectArchaetech.common {
 		public Dictionary<ResourceData, double> TakeAway(Dictionary<ResourceData, double> resources) {
 			Dictionary<ResourceData, double> taken = new Dictionary<ResourceData, double>();
 			foreach (ResourceData res in resources.Keys) {
-				double proportion = this.resources[res];
+				double proportion = this.Resources[res];
 				double amountTaken = this.MonthlyOutput[res] * proportion;
 				if (taken.ContainsKey(res)) {
 					taken[res] += amountTaken;
@@ -97,22 +95,27 @@ namespace ProjectArchaetech.common {
 			double k = 1.0;
 			Dictionary<ResourceData, double> input = job.input.Duplicate(true);
 			foreach (ResourceData res in input.Keys) {
-				if (this.resources[res] < 1) {
+				if (this.Resources[res] < 1) {
 					// Use < 1 to avoid any possible floating point precision issue
 					return;
 				}
 				input[res] *= nWorkers;
-				k = Math.Min(this.resources[res] / input[res], k);
+				k = Math.Min(this.Resources[res] / input[res], k);
 			}
 			Dictionary<ResourceData, double> output = job.output.Duplicate(true);
 			foreach (ResourceData res in input.Keys) {
 				input[res] *= k;
 			}
 			foreach (ResourceData res in output.Keys) {
-				if (this.MonthlyOutput.Contains(res)) {
-					this.MonthlyOutput[res] += output[res] * k * nWorkers;
+				if (!this.MonthlyOutput.ContainsKey(res)) {
+					this.MonthlyOutput[res] = 0;
+				}
+				if (res.type == ResourceType.Research) {
+					// Research points do not need to be transported
+					// so they will be directly credited into global warehouse.
+					Global.ResManager.Add(res, output[res] * k * nWorkers);
 				} else {
-					this.MonthlyOutput[res] = output[res] * k * nWorkers;
+					this.MonthlyOutput[res] += output[res] * k * nWorkers;
 				}
 			}
 			this.Consume(input);
@@ -120,6 +123,9 @@ namespace ProjectArchaetech.common {
 		}
 
 		public virtual void Reset() {
+			foreach (ResourceData res in this.MonthlyOutput.Keys) {
+				this.EmitSignal(SignalName.ResourceQtyUpdated, res, this.Resources[res]);
+			}
 			this.MonthlyOutput.Clear();
 		}
 	}

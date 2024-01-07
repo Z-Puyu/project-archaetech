@@ -7,7 +7,7 @@ using ProjectArchaetech.resource;
 
 namespace ProjectArchaetech.common {
     [GlobalClass]
-    public partial class LogisticBuilding : ManableBuilding, IFunctionable, IRecyclable {
+    public partial class LogisticBuilding : ManableBuilding {
         [Export]
         public static Array<TransportRouteSpecification> specs { set; get; }
         protected HashDictionary<LogisticBuilding, TransportRoute> inPaths;
@@ -18,16 +18,21 @@ namespace ProjectArchaetech.common {
             this.outPaths = new HashDictionary<LogisticBuilding, TransportRoute>();
         }
 
-        public virtual void Work() {
+        public override void Work() {
             foreach (TransportRoute route in this.outPaths.Values) {
                 route.Work();
             }
+            base.Work();
         }
 
         public void LinkTo(LogisticBuilding to) {
             TransportRoute route = new TransportRoute(this, to, specs[0]);
             this.outPaths.Add(to, route);
             to.inPaths.Add(this, route);
+        }
+
+        public Array<TransportRoute> GetOutwardRoutes() {
+            return new Array<TransportRoute>(this.outPaths.Values.ToArray());
         }
 
         protected override void OnClick(Node viewport, InputEvent e, long shapeIdx) {
@@ -39,13 +44,12 @@ namespace ProjectArchaetech.common {
                         GD.PushError("No valid source found!");
                     }
                 } else {
-                    Global.EventBus.EmitSignal(Events.SignalName.DisplayingBuildingUI, this);
-                    Global.EventBus.EmitSignal(Events.SignalName.ModalToggled, "building");
+                    base.OnClick(viewport, e, shapeIdx);
                 }
             }
         }
 
-        public void Disable() {
+        public override void Disable() {
             foreach (LogisticBuilding building in this.inPaths.Keys) {
                 building.outPaths.Remove(this);
             }
@@ -54,7 +58,13 @@ namespace ProjectArchaetech.common {
             }
             this.inPaths.Clear();
             this.outPaths.Clear();
-            Global.Grave.Enqueue(this);
+            base.Disable();
+        }
+
+        public void CloseRoute(TransportRoute route) {
+            this.inPaths.Remove(route.From);
+            this.outPaths.Remove(route.To);
+            Global.Grave.Enqueue(route);
         }
     }
 }

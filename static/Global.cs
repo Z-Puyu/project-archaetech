@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 using ProjectArchaetech.common;
+using ProjectArchaetech.events;
+using static ProjectArchaetech.events.EventBus;
 
 namespace ProjectArchaetech {
 	public partial class Global : Node {
@@ -16,7 +19,7 @@ namespace ProjectArchaetech {
 		private static ResourceManager resManager;
 		private static PopManager popManager;
 		private static BuildingManager buildManager;
-		private static Events eventBus;
+		private static EventBus eventBus;
 		private static TechManager techTree;
 		private static GameMode gameState;
 		private static Node pickUp;
@@ -26,7 +29,7 @@ namespace ProjectArchaetech {
 		public static ResourceManager ResManager { get => resManager; }
 		public static PopManager PopManager { get => popManager; }
 		public static BuildingManager BuildManager { get => buildManager; }
-		public static Events EventBus { get => eventBus; }
+		public static EventBus EventBus { get => eventBus; }
 		public static TechManager TechTree { get => techTree; }
 		public static GameMode GameState { get => gameState; set => gameState = value; }
 		public static Queue<Node> Grave { get => grave; set => grave = value; }
@@ -35,13 +38,21 @@ namespace ProjectArchaetech {
 
 		// We define the following signals to communicate between GDscript and C#
 		[Signal]
+		public delegate void NewMonthEventHandler();
+		[Signal]
 		public delegate void ChangingGameModeEventHandler(int gameModeIdx);
 		[Signal]
 		public delegate void PickingUpObjEventHandler(Node gameObj);
 		[Signal]
 		public delegate void AddingBuildingEventHandler(string buildingId);
 		[Signal]
-		public delegate void CellSelectedEventHandler(TileData tileData);
+		public delegate void CellSelectedEventHandler(Cell cell, TileData tileData);
+		[Signal]
+		public delegate void DisplayingBuildingUIEventHandler(Building building);
+		[Signal]
+		public delegate void ModalToggledUIEventHandler(string windowName);
+		[Signal]
+		public delegate void DeletedGameObjEventHandler(Node node);
 
 		public override void _Ready() {
 			// Get static references to the singletons.
@@ -50,17 +61,17 @@ namespace ProjectArchaetech {
 			resManager = this.GetNode<ResourceManager>("ResourceManager");
 			popManager = this.GetNode<PopManager>("PopManager");
 			buildManager = this.GetNode<BuildingManager>("BuildingManager");
-			eventBus = this.GetNode<Events>("Events");
+			eventBus = this.GetNode<EventBus>("/root/EventBus");
 			techTree = this.GetNode<TechManager>("TechManager");
 
 			// Connect events.
-			resManager.TechProgress += techTree.Research;
-			eventBus.CellSelected += buildManager.SetCell;
-			gameManager.NewMonth += ClearDeadObjects;
-
+			EventBus.Subscribe<NewMonthEvent>((sender, e) => ClearDeadObjects());
+			
+			this.CellSelected += buildManager.SetCell;
 			this.ChangingGameMode += gameModeIdx => GameState = (GameMode) gameModeIdx;
 			this.PickingUpObj += gameObj => PickUp = gameObj;
 			this.AddingBuilding += buildingId => BuildManager.AddBuilding(buildingId);
+			this.DeletedGameObj += node => Grave.Enqueue(node);
 		}
 
 		public bool IsGamePaused() => GameState == GameMode.Paused;

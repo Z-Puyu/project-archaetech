@@ -1,17 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqincjgywpm74"]
 
-[ext_resource type="Script" path="res://interface/buildings/TransportRouteUI.gd" id="1_fbhno"]
-[ext_resource type="PackedScene" uid="uid://dbe2ae0buv5cu" path="res://interface/buildings/TransportRouteCard.tscn" id="1_smd0p"]
-[ext_resource type="Texture2D" uid="uid://hmn5st8txqwv" path="res://gfx/interface/icons/general/cancel.svg" id="2_gjprd"]
+[ext_resource type="Script" path="res://interface/buildings/TransportRouteInfo.gd" id="1_y3egu"]
+[ext_resource type="PackedScene" uid="uid://dbe2ae0buv5cu" path="res://interface/buildings/TransportRouteCard.tscn" id="2_xhxng"]
+[ext_resource type="Texture2D" uid="uid://hmn5st8txqwv" path="res://gfx/interface/icons/general/cancel.svg" id="3_orgv5"]
 
 [node name="TransportRouteUI" type="HBoxContainer"]
 offset_right = 500.0
 offset_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_fbhno")
+script = ExtResource("1_y3egu")
 
-[node name="TransportRouteCard" parent="." instance=ExtResource("1_smd0p")]
+[node name="TransportRouteCard" parent="." instance=ExtResource("2_xhxng")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -32,5 +33,5 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_gjprd")
+texture = ExtResource("3_orgv5")
 expand_mode = 1

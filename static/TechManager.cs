@@ -1,8 +1,10 @@
 using C5;
 using Godot;
 using Godot.Collections;
+using ProjectArchaetech.events;
 using System;
 using System.Collections.Generic;
+using static ProjectArchaetech.events.EventBus;
 
 namespace ProjectArchaetech {
 	[GlobalClass]
@@ -39,6 +41,8 @@ namespace ProjectArchaetech {
 			foreach (Tech tech in this.Researchable) {
 				this.Selector.Add(new C5.KeyValuePair<int, Tech>(tech.weight, tech));
 			}
+			this.GetNode<EventBus>("/root/EventBus").Subscribe<TechProgressEvent>((sender, e) => 
+				this.Research(((TechProgressEvent) e).AvailablePoints));
 		}
 
 		public void Unlock(Tech tech) {
@@ -61,9 +65,11 @@ namespace ProjectArchaetech {
 			}
 		}
 
-		public void Research(int availablePoints) {
+		private void Research(int availablePoints) {
 			HashDictionary<Tech, int> progress = new HashDictionary<Tech, int>();
-
+			if (this.researchable.IsEmpty) {
+				return;
+			}
 			if (!this.Focus.IsEmpty) {
 				int focusPoints = (int) Math.Floor(0.33 * availablePoints);
 				for (int i = 0; i < focusPoints; i += 1) {
@@ -87,14 +93,14 @@ namespace ProjectArchaetech {
 			List<Tech> unlocking = new List<Tech>();
 			foreach (Tech tech in this.Researchable) {
 				tech.progress = Math.Min(tech.progress + progress[tech], tech.cost);
-				GD.Print(tech.name + " gets " + Math.Min(progress[tech], tech.cost - tech.progress + progress[tech]) + " progress");
+				Console.WriteLine(tech.name + " gets " + Math.Min(progress[tech], tech.cost - tech.progress + progress[tech]) + " progress");
 				if (tech.progress == tech.cost) {
 					unlocking.Add(tech);
 				}
 			}
 			foreach (Tech tech in unlocking) {
 				this.Unlock(tech);
-				GD.Print("unlocked " + tech.name + "!");
+				Console.WriteLine("unlocked " + tech.name + "!");
 			}
 		}
 	}

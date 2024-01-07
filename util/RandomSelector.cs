@@ -16,10 +16,7 @@ namespace ProjectArchaetech {
         }
 
         public T Select() {
-            Console.WriteLine(this.totalWeight);
             double r = this.rand.NextDouble() * this.totalWeight;
-            Console.WriteLine((int) r);
-            Console.WriteLine(items);
             return this.items.WeakPredecessor((int) r).Value;
         }
 
@@ -28,7 +25,6 @@ namespace ProjectArchaetech {
                 this.items.Add(this.totalWeight, item.Value);
                 this.lookUp.Add(item.Value, this.totalWeight);
                 this.totalWeight += item.Key;
-                Console.WriteLine(this.totalWeight);
             }
         }
 

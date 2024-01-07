@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://interface/InfoPanel.gd" id="1_4whsk"]
 [ext_resource type="Texture2D" uid="uid://cgchs35ncnvqs" path="res://gfx/interface/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-003.png" id="2_p1son"]
 [ext_resource type="Script" path="res://interface/core/NewUnit.gd" id="3_w4mq5"]
-[ext_resource type="PackedScene" uid="uid://cgrwtvvjgvdio" path="res://interface/buildings/CellInfo.tscn" id="4_36bes"]
+[ext_resource type="PackedScene" uid="uid://bhom6ocb2rr58" path="res://interface/buildings/CellInfo.tscn" id="4_36bes"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3vysl"]
 

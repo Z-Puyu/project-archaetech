@@ -43,5 +43,7 @@
     <Content Include="util\ILazyBase.cs" />
     <Content Include="util\RandomSelector.cs" />
     <Content Include="common\map\Map.cs" />
+    <Content Include="util\Pair.cs" />
+    <Content Include="interface\buildings\BuildingInfo.gd" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 class_name Cursor extends Node2D
 
-const Building = preload("res://common/buildings/Building.gd")
+const Building = preload("res://common/buildings/Building.cs")
 
 enum mode {
 	NORMAL,

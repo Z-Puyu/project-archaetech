@@ -1,3 +1,4 @@
+using System;
 using C5;
 using Godot;
 using Godot.Collections;
@@ -14,22 +15,17 @@ namespace ProjectArchaetech.common {
             this.activePM = this.data.productionMethods[0];
             Dictionary<JobData, int> jobs = this.activePM.recipe;
             foreach (JobData job in jobs.Keys) {
-                this.employmentCap[job] = jobs[job];
+                this.EmploymentCap[job] = jobs[job];
             }
         }
 
         public override void Work() {
             // Process each job in the building sequentially
-            foreach (KeyValuePair<JobData, int> job in this.employmentCap) {
-                if (!this.workers.Contains(job.Key)) {
-                    this.workers[job.Key] = 0;
-                }
-                this.warehouse.Supply(job.Key, this.workers[job.Key]);
-                if (this.workers[job.Key] < job.Value) {
-                    this.Recruit(job.Key);
-                }
+            foreach (JobData job in this.Workers.Keys) {
+                this.warehouse.Supply(job, this.Workers[job]);
             }
             base.Work();
+            this.warehouse.Reset();
         }
     }
 }

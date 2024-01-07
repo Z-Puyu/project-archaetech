@@ -1,7 +1,9 @@
 using System;
 using Godot;
 using Godot.Collections;
+using ProjectArchaetech.events;
 using ProjectArchaetech.resources;
+using static ProjectArchaetech.events.EventBus;
 
 namespace ProjectArchaetech {
 	[GlobalClass]
@@ -9,11 +11,11 @@ namespace ProjectArchaetech {
 		// These define how much one Pop consumes per month 
 		// for each of the edible resources.
 		[Export]
-		public Dictionary<ResourceData, double> primaryFoodDemands { set; get; }
+		public Dictionary<ResourceData, double> PrimaryFoodDemands { set; get; }
 		[Export] // Currently not used but will be
-		public Dictionary<ResourceData, double> secondaryFoodDemands { set; get; } 
+		public Dictionary<ResourceData, double> SecondaryFoodDemands { set; get; } 
 		[Export]
-		public Array<ResourceData> primaryFoodChoices { set; get; }
+		public Array<ResourceData> PrimaryFoodChoices { set; get; }
 		public int PopCount { get => popCount; set => popCount = value; }
 		public double GrowthRate { get => growthRate; set => growthRate = value; }
 		public double GrowthProgress { get => growthProgress; set => growthProgress = value; }
@@ -29,24 +31,31 @@ namespace ProjectArchaetech {
 		[Signal]
 		public delegate void PopGrewEventHandler();
 
+		public PopManager() {
+			this.PrimaryFoodDemands = new Dictionary<ResourceData, double>();
+			this.SecondaryFoodDemands = new Dictionary<ResourceData, double>();
+			this.PrimaryFoodChoices = new Array<ResourceData>();
+		}
+
 		public override void _Ready() {
 			this.PopCount = 25;
 			this.GrowthRate = 0.05;
 			this.GrowthProgress = 0.0;
 			this.NUnemployed = 25;
+			this.GetNode<EventBus>("/root/EventBus").Subscribe<NewMonthEvent>((sender, e) => this.Update());
 		}
 
-		private int ConsumeFood(ResourceManager resManager) {
+		private int ConsumeFood() {
 			// The Pops will consume primary foods based on a priority ranking.
 			int nUnfed = this.PopCount;
-			foreach (ResourceData foodType in this.primaryFoodChoices) {
-				if (resManager.resources.ContainsKey(foodType)) {
-					double stores = resManager.resources[foodType];
-					double perCapitaNeed = this.primaryFoodDemands[foodType];
+			foreach (ResourceData foodType in this.PrimaryFoodChoices) {
+				if (Global.ResManager.Resources.ContainsKey(foodType)) {
+					double stores = Global.ResManager.Resources[foodType];
+					double perCapitaNeed = this.PrimaryFoodDemands[foodType];
 					int nFed = Math.Min((int) Math.Floor(stores / perCapitaNeed), nUnfed);
 					if (nFed > 0) {
 						nUnfed -= nFed;
-						resManager.Consume(foodType, nFed * perCapitaNeed);
+						Global.ResManager.Consume(foodType, nFed * perCapitaNeed);
 					}
 				}
 				if (nUnfed <= 0) {
@@ -60,14 +69,14 @@ namespace ProjectArchaetech {
 			// We first compute how much food is needed if all Pops only consume basic food
 			int yearlyFood = this.PopCount * 12;
 			double foodStorage = 0.0;
-			foreach (ResourceData foodType in this.primaryFoodChoices) {
-				if (Global.ResManager.resources.ContainsKey(foodType)) {
+			foreach (ResourceData foodType in this.PrimaryFoodChoices) {
+				if (Global.ResManager.Resources.ContainsKey(foodType)) {
 					// Convert the food stores into basic food and aggregate
-					double stores = Global.ResManager.resources[foodType];
-					foodStorage += stores / primaryFoodDemands[foodType];
+					double stores = Global.ResManager.Resources[foodType];
+					foodStorage += stores / PrimaryFoodDemands[foodType];
 				}
 			}
-			int nUnfed = this.ConsumeFood(Global.ResManager);
+			int nUnfed = this.ConsumeFood();
 			double growthModifier = 1.0;
 			if (nUnfed != 0) {
 				double starvation = nUnfed / this.PopCount;

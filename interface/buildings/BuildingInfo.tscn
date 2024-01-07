@@ -46,12 +46,14 @@ layout_mode = 2
 size_flags_vertical = 0
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Header"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("3_5bd70")
 script = ExtResource("2_ro52x")
 
 [node name="Name" type="Label" parent="MarginContainer/VBoxContainer/Header"]
+unique_name_in_owner = true
 layout_mode = 2
 label_settings = SubResource("LabelSettings_yvlaa")
 script = ExtResource("3_o6xsx")
@@ -62,6 +64,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Employment" type="Label" parent="MarginContainer/VBoxContainer/InfoList"]
+unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("3_o6xsx")
 
@@ -70,6 +73,7 @@ layout_mode = 2
 text = "Last month, this building has produced:"
 
 [node name="MonthlyOutput" type="HFlowContainer" parent="MarginContainer/VBoxContainer/InfoList"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("6_501oj")
@@ -79,6 +83,7 @@ layout_mode = 2
 text = "Local storage:"
 
 [node name="LocalStorage" type="HFlowContainer" parent="MarginContainer/VBoxContainer/InfoList"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("6_501oj")
@@ -91,11 +96,13 @@ text = "Connected transport routes:"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/InfoList/ScrollContainer"]
+[node name="ListOfRoutes" type="VBoxContainer" parent="MarginContainer/VBoxContainer/InfoList/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="NewRouteButton" type="TextureButton" parent="MarginContainer/VBoxContainer/InfoList/ScrollContainer/VBoxContainer"]
+[node name="NewRouteButton" type="TextureButton" parent="MarginContainer/VBoxContainer/InfoList/ScrollContainer/ListOfRoutes"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 texture_normal = ExtResource("10_ej3ph")
@@ -104,7 +111,7 @@ texture_hover = ExtResource("12_x2k6h")
 texture_disabled = ExtResource("11_ik561")
 stretch_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/InfoList/ScrollContainer/VBoxContainer/NewRouteButton"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/InfoList/ScrollContainer/ListOfRoutes/NewRouteButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

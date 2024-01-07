@@ -19,7 +19,3 @@ func _on_speed_down():
 	Global.SlowDownGame()
 	self._speed = max(self._speed - 1, 1)
 	self.speed_label.text = str(self._speed, "x")
-	
-func _input(event):
-	if event.is_action("space_bar_pressed"):
-		print("HI from " + str(self))
