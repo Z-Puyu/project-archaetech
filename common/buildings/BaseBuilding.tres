@@ -7,8 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_sejoj"]
 script = ExtResource("1_bej1o")
-name = "Basic"
-recipe = {
+Name = "Basic"
+Recipe = {
 ExtResource("1_5p86u"): 5
 }
 

@@ -13,7 +13,6 @@ func _ready():
 	self.info = {}
 
 func update_info(new_info: Dictionary):
-	print(new_info)
 	for key in new_info:
 		if not self.info.has(key):
 			add_resource(key, new_info.get(key))

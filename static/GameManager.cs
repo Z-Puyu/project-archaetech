@@ -8,6 +8,7 @@ namespace ProjectArchaetech {
 	public partial class GameManager : Node {
 		private GameClock gameClock;
 		private int nDays;
+		private static readonly NewMonthEvent newMonthEvent = new NewMonthEvent();
 
 		public GameClock GameClock { get => gameClock; private set => gameClock = value; }
 		public int NDays { get => nDays; private set => nDays = value; }
@@ -18,14 +19,13 @@ namespace ProjectArchaetech {
 		}
 
 		private void NextTurn() {
-			Global.EventBus.Publish(this, new NewMonthEvent());
+			Global.EventBus.Publish(this, newMonthEvent);
 		}
 
 		private void OnWorldTimerTimeout() {
 			this.NDays += 1;
 			if (this.NDays % 30 == 0) {
 				this.NextTurn();
-				this.GetParent<Global>().EmitSignal(Global.SignalName.NewMonth);
 			}
 		}
 	}

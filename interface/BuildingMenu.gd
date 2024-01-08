@@ -21,7 +21,7 @@ func _ready():
 		building.queue_free()
 	self.hide()
 	
-func open():
+func open(init_info: Dictionary = {}):
 	self.show()
 	
 func close():

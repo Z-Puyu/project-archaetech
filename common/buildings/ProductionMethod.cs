@@ -6,19 +6,19 @@ namespace ProjectArchaetech.resources {
     [RegisteredType(nameof(Tech), "", nameof(Resource)), GlobalClass]
     public partial class ProductionMethod : Resource {
         [Export]
-        public string name { set; get; }
+        public string Name { set; get; }
         [Export]
-        public Dictionary<JobData, int> recipe { set; get; }
+        public Dictionary<JobData, int> Recipe { set; get; }
 
         public ProductionMethod() {
-            this.name = "New Production Method";
-            this.recipe = new Dictionary<JobData, int>();
+            this.Name = "New Production Method";
+            this.Recipe = new Dictionary<JobData, int>();
         }
 
         public override string ToString() {
-            string str = "- " + this.name + "\n";
-            foreach (JobData job in this.recipe.Keys) {
-                str += (" └ " + job.ToString() + ": " + this.recipe[job] + "\n");
+            string str = "- " + this.Name + "\n";
+            foreach (JobData job in this.Recipe.Keys) {
+                str += (" └ " + job.ToString() + ": " + this.Recipe[job] + "\n");
             }
             return str;
         }

@@ -15,9 +15,6 @@ namespace ProjectArchaetech.common {
 
 		public Dictionary<ResourceData, double> MonthlyOutput { get => monthlyOutput; }
 
-		[Signal] 
-		public delegate void ResourceQtyUpdatedEventHandler(ResourceData res, double newQty);
-
 		public Warehouse() {
 			this.Resources = new Dictionary<ResourceData, double>();
 			this.StorageLimit = new Array<int>();
@@ -28,7 +25,7 @@ namespace ProjectArchaetech.common {
 			return this.Resources.ContainsKey(res) && this.Resources[res] >= benchmark;
 		}
 
-		public void Add(ResourceData res, double amount) {
+		public virtual void Add(ResourceData res, double amount) {
 			if (!this.Resources.ContainsKey(res)) {
 				this.Resources[res] = 0;
 			} else {
@@ -61,7 +58,7 @@ namespace ProjectArchaetech.common {
 			}
 		}
 
-		public void Consume(ResourceData res, double amount) {
+		public virtual void Consume(ResourceData res, double amount) {
 			if (this.HasEnough(res, amount)) {
 				this.Resources[res] -= amount;
 			}

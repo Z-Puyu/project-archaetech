@@ -8,33 +8,6 @@ namespace ProjectArchaetech.events {
 	public partial class EventBus : Node {
 		private readonly HashDictionary<Type, EventHandler> subscribers;
 
-		public class NewMonthEvent : EventArgs { }
-		public class TechProgressEvent : EventArgs {
-			private readonly int availablePoints;
-
-			public int AvailablePoints => availablePoints;
-
-			public TechProgressEvent(int availablePoints) {
-				this.availablePoints = availablePoints;
-			}
-		}
-		public class ProcessingBuildingsEvent : EventArgs { }
-		public class CellSelectedEvent : EventArgs {
-			private readonly TileData data;
-			private readonly Cell cell;
-
-			public CellSelectedEvent(Cell cell, TileData data) {
-				this.cell = cell;
-				this.data = data;
-			}
-
-			public TileData Data => data;
-
-			public Cell Cell => cell;
-		}
-		public class PopCountUpdatedEvent : EventArgs { }
-		public class BuildingInfoUpdatedUIEvent : EventArgs { }
-
 		public EventBus() {
 			this.subscribers = new HashDictionary<Type, EventHandler>();
 		}

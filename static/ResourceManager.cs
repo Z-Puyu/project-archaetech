@@ -3,7 +3,6 @@ using Godot;
 using ProjectArchaetech.common;
 using ProjectArchaetech.events;
 using ProjectArchaetech.resources;
-using static ProjectArchaetech.events.EventBus;
 
 namespace ProjectArchaetech {
 	[GlobalClass]
@@ -11,24 +10,36 @@ namespace ProjectArchaetech {
 		[Export]
 		public ResourceData RpResource { set; get; }
 
+		[Signal] 
+		public delegate void ResourceQtyUpdatedEventHandler(ResourceData res, double newQty);
+
+		private static readonly ProductionStartedEvent productionStartedEvent = new ProductionStartedEvent();
+
 		public ResourceManager() : base() {
 			this.RpResource = null;
 		}
 
-		public void ClearRp() {
+		public override void _Ready() {
+			Global.EventBus.Subscribe<NewMonthEvent>(this.OnNewProductionCycle);
+		}
+
+		public override void Add(ResourceData res, double amount) {
+			base.Add(res, amount);
+			this.EmitSignal(SignalName.ResourceQtyUpdated, res, this.Resources[res]);
+		}
+
+		public override void Consume(ResourceData res, double amount) {
+			base.Consume(res, amount);
+			this.EmitSignal(SignalName.ResourceQtyUpdated, res, this.Resources[res]);
+		}
+
+		private void OnNewProductionCycle(object sender, EventArgs e) {
 			this.Resources[RpResource] = 0;
+			Global.EventBus.Publish(this, productionStartedEvent); 
 		}
 
-		public override void Reset() {
-			base.Reset();
-		}
-
-		public void SendWarehouseInfo() {
-			Global.EventBus.Publish(this, new TechProgressEvent((int) this.Resources[this.RpResource]));
-			foreach (ResourceData res in this.MonthlyOutput.Keys) {
-				Console.WriteLine(res + " : " + this.Resources[res]);
-				this.EmitSignal(Warehouse.SignalName.ResourceQtyUpdated, res, this.Resources[res]);
-			}
+		public int GetRP() {
+			return (int) Math.Floor(this.Resources[this.RpResource]);
 		}
 	}
 }

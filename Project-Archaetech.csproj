@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Godot.NET.Sdk/4.2.1">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net7.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -12,18 +12,14 @@
     <PackageReference Include="QuikGraph" Version="2.5.0" />
     <Content Include="util\Lazy.cs" />
     <Content Include="common\buildings\BaseBuilding.cs" />
-    <Content Include="common\buildings\LogisticBuilding.cs" />
     <Content Include="common\buildings\ProductionMethod.cs" />
     <Content Include="common\buildings\Building.cs" />
     <Content Include="common\buildings\Building.cs" />
     <Content Include="common\buildings\BuildingData.cs" />
-    <Content Include="common\buildings\IFunctionable.cs" />
     <Content Include="common\buildings\IManable.cs" />
-    <Content Include="common\buildings\ManableBuilding.cs" />
     <Content Include="common\buildings\ProductiveBuilding.cs" />
     <Content Include="common\buildings\TransportRoute.cs" />
     <Content Include="common\buildings\TransportRouteSpecification.cs" />
-    <Content Include="common\buildings\Warehouse.cs" />
     <Content Include="common\jobs\JobData.cs" />
     <Content Include="common\map\Cell.cs" />
     <Content Include="common\resources\ResourceData.cs" />
@@ -47,5 +43,21 @@
     <Content Include="interface\buildings\BuildingInfo.gd" />
     <Content Include="common\buildings\transport\TransportRouteSpecification.cs" />
     <Content Include="common\buildings\transport\TransportRoute.cs" />
+    <Content Include="common\components\IFunctionable.cs" />
+    <Content Include="common\buildings\ProductiveBuilding" />
+    <Content Include="common\components\RecruitmentFunctionality.cs" />
+    <Content Include="common\components\ProductionFunctionality.cs" />
+    <Content Include="common\components\TransportFunctionality.cs" />
+    <Content Include="static\events\NewMonthEvent.cs" />
+    <Content Include="static\events\ConstructionTaskCompletedEvent.cs" />
+    <Content Include="static\events\ProductionEndedEvent.cs" />
+    <Content Include="static\events\BuildingProcessedEvent.cs" />
+    <Content Include="static\events\PopCountUpdatedEvent.cs" />
+    <Content Include="static\events\ProcessingPopsEvent.cs" />
+    <Content Include="static\EventBus.cs" />
+    <Content Include="common\buildings\Warehouse.cs" />
+    <Content Include="static\events\BuildingUIDataUpdatedEvent.cs" />
+    <Content Include="static\events\TransportRouteAddedEvent.cs" />
+    <Content Include="static\events\TransportRouteRemoved.cs" />
   </ItemGroup>
 </Project>

@@ -41,8 +41,8 @@ namespace ProjectArchaetech {
 			foreach (Tech tech in this.Researchable) {
 				this.Selector.Add(new C5.KeyValuePair<int, Tech>(tech.weight, tech));
 			}
-			Global.EventBus.Subscribe<TechProgressEvent>((sender, e) => 
-				this.Research(((TechProgressEvent) e).AvailablePoints));
+			Global.EventBus.Subscribe<TechProgressedEvent>((sender, e) => 
+				this.Research(((TechProgressedEvent) e).AvailablePoints));
 		}
 
 		public void Unlock(Tech tech) {
