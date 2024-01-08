@@ -16,11 +16,15 @@ namespace ProjectArchaetech {
 		public Dictionary<ResourceData, double> SecondaryFoodDemands { set; get; } 
 		[Export]
 		public Array<ResourceData> PrimaryFoodChoices { set; get; }
+
+		private static readonly PopCountUpdatedEvent popCountUpdatedEvent = 
+			new PopCountUpdatedEvent();
+
 		public int PopCount { 
 			get => popCount; 
 			set {
 				popCount = value;
-				Global.EventBus.Publish(this, new PopCountUpdatedEvent()); 
+				Global.EventBus.Publish(this, popCountUpdatedEvent); 
 			}
 		}
 		public double GrowthRate { get => growthRate; set => growthRate = value; }
@@ -29,7 +33,7 @@ namespace ProjectArchaetech {
 			get => nUnemployed; 
 			set {
 				nUnemployed = value;
-				Global.EventBus.Publish(this, new PopCountUpdatedEvent()); 
+				Global.EventBus.Publish(this, popCountUpdatedEvent); 
 			}
 		}
 
@@ -52,7 +56,7 @@ namespace ProjectArchaetech {
 			this.GrowthRate = 0.05;
 			this.GrowthProgress = 0.0;
 			this.NUnemployed = 25;
-			Global.EventBus.Subscribe<NewMonthEvent>((sender, e) => this.Update());
+			Global.EventBus.Subscribe<ProcessingPopsEvent>((sender, e) => this.Update());
 		}
 
 		private int ConsumeFood() {

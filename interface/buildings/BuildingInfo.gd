@@ -1,8 +1,6 @@
 class_name BuildingInfo extends PanelContainer
 const Building = preload("res://common/buildings/Building.cs")
 const BaseBuilding = preload("res://common/buildings/BaseBuilding.cs")
-const LogisticBuilding = preload("res://common/buildings/LogisticBuilding.cs")
-const ManableBuilding = preload("res://common/buildings/ManableBuilding.cs")
 const ProductiveBuilding = preload("res://common/buildings/ProductiveBuilding.cs")
 const TransportRoute = preload("res://common/buildings/transport/TransportRoute.cs")
 const TransportRouteInfo = preload("res://interface/buildings/TransportRouteInfo.gd")
@@ -47,47 +45,39 @@ func _ready():
 	self.hide()
 	
 func _load_data(building: Building):
-	if self.displayed_building.data.Id != building.data.Id:
+	if self.displayed_building.Data.Id != building.Data.Id:
 		push_error("Loading incorrect building into Building Info panel!
 			 It is likely that there is an issue with signal connection.")
 	else:
-		components.get("name").update_info(building.data.Name)
-		components.get("icon").update_info(building.data.Icon)
-		
-		if building is ManableBuilding:
-			components.get("employment").update_info(building.GetEmploymentData())
-			components.get("local_storage").update_info({} if building is BaseBuilding 
-				else building.warehouse.Resources)
-		
-		if building is LogisticBuilding:
-			if not self.cached_buildings.has(building):
-				var transport_network: Array = building.GetOutwardRoutes()
-				var routes: Dictionary = {}
-				for route in transport_network:
-					routes[route] = self._add_route_info(route)
-				self.cached_buildings[building] = routes
-			else: 
-				self._load(building)
-				
-		if building is ProductiveBuilding:
-			components.get("output").update_info(building.GetOutput())
+		self._update_data(building.UpdatedUIData)
+		if not self.cached_buildings.has(building):
+			var transport_network: Array = building.GetOutwardRoutes()
+			var routes: Dictionary = {}
+			for route in transport_network:
+				routes[route] = self._add_route_info(route)
+			self.cached_buildings[building] = routes
+		else: 
+			self._load(building)
+
+func _update_data(data: Dictionary):
+	for key in data.keys():
+		components.get(key).update_info(data.get(key))
 
 func open():
 	self.new_route_button.pressed.connect(func(): 
 		Global.EnteringRouteConstructionMode.emit()
 	)
 	var pick_up: Node = Global.GetPickUp()
-	print(pick_up)
 	if not pick_up is Building:
 		push_error("Loading incorrect data into Building Info panel!")
 	else:
 		self.displayed_building = pick_up
-		self.displayed_building.BuildingInfoUpdatedUI.connect(self._load_data)
+		self.displayed_building.BuildingInfoUpdatedUI.connect(self._update_data)
 		self._load_data(pick_up)
 		self.show()
 	
 func close():
-	self.displayed_building.BuildingInfoUpdatedUI.disconnect(self._load_data)
+	self.displayed_building.BuildingInfoUpdatedUI.disconnect(self._update_data)
 	self.displayed_building = null
 	for key in self.components:
 		self.components.get(key).clear()

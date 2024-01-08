@@ -1,5 +1,7 @@
+using System;
 using C5;
 using Godot;
+using ProjectArchaetech.events;
 
 namespace ProjectArchaetech.common.util {
 	public partial class ConstructionQueue<T> : Node where T : Node {
@@ -13,6 +15,9 @@ namespace ProjectArchaetech.common.util {
 			this.inactive = new HashedLinkedList<ConstructibleTask<T>>();
 			this.constructionSites = new HashDictionary<Cell, ConstructibleTask<T>>();
 			this.maxActiveSize = maxActiveSize;
+			Global.EventBus.Subscribe<ConstructionTaskCompletedEvent<T>>(
+				this.OnTaskCompleted
+			);
 		}
 
 		public int MaxActiveSize { get => maxActiveSize; set => maxActiveSize = value; }
@@ -21,8 +26,15 @@ namespace ProjectArchaetech.common.util {
 			return this.active.Count + this.inactive.Count;
 		}
 
+		private void OnTaskCompleted(object sender, EventArgs e) {
+			ConstructibleTask<T> task = (ConstructibleTask<T>) sender;
+			if (this.constructionSites.Contains(task.Location)) {
+				// Check if the task is really in this queue, just to be safe.
+				this.Remove(task);
+			}
+		}
+
 		public void Enqueue(ConstructibleTask<T> task) {
-			task.TerminateEvent += this.Remove;
 			if (this.active.Count < this.MaxActiveSize) {
 				this.active.InsertFirst(task);
 				task.Start();
@@ -34,7 +46,6 @@ namespace ProjectArchaetech.common.util {
 		}
 
 		public void Remove(ConstructibleTask<T> task) {
-			task.TerminateEvent -= this.Remove;
 			if (this.active.Contains(task)) {
 				this.active.Remove(task);
 			} else {

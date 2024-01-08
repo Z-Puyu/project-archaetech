@@ -11,22 +11,27 @@ namespace ProjectArchaetech {
 		[Export]
 		public ResourceData RpResource { set; get; }
 
+		private static readonly ProductionStartedEvent productionStartedEvent = new ProductionStartedEvent();
+
 		public ResourceManager() : base() {
 			this.RpResource = null;
 		}
 
-		public void ClearRp() {
-			this.Resources[RpResource] = 0;
+		public override void _Ready() {
+			Global.EventBus.Subscribe<NewMonthEvent>(this.OnNewProductionCycle);
 		}
 
-		public override void Reset() {
-			base.Reset();
+		private void OnNewProductionCycle(object sender, EventArgs e) {
+			this.Resources[RpResource] = 0;
+			Global.EventBus.Publish(this, productionStartedEvent); 
+		}
+
+		public int GetRP() {
+			return (int) Math.Floor(this.Resources[this.RpResource]);
 		}
 
 		public void SendWarehouseInfo() {
-			Global.EventBus.Publish(this, new TechProgressEvent((int) this.Resources[this.RpResource]));
 			foreach (ResourceData res in this.MonthlyOutput.Keys) {
-				Console.WriteLine(res + " : " + this.Resources[res]);
 				this.EmitSignal(Warehouse.SignalName.ResourceQtyUpdated, res, this.Resources[res]);
 			}
 		}

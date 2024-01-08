@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using ProjectArchaetech.events;
 
 namespace ProjectArchaetech.common.util {
 	public partial class ConstructibleTask<T> : Node2D where T : Node {
@@ -11,13 +12,11 @@ namespace ProjectArchaetech.common.util {
 		public int DaysRemaining { get => daysRemaining; set => daysRemaining = value; }
 		public Cell Location { get => location; }
 
-		public delegate void TerminateEventHandler(ConstructibleTask<T> task);
-		public event TerminateEventHandler TerminateEvent;
-
 		public ConstructibleTask(T value, Cell location, int daysRemaining) {
 			this.value = value;
 			this.daysRemaining = daysRemaining;
 			this.location = location;
+			Global.GameManager.GameClock.Timeout += this.Progress;
 		}
 
 		public void Start() {
@@ -36,7 +35,7 @@ namespace ProjectArchaetech.common.util {
 					this.GetNode<Node2D>("/root/World").AddChild(this.Value);
 				}
 				Global.GameManager.GameClock.Timeout -= this.Progress;
-				TerminateEvent?.Invoke(this);
+				Global.EventBus.Publish(this, new ConstructionTaskCompletedEvent<T>(this));
 			}
 		}
 

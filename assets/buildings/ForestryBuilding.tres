@@ -6,23 +6,24 @@
 [ext_resource type="Resource" uid="uid://bx07rulho34t1" path="res://common/resources/basic/WoodResource.tres" id="3_31gcr"]
 [ext_resource type="Texture2D" uid="uid://bfdfuv51e64ww" path="res://gfx/map-objects/ForestryBuilding.png" id="4_17pww"]
 
-[sub_resource type="Resource" id="Resource_olp2c"]
+[sub_resource type="Resource" id="Resource_1276p"]
 script = ExtResource("2_6rnoi")
-name = "Basic"
-recipe = {
+Name = "Basic"
+Recipe = {
 ExtResource("1_x0gsh"): 2
 }
 
 [resource]
 script = ExtResource("1_xx76p")
-name = "Logging Camp"
-id = "building-forestry-1"
-icon = ExtResource("4_17pww")
-width = 1
-height = 1
-cost = {
+Name = "Logging Camp"
+Desc = ""
+Id = "building-forestry-1"
+Icon = ExtResource("4_17pww")
+Width = 1
+Height = 1
+Cost = {
 ExtResource("3_31gcr"): 100
 }
-requiredTerrains = null
-timeToBuild = 10
-productionMethods = Array[Object]([SubResource("Resource_olp2c")])
+RequiredTerrains = null
+TimeToBuild = 10
+ProductionMethods = Array[Object]([SubResource("Resource_1276p")])

@@ -56,8 +56,6 @@ func _process(delta: float):
 	self.position.y += self.v_y * delta;
 	
 func _unhandled_input(event: InputEvent):
-	if event.is_action_pressed("space_bar_pressed"):
-		print("HI from " + str(self))
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("wheel_up"):
 			self.zoom.x *= (1 + 0.01 * self.zoom_speed);

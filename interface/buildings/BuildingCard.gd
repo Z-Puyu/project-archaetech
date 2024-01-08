@@ -12,10 +12,10 @@ func _ready():
 	self.pressed.connect(func(): Global.AddingBuilding.emit(self.building))
 
 func initialise(building: Building):
-	var icon: Texture2D = building.data.Icon
-	var building_name: String = building.data.Name
-	var cost: Dictionary = building.data.Cost
-	self.building = building.data.Id
+	var icon: Texture2D = building.Data.Icon
+	var building_name: String = building.Data.Name
+	var cost: Dictionary = building.Data.Cost
+	self.building = building.Data.Id
 	self.icon.set_texture(icon)
 	self.building_name.set_text(building_name)
 	self.cost.update_info(cost)
