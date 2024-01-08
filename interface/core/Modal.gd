@@ -13,7 +13,7 @@ func _ready():
 	self.backdrop.clicked.connect(self._on_backdrop_clicked)
 	Global.OpeningModalUI.connect(self.open)
 	
-func open(window_name: String):
+func open(window_name: String, init_info: Dictionary = {}):
 	if not self.windows.has(window_name):
 		push_error("Modal window with name \"" + window_name + "\" does not exist!")
 		return
@@ -37,7 +37,7 @@ func open(window_name: String):
 		
 	# Switch to the correct window
 	self.active_window = new_window
-	self.active_window.open()
+	self.active_window.open(init_info)
 	self.backdrop.open()
 	self.show()
 	Global.ClosingModalUI.connect(self.close)

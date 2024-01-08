@@ -11,13 +11,11 @@ namespace ProjectArchaetech.common {
 		private Warehouse warehouse;
 		private ProductionMethod activePM;
 
-		public ProductiveBuilding() : base(new TransportFunctionality(
-			new HashDictionary<Building, TransportRoute>(), 1)) { }
-
 		public Warehouse Warehouse { get => warehouse; set => warehouse = value; }
 
 		public override void _Ready() {
 			base._Ready();
+
 			this.warehouse = this.GetNode<Warehouse>("Warehouse");
 			this.activePM = this.Data.ProductionMethods[0];
 			Dictionary<JobData, int> workers = new Dictionary<JobData, int>();
@@ -25,11 +23,16 @@ namespace ProjectArchaetech.common {
 			foreach (JobData job in this.activePM.Recipe.Keys) {
 				workers[job] = 0;
 			}
-			this.updatedUIData["employment"] = new Pair(workers.Duplicate(true), employmentCap.Duplicate(true));
-			this.updatedUIData["local_storage"] = this.warehouse.Resources;
-			this.updatedUIData["output"] = this.warehouse.MonthlyOutput;
+
 			this.AddFunctionality(new ProductionFunctionality(this.warehouse, workers));
 			this.AddFunctionality(new RecruitmentFunctionality(employmentCap, workers));
+			this.AddFunctionality(new TransportFunctionality(
+				new HashDictionary<Building, TransportRoute>(), 1
+			));
+			
+			this.updatedUIData["employment"] = new Pair(workers.Duplicate(true), employmentCap.Duplicate(true));
+			this.updatedUIData["output"] = new Dictionary<ResourceData, double>();
+			this.updatedUIData["local_storage"] = new Dictionary<ResourceData, double>();
 		}
 
 		public void Store(Dictionary<ResourceData, double> resources) {

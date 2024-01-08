@@ -1,4 +1,3 @@
-using Godot;
 using Godot.Collections;
 using ProjectArchaetech.interfaces;
 using ProjectArchaetech.resources;
@@ -13,15 +12,17 @@ namespace ProjectArchaetech.common.components {
             this.workers = workers;
         }
 
-        public void Execute(Dictionary<string, Variant> updatedUIData) {
+        public event IFunctionable.BuildingUIDataUpdatedEventHandler BuildingUIDataUpdatedEvent;
+
+        public void Execute() {
             // Erase last month's product records.
             this.warehouse.Reset();
 			// Process each job in the building sequentially
 			foreach (JobData job in this.workers.Keys) {
 				this.warehouse.Supply(job, this.workers[job]);
 			}
-            updatedUIData["output"] = this.warehouse.MonthlyOutput;
-            updatedUIData["local_storage"] = this.warehouse.Resources;
+            this.BuildingUIDataUpdatedEvent.Invoke("local_storage", this.warehouse.Resources);
+            this.BuildingUIDataUpdatedEvent.Invoke("output", this.warehouse.MonthlyOutput);
         }
     }
 }

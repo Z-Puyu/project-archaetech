@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 using ProjectArchaetech.common;
 using ProjectArchaetech.events;
 using static ProjectArchaetech.events.EventBus;
@@ -39,17 +39,21 @@ namespace ProjectArchaetech {
 		// We define the following signals to communicate between GDscript and C#
 		// Modal-related
 		[Signal]
-		public delegate void OpeningModalUIEventHandler(string windowName);
+		public delegate void OpeningModalUIEventHandler(string windowName, Godot.Collections.Dictionary<string, Variant> optionalArgs);
 		[Signal]
 		public delegate void ClosingModalUIEventHandler();
 		[Signal]
 		public delegate void OpeningBuildingMenuEventHandler();
 		[Signal]
+		public delegate void TransportRouteAddedEventHandler(TransportRoute route);
+		[Signal]
+		public delegate void TransportRouteRemovedEventHandler(TransportRoute route);
+
+		// GameMode-related
+		[Signal]
 		public delegate void EnteringRouteConstructionModeEventHandler();
 		[Signal]
-		public delegate void ExitingRouteConstructionModeEventHandler();
-		[Signal]
-		public delegate void TransportRouteAddedEventHandler(TransportRoute route);
+		public delegate void RestoringNormalModeEventHandler();
 
 		[Signal]
 		public delegate void NewMonthEventHandler();
@@ -86,13 +90,18 @@ namespace ProjectArchaetech {
 			EventBus.Subscribe<PopCountUpdatedEvent>((sender, e) => this.EmitSignal(
 				SignalName.PopCountUpdated, PopManager.PopCount, PopManager.NUnemployed
 			));
+			EventBus.Subscribe<TransportRouteAddedEvent>((sender, e) => this.EmitSignal(
+				SignalName.TransportRouteAdded, ((TransportRouteAddedEvent) e).Route
+			));
 			
 			this.PickingUpObj += gameObj => PickUp = gameObj;
-			this.AddingBuilding += buildingId => BuildManager.AddBuilding(buildingId);
-			this.DeletedGameObj += node => Grave.Enqueue(node);
+			this.AddingBuilding += BuildManager.AddBuilding;
+			this.DeletedGameObj += Grave.Enqueue;
 			this.OpeningBuildingMenu += OnOpeningConstructionMenu;
 			this.EnteringRouteConstructionMode += () => GameState = GameMode.BuildRoute;
-			this.ExitingRouteConstructionMode += () => GameState = GameMode.Normal;
+			this.RestoringNormalMode += () => GameState = GameMode.Normal;
+			this.TransportRouteRemoved += route => EventBus
+				.Publish(this, new TransportRouteRemovedEvent(route));
 		}
 
 		private static void OnOpeningConstructionMenu() {

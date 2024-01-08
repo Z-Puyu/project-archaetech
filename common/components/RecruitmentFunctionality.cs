@@ -16,7 +16,9 @@ namespace ProjectArchaetech.common.components {
             this.workers = workers;
         }
 
-        public void Execute(Dictionary<string, Variant> updatedUIData) {
+        public event IFunctionable.BuildingUIDataUpdatedEventHandler BuildingUIDataUpdatedEvent;
+
+        public void Execute() {
             foreach (JobData job in this.employmentCap.Keys) {
 				if (!this.workers.ContainsKey(job)) {
 				    this.workers[job] = 0;
@@ -29,7 +31,8 @@ namespace ProjectArchaetech.common.components {
                     Global.PopManager.NUnemployed -= nRecruited;
                 }
 			}
-            updatedUIData["employment"] = new Pair(this.workers, this.employmentCap);
+            this.BuildingUIDataUpdatedEvent.Invoke("employment", new Pair(workers, employmentCap));
+            //updatedUIData["employment"] = new Pair(this.workers, this.employmentCap);
         }
     }
 }

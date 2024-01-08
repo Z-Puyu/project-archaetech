@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://tk3rk44j88w1"]
+[gd_scene load_steps=14 format=3 uid="uid://tk3rk44j88w1"]
 
 [ext_resource type="Script" path="res://interface/buildings/BuildingInfo.gd" id="1_hfjuu"]
 [ext_resource type="Texture2D" uid="uid://cspy5k65v6guc" path="res://gfx/interface/overlays/MiniPanel01.jpg" id="1_yo2nh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bfdfuv51e64ww" path="res://gfx/map-objects/ForestryBuilding.png" id="3_5bd70"]
 [ext_resource type="Script" path="res://interface/core/DynamicLabel.gd" id="3_o6xsx"]
 [ext_resource type="Script" path="res://interface/core/DynamicResourceInfo.gd" id="6_501oj"]
+[ext_resource type="Script" path="res://interface/buildings/DynamicList.gd" id="7_k62te"]
 [ext_resource type="Texture2D" uid="uid://b1qneotb641pc" path="res://gfx/interface/UIDifferentFree03Wenrexa/Button01.png" id="10_ej3ph"]
 [ext_resource type="Texture2D" uid="uid://bvcas7k4escon" path="res://gfx/interface/overlays/Button01Pressed.png" id="11_ik561"]
 [ext_resource type="Texture2D" uid="uid://se6n5605jfcq" path="res://gfx/interface/overlays/Button01Hover.png" id="12_x2k6h"]
@@ -100,6 +101,7 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("7_k62te")
 
 [node name="NewRouteButton" type="TextureButton" parent="MarginContainer/VBoxContainer/InfoList/ScrollContainer/ListOfRoutes"]
 unique_name_in_owner = true

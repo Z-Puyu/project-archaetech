@@ -22,7 +22,6 @@ namespace ProjectArchaetech.common {
 		public int Level { get => level; set => level = value; }
 		public int Manpower { get => manpower; set => manpower = value; }
 		public TransportRouteSpecification Spec { get => spec; set => spec = value; }
-		
 
 		public TransportRoute(Building from, Building to, 
 			TransportRouteSpecification spec) {
@@ -49,7 +48,7 @@ namespace ProjectArchaetech.common {
 			}
 		}
 
-		public void Work(ref Dictionary<string, Variant> updatedUIData) {
+		public void Work() {
 			// For debug purposes only!!!
 			if (this.From.GetType() == typeof(Building) || this.To.GetType() == typeof(Building)) {
 				return;

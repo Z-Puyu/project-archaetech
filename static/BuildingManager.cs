@@ -17,7 +17,7 @@ namespace ProjectArchaetech {
 		private Cell selectedCell;
 		private TileData tileData;
 		private ResourceManager resManager;
-		private static int nBuildings = 0;
+		private static int nBuildings = 1;
 		private static int nBuildingsProcessed = 0;
 		private static readonly ProductionEndedEvent productionEndedEvent = new ProductionEndedEvent();
 

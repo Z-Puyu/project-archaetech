@@ -11,7 +11,7 @@ func _ready():
 	Global.CellSelected.connect(%InfoPanel/%CellInfo.show_info)
 
 func _on_toggle_modal(window_name: String):
-	Global.ExitingRouteConstructionMode.emit()
+	Global.RestoringNormalMode.emit()
 	if self._modal.is_visible():
 		self._modal.close()
 	else:
