@@ -12,7 +12,7 @@ namespace ProjectArchaetech.common.components {
             this.workers = workers;
         }
 
-        public event IFunctionable.BuildingUIDataUpdatedEventHandler BuildingUIDataUpdatedEvent;
+        public event IFunctionable.ObjectUIDataUpdatedEventHandler ObjectUIDataUpdatedEvent;
 
         public void Execute() {
             // Erase last month's product records.
@@ -21,8 +21,8 @@ namespace ProjectArchaetech.common.components {
 			foreach (JobData job in this.workers.Keys) {
 				this.warehouse.Supply(job, this.workers[job]);
 			}
-            this.BuildingUIDataUpdatedEvent.Invoke("local_storage", this.warehouse.Resources);
-            this.BuildingUIDataUpdatedEvent.Invoke("output", this.warehouse.MonthlyOutput);
+            this.ObjectUIDataUpdatedEvent.Invoke("local_storage", this.warehouse.Resources);
+            this.ObjectUIDataUpdatedEvent.Invoke("output", this.warehouse.MonthlyOutput);
         }
     }
 }

@@ -45,9 +45,9 @@ namespace ProjectArchaetech {
 			});
 		}
 
-		public void SetCell(CellSelectedEvent e) {
-			this.SelectedCell = e.Cell;
-			this.TileData = e.Data;
+		public void SetCell(Cell cell, TileData tileData) {
+			this.SelectedCell = cell;
+			this.TileData = tileData;
 		}
 
 		public void AddBuilding(string id) {

@@ -38,7 +38,7 @@ namespace ProjectArchaetech.common {
 
 		public void AddFunctionality(IFunctionable f) {
 			this.functionalities.Add(f);
-			f.BuildingUIDataUpdatedEvent += (key, value) => this.updatedUIData[key] = value;
+			f.ObjectUIDataUpdatedEvent += (key, value) => this.updatedUIData[key] = value;
 		}
 
 		public bool CanBeBuilt(TileData tile, Cell location) {

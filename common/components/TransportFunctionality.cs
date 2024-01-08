@@ -27,7 +27,7 @@ namespace ProjectArchaetech.common.components {
 
 		public int MaxNOut { get => maxNOut; set => maxNOut = value; }
 
-		public event IFunctionable.BuildingUIDataUpdatedEventHandler BuildingUIDataUpdatedEvent;
+		public event IFunctionable.ObjectUIDataUpdatedEventHandler ObjectUIDataUpdatedEvent;
 
 		public void Execute() {
 			foreach (TransportRoute route in this.outPaths.Values) {

@@ -64,7 +64,6 @@ namespace ProjectArchaetech {
 		[Signal]
 		public delegate void CellSelectedEventHandler(Cell cell, TileData tileData);
 		
-		
 		[Signal]
 		public delegate void DeletedGameObjEventHandler(Node node);
 		[Signal]
@@ -86,7 +85,6 @@ namespace ProjectArchaetech {
 
 			// Connect events.
 			EventBus.Subscribe<NewMonthEvent>((sender, e) => ClearDeadObjects());
-			EventBus.Subscribe<CellSelectedEvent>((sender, e) => BuildManager.SetCell((CellSelectedEvent) e));
 			EventBus.Subscribe<PopCountUpdatedEvent>((sender, e) => this.EmitSignal(
 				SignalName.PopCountUpdated, PopManager.PopCount, PopManager.NUnemployed
 			));
@@ -94,6 +92,7 @@ namespace ProjectArchaetech {
 				SignalName.TransportRouteAdded, ((TransportRouteAddedEvent) e).Route
 			));
 			
+			this.CellSelected += (cell, tileData) => BuildManager.SetCell(cell, tileData);
 			this.PickingUpObj += gameObj => PickUp = gameObj;
 			this.AddingBuilding += BuildManager.AddBuilding;
 			this.DeletedGameObj += Grave.Enqueue;

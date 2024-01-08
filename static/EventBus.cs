@@ -7,21 +7,6 @@ namespace ProjectArchaetech.events {
 	[GlobalClass]
 	public partial class EventBus : Node {
 		private readonly HashDictionary<Type, EventHandler> subscribers;
-		public class CellSelectedEvent : EventArgs {
-			private readonly TileData data;
-			private readonly Cell cell;
-
-			public CellSelectedEvent(Cell cell, TileData data) {
-				this.cell = cell;
-				this.data = data;
-			}
-
-			public TileData Data => data;
-
-			public Cell Cell => cell;
-		}
-		
-		public class BuildingInfoUpdatedUIEvent : EventArgs { }
 
 		public EventBus() {
 			this.subscribers = new HashDictionary<Type, EventHandler>();

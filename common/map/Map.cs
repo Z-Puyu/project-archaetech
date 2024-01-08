@@ -59,11 +59,6 @@ namespace ProjectArchaetech.common {
 				}
 				this.navigableWater.Add(pt, cell);
 			}
-			Global.EventBus.Subscribe<CellSelectedEvent>(
-				(sender, e) => ((Map) sender)
-					.GetNode<Global>("/root/Global")
-					.EmitSignal(Global.SignalName.CellSelected, ((CellSelectedEvent) e).Data)
-			);
 		}
 
 		public override void _UnhandledInput(InputEvent e) {
@@ -87,7 +82,9 @@ namespace ProjectArchaetech.common {
 					this.ClearLayer((int) Layer.UI);
 					this.SetCell((int) Layer.UI, this.CurrSelection.Pos, 
 						(int) Atlas.Cells, new Vector2I(5, 0));
-					Global.EventBus.Publish(this, new CellSelectedEvent(this.CurrSelection, tileData));
+					Global.PickUp = this.CurrSelection;
+					this.GetNode<Global>("/root/Global")
+						.EmitSignal(Global.SignalName.CellSelected, this.CurrSelection, tileData);
 				}
 			}
 		}
