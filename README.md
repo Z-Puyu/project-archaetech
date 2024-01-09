@@ -2,6 +2,12 @@
 
 ## IMPORTANT: Do NOT push to `main`. ALL updates must be done in a separate branch. Do a PULL REQUEST before merging to `main`.
 
+## Important Pages (You Probably Want to Read These before Blowing Things up :O)
+
+- [Recommended coding practices](https://github.com/Z-Puyu/project-archaetech/discussions/25)
+  
+- [How to manage events and signals](https://github.com/Z-Puyu/project-archaetech/issues/16)
+
 ## Motivation
 
 We all love to play 4X strategy games. Most of the currently available 4X games, whether historical or fictional, tend to focus on advancing your civilisation **forwards** from a primitive era to a futuristic one. However, we would like to do some **reverse thinking** here: what if the nation you play as in a 4X game progresses not by **discovering the unknown of the future**, but by **digging out the lost legacies of a mysterious past**?
@@ -224,9 +230,9 @@ Based on the current condition of the player's sanctuary, we can dynamically pro
 
 - [ ] Unit: formation and dismissal, health point
 
-- [ ] Production: resource transportation system, storage system
+- [x] Production: resource transportation system, storage system
 
-- [ ] Technology: tech-tree, research mechanism
+- [x] Technology: tech-tree, research mechanism
 
 - [ ] UI: textures, unit movement paths, highlighted texts
 
@@ -236,7 +242,7 @@ Based on the current condition of the player's sanctuary, we can dynamically pro
 
 - [ ] Map: fog-of-war
 
-- [ ] Pops and resources: resource consumption
+- [x] Pops and resources: resource consumption
 
 - [ ] UI: event windows
 
@@ -332,41 +338,3 @@ But we want this local storage to play more part in gameplay than merely an info
 We wanted the mechanism to establish a transport link between 2 buildings intuitive enough in terms of user iteraction. To do so, we first built a simple building information panel using a modal, which will open up when the player clicks on a building an close itself whenever the player clicks anywhere outside of the panel. This panel displays some important information of the building: its name and icon of course, the pops currently employed in the building and their jobs, the resources produced last month and the resources present in the local storage. This is followed up by a list of active transportation routes. To add a new route, the player would simply press the new route button and the game will record down the currently selected building as the anchor. Now, whenever the player clicks on a different building, a transport link will be established from the anchor to that building.
 
 Each transport route has a **level**, representing the maximal possible amount of labour which can be assigned to the route. The **capacity** of a transport route represents the *percentage* of monthly output that can be transported out of the building. Assigning more pops to work at a route will raise its productive capacity but with diminishing marginal benefit. This is designed as such to mimic attrition effect and diseconomies of scale.
-
-## Coding Conventions
-
-- All variables and functions have their names spelt in **snake_case**.
-
-- All classes and game files have their names spelt in **PascalCase**.
-
-- Folders should be named using **kebab-case**.
-
-- **Private** methods should have their names preceeded by an **underscore**.
-
-- Always use the **self** keyword in class methods when referencing class attributes.
-
-- Always use **type notations** for variable declaration and (non-void) return type of functions.
-
-- Semi-colons are **not** used.
-
-- Each line should contain only a single statement. 
-
-- Use **and**, **or**, **not** rather than **&&**, **||**, **!**.
-
-- No statement should be longer than **100 characters**.
-
-- Names of variables and functions should be **descriptive** and **no custom abbreviations** are allowed.
-
-- `match` statements should always have a default `_` branch.
-
-- `while (true)` is **banned**.
-
-- When declaring new classes, write `class A extends B` in a **single line**.
-
-- Custom scripts and resources are placed under **common** folder while packed scenes (assets) are placed under **assets** folder.
-
-- To avoid confusion in syntaxes, retrieving from dictionaries will use **Dictionary::get**  method instead of accessing by index.
-
-- `to_string` and `_to_string` methods are called implicitly.
-
-- Use `Signal::connect`  and `Signal::emit` to manage signals (this is the new Godot 4 syntax).
