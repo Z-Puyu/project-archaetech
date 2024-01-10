@@ -52,12 +52,14 @@
     <Content Include="static\events\ConstructionTaskCompletedEvent.cs" />
     <Content Include="static\events\ProductionEndedEvent.cs" />
     <Content Include="static\events\BuildingProcessedEvent.cs" />
-    <Content Include="static\events\PopCountUpdatedEvent.cs" />
     <Content Include="static\events\ProcessingPopsEvent.cs" />
     <Content Include="static\EventBus.cs" />
     <Content Include="common\buildings\Warehouse.cs" />
     <Content Include="static\events\BuildingUIDataUpdatedEvent.cs" />
     <Content Include="static\events\TransportRouteAddedEvent.cs" />
     <Content Include="static\events\TransportRouteRemoved.cs" />
+    <Content Include="common\pops\PopData.cs" />
+    <Content Include="common\pops\Competency.cs" />
+    <Content Include="common\pops\Pop.cs" />
   </ItemGroup>
 </Project>

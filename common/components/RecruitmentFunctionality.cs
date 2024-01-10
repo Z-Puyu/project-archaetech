@@ -24,11 +24,11 @@ namespace ProjectArchaetech.common.components {
 				    this.workers[job] = 0;
 			    } 
                 if (this.workers[job] < this.employmentCap[job] && 
-                    Global.PopManager.NUnemployed > 0) {
+                    Global.PopManager.GetUnemployment() > 0) {
                     int shortage = this.employmentCap[job] - this.workers[job];
-                    int nRecruited = Math.Min(shortage, Global.PopManager.NUnemployed);
+                    int nRecruited = Math.Min(shortage, Global.PopManager.GetUnemployment());
                     this.workers[job] += nRecruited;
-                    Global.PopManager.NUnemployed -= nRecruited;
+                    Global.PopManager.PopFindJobs(job, nRecruited);
                 }
 			}
             this.ObjectUIDataUpdatedEvent.Invoke("employment", new Pair(workers, employmentCap));

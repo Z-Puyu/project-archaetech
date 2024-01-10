@@ -68,7 +68,9 @@ namespace ProjectArchaetech.common {
 		}
 
 		public Godot.Collections.Dictionary<ResourceData, double> GetOutput() {
-			return this.GetType() == typeof(ProductiveBuilding) ? ((ProductiveBuilding)this).Warehouse.Resources : new Godot.Collections.Dictionary<ResourceData, double>();
+			return this.GetType() == typeof(ProductiveBuilding) 
+				? ((ProductiveBuilding)this).Warehouse.Resources 
+				: new Godot.Collections.Dictionary<ResourceData, double>();
 		}
 
 		protected virtual void OnClick(Node viewport, InputEvent e, long shapeIdx) {

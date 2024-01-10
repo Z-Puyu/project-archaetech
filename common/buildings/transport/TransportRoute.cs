@@ -35,12 +35,12 @@ namespace ProjectArchaetech.common {
 
 		public void Recruit(JobData job = null) {
 			int shortage = this.Level - this.Manpower;
-			int nRecruited = Math.Min(shortage, Global.PopManager.NUnemployed);
+			int nRecruited = Math.Min(shortage, Global.PopManager.GetUnemployment());
 			if (nRecruited == 0) {
 				this.Level = Math.Max(this.Level - 1, this.manpower);
 			} else {
 				this.manpower += nRecruited;
-				Global.PopManager.NUnemployed -= nRecruited;
+				Global.PopManager.PopFindJobs(null, nRecruited);
 			}
 			// More features in the future.
 			foreach (ResourceData res in this.Resources.Keys) {
