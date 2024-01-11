@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Option" load_steps=2 format=3 uid="uid://8mi1t6l74as2"]
+
+[ext_resource type="Script" path="res://events/Option.cs" id="1_1ghvi"]
+
+[resource]
+script = ExtResource("1_1ghvi")
+Id = ""
+Desc = ""
+Effect = Callable()

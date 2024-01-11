@@ -2,7 +2,7 @@
 using System;
 using ProjectArchaetech.common;
 
-namespace ProjectArchaetech.events {
+namespace ProjectArchaetech.util.events {
     public class TransportRouteRemovedEvent : EventArgs { 
         private readonly TransportRoute route;
 

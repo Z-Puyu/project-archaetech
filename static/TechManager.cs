@@ -1,10 +1,10 @@
 using C5;
 using Godot;
 using Godot.Collections;
-using ProjectArchaetech.events;
+using ProjectArchaetech.util.events;
 using System;
 using System.Collections.Generic;
-using static ProjectArchaetech.events.EventBus;
+using static ProjectArchaetech.util.events.EventBus;
 
 namespace ProjectArchaetech {
 	[GlobalClass]

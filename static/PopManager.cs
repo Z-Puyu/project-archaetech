@@ -5,7 +5,7 @@ using C5;
 using Godot;
 using Godot.Collections;
 using ProjectArchaetech.common;
-using ProjectArchaetech.events;
+using ProjectArchaetech.util.events;
 using ProjectArchaetech.resources;
 
 namespace ProjectArchaetech {

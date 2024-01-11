@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace ProjectArchaetech.events {
+namespace ProjectArchaetech.util.events {
     public class BuildingUIDataUpdatedEvent : EventArgs {
         private readonly string key;
         private readonly Variant info;

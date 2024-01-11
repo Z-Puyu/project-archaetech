@@ -1,6 +1,6 @@
 using System;
 using Godot;
-using ProjectArchaetech.events;
+using ProjectArchaetech.util.events;
 
 namespace ProjectArchaetech.common.util {
 	public partial class ConstructibleTask<T> : Node2D where T : Node {

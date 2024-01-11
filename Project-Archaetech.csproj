@@ -61,5 +61,11 @@
     <Content Include="common\pops\PopData.cs" />
     <Content Include="common\pops\Competency.cs" />
     <Content Include="common\pops\Pop.cs" />
+    <Content Include="events\EventData.cs" />
+    <Content Include="events\Option.cs" />
+    <Content Include="events\GameEvent.cs" />
+    <Content Include="events\IEvent.cs" />
+    <Content Include="events\EventType.cs" />
+    <Content Include="events\RandomEventData.cs" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 using System;
 using Godot;
-using ProjectArchaetech.events;
-using static ProjectArchaetech.events.EventBus;
+using ProjectArchaetech.util.events;
+using static ProjectArchaetech.util.events.EventBus;
 
 namespace ProjectArchaetech {
 	[GlobalClass]

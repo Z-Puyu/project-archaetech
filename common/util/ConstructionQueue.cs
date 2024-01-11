@@ -1,7 +1,7 @@
 using System;
 using C5;
 using Godot;
-using ProjectArchaetech.events;
+using ProjectArchaetech.util.events;
 
 namespace ProjectArchaetech.common.util {
 	public partial class ConstructionQueue<T> : Node where T : Node {

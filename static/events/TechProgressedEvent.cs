@@ -1,6 +1,6 @@
 using System;
 
-namespace ProjectArchaetech.events {
+namespace ProjectArchaetech.util.events {
     public class TechProgressedEvent : EventArgs {
 			private readonly int availablePoints;
 
