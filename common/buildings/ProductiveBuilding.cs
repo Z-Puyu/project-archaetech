@@ -18,10 +18,14 @@ namespace ProjectArchaetech.common {
 
 			this.warehouse = this.GetNode<Warehouse>("Warehouse");
 			this.activePM = this.Data.ProductionMethods[0];
-			Dictionary<JobData, int> workers = new Dictionary<JobData, int>();
+			Dictionary<JobData, Dictionary<int, Array<Pop>>> workers = new Dictionary<JobData, Dictionary<int, Array<Pop>>>();
 			Dictionary<JobData, int> employmentCap = this.activePM.Recipe.Duplicate(true);
 			foreach (JobData job in this.activePM.Recipe.Keys) {
-				workers[job] = 0;
+				Dictionary<int, Array<Pop>> workersList = new Dictionary<int, Array<Pop>>();
+				for (int i = 0; i < 3; i += 1) {
+					workersList[i] = new Array<Pop>();
+				}
+				workers[job] = workersList;
 			}
 
 			this.AddFunctionality(new ProductionFunctionality(this.warehouse, workers));

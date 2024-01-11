@@ -36,9 +36,22 @@ func _ready():
 				return "No employment data available"
 			var parsed: String = ""
 			for job in curr.keys():
-				var denominator: int = max.get(job)
-				var numerator: int = curr.get(job)
-				parsed += str(job.name, ": ", numerator, "/", denominator, " ")
+				parsed += (job.name + ": ")
+				for competency in curr.get(job).keys():
+					print(competency)
+					var label: String = ""
+					match competency:
+						0:
+							label = "Novice: "
+						1:
+							label = "Regular: "
+						2:
+							label = "Expert: "
+						_:
+							label = "Unknown: "
+					parsed += str(label, curr.get(job).get(competency).size(), ", ")
+				var total: int = max.get(job)
+				parsed += str("Total: ", total, "\n")
 			return parsed
 	)
 	self.cached_buildings = {}

@@ -15,6 +15,10 @@ namespace ProjectArchaetech {
             this.rand = new Random(Guid.NewGuid().GetHashCode());
         }
 
+        public bool IsEmpty() {
+            return this.items.IsEmpty;
+        }
+
         public T Select() {
             double r = this.rand.NextDouble() * this.totalWeight;
             return this.items.WeakPredecessor((int) r).Value;
@@ -32,6 +36,7 @@ namespace ProjectArchaetech {
             if (this.lookUp.Contains(item)) {
                 int key = this.lookUp[item]; // Get the cumulative weight of this item.
                 this.items.Remove(key); // Remove this item.
+                this.lookUp.Remove(item);
                 if (this.items.TrySuccessor(key, out KeyValuePair<int, T> next)) {
                     // If the item has at least one successor, 
                     // We calculate by how much should the successors be shifted down.
@@ -39,6 +44,8 @@ namespace ProjectArchaetech {
                     do {
                         this.items.Remove(next.Key);
                         this.items.Add(next.Key - diff, next.Value);
+                        key = next.Key - diff;
+                        this.lookUp[next.Value] = key;
                     } while (this.items.TrySuccessor(key, out next));
                 }
             }

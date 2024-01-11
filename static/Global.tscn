@@ -63,7 +63,13 @@ ExtResource("10_hoi58"): 0.5,
 ExtResource("12_rn820"): 0.25,
 ExtResource("11_lnhlp"): 0.5
 }
-PrimaryFoodChoices = Array[Object]([ExtResource("11_lnhlp"), ExtResource("7_36sjg"), ExtResource("9_qfcwm"), ExtResource("10_hoi58"), ExtResource("8_wbr7w")])
+PrimaryFoodChoices = {
+ExtResource("11_lnhlp"): 100,
+ExtResource("7_36sjg"): 50,
+ExtResource("9_qfcwm"): 25,
+ExtResource("10_hoi58"): 25,
+ExtResource("8_wbr7w"): 10
+}
 
 [node name="BuildingManager" type="Node" parent="."]
 script = ExtResource("5_a6whb")

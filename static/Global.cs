@@ -66,8 +66,6 @@ namespace ProjectArchaetech {
 		
 		[Signal]
 		public delegate void DeletedGameObjEventHandler(Node node);
-		[Signal]
-		public delegate void PopCountUpdatedEventHandler(int total, int labour);
 
 		public Global() {
 			eventBus = new EventBus();
@@ -85,9 +83,6 @@ namespace ProjectArchaetech {
 
 			// Connect events.
 			EventBus.Subscribe<NewMonthEvent>((sender, e) => ClearDeadObjects());
-			EventBus.Subscribe<PopCountUpdatedEvent>((sender, e) => this.EmitSignal(
-				SignalName.PopCountUpdated, PopManager.PopCount, PopManager.NUnemployed
-			));
 			EventBus.Subscribe<TransportRouteAddedEvent>((sender, e) => this.EmitSignal(
 				SignalName.TransportRouteAdded, ((TransportRouteAddedEvent) e).Route
 			));
