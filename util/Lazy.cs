@@ -4,7 +4,7 @@ namespace ProjectArchaetech.util {
     public class Lazy<T> : ILazyBase {
         public delegate X Supplier<out X>();
         // public delegate bool Predicate<in X>(X x);
-        public delegate Z Combinaer<in X, in Y, out Z>(X x, Y y);
+        public delegate Z Combiner<in X, in Y, out Z>(X x, Y y);
         private readonly Supplier<T> producer;
         private T value;
 

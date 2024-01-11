@@ -1,8 +1,6 @@
-using System;
 using C5;
 using Godot;
 using Godot.Collections;
-using static ProjectArchaetech.events.EventBus;
 
 namespace ProjectArchaetech.common {
 	[GlobalClass]
