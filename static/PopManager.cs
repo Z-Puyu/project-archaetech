@@ -217,7 +217,7 @@ namespace ProjectArchaetech {
 			for (int i = 0; i < n; i += 1) {
 				int which = this.randomPopSelector.Next(this.unemployedAdults.Count);
 				Pop who = this.unemployedAdults.RemoveAt(which);
-				who.Job = job;
+				who.acquireJob(job);
 				this.employedAdults.Add(who);
 				newRecruits.Add(who);
 				if (this.unemployedAdults.Count == 0) {

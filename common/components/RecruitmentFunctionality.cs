@@ -42,7 +42,7 @@ namespace ProjectArchaetech.common.components {
                     int nRecruited = Math.Min(shortage, Global.PopManager.GetUnemployment());
                     List<Pop> newRecruits = Global.PopManager.PopFindJobs(job, nRecruited);
                     foreach (Pop pop in newRecruits) {
-                        this.workers[job][(int) pop.Competency].Add(pop);
+                        this.workers[job][(int) pop.GetCompetencyOf(job)].Add(pop);
                     }
                 }
 			}

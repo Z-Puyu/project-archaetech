@@ -38,11 +38,11 @@ namespace ProjectArchaetech.common.components {
             foreach (JobData job in this.workers.Keys) {
                 foreach (Pop pop in this.workers[job][(int) Competency.Novice]) {
                     // Easy to upgrade from Novice to Regular
-                    pop.GainXp(rand.NextDouble() * NOVICE_BASE_XP);
+                    pop.GainXp(job, rand.NextDouble() * NOVICE_BASE_XP);
                 }
                 foreach (Pop pop in this.workers[job][(int) Competency.Regular]) {
                     // Hard to become expert
-                    pop.GainXp(rand.NextDouble() * rand.Next(0, 3));
+                    pop.GainXp(job, rand.NextDouble() * rand.Next(0, 3));
                 }
             }
         }
