@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection.Metadata;
 using C5;
 using Godot;
@@ -18,14 +19,14 @@ namespace ProjectArchaetech {
 		// These define how much one Pop consumes per month 
 		// for each of the edible resources.
 		[Export]
-		public Dictionary<ResourceData, double> PrimaryFoodDemands { set; get; }
+		public Godot.Collections.Dictionary<ResourceData, double> PrimaryFoodDemands { set; get; }
 		[Export] // Currently not used but will be
-		public Dictionary<ResourceData, double> SecondaryFoodDemands { set; get; } 
+		public Godot.Collections.Dictionary<ResourceData, double> SecondaryFoodDemands { set; get; } 
 		[Export]
-		public Dictionary<ResourceData, int> PrimaryFoodChoices { set; get; } // [resource, weight]
+		public Godot.Collections.Dictionary<ResourceData, int> PrimaryFoodChoices { set; get; } // [resource, weight]
 
-		private readonly HashSet<Pop> employedAdults;
-		private readonly HashSet<Pop> children;
+		private readonly C5.HashSet<Pop> employedAdults;
+		private readonly C5.HashSet<Pop> children;
 		private readonly HashedLinkedList<Pop> unemployedAdults;
 		private double growthRate;
 		private double growthProgress;
@@ -43,11 +44,11 @@ namespace ProjectArchaetech {
 		public delegate void PopCountUpdatedEventHandler(int labour, int total);
 
 		public PopManager() {
-			this.PrimaryFoodDemands = new Dictionary<ResourceData, double>();
-			this.SecondaryFoodDemands = new Dictionary<ResourceData, double>();
-			this.PrimaryFoodChoices = new Dictionary<ResourceData, int>();
-			this.employedAdults = new HashSet<Pop>();
-			this.children = new HashSet<Pop>();
+			this.PrimaryFoodDemands = new Godot.Collections.Dictionary<ResourceData, double>();
+			this.SecondaryFoodDemands = new Godot.Collections.Dictionary<ResourceData, double>();
+			this.PrimaryFoodChoices = new Godot.Collections.Dictionary<ResourceData, int>();
+			this.employedAdults = new C5.HashSet<Pop>();
+			this.children = new C5.HashSet<Pop>();
 			this.unemployedAdults = new HashedLinkedList<Pop>();
 			this.primarySelector = new RandomSelector<ResourceData>();
 			this.secondarySelector = new RandomSelector<ResourceData>();
@@ -66,10 +67,10 @@ namespace ProjectArchaetech {
 			this.sol = 5;
 			Global.EventBus.Subscribe<ProcessingPopsEvent>((sender, e) => this.Update());
 			foreach (ResourceData res in this.SecondaryFoodDemands.Keys) {
-				this.secondarySelector.Add(new KeyValuePair<int, ResourceData>(1, res));
+				this.secondarySelector.Add(new C5.KeyValuePair<int, ResourceData>(1, res));
 			}
 			foreach (ResourceData res in this.PrimaryFoodChoices.Keys) {
-				this.primarySelector.Add(new KeyValuePair<int, ResourceData>(this.PrimaryFoodChoices[res], res));
+				this.primarySelector.Add(new C5.KeyValuePair<int, ResourceData>(this.PrimaryFoodChoices[res], res));
 			}
 		}
 
@@ -99,14 +100,14 @@ namespace ProjectArchaetech {
 				solSecondaryModifier = Math.Sqrt(diff / (MEAN_SOL * SOL_THRESHOLD)) * 10;
 			}
 
-			HashSet<ResourceData> invalidFoods = new HashSet<ResourceData>();
+			C5.HashSet<ResourceData> invalidFoods = new C5.HashSet<ResourceData>();
 			if (this.AdultsConsumeFood(nUnfedAdults, solModifier, invalidFoods) 
 				&& !this.ChildrenConsumeFood(nUnfedChildren, solModifier, invalidFoods)) {
 				this.ConsumeExtra(solSecondaryModifier);
 			}
 
 			foreach (ResourceData res in invalidFoods) {
-				this.primarySelector.Add(new KeyValuePair<int, ResourceData>(this.PrimaryFoodChoices[res], res));
+				this.primarySelector.Add(new C5.KeyValuePair<int, ResourceData>(this.PrimaryFoodChoices[res], res));
 			}
 			
 			return nUnfedAdults + nUnfedChildren;
@@ -139,7 +140,7 @@ namespace ProjectArchaetech {
 		}
 
 		private bool AdultsConsumeFood(int nUnfedAdults, double solModifier, 
-			HashSet<ResourceData> invalidFoods) {
+			C5.HashSet<ResourceData> invalidFoods) {
 			while (nUnfedAdults > 0) {
 				ResourceData foodType = this.primarySelector.Select();
 				double perCapitaNeed = this.PrimaryFoodDemands[foodType] * solModifier;
@@ -161,7 +162,7 @@ namespace ProjectArchaetech {
 		}
 
 		private bool ChildrenConsumeFood(int nUnfedChildren, double solModifier, 
-			HashSet<ResourceData> invalidFoods) {
+			C5.HashSet<ResourceData> invalidFoods) {
 			while (nUnfedChildren > 0) {
 				ResourceData foodType = this.primarySelector.Select();
 				double perCapitaNeed = this.PrimaryFoodDemands[foodType]
@@ -211,14 +212,20 @@ namespace ProjectArchaetech {
 			}
 		}
 
-		public void PopFindJobs(JobData job, int n) {
+		public List<Pop> PopFindJobs(JobData job, int n) {
+			List<Pop> newRecruits = new List<Pop>(n);
 			for (int i = 0; i < n; i += 1) {
 				int which = this.randomPopSelector.Next(this.unemployedAdults.Count);
 				Pop who = this.unemployedAdults.RemoveAt(which);
 				who.Job = job;
 				this.employedAdults.Add(who);
+				newRecruits.Add(who);
+				if (this.unemployedAdults.Count == 0) {
+					break;
+				}
 			}
 			this.EmitSignal(SignalName.PopCountUpdated, this.PopCount(), this.unemployedAdults.Count);
+			return newRecruits;
 		}
 
 		public int GetUnemployment() {

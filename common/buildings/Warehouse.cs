@@ -91,10 +91,27 @@ namespace ProjectArchaetech.common {
 			return taken;
 		}
 
-		public void Supply(JobData job, int nWorkers) {
+		public void Supply(JobData job, int nWorkers, Competency competency) {
 			if (nWorkers <= 0) {
 				return;
 			}
+
+			double competencyModifier;
+			switch (competency) {
+				case Competency.Novice:
+					competencyModifier = 0.8;
+					break;
+				case Competency.Regular:
+					competencyModifier = 1.0;
+					break;
+				case Competency.Expert:
+					competencyModifier = 1.25;
+					break;
+				default:
+					competencyModifier = 1.0;
+					break;
+			}
+
 			double k = 1.0;
 			Dictionary<ResourceData, double> input = job.input.Duplicate(true);
 			foreach (ResourceData res in input.Keys) {
@@ -113,7 +130,7 @@ namespace ProjectArchaetech.common {
 				if (!this.MonthlyOutput.ContainsKey(res)) {
 					this.MonthlyOutput[res] = 0;
 				}
-				this.MonthlyOutput[res] += output[res] * k * nWorkers;
+				this.MonthlyOutput[res] += output[res] * k * nWorkers * competencyModifier;
 			}
 			this.Consume(input);
 			this.Add(this.MonthlyOutput);
