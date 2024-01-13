@@ -67,5 +67,14 @@
     <Content Include="events\IEvent.cs" />
     <Content Include="events\EventType.cs" />
     <Content Include="events\RandomEventData.cs" />
+    <Content Include="events\data\template.json" />
+    <Content Include="util\StringFormatter.cs" />
+    <Content Include="events\triggers\XorCondition.cs" />
+    <Content Include="events\triggers\OrCondition.cs" />
+    <Content Include="events\triggers\NotCondition.cs" />
+    <Content Include="events\triggers\Condition.cs" />
+    <Content Include="common\scripted-effects\ScriptedEffects.cs" />
+    <Content Include="common\scripted-effects\Effect.cs" />
+    <Content Include="events\Effect.cs" />
   </ItemGroup>
 </Project>

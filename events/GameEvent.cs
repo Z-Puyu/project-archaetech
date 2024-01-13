@@ -1,12 +1,19 @@
 using System.Collections.Generic;
+using Godot;
 
 namespace ProjectArchaetech.events.types {
-    public class GameEvent : IEvent {
-        private readonly EventData data;
-        private readonly List<Option> options;
+	[GlobalClass]
+	public partial class GameEvent : GodotObject, IEvent {
+		private readonly EventData data;
 
-        public void Fire() {
-            throw new System.NotImplementedException();
-        }
-    }
+		public GameEvent(EventData data, List<Option> options) {
+			this.data = data;
+		}
+
+		public EventData Data => data;
+
+		public void Fire() {
+			throw new System.NotImplementedException();
+		}
+	}
 }

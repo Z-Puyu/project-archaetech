@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dwmspwwtu1d2d"]
+[gd_scene load_steps=21 format=3 uid="uid://dwmspwwtu1d2d"]
 
 [ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/core/ResourcePanel.tscn" id="1_0xkas"]
 [ext_resource type="Script" path="res://interface/core/InGameUI.gd" id="1_iumxe"]
@@ -11,9 +11,22 @@
 [ext_resource type="Texture2D" uid="uid://doi4skv8n2jvq" path="res://gfx/interface/icons/general/button_rnd_pressed_grayscale.png" id="10_oowsg"]
 [ext_resource type="Script" path="res://interface/core/Backdrop.gd" id="11_btrfl"]
 [ext_resource type="Texture2D" uid="uid://btrvavqd3rcn3" path="res://gfx/interface/icons/general/gear-hammer.svg" id="11_vdjfq"]
+[ext_resource type="Texture2D" uid="uid://cgdb88c0itqxg" path="res://gfx/interface/overlays/MiniPanel03.jpg" id="12_w8554"]
+[ext_resource type="Texture2D" uid="uid://bohxmdskrlons" path="res://gfx/interface/overlays/TestPic.jpg" id="13_3ie75"]
+[ext_resource type="Script" path="res://interface/events/EventWindow.gd" id="13_y58fi"]
+[ext_resource type="PackedScene" uid="uid://4o1jwxb3pk1j" path="res://interface/events/EventOptionButton.tscn" id="15_8xdda"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_xo7pg"]
 allow_unpress = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d2gkw"]
+texture = ExtResource("12_w8554")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ke7u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bt8eb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_grjr4"]
 
 [node name="InGameUI" type="Control"]
 layout_direction = 2
@@ -130,3 +143,78 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_vdjfq")
 expand_mode = 1
+
+[node name="EventPopups" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="EventWindow" type="PanelContainer" parent="EventPopups"]
+custom_minimum_size = Vector2(800, 350)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -175.0
+offset_right = 400.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_d2gkw")
+script = ExtResource("13_y58fi")
+
+[node name="MarginContainer" type="MarginContainer" parent="EventPopups/EventWindow"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 44
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EventPopups/EventWindow/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="EventTitle" type="Label" parent="EventPopups/EventWindow/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Test Event Title"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EventPopups/EventWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EventPicture" type="TextureRect" parent="EventPopups/EventWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("13_3ie75")
+expand_mode = 2
+
+[node name="EventContents" type="VBoxContainer" parent="EventPopups/EventWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EventDescription" type="TextEdit" parent="EventPopups/EventWindow/MarginContainer/VBoxContainer/HBoxContainer/EventContents"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2ke7u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bt8eb")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_grjr4")
+editable = false
+wrap_mode = 1
+
+[node name="EventOptionButton" parent="EventPopups/EventWindow/MarginContainer/VBoxContainer/HBoxContainer/EventContents" instance=ExtResource("15_8xdda")]
+layout_mode = 2
+
+[node name="Tooltip" parent="EventPopups/EventWindow/MarginContainer/VBoxContainer/HBoxContainer/EventContents/EventOptionButton" index="1"]
+offset_top = -61.0
+offset_right = 508.0
+offset_bottom = -26.0
+editable = false
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[editable path="EventPopups/EventWindow/MarginContainer/VBoxContainer/HBoxContainer/EventContents/EventOptionButton"]
