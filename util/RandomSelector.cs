@@ -3,10 +3,13 @@ using System;
 
 namespace ProjectArchaetech {
     public class RandomSelector<T> {
-        private TreeDictionary<int, T> items;
-        private HashDictionary<T, int> lookUp;
+        private readonly TreeDictionary<int, T> items;
+        private readonly HashDictionary<T, int> lookUp;
         private int totalWeight;
-        private Random rand;
+        private readonly Random rand;
+
+        public int TotalWeight => totalWeight;
+
 
         public RandomSelector() {
             this.items = new TreeDictionary<int, T>();
@@ -20,14 +23,14 @@ namespace ProjectArchaetech {
         }
 
         public T Select() {
-            double r = this.rand.NextDouble() * this.totalWeight;
+            double r = this.rand.NextDouble() * this.TotalWeight;
             return this.items.WeakPredecessor((int) r).Value;
         }
 
         public void Add(params KeyValuePair<int, T>[] items) {
             foreach (KeyValuePair<int, T> item in items) {
-                this.items.Add(this.totalWeight, item.Value);
-                this.lookUp.Add(item.Value, this.totalWeight);
+                this.items.Add(this.TotalWeight, item.Value);
+                this.lookUp.Add(item.Value, this.TotalWeight);
                 this.totalWeight += item.Key;
             }
         }

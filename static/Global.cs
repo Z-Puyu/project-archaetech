@@ -1,14 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using Godot;
-using Godot.Collections;
 using ProjectArchaetech.common;
-using ProjectArchaetech.events;
-using ProjectArchaetech.triggers;
 using ProjectArchaetech.util.events;
-using static ProjectArchaetech.util.events.EventBus;
 
 namespace ProjectArchaetech {
 	public partial class Global : Node {
@@ -30,13 +23,13 @@ namespace ProjectArchaetech {
 		private static Node pickUp;
 		private static bool gameClockWasPaused;
 
-		public static GameManager GameManager { get => gameManager; }
-		public static ResourceManager ResManager { get => resManager; }
-		public static PopManager PopManager { get => popManager; }
-		public static BuildingManager BuildManager { get => buildManager; }
-		public static EventBus EventBus { get => eventBus; }
-		public static TechManager TechTree { get => techTree; }
-		public static GameMode GameState { get => gameState; set => gameState = value; }
+        public static GameManager GameManager => gameManager;
+        public static ResourceManager ResManager => resManager;
+        public static PopManager PopManager => popManager;
+        public static BuildingManager BuildManager => buildManager;
+        public static EventBus EventBus => eventBus;
+        public static TechManager TechTree => techTree;
+        public static GameMode GameState { get => gameState; set => gameState = value; }
 		public static Queue<Node> Grave { get => grave; set => grave = value; }
 		public static Node PickUp { get => pickUp; set => pickUp = value; }
 		public static bool GameClockWasPaused { get => gameClockWasPaused; set => gameClockWasPaused = value; }

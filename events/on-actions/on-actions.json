@@ -1,0 +1,12 @@
+{
+    "OnDailyPulse": {
+        "10": "event-id" 
+    },
+    "OnWeeklyPulse": {},
+    "OnFortnightlyPulse": {},
+    "OnMonthlyPulse": {},
+    "OnBimonthlyPulse": {},
+    "OnQuarterlyPulse": {},
+    "OnHalfYearPulse": {},
+    "OnYearlyPulse": {}
+}

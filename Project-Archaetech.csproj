@@ -71,5 +71,11 @@
     <Content Include="events\GameEvent.cs" />
     <Content Include="events\data\template.json" />
     <Content Include="common\scripted-triggers\Condition.cs" />
+    <Content Include="events\on-actions\on-actions.json" />
+    <Content Include="static\GameEventManager.cs" />
+    <Content Include="common\util\ObjectPool.cs" />
+    <Content Include=".vscode\settings.json" />
+    <Content Include="common\util\IPoolable.cs" />
+    <Content Include="common\util\RandomPool.cs" />
   </ItemGroup>
 </Project>

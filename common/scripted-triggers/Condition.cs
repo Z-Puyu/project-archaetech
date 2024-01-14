@@ -5,7 +5,7 @@ using Godot;
 using ProjectArchaetech.interfaces;
 
 namespace ProjectArchaetech.triggers {
-    [JsonDerivedType(typeof(Condition), typeDiscriminator: "condition")]
+    [JsonDerivedType(typeof(Condition), typeDiscriminator: "Condition")]
     [JsonDerivedType(typeof(AndCondition), typeDiscriminator: "AND")]
     [JsonDerivedType(typeof(OrCondition), typeDiscriminator: "OR")]
     [JsonDerivedType(typeof(XorCondition), typeDiscriminator: "XOR")]
