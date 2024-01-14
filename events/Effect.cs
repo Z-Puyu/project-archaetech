@@ -1,35 +1,34 @@
 using System;
 using System.Reflection;
-using Godot;
-using Godot.Collections;
-using MonoCustomResourceRegistry;
 using ProjectArchaetech.common;
 
 namespace ProjectArchaetech.events {
-	[RegisteredType(nameof(Tech), "", nameof(Resource)), GlobalClass]
-	public partial class Effect : Resource {
-		[Export]
-		public Dictionary<string, Variant> Effects { set; get; }
-		[Export]
-		public string Tooltip { set; get; }
-		[Export]
-		public bool Visible { set; get; }
+	public partial class Effect {
+		public string Name { get; set; }
+		public dynamic Arg { get; set; }
+		public string Tooltip { get; set; }
+		public bool Visible { get; set; }
 
 		public Effect() {
-			this.Effects = new Dictionary<string, Variant>();
+			this.Name = "";
+			this.Arg = null;
 			this.Tooltip = "";
 			this.Visible = true;
 		}
 
+		public Effect(string name, dynamic arg, string tooltip, bool visible) {
+			this.Name = name;
+			this.Arg = arg;
+			this.Tooltip = tooltip;
+			this.Visible = visible;
+		}
+
 		public override string ToString() {
 			string str = "";
-			foreach (string name in this.Effects.Keys) {
-				Type type = typeof(ScriptedEffects).GetNestedType(name);
-				str += type.GetMethod("ToString", BindingFlags.Static)
-					.Invoke(null, [this.Effects[name]]);
-				str += "\n";
-			}
-			return str + this.Tooltip + "\n";
+			Type type = typeof(ScriptedEffects).GetNestedType(Name);
+			string effectDesc = (string) type.GetMethod("ToString", BindingFlags.Static)
+				.Invoke(null, [this.Arg]);
+			return str + effectDesc + "\n" + this.Tooltip + "\n";
 		}
 	}
 }

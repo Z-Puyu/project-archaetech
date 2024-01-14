@@ -1,0 +1,73 @@
+[
+    {
+        "Prefix": "",
+        "Id": 0,
+        "Title": "",
+        "Desc": "",
+        "Mtth": 0,
+        "Options": [
+            {
+                "Id": "",
+                "Desc": "",
+                "Potential": {
+                    "Conditions": [
+                        {
+                            "$type": "condition",
+                            "Name": "",
+                            "Arg": 0
+                        },
+                        {
+                            "$type": "AND",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "OR",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "XOR",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "NOT",
+                            "Conditions": []
+                        }
+                    ]
+                },
+                "Triggers": {
+                    "Conditions": [
+                        {
+                            "$type": "condition",
+                            "Name": "",
+                            "Arg": 0
+                        },
+                        {
+                            "$type": "AND",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "OR",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "XOR",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "NOT",
+                            "Conditions": []
+                        }
+                    ]
+                },
+                "Effects": [
+                    {
+                        "name": "",
+                        "arg": 0,
+                        "tooltip": "",
+                        "visible": true
+                    }
+                ]
+            }
+        ]
+    }
+]
