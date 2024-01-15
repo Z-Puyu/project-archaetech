@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -5,26 +6,30 @@ using C5;
 using Godot;
 using ProjectArchaetech.common.util;
 using ProjectArchaetech.events;
+using ProjectArchaetech.util.events;
 
 namespace ProjectArchaetech {
     [GlobalClass]
     public partial class GameEventManager : Node {
+        private const string EVENT_NAMESPACE = "ProjectArchaetech.util.events";
         private readonly HashDictionary<string, GameEvent> events;
-        private readonly HashDictionary<string, RandomPool<GameEvent>> pool;
+        private readonly HashDictionary<Type, RandomPool<GameEvent>> pool;
 
         public GameEventManager() {
             this.events = new HashDictionary<string, GameEvent>();
-            this.pool = new HashDictionary<string, RandomPool<GameEvent>>();
+            this.pool = new HashDictionary<Type, RandomPool<GameEvent>>();
         }
 
         private void PopulatePool() {
             string onActionPath = "events/on-actions/on-actions.json";
             string onActionData = File.ReadAllText(onActionPath);
-            Dictionary<string, List<string>> onActions = JsonSerializer
-                .Deserialize<Dictionary<string, List<string>>>(onActionData);
+            Dictionary<string, OnAction> onActions = JsonSerializer
+                .Deserialize<Dictionary<string, OnAction>>(onActionData);
             foreach (string pulse in onActions.Keys) {
+                string eventName = onActions[pulse].Global;
+                Type eventType = Type.GetType($"{EVENT_NAMESPACE}.{eventName}");
                 RandomPool<GameEvent> s = new RandomPool<GameEvent>(null, null);
-                foreach (string id in onActions[pulse]) {
+                foreach (string id in onActions[pulse].EventId) {
                     if (this.events.Contains(id)) {
                         GameEvent e = this.events[id];
                         if (e is RandomGameEvent) {
@@ -37,7 +42,7 @@ namespace ProjectArchaetech {
                         GD.PushError("Event with ID " + id + " does not exist!");
                     }
                 }
-                this.pool[pulse] = s;
+                this.pool[eventType] = s;
             }
         }
 
@@ -54,10 +59,12 @@ namespace ProjectArchaetech {
                 this.events[e.GetId()] = e;
             }
             this.PopulatePool();
+
+            Global.EventBus.Subscribe<NewMonthEvent>((sender, e) => this.PollEvent(e));
         }
 
-        private void PollEvent(string pulse) {
-            GameEvent e = this.pool[pulse].Poll();
+        private void PollEvent(EventArgs globalEvent) {
+            GameEvent e = this.pool[globalEvent.GetType()].Poll();
             if (e != default) {
                 e.Fire();
             }

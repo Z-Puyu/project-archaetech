@@ -1,12 +1,34 @@
 {
     "OnDailyPulse": {
-        "10": "event-id" 
+        "Global": "NewDayEvent",
+        "EventId": []
     },
-    "OnWeeklyPulse": {},
-    "OnFortnightlyPulse": {},
-    "OnMonthlyPulse": {},
-    "OnBimonthlyPulse": {},
-    "OnQuarterlyPulse": {},
-    "OnHalfYearPulse": {},
-    "OnYearlyPulse": {}
+    "OnWeeklyPulse": {
+        "Global": "NewWeekEvent",
+        "EventId": []
+    },
+    "OnFortnightlyPulse": {
+        "Global": "NewFortnightEvent",
+        "EventId": []
+    },
+    "OnMonthlyPulse": {
+        "Global": "NewMonthEvent",
+        "EventId": []
+    },
+    "OnBiMonthlyPulse": {
+        "Global": "NewBiMonthEvent",
+        "EventId": []
+    },
+    "OnQuarterlyPulse": {
+        "Global": "NewQuarterEvent",
+        "EventId": []
+    },
+    "OnHalfYearPulse": {
+        "Global": "NewHalfYearEvent",
+        "EventId": []
+    },
+    "OnYearlyPulse": {
+        "Global": "NewYearEvent",
+        "EventId": []
+    }
 }

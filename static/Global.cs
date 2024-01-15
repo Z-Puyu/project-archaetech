@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 using ProjectArchaetech.common;
+using ProjectArchaetech.events;
 using ProjectArchaetech.util.events;
 
 namespace ProjectArchaetech {
@@ -19,20 +20,22 @@ namespace ProjectArchaetech {
 		private static BuildingManager buildManager;
 		private static EventBus eventBus;
 		private static TechManager techTree;
+		private static GameEventManager gameEventManager;
 		private static GameMode gameState;
 		private static Node pickUp;
 		private static bool gameClockWasPaused;
 
-        public static GameManager GameManager => gameManager;
-        public static ResourceManager ResManager => resManager;
-        public static PopManager PopManager => popManager;
-        public static BuildingManager BuildManager => buildManager;
-        public static EventBus EventBus => eventBus;
-        public static TechManager TechTree => techTree;
-        public static GameMode GameState { get => gameState; set => gameState = value; }
+		public static GameManager GameManager => gameManager;
+		public static ResourceManager ResManager => resManager;
+		public static PopManager PopManager => popManager;
+		public static BuildingManager BuildManager => buildManager;
+		public static EventBus EventBus => eventBus;
+		public static TechManager TechTree => techTree;
+		public static GameMode GameState { get => gameState; set => gameState = value; }
 		public static Queue<Node> Grave { get => grave; set => grave = value; }
 		public static Node PickUp { get => pickUp; set => pickUp = value; }
 		public static bool GameClockWasPaused { get => gameClockWasPaused; set => gameClockWasPaused = value; }
+		public static GameEventManager GameEventManager => gameEventManager;
 
 		// We define the following signals to communicate between GDscript and C#
 		// Modal-related
@@ -78,6 +81,7 @@ namespace ProjectArchaetech {
 			popManager = this.GetNode<PopManager>("PopManager");
 			buildManager = this.GetNode<BuildingManager>("BuildingManager");
 			techTree = this.GetNode<TechManager>("TechManager");
+			gameEventManager = this.GetNode<GameEventManager>("GameEventManager");
 
 			// Connect events.
 			EventBus.Subscribe<NewMonthEvent>((sender, e) => ClearDeadObjects());

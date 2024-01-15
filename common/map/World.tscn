@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://bfuicndnh6uun" path="res://common/terrain/DesertTerrain.tres" id="5_k4vpl"]
 [ext_resource type="Resource" uid="uid://obr3cg2hliic" path="res://common/terrain/MountainTerrain.tres" id="6_74qwf"]
 [ext_resource type="Texture2D" uid="uid://boohv8wkfp05h" path="res://gfx/map-objects/Cells.png" id="7_yhy3o"]
-[ext_resource type="Texture2D" uid="uid://7hlea4wwm3aw" path="res://gfx/map-objects/Buildings.png" id="8_0arc8"]
+[ext_resource type="Texture2D" uid="uid://bscbqdogi4shx" path="res://gfx/map-objects/BaseBuilding.png" id="8_0arc8"]
 [ext_resource type="Script" path="res://common/map/Map.cs" id="9_x8mba"]
 [ext_resource type="Script" path="res://common/map/MainCamera.gd" id="10_b0jpv"]
 [ext_resource type="PackedScene" uid="uid://dvtrin5dw4fxj" path="res://assets/buildings/BaseBuilding.tscn" id="11_jqtdp"]
@@ -35,7 +35,6 @@ texture = ExtResource("8_0arc8")
 texture_region_size = Vector2i(32, 16)
 0:0/size_in_atlas = Vector2i(2, 4)
 0:0/0 = 0
-2:0/size_in_atlas = Vector2i(6, 10)
 2:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_usiub"]

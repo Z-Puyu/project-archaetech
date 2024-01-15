@@ -28,14 +28,6 @@
     <Content Include="common\util\ConstructibleTask.cs" />
     <Content Include="common\util\IRecyclable.cs" />
     <Content Include="common\util\ConstructionQueue.cs" />
-    <Content Include="static\BuildingManager.cs" />
-    <Content Include="static\Events.cs" />
-    <Content Include="static\GameClock.cs" />
-    <Content Include="static\GameManager.cs" />
-    <Content Include="static\Global.cs" />
-    <Content Include="static\PopManager.cs" />
-    <Content Include="static\ResourceManager.cs" />
-    <Content Include="static\TechManager.cs" />
     <Content Include="util\ILazyBase.cs" />
     <Content Include="util\RandomSelector.cs" />
     <Content Include="common\map\Map.cs" />
@@ -48,16 +40,7 @@
     <Content Include="common\components\RecruitmentFunctionality.cs" />
     <Content Include="common\components\ProductionFunctionality.cs" />
     <Content Include="common\components\TransportFunctionality.cs" />
-    <Content Include="static\events\NewMonthEvent.cs" />
-    <Content Include="static\events\ConstructionTaskCompletedEvent.cs" />
-    <Content Include="static\events\ProductionEndedEvent.cs" />
-    <Content Include="static\events\BuildingProcessedEvent.cs" />
-    <Content Include="static\events\ProcessingPopsEvent.cs" />
-    <Content Include="static\EventBus.cs" />
     <Content Include="common\buildings\Warehouse.cs" />
-    <Content Include="static\events\BuildingUIDataUpdatedEvent.cs" />
-    <Content Include="static\events\TransportRouteAddedEvent.cs" />
-    <Content Include="static\events\TransportRouteRemoved.cs" />
     <Content Include="common\pops\PopData.cs" />
     <Content Include="common\pops\Competency.cs" />
     <Content Include="common\pops\Pop.cs" />
@@ -72,10 +55,24 @@
     <Content Include="events\data\template.json" />
     <Content Include="common\scripted-triggers\Condition.cs" />
     <Content Include="events\on-actions\on-actions.json" />
-    <Content Include="static\GameEventManager.cs" />
     <Content Include="common\util\ObjectPool.cs" />
     <Content Include=".vscode\settings.json" />
     <Content Include="common\util\IPoolable.cs" />
     <Content Include="common\util\RandomPool.cs" />
+    <Content Include="static\GameEventManager.cs" />
+    <Content Include="events\on-actions\OnAction.cs" />
+    <Content Include="static\GameManager.cs" />
+    <Content Include="interface\core\Calendar.gd" />
+    <Content Include="static\events\NewDayEvent.cs" />
+    <Content Include="static\events\NewWeekEvent.cs" />
+    <Content Include="static\events\NewFortnightEvent.cs" />
+    <Content Include="static\events\NewBiMonthEvent.cs" />
+    <Content Include="static\events\NewQuarterEvent.cs" />
+    <Content Include="static\events\NewHalfYearEvent.cs" />
+    <Content Include="static\events\NewYearEvent.cs" />
+    <Content Include="common\util\Date.cs" />
+    <Content Include="static\Global.cs" />
+    <Content Include="events\data\events.json" />
+    <Content Include="events\data\template copy.json" />
   </ItemGroup>
 </Project>
