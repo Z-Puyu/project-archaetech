@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://ch21g0i1voo1"]
 
-[ext_resource type="Script" path="res://common/resources/ResourceData.gd" id="1_bhomj"]
+[ext_resource type="Script" path="res://common/resources/ResourceData.cs" id="1_bhomj"]
 
 [resource]
 script = ExtResource("1_bhomj")
-name = ""
+name = "Chemicals"
 desc = ""
-type = 0
+type = 4

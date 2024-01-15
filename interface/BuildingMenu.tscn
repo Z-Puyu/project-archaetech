@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=3 uid="uid://dup5ujurhlwff"]
+
+[ext_resource type="Script" path="res://interface/BuildingMenu.gd" id="1_0rtug"]
+[ext_resource type="Texture2D" uid="uid://cspy5k65v6guc" path="res://gfx/interface/overlays/MiniPanel01.jpg" id="1_p6qb0"]
+[ext_resource type="Texture2D" uid="uid://1kp46s12ruyr" path="res://gfx/interface/overlays/ItemEnable.png" id="3_ftds8"]
+[ext_resource type="Texture2D" uid="uid://cjkb506vylf4r" path="res://gfx/interface/overlays/ItemDisable.png" id="4_4bcgt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l550n"]
+content_margin_left = 19.0
+content_margin_top = 26.0
+content_margin_right = 23.0
+content_margin_bottom = 20.0
+texture = ExtResource("1_p6qb0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_20fws"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+texture = ExtResource("3_ftds8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5boyq"]
+texture = ExtResource("4_4bcgt")
+texture_margin_left = 10.0
+texture_margin_right = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r55ri"]
+texture = ExtResource("4_4bcgt")
+texture_margin_left = 10.0
+texture_margin_right = 10.0
+modulate_color = Color(0.752941, 0.752941, 0.752941, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mxwdj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nt6t2"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+
+[node name="BuildingMenu" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_l550n")
+script = ExtResource("1_0rtug")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+theme_override_styles/tab_selected = SubResource("StyleBoxTexture_20fws")
+theme_override_styles/tab_hovered = SubResource("StyleBoxTexture_5boyq")
+theme_override_styles/tab_unselected = SubResource("StyleBoxTexture_r55ri")
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_mxwdj")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nt6t2")
+
+[node name="All" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/All"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/All/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="Production" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Production"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Production/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5

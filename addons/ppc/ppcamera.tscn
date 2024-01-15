@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3wfofdy85r5q"]
+
+[ext_resource type="Script" path="res://addons/ppc/ppcamera.gd" id="1"]
+
+[node name="PinchPanCamera" type="Marker2D"]
+script = ExtResource("1")

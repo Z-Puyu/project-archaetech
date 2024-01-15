@@ -1,9 +1,18 @@
-extends Control
-# Called when the node enters the scene tree for the first time.
+class_name InGameUI extends Control
+
+@onready var _modal: CanvasLayer = %Modal
+
 func _ready():
-	pass # Replace with function body.
+	%Calendar/%PauseButton.toggled.connect(func(toggled: bool): 
+		Global.ResumeTime() if toggled else Global.PauseTime()
+	)
+	%NewBuildingButton.pressed.connect(func(): self._on_toggle_modal("construction"))
+	Global.CellSelected.connect(func(data: TileData): %InfoPanel.show())
+	Global.CellSelected.connect(%InfoPanel/%CellInfo.show_info)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_toggle_modal(window_name: String):
+	Global.RestoringNormalMode.emit()
+	if self._modal.is_visible():
+		self._modal.close()
+	else:
+		self._modal.open(window_name)

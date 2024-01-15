@@ -1,6 +1,7 @@
 class_name TerrainData extends Resource
 
 @export var type: int
+@export var name: String
 @export var time_to_traverse: int # Number of days to pass through the tile
 @export var impassible: bool = false
 @export var harmful: bool = false

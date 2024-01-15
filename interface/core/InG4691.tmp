@@ -1,0 +1,150 @@
+[gd_scene load_steps=12 format=3 uid="uid://dwmspwwtu1d2d"]
+
+[ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/core/ResourcePanel.tscn" id="1_0xkas"]
+[ext_resource type="Script" path="res://interface/core/InGameUI.gd" id="1_ujdhx"]
+[ext_resource type="PackedScene" uid="uid://co81lv0s2uhl" path="res://interface/core/Calendar.tscn" id="2_lfric"]
+[ext_resource type="Script" path="res://interface/core/NewUnit.gd" id="4_3x6to"]
+[ext_resource type="Script" path="res://interface/core/NewBuilding.gd" id="4_4caic"]
+[ext_resource type="Texture2D" uid="uid://cgchs35ncnvqs" path="res://gfx/interface/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-003.png" id="4_7kwqw"]
+[ext_resource type="Script" path="res://interface/Info.gd" id="4_kdhwk"]
+[ext_resource type="PackedScene" uid="uid://dw3duqsv2ocqc" path="res://interface/buildings/BuildingInfo.tscn" id="5_ci4fi"]
+[ext_resource type="Script" path="res://interface/UnitSelection.gd" id="6_q7puf"]
+[ext_resource type="PackedScene" uid="uid://dup5ujurhlwff" path="res://interface/BuildingMenu.tscn" id="8_1wx18"]
+[ext_resource type="Script" path="res://interface/core/ModalBackdrop.gd" id="10_mmjag"]
+
+[node name="InGameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ujdhx")
+
+[node name="ResourcePanel" parent="." instance=ExtResource("1_0xkas")]
+layout_mode = 0
+offset_right = 382.0
+
+[node name="Calendar" parent="." instance=ExtResource("2_lfric")]
+layout_mode = 1
+
+[node name="InfoPanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 773.0
+offset_top = 410.0
+offset_right = 1150.0
+offset_bottom = 646.0
+script = ExtResource("4_kdhwk")
+
+[node name="ColorRect" type="NinePatchRect" parent="InfoPanel"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -377.0
+offset_top = -239.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("4_7kwqw")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="Info" type="Label" parent="InfoPanel"]
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 8.0
+offset_right = 365.0
+offset_bottom = 233.0
+
+[node name="BuildingInfo" parent="InfoPanel" instance=ExtResource("5_ci4fi")]
+layout_mode = 1
+offset_left = -176.5
+offset_top = 10.0
+offset_right = 176.5
+offset_bottom = 110.0
+
+[node name="NewUnit" type="Button" parent="InfoPanel"]
+layout_mode = 0
+offset_left = -772.0
+offset_top = 171.0
+offset_right = -667.0
+offset_bottom = 238.0
+text = "New Unit"
+script = ExtResource("4_3x6to")
+
+[node name="NewBuildingButton" type="Button" parent="InfoPanel"]
+layout_mode = 0
+offset_left = -656.0
+offset_top = 172.0
+offset_right = -545.0
+offset_bottom = 237.0
+text = "New Building"
+script = ExtResource("4_4caic")
+
+[node name="UnitSelection" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -225.0
+offset_right = 75.0
+offset_bottom = 225.0
+grow_vertical = 2
+
+[node name="ColorRect" type="NinePatchRect" parent="UnitSelection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_7kwqw")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UnitSelection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UnitSelection/ScrollContainer"]
+custom_minimum_size = Vector2(75, 450)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_q7puf")
+
+[node name="ModalBackdrop" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource("10_mmjag")
+
+[node name="BuildingMenu" parent="ModalBackdrop" instance=ExtResource("8_1wx18")]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[connection signal="pressed" from="InfoPanel/NewUnit" to="InfoPanel" method="_on_new_unit_pressed"]
+[connection signal="pressed" from="InfoPanel/NewUnit" to="InfoPanel/NewUnit" method="_on_pressed"]
+[connection signal="pressed" from="InfoPanel/NewBuildingButton" to="InfoPanel" method="_on_new_building_pressed"]
+[connection signal="pressed" from="InfoPanel/NewBuildingButton" to="InfoPanel/NewBuildingButton" method="_on_pressed"]

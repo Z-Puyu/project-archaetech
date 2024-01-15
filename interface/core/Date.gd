@@ -4,14 +4,14 @@ var date: Array[int]
 
 func _ready():
 	self.date = [0, 0, 1]
-	GameManager.game_clock.timeout.connect(self.next_day)
+	get_node("/root/Global/GameManager/GameClock").timeout.connect(self.next_day)
 
 func next_day():
 	self.date[2] += 1
 	if self.date[2] == 31:
 		self.date[1] += 1
 		self.date[2] = 1
-		print(self.date[2])
+		# print(self.date[2])
 		if self.date[1] == 12:
 			self.date[0] += 1
 			self.date[1] = 0

@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwmspwwtu1d2d"]
+
+[ext_resource type="PackedScene" uid="uid://px7ujblhnr2w" path="res://interface/core/ResourcePanel.tscn" id="1_0xkas"]
+[ext_resource type="Script" path="res://interface/core/InGameUI.gd" id="1_ujdhx"]
+[ext_resource type="PackedScene" uid="uid://co81lv0s2uhl" path="res://interface/core/Calendar.tscn" id="2_lfric"]
+[ext_resource type="PackedScene" uid="uid://tk3rk44j88w1" path="res://interface/buildings/BuildingInfo.tscn" id="5_ci4fi"]
+[ext_resource type="PackedScene" uid="uid://dup5ujurhlwff" path="res://interface/BuildingMenu.tscn" id="8_1wx18"]
+[ext_resource type="Script" path="res://interface/core/ModalBackdrop.gd" id="10_mmjag"]
+[ext_resource type="Script" path="res://interface/core/Backdrop.gd" id="11_btrfl"]
+
+[node name="InGameUI" type="Control"]
+layout_direction = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ujdhx")
+
+[node name="ResourcePanel" parent="." instance=ExtResource("1_0xkas")]
+layout_mode = 0
+offset_right = 668.0
+
+[node name="Calendar" parent="." instance=ExtResource("2_lfric")]
+layout_mode = 1
+
+[node name="Modal" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource("10_mmjag")
+
+[node name="Backdrop" type="Control" parent="Modal"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("11_btrfl")
+
+[node name="BuildingInfo" parent="Modal/Backdrop" instance=ExtResource("5_ci4fi")]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="BuildingMenu" parent="Modal/Backdrop" instance=ExtResource("8_1wx18")]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0

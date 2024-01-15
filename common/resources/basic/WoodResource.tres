@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="ResourceData" load_steps=2 format=3 uid="uid://bx07rulho34t1"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bx07rulho34t1"]
 
-[ext_resource type="Script" path="res://common/resources/ResourceData.gd" id="1_gvuhq"]
+[ext_resource type="Texture2D" uid="uid://cnotgn47ma5cn" path="res://gfx/interface/icons/resources/wood.svg" id="1_e6ik2"]
+[ext_resource type="Script" path="res://common/resources/ResourceData.cs" id="1_nqo3d"]
 
 [resource]
-script = ExtResource("1_gvuhq")
+script = ExtResource("1_nqo3d")
 name = "Wood"
+desc = ""
+icon = ExtResource("1_e6ik2")
 type = 0
