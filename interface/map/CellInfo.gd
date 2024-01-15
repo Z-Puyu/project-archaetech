@@ -1,4 +1,5 @@
 class_name CellInfo extends Panel
+const Cell = preload("res://common/map/Cell.cs")
 
 @onready var components: Dictionary = {
 	"terrain": $Terrain

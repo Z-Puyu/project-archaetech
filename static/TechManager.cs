@@ -1,10 +1,10 @@
 using C5;
 using Godot;
 using Godot.Collections;
+using ProjectArchaetech.events;
 using ProjectArchaetech.util.events;
 using System;
 using System.Collections.Generic;
-using static ProjectArchaetech.util.events.EventBus;
 
 namespace ProjectArchaetech {
 	[GlobalClass]
@@ -47,7 +47,7 @@ namespace ProjectArchaetech {
 
 		public void Unlock(Tech tech) {
 			if (!this.Researchable.Contains(tech)) {
-				GD.PushError("Nonexistent Tech!");
+				GD.PushError("Non-existent Tech!");
 				GetTree().Quit();
 			} else {
 				this.Unlocked.Add(tech);
@@ -62,6 +62,7 @@ namespace ProjectArchaetech {
 						this.Selector.Add(new C5.KeyValuePair<int, Tech>(newTech.weight, newTech));
 					}
 				}
+				Global.EventBus.Publish(this, new TechUnlockedEvent(tech));
 			}
 		}
 

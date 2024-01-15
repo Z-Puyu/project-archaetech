@@ -10,7 +10,8 @@ namespace ProjectArchaetech {
 			Normal,
 			Paused,
 			Build,
-			BuildRoute
+			BuildRoute,
+			ForcePaused
 		}
 
 		private static Queue<Node> grave;
@@ -58,15 +59,22 @@ namespace ProjectArchaetech {
 
 		[Signal]
 		public delegate void NewMonthEventHandler();
+
+		// General
 		[Signal]
 		public delegate void PickingUpObjEventHandler(Node gameObj);
+		[Signal]
+		public delegate void DeletedGameObjEventHandler(Node node);
 		[Signal]
 		public delegate void AddingBuildingEventHandler(string buildingId);
 		[Signal]
 		public delegate void CellSelectedEventHandler(Cell cell, TileData tileData);
-		
 		[Signal]
-		public delegate void DeletedGameObjEventHandler(Node node);
+		public delegate void GameForcePausedEventHandler();
+		[Signal]
+		public delegate void GameForceResumedEventHandler();
+		
+		
 
 		public Global() {
 			eventBus = new EventBus();
@@ -116,6 +124,24 @@ namespace ProjectArchaetech {
 		public void ResumeGame() {
 			GameManager.GameClock.Paused = GameManager.GameClock.Paused;
 			GameState = GameMode.Normal;
+		}
+
+		public void ForcePause() {
+			if (!GameManager.GameClock.Paused) {
+				this.EmitSignal(SignalName.GameForcePaused);
+				GameState = GameMode.ForcePaused;
+			}
+		}
+
+		public void ForceResume() {
+			if (WasForcePaused()) {
+				this.EmitSignal(SignalName.GameForceResumed);
+				GameState = GameMode.Normal;
+			}
+		}
+
+		public static bool WasForcePaused() {
+			return GameState == GameMode.ForcePaused;
 		}
 		
 		public void PauseTime() {

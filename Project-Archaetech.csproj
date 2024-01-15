@@ -48,7 +48,6 @@
     <Content Include="common\scripted-effects\ScriptedEffects.cs" />
     <Content Include="common\scripted-effects\Effect.cs" />
     <Content Include="events\Effect.cs" />
-    <Content Include="events\EventType.cs" />
     <Content Include="events\Option.cs" />
     <Content Include="events\IEvent.cs" />
     <Content Include="events\GameEvent.cs" />
@@ -75,5 +74,13 @@
     <Content Include="events\data\events.json" />
     <Content Include="events\data\template copy.json" />
     <Content Include="common\util\CountDown.cs" />
+    <Content Include="static\TechManager.cs" />
+    <Content Include="static\events\TechUnlockedEvent.cs" />
+    <Content Include="static\events\TransportRouteAddedEvent.cs" />
+    <Content Include="static\events\abstract-types\GameEvent.cs" />
+    <Content Include="interface\events\EventWindow.cs" />
+    <Content Include="interface\events\EventOptionButton.cs" />
+    <Content Include="static\events\GameEventFiredEvent.cs" />
+    <Content Include="interface\events\EventPopups.cs" />
   </ItemGroup>
 </Project>

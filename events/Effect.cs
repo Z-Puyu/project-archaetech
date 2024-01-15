@@ -23,6 +23,10 @@ namespace ProjectArchaetech.events {
 			this.Visible = visible;
 		}
 
+		public void Invoke() {
+			typeof(ScriptedEffects).GetMethod(this.Name, BindingFlags.Static).Invoke(null, Arg);
+		}
+
 		public override string ToString() {
 			string str = "";
 			Type type = typeof(ScriptedEffects).GetNestedType(Name);

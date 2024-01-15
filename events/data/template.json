@@ -5,7 +5,66 @@
         "Id": 0,
         "Title": "",
         "Desc": "",
+        "Visible": true,
+        "Potential": {
+            "Conditions": [
+                {
+                    "$type": "Condition",
+                    "Name": "",
+                    "Arg": 0
+                },
+                {
+                    "$type": "AND",
+                    "Conditions": []
+                },
+                {
+                    "$type": "OR",
+                    "Conditions": []
+                },
+                {
+                    "$type": "XOR",
+                    "Conditions": []
+                },
+                {
+                    "$type": "NOT",
+                    "Conditions": []
+                }
+            ]
+        },
+        "Triggers": {
+            "Conditions": [
+                {
+                    "$type": "Condition",
+                    "Name": "",
+                    "Arg": 0
+                },
+                {
+                    "$type": "AND",
+                    "Conditions": []
+                },
+                {
+                    "$type": "OR",
+                    "Conditions": []
+                },
+                {
+                    "$type": "XOR",
+                    "Conditions": []
+                },
+                {
+                    "$type": "NOT",
+                    "Conditions": []
+                }
+            ]
+        },
         "Mtth": 0,
+        "ImmediateEffects": [
+            {
+                "name": "",
+                "arg": 0,
+                "tooltip": "",
+                "visible": true
+            }
+        ],
         "Options": [
             {
                 "Id": "",
@@ -77,8 +136,67 @@
         "Id": 0,
         "Title": "",
         "Desc": "",
+        "Visible": true,
+        "Potential": {
+            "Conditions": [
+                {
+                    "$type": "Condition",
+                    "Name": "",
+                    "Arg": 0
+                },
+                {
+                    "$type": "AND",
+                    "Conditions": []
+                },
+                {
+                    "$type": "OR",
+                    "Conditions": []
+                },
+                {
+                    "$type": "XOR",
+                    "Conditions": []
+                },
+                {
+                    "$type": "NOT",
+                    "Conditions": []
+                }
+            ]
+        },
+        "Triggers": {
+            "Conditions": [
+                {
+                    "$type": "Condition",
+                    "Name": "",
+                    "Arg": 0
+                },
+                {
+                    "$type": "AND",
+                    "Conditions": []
+                },
+                {
+                    "$type": "OR",
+                    "Conditions": []
+                },
+                {
+                    "$type": "XOR",
+                    "Conditions": []
+                },
+                {
+                    "$type": "NOT",
+                    "Conditions": []
+                }
+            ]
+        },
         "Mtth": 0,
         "Factor": 1,
+        "ImmediateEffects": [
+            {
+                "name": "",
+                "arg": 0,
+                "tooltip": "",
+                "visible": true
+            }
+        ],
         "Options": [
             {
                 "Id": "",
