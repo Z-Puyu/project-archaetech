@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5kaiyggch02c"]
+
+[ext_resource type="Texture2D" uid="uid://cgdb88c0itqxg" path="res://gfx/interface/overlays/MiniPanel03.jpg" id="1_onj81"]
+[ext_resource type="Script" path="res://interface/events/EventWindow.cs" id="2_h8k0g"]
+[ext_resource type="Texture2D" uid="uid://bohxmdskrlons" path="res://gfx/interface/overlays/TestPic.jpg" id="3_pyb2e"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d2gkw"]
+texture = ExtResource("1_onj81")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ke7u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bt8eb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_grjr4"]
+
+[node name="EventWindow" type="PanelContainer"]
+custom_minimum_size = Vector2(800, 350)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -175.0
+offset_right = 400.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_d2gkw")
+script = ExtResource("2_h8k0g")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 44
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="EventTitle" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Test Event Title"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EventPicture" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_pyb2e")
+expand_mode = 2
+
+[node name="EventContents" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EventDescription" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/EventContents"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2ke7u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bt8eb")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_grjr4")
+editable = false
+wrap_mode = 1

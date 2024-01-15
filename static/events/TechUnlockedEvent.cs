@@ -1,7 +1,7 @@
 using ProjectArchaetech.events.@abstract;
 
-namespace ProjectArchaetech.events {
-    public class TechUnlockedEvent : @abstract.GameEvent {
+namespace ProjectArchaetech.util.events {
+    public class TechUnlockedEvent :GameEvent {
         public TechUnlockedEvent(Tech tech) : base(
             $"Discovered {tech.name}!", 
             $"We have discovered {tech.name}!"

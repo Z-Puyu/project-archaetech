@@ -78,5 +78,9 @@
     <Content Include="static\events\TechUnlockedEvent.cs" />
     <Content Include="static\events\TransportRouteAddedEvent.cs" />
     <Content Include="static\events\abstract-types\GameEvent.cs" />
+    <Content Include="interface\events\EventWindow.cs" />
+    <Content Include="interface\events\EventOptionButton.cs" />
+    <Content Include="static\events\GameEventFiredEvent.cs" />
+    <Content Include="interface\events\EventPopups.cs" />
   </ItemGroup>
 </Project>

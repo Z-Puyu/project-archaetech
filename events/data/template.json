@@ -5,6 +5,7 @@
         "Id": 0,
         "Title": "",
         "Desc": "",
+        "Visible": true,
         "Potential": {
             "Conditions": [
                 {
@@ -135,6 +136,7 @@
         "Id": 0,
         "Title": "",
         "Desc": "",
+        "Visible": true,
         "Potential": {
             "Conditions": [
                 {

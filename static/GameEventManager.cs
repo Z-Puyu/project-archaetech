@@ -38,8 +38,7 @@ namespace ProjectArchaetech {
                         if (e is RandomGameEvent) {
                             s.Add(((RandomGameEvent) e).Factor, e);
                         } else {
-                            GD.PushError("Event with ID " + id + " is not a random event!");
-                            this.GetTree().Quit();
+                            s.Add(1, e);
                         }
                     } else {
                         GD.PushError("Event with ID " + id + " does not exist!");
@@ -83,7 +82,10 @@ namespace ProjectArchaetech {
             RandomPool<GameEvent> pool = this.pool[globalEvent.GetType()];
             while (!polledEvents.Contains(e)) {
                 e = pool.Poll();
-                if (e == default || (e.IsValid() && e.CanFire())) {
+                if (e == default) {
+                    break;
+                }
+                if (e.IsValid() && e.CanFire()) {
                     if (e is not RandomGameEvent) {
                         GD.PushError($"{e.GetId()} is not a random event!");
                         return;
@@ -124,11 +126,12 @@ namespace ProjectArchaetech {
                         @event.Fire();
                     } else {
                         string id = @event.GetId();
-                        CountDown scheduledEvent = @event.Schedule(() => this.scheduled.Remove(id));
+                        CountDown scheduledEvent = @event.Schedule(
+                            () => this.scheduled.Remove(id)
+                        );
                         this.scheduled.Add(id, scheduledEvent);
                     }
                 }
-                
             }
         }
     }
