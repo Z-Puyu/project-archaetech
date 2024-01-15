@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using ProjectArchaetech.common.util;
 using ProjectArchaetech.interfaces;
+using ProjectArchaetech.triggers;
 
 namespace ProjectArchaetech.events {
 	[JsonDerivedType(typeof(GameEvent), typeDiscriminator: "Event")]
@@ -12,7 +13,10 @@ namespace ProjectArchaetech.events {
 		public int Id { get; set; }
 		public string Title { get; set; }
 		public string Desc { get; set; }
+		public AndCondition Potential { get; set; }
+		public AndCondition Triggers { get; set; }
 		public int Mtth { get; set; }
+		public List<Effect> ImmediateEffects { get; set; }
 		public List<Option> Options { get; set; }
 
 		public GameEvent() { 
@@ -38,17 +42,34 @@ namespace ProjectArchaetech.events {
 			return this.Prefix + "." + this.Id;
 		}
 
+		public bool IsValid() {
+			return this.Potential.IsTrue();
+		}
+
+		public bool CanFire() {
+			return this.Triggers.IsTrue();
+		}
+
 		public void Fire() {
 			Console.WriteLine("");
 		}
 
-        public void Initialise(Action<GameEvent> @return)
-        {
+        public void Customise(string customTitle, string customDesc) {
+            this.Title = customTitle;
+			this.Desc = customDesc;
+        }
+
+		public CountDown Schedule(Action @return) {
+			Random rand = new Random(Guid.NewGuid().GetHashCode());
+			int t = (int) (this.Mtth * (0.5 + rand.NextDouble() + rand.NextDouble() + 0.5 * rand.NextDouble()));
+			return new CountDown(t, this.Fire, @return);
+		}
+
+        public void Initialise(Action<GameEvent> @return) {
             throw new NotImplementedException();
         }
 
-        public void Return()
-        {
+        public void Return() {
             throw new NotImplementedException();
         }
     }
@@ -63,12 +84,6 @@ namespace ProjectArchaetech.events {
 		public RandomGameEvent(string prefix, int id, string title, string desc, int mtth, 
 			List<Option> options, int factor) : base(prefix, id, title, desc, mtth, options) {
 			this.Factor = factor;
-		}
-
-		public CountDown Schedule(Action @return) {
-			Random rand = new Random(Guid.NewGuid().GetHashCode());
-			int t = (int) (this.Mtth * (0.5 + rand.NextDouble() + rand.NextDouble() + 0.5 * rand.NextDouble()));
-			return new CountDown(t, this.Fire, @return);
 		}
 	}
 }

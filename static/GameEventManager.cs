@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using C5;
 using Godot;
@@ -62,6 +63,7 @@ namespace ProjectArchaetech {
             }
             this.PopulatePool();
 
+            // Random Events
             Global.EventBus.Subscribe<NewDayEvent>((sender, e) => this.PollEvent(e));
             Global.EventBus.Subscribe<NewWeekEvent>((sender, e) => this.PollEvent(e));
             Global.EventBus.Subscribe<NewFortnightEvent>((sender, e) => this.PollEvent(e));
@@ -70,18 +72,63 @@ namespace ProjectArchaetech {
             Global.EventBus.Subscribe<NewQuarterEvent>((sender, e) => this.PollEvent(e));
             Global.EventBus.Subscribe<NewHalfYearEvent>((sender, e) => this.PollEvent(e));
             Global.EventBus.Subscribe<NewYearEvent>((sender, e) => this.PollEvent(e));
+        
+            // On-Action Events
+            Global.EventBus.Subscribe<TechUnlockedEvent>((sender, e) => this.FireEvent(e));
         }
 
         private void PollEvent(EventArgs globalEvent) {
-            GameEvent e = this.pool[globalEvent.GetType()].Poll();
-            if (e != default) {
+            GameEvent e = default;
+            C5.HashSet<RandomGameEvent> polledEvents = new C5.HashSet<RandomGameEvent>();
+            RandomPool<GameEvent> pool = this.pool[globalEvent.GetType()];
+            while (!polledEvents.Contains(e)) {
+                e = pool.Poll();
+                if (e == default || (e.IsValid() && e.CanFire())) {
+                    if (e is not RandomGameEvent) {
+                        GD.PushError($"{e.GetId()} is not a random event!");
+                        return;
+                    }
+                    break;
+                }
                 if (e is not RandomGameEvent) {
                     GD.PushError($"{e.GetId()} is not a random event!");
-                } else {
-                    string id = e.GetId();
-                    CountDown scheduledEvent = ((RandomGameEvent) e).Schedule(() => this.scheduled.Remove(id));
-                    this.scheduled.Add(id, scheduledEvent);
+                    return;
                 }
+                // e != default
+                pool.Pop(e);
+                polledEvents.Add((RandomGameEvent) e);
+            }
+
+            foreach (RandomGameEvent @event in polledEvents) {
+                pool.Add(@event.Factor, @event);
+                polledEvents.Remove(@event);
+            }
+
+            if (e != default) {
+                string id = e.GetId();
+                CountDown scheduledEvent = ((RandomGameEvent) e)
+                    .Schedule(() => this.scheduled.Remove(id));
+                this.scheduled.Add(id, scheduledEvent);
+            }
+        }
+
+        private void FireEvent(EventArgs e) {
+            C5.HashSet<GameEvent> events = this.pool[e.GetType()].Items;
+            foreach (GameEvent @event in events) {
+                if (e is events.@abstract.GameEvent) {
+                    events.@abstract.GameEvent data = (events.@abstract.GameEvent) e;
+                    @event.Customise(data.CustomTitle, data.CustomDesc);
+                }
+                if (@event.IsValid() && @event.CanFire()) {
+                    if (@event.Mtth <= 0) {
+                        @event.Fire();
+                    } else {
+                        string id = @event.GetId();
+                        CountDown scheduledEvent = @event.Schedule(() => this.scheduled.Remove(id));
+                        this.scheduled.Add(id, scheduledEvent);
+                    }
+                }
+                
             }
         }
     }
