@@ -60,6 +60,20 @@ namespace ProjectArchaetech {
             }
             this.PopulatePool();
 
+            HashDictionary<string, int> testData = new HashDictionary<string, int>();
+            testData["No Event"] = 0;
+            for (int i = 0; i < 10000; i += 1) {
+                GameEvent e = this.pool[typeof(NewDayEvent)].Poll();
+                if (e == null) {
+                    testData["No Event"] += 1;
+                    continue;
+                }
+                if (testData.Contains(e.GetId())) {
+                    testData[e.GetId()] += 1;
+                } else {
+                    testData[e.GetId()] = 1;
+                }
+            }
             Global.EventBus.Subscribe<NewMonthEvent>((sender, e) => this.PollEvent(e));
         }
 

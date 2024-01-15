@@ -44,14 +44,27 @@ namespace ProjectArchaetech {
                     // If the item has at least one successor, 
                     // We calculate by how much should the successors be shifted down.
                     int diff = next.Key - key;
+                    
+                    this.totalWeight -= diff;
                     do {
                         this.items.Remove(next.Key);
                         this.items.Add(next.Key - diff, next.Value);
                         key = next.Key - diff;
                         this.lookUp[next.Value] = key;
                     } while (this.items.TrySuccessor(key, out next));
+                } else {
+                    this.totalWeight = key;
                 }
             }
+        }
+
+        public override string ToString() {
+            string str = "";
+            foreach (KeyValuePair<int, T> pair in this.items) {
+
+                str += pair.Value == null ? $"{pair.Key}: Null\n" : $"{pair.Key}: {pair.Value}\n";
+            }
+            return str;
         }
     }
 }

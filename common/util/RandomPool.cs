@@ -26,7 +26,11 @@ namespace ProjectArchaetech.common.util {
         public void Add(int weight, T t) {
             this.pool.Remove(default);
             this.pool.Add(new KeyValuePair<int, T>(weight, t));
-            this.pool.Add(new KeyValuePair<int, T>(this.pool.TotalWeight, default));
+            this.pool.Add(new KeyValuePair<int, T>(this.pool.TotalWeight, default));    
+        }
+
+        public override string ToString() {
+            return this.pool.ToString();
         }
     }
 }
