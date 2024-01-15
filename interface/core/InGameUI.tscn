@@ -146,6 +146,7 @@ expand_mode = 1
 
 [node name="EventPopups" type="CanvasLayer" parent="."]
 layer = 3
+visible = false
 
 [node name="EventWindow" type="PanelContainer" parent="EventPopups"]
 custom_minimum_size = Vector2(800, 350)
