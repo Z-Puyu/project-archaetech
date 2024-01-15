@@ -74,5 +74,6 @@
     <Content Include="static\Global.cs" />
     <Content Include="events\data\events.json" />
     <Content Include="events\data\template copy.json" />
+    <Content Include="common\util\CountDown.cs" />
   </ItemGroup>
 </Project>

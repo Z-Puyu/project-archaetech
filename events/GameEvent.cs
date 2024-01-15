@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using ProjectArchaetech.common.util;
 using ProjectArchaetech.interfaces;
 
 namespace ProjectArchaetech.events {
@@ -62,6 +63,12 @@ namespace ProjectArchaetech.events {
 		public RandomGameEvent(string prefix, int id, string title, string desc, int mtth, 
 			List<Option> options, int factor) : base(prefix, id, title, desc, mtth, options) {
 			this.Factor = factor;
+		}
+
+		public CountDown Schedule(Action @return) {
+			Random rand = new Random(Guid.NewGuid().GetHashCode());
+			int t = (int) (this.Mtth * (0.5 + rand.NextDouble() + rand.NextDouble() + 0.5 * rand.NextDouble()));
+			return new CountDown(t, this.Fire, @return);
 		}
 	}
 }

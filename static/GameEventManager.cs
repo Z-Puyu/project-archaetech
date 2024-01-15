@@ -14,10 +14,12 @@ namespace ProjectArchaetech {
         private const string EVENT_NAMESPACE = "ProjectArchaetech.util.events";
         private readonly HashDictionary<string, GameEvent> events;
         private readonly HashDictionary<Type, RandomPool<GameEvent>> pool;
+        private readonly HashDictionary<string, CountDown> scheduled;
 
         public GameEventManager() {
             this.events = new HashDictionary<string, GameEvent>();
             this.pool = new HashDictionary<Type, RandomPool<GameEvent>>();
+            this.scheduled = new HashDictionary<string, CountDown>();
         }
 
         private void PopulatePool() {
@@ -60,27 +62,26 @@ namespace ProjectArchaetech {
             }
             this.PopulatePool();
 
-            HashDictionary<string, int> testData = new HashDictionary<string, int>();
-            testData["No Event"] = 0;
-            for (int i = 0; i < 10000; i += 1) {
-                GameEvent e = this.pool[typeof(NewDayEvent)].Poll();
-                if (e == null) {
-                    testData["No Event"] += 1;
-                    continue;
-                }
-                if (testData.Contains(e.GetId())) {
-                    testData[e.GetId()] += 1;
-                } else {
-                    testData[e.GetId()] = 1;
-                }
-            }
+            Global.EventBus.Subscribe<NewDayEvent>((sender, e) => this.PollEvent(e));
+            Global.EventBus.Subscribe<NewWeekEvent>((sender, e) => this.PollEvent(e));
+            Global.EventBus.Subscribe<NewFortnightEvent>((sender, e) => this.PollEvent(e));
             Global.EventBus.Subscribe<NewMonthEvent>((sender, e) => this.PollEvent(e));
+            Global.EventBus.Subscribe<NewBiMonthEvent>((sender, e) => this.PollEvent(e));
+            Global.EventBus.Subscribe<NewQuarterEvent>((sender, e) => this.PollEvent(e));
+            Global.EventBus.Subscribe<NewHalfYearEvent>((sender, e) => this.PollEvent(e));
+            Global.EventBus.Subscribe<NewYearEvent>((sender, e) => this.PollEvent(e));
         }
 
         private void PollEvent(EventArgs globalEvent) {
             GameEvent e = this.pool[globalEvent.GetType()].Poll();
             if (e != default) {
-                e.Fire();
+                if (e is not RandomGameEvent) {
+                    GD.PushError($"{e.GetId()} is not a random event!");
+                } else {
+                    string id = e.GetId();
+                    CountDown scheduledEvent = ((RandomGameEvent) e).Schedule(() => this.scheduled.Remove(id));
+                    this.scheduled.Add(id, scheduledEvent);
+                }
             }
         }
     }
