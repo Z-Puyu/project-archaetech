@@ -1,8 +1,10 @@
 {
-    "godot_tools.editor_path": "f:\\Godot\\Godot_v4.2.1-stable_mono_win64.exe",
+    "godot_tools.editor_path": "d:\\Godot\\Godot_v4.2.1-stable_mono_win64.exe",
     "cSpell.words": [
         "Archaetech",
         "Godot",
+        "mtth",
+        "Poolable",
         "tres"
     ]
 }

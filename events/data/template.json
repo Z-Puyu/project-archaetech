@@ -1,0 +1,147 @@
+[
+    {
+        "$type": "Event",
+        "Prefix": "",
+        "Id": 0,
+        "Title": "",
+        "Desc": "",
+        "Mtth": 0,
+        "Options": [
+            {
+                "Id": "",
+                "Desc": "",
+                "Potential": {
+                    "Conditions": [
+                        {
+                            "$type": "Condition",
+                            "Name": "",
+                            "Arg": 0
+                        },
+                        {
+                            "$type": "AND",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "OR",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "XOR",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "NOT",
+                            "Conditions": []
+                        }
+                    ]
+                },
+                "Triggers": {
+                    "Conditions": [
+                        {
+                            "$type": "Condition",
+                            "Name": "",
+                            "Arg": 0
+                        },
+                        {
+                            "$type": "AND",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "OR",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "XOR",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "NOT",
+                            "Conditions": []
+                        }
+                    ]
+                },
+                "Effects": [
+                    {
+                        "name": "",
+                        "arg": 0,
+                        "tooltip": "",
+                        "visible": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "$type": "RandomEvent",
+        "Prefix": "",
+        "Id": 0,
+        "Title": "",
+        "Desc": "",
+        "Mtth": 0,
+        "Factor": 1,
+        "Options": [
+            {
+                "Id": "",
+                "Desc": "",
+                "Potential": {
+                    "Conditions": [
+                        {
+                            "$type": "Condition",
+                            "Name": "",
+                            "Arg": 0
+                        },
+                        {
+                            "$type": "AND",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "OR",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "XOR",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "NOT",
+                            "Conditions": []
+                        }
+                    ]
+                },
+                "Triggers": {
+                    "Conditions": [
+                        {
+                            "$type": "Condition",
+                            "Name": "",
+                            "Arg": 0
+                        },
+                        {
+                            "$type": "AND",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "OR",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "XOR",
+                            "Conditions": []
+                        },
+                        {
+                            "$type": "NOT",
+                            "Conditions": []
+                        }
+                    ]
+                },
+                "Effects": [
+                    {
+                        "name": "",
+                        "arg": 0,
+                        "tooltip": "",
+                        "visible": true
+                    }
+                ]
+            }
+        ]
+    }
+]

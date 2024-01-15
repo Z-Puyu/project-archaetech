@@ -3,10 +3,13 @@ using System;
 
 namespace ProjectArchaetech {
     public class RandomSelector<T> {
-        private TreeDictionary<int, T> items;
-        private HashDictionary<T, int> lookUp;
+        private readonly TreeDictionary<int, T> items;
+        private readonly HashDictionary<T, int> lookUp;
         private int totalWeight;
-        private Random rand;
+        private readonly Random rand;
+
+        public int TotalWeight => totalWeight;
+
 
         public RandomSelector() {
             this.items = new TreeDictionary<int, T>();
@@ -20,14 +23,14 @@ namespace ProjectArchaetech {
         }
 
         public T Select() {
-            double r = this.rand.NextDouble() * this.totalWeight;
+            double r = this.rand.NextDouble() * this.TotalWeight;
             return this.items.WeakPredecessor((int) r).Value;
         }
 
         public void Add(params KeyValuePair<int, T>[] items) {
             foreach (KeyValuePair<int, T> item in items) {
-                this.items.Add(this.totalWeight, item.Value);
-                this.lookUp.Add(item.Value, this.totalWeight);
+                this.items.Add(this.TotalWeight, item.Value);
+                this.lookUp.Add(item.Value, this.TotalWeight);
                 this.totalWeight += item.Key;
             }
         }
@@ -41,14 +44,27 @@ namespace ProjectArchaetech {
                     // If the item has at least one successor, 
                     // We calculate by how much should the successors be shifted down.
                     int diff = next.Key - key;
+                    
+                    this.totalWeight -= diff;
                     do {
                         this.items.Remove(next.Key);
                         this.items.Add(next.Key - diff, next.Value);
                         key = next.Key - diff;
                         this.lookUp[next.Value] = key;
                     } while (this.items.TrySuccessor(key, out next));
+                } else {
+                    this.totalWeight = key;
                 }
             }
+        }
+
+        public override string ToString() {
+            string str = "";
+            foreach (KeyValuePair<int, T> pair in this.items) {
+
+                str += pair.Value == null ? $"{pair.Key}: Null\n" : $"{pair.Key}: {pair.Value}\n";
+            }
+            return str;
         }
     }
 }

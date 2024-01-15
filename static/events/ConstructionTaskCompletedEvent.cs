@@ -2,7 +2,7 @@ using System;
 using Godot;
 using ProjectArchaetech.common.util;
 
-namespace ProjectArchaetech.events {
+namespace ProjectArchaetech.util.events {
     public class ConstructionTaskCompletedEvent<T> : EventArgs where T : Node {
         private readonly ConstructibleTask<T> task;
 

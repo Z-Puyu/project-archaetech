@@ -1,7 +1,7 @@
 using System;
 using Godot;
 using ProjectArchaetech.common;
-using ProjectArchaetech.events;
+using ProjectArchaetech.util.events;
 using ProjectArchaetech.resources;
 
 namespace ProjectArchaetech {

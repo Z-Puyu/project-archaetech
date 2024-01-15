@@ -7,7 +7,7 @@ func _ready():
 		Global.ResumeTime() if toggled else Global.PauseTime()
 	)
 	%NewBuildingButton.pressed.connect(func(): self._on_toggle_modal("construction"))
-	Global.CellSelected.connect(func(data: TileData): %InfoPanel.show())
+	Global.CellSelected.connect(func(cell: Cell, data: TileData): %InfoPanel.show())
 	Global.CellSelected.connect(%InfoPanel/%CellInfo.show_info)
 
 func _on_toggle_modal(window_name: String):

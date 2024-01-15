@@ -57,7 +57,7 @@ namespace ProjectArchaetech.util {
             );
         }
 
-        public Lazy<R> combine<S, R, U>(Lazy<S> lazy, Func<T, S, U> f) where U : class, R {
+        public Lazy<R> Combine<S, R, U>(Lazy<S> lazy, Func<T, S, U> f) where U : class, R {
             return Lazy<R>.Of(() => f.Invoke(this.Get(), lazy.Get()));
         }
 

@@ -2,7 +2,7 @@ using C5;
 using Godot;
 using Godot.Collections;
 using ProjectArchaetech.common.components;
-using ProjectArchaetech.events;
+using ProjectArchaetech.util.events;
 using ProjectArchaetech.interfaces;
 using ProjectArchaetech.resources;
 using ProjectArchaetech.util;

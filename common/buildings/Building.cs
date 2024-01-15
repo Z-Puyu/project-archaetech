@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Godot;
 using ProjectArchaetech.common.components;
 using ProjectArchaetech.common.util;
-using ProjectArchaetech.events;
+using ProjectArchaetech.util.events;
 using ProjectArchaetech.interfaces;
 using ProjectArchaetech.resource;
 using ProjectArchaetech.resources;

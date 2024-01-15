@@ -3,7 +3,7 @@ using C5;
 using Godot;
 using ProjectArchaetech.common;
 
-namespace ProjectArchaetech.events {
+namespace ProjectArchaetech.util.events {
 	[GlobalClass]
 	public partial class EventBus : Node {
 		private readonly HashDictionary<Type, EventHandler> subscribers;

@@ -1,5 +1,5 @@
 using System;
 
-namespace ProjectArchaetech.events {
+namespace ProjectArchaetech.util.events {
     public class NewMonthEvent : EventArgs { }
 }

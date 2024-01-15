@@ -7,7 +7,7 @@
 script = ExtResource("1_krech")
 name = "Documenter"
 desc = ""
-input = {}
+input = null
 output = {
 ExtResource("1_lc7uc"): 10.0
 }
