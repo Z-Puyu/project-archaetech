@@ -1,6 +1,7 @@
 class_name EventWindow extends PanelContainer
 const GameEvent = preload("res://events/GameEvent.cs")
 const OPTION = preload("res://interface/events/EventOptionButton.tscn")
+const EventOptionButton = preload("res://interface/events/EventOptionButton.gd")
 
 @onready var _event_contents: VBoxContainer = %EventContents
 

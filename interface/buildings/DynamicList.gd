@@ -1,5 +1,6 @@
 class_name DynamicList extends VBoxContainer
 const TransportRoute = preload("res://common/buildings/transport/TransportRoute.cs")
+const TransportRouteInfo = preload("res://interface/buildings/TransportRouteInfo.gd")
 
 var _listables: Dictionary = {
 	typeof(TransportRoute): preload("res://interface/buildings/TransportRouteInfo.tscn")
