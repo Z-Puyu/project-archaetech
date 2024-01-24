@@ -3,6 +3,7 @@ using Godot;
 using Godot.Collections;
 using ProjectArchaetech.common;
 using ProjectArchaetech.common.util;
+using ProjectArchaetech.resources;
 using ProjectArchaetech.util.events;
 using static ProjectArchaetech.util.events.EventBus;
 
@@ -65,7 +66,9 @@ namespace ProjectArchaetech {
 					// No construction going on, so remove the existing one.
 					DeleteBuilding(this.SelectedCell);
 				}
-				Global.ResManager.Consume(obj.Data.Cost);
+				foreach (ResourceData res in obj.Data.Cost.Keys) {
+					res.Use(obj.Data.Cost[res]);
+				}
 				obj.Translate(this.SelectedCell.LocalCoords);
 				obj.ZIndex = 1;
 				ConstructibleTask<Building> newTask = new ConstructibleTask<Building>(

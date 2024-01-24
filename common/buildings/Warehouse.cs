@@ -64,13 +64,13 @@ namespace ProjectArchaetech.common {
 			}
 		}
 
-		public void Consume(Dictionary<ResourceData, double> affectedResources) {
+		private void Consume(Dictionary<ResourceData, double> affectedResources) {
 			foreach (ResourceData res in affectedResources.Keys) {
 				this.Consume(res, affectedResources[res]);
 			}
 		}
 
-		public void Consume(Dictionary<ResourceData, int> affectedResources) {
+		private void Consume(Dictionary<ResourceData, int> affectedResources) {
 			foreach (ResourceData res in affectedResources.Keys) {
 				this.Consume(res, affectedResources[res]);
 			}

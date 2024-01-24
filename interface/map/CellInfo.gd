@@ -8,4 +8,4 @@ const Cell = preload("res://common/map/Cell.cs")
 		return components
 
 func show_info(cell: Cell, data: TileData):
-	self.components.get("terrain").set_text(data.get_custom_data("terrain").name)
+	self.components.get("terrain").set_text(data.get_custom_data("terrain").Name)

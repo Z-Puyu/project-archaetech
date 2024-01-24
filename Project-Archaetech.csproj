@@ -83,7 +83,12 @@
     <Content Include="static\events\GameEventFiredEvent.cs" />
     <Content Include="interface\events\EventPopups.cs" />
     <Content Include="static\PathFinder.cs" />
-    <Content Include="common\terrain\TerrainData.cs" />
-    <Content Include="common\terrain\TerrainType.cs" />
+    <Content Include="common\map\terrain\TerrainType.cs" />
+    <Content Include="common\map\terrain\TerrainData.cs" />
+    <Content Include="common\units\UnitData.cs" />
+    <Content Include="common\util\IConsumable.cs" />
+    <Content Include="static\PopManager.cs" />
+    <Content Include="static\BuildingManager.cs" />
+    <Content Include="static\ResourceManager.cs" />
   </ItemGroup>
 </Project>

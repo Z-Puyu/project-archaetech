@@ -1,5 +1,5 @@
 class_name Explorer extends Node2D
-const UnitData = preload("res://common/units/UnitData.gd")
+const UnitData = preload("res://common/units/UnitData.cs")
 
 @export var data: UnitData;
 var id: String;

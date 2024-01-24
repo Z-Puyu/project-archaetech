@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TerrainData" load_steps=2 format=3 uid="uid://bce52sx4o7sel"]
+
+[ext_resource type="Script" path="res://common/map/terrain/TerrainData.cs" id="1_yyqh3"]
+
+[resource]
+script = ExtResource("1_yyqh3")
+Type = 0
+Name = "Plains"
+TimeToTraverse = 5
+Harmful = false
+Damage = 0
+ResourceProbability = 0.0
+DiscoverableResources = null

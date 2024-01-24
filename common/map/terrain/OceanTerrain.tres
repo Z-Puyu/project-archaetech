@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TerrainData" load_steps=2 format=3 uid="uid://dbtwq3h3rpn27"]
+
+[ext_resource type="Script" path="res://common/map/terrain/TerrainData.cs" id="1_alg2v"]
+
+[resource]
+script = ExtResource("1_alg2v")
+IsWater = true
+Name = "Ocean"
+TimeToTraverse = 3
+Harmful = false
+Damage = 0
+ResourceProbability = 0.0
+DiscoverableResources = null

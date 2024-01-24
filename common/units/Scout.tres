@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=2 format=3 uid="uid://b0fs7hjq7eekl"]
+
+[ext_resource type="Script" path="res://common/units/UnitData.cs" id="1_765ds"]
+
+[resource]
+script = ExtResource("1_765ds")
+Name = "Scout"
+Speed = 1.0
+Cost = {}

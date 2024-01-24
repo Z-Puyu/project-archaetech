@@ -35,7 +35,7 @@ namespace ProjectArchaetech.common {
 
 		public void Recruit(JobData job = null) {
 			int shortage = this.Level - this.Manpower;
-			int nRecruited = Math.Min(shortage, Global.PopManager.GetUnemployment());
+			int nRecruited = Math.Min(shortage, Global.PopManager.CountUnemployed());
 			if (nRecruited == 0) {
 				this.Level = Math.Max(this.Level - 1, this.manpower);
 			} else {
@@ -58,7 +58,7 @@ namespace ProjectArchaetech.common {
 			}
 			double maintenanceCost = this.Spec.MaintenanceCost[this.Manpower] * this.Manpower;
 			if (Global.ResManager.HasEnough(this.Spec.MaintenanceType, maintenanceCost)) {
-				Global.ResManager.Consume(this.Spec.MaintenanceType, maintenanceCost);
+				this.Spec.MaintenanceType.Use(maintenanceCost);
 				((ProductiveBuilding) this.to).Store(((ProductiveBuilding) this.From).Take(this.Resources));
 			}
 			if (this.Manpower < this.level) {

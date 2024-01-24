@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata;
 using C5;
 using Godot;
-using Godot.Collections;
 using ProjectArchaetech.common;
 using ProjectArchaetech.util.events;
 using ProjectArchaetech.resources;
+using System.Linq;
+using System.Numerics;
 
 namespace ProjectArchaetech {
 	[GlobalClass]
@@ -27,7 +27,7 @@ namespace ProjectArchaetech {
 
 		private readonly C5.HashSet<Pop> employedAdults;
 		private readonly C5.HashSet<Pop> children;
-		private readonly HashedLinkedList<Pop> unemployedAdults;
+		private readonly HashDictionary<Competency, HashedLinkedList<Pop>> unemployedAdults;
 		private double growthRate;
 		private double growthProgress;
 		private double sol;
@@ -49,15 +49,18 @@ namespace ProjectArchaetech {
 			this.PrimaryFoodChoices = new Godot.Collections.Dictionary<ResourceData, int>();
 			this.employedAdults = new C5.HashSet<Pop>();
 			this.children = new C5.HashSet<Pop>();
-			this.unemployedAdults = new HashedLinkedList<Pop>();
+			this.unemployedAdults = new HashDictionary<Competency, HashedLinkedList<Pop>>();
 			this.primarySelector = new RandomSelector<ResourceData>();
 			this.secondarySelector = new RandomSelector<ResourceData>();
 			this.randomPopSelector = new Random(Guid.NewGuid().GetHashCode());
 		}
 
 		public override void _Ready() {
+			for (Competency c = Competency.Novice; c <= Competency.Expert; c += 1) {
+				this.unemployedAdults.Add(c, new HashedLinkedList<Pop>());
+			}
 			for (int i = 0; i < 25; i += 1) {
-				this.unemployedAdults.InsertFirst(new Pop(false));
+				this.unemployedAdults[Competency.Novice].InsertFirst(new Pop(false));
 			}
 			for (int i = 0; i < 10; i += 1) {
 				this.children.Add(new Pop(true));
@@ -74,8 +77,16 @@ namespace ProjectArchaetech {
 			}
 		}
 
+		public int CountUnemployed() {
+			int n = 0;
+			foreach (HashedLinkedList<Pop> list in this.unemployedAdults.Values) {
+				n += list.Count;
+			}
+			return n;
+		}
+
 		public int PopCount() {
-			return this.unemployedAdults.Count + this.employedAdults.Count + this.children.Count;
+			return this.CountUnemployed() + this.employedAdults.Count + this.children.Count;
 		}
 
 		private int ConsumeFood() {
@@ -130,7 +141,7 @@ namespace ProjectArchaetech {
 						}
 						continue;
 					}
-					Global.ResManager.Consume(foodType, perCapitaNeed);
+					foodType.Use(perCapitaNeed);
 				}
 				// The higher the SOL, the higher the expectation :O
 				this.sol -= Math.Clamp((this.sol - MEAN_SOL) * 0.0005 * nUnsatisfied, 0, 0.2);
@@ -155,7 +166,7 @@ namespace ProjectArchaetech {
 					}
 					continue;
 				}
-				Global.ResManager.Consume(foodType, perCapitaNeed);
+				foodType.Use(perCapitaNeed);
 				nUnfedAdults -= 1;
 			}
 			return true;
@@ -178,7 +189,7 @@ namespace ProjectArchaetech {
 					}
 					continue;
 				}
-				Global.ResManager.Consume(foodType, perCapitaNeed);
+				foodType.Use(perCapitaNeed);
 				nUnfedChildren -= 1;
 			}
 			return true;
@@ -212,24 +223,82 @@ namespace ProjectArchaetech {
 			}
 		}
 
+		private bool TryFindVeteran(JobData job, out Pop pop) {
+			pop = null;
+			IEnumerable<double> xp = [];
+			IEnumerable<Pop> targets = this.unemployedAdults[Competency.Expert]
+				.Where(pop => pop.GetCompetencyOf(job, ref xp)).ToList();
+			if (targets.Any()) {
+				// Find any expert.
+				pop = targets.First();
+				this.unemployedAdults[Competency.Expert].Remove(pop);
+				return true;
+			}
+			xp = [];
+			targets = this.unemployedAdults[Competency.Regular]
+				.Where(pop => pop.GetCompetencyOf(job, ref xp));
+			if (this.FindMostExperienced(targets, xp, ref pop)) {
+				return true;
+			}
+			xp = [];
+			targets = this.unemployedAdults[Competency.Novice]
+				.Where(pop => pop.GetCompetencyOf(job, ref xp));
+			if (this.FindMostExperienced(targets, xp, ref pop)) {
+				return true;
+			}
+			return false;
+		}
+
+		private bool FindMostExperienced(IEnumerable<Pop> pops, IEnumerable<double> xp, 
+			ref Pop pop) {
+			if (pops.Any()) {
+				// Find a regular with greatest xp.
+				double max = double.MinValue;
+				int idx = -1;
+				foreach (double val in xp) {
+					if (val > max) {
+						max = val;
+					}
+					idx += 1;
+				}
+				pop = pops.ToList()[idx];
+				this.unemployedAdults[Competency.Regular].Remove(pop);
+				return true;
+			}
+			return false;
+		}
+
 		public List<Pop> PopFindJobs(JobData job, int n) {
 			List<Pop> newRecruits = new List<Pop>(n);
 			for (int i = 0; i < n; i += 1) {
-				int which = this.randomPopSelector.Next(this.unemployedAdults.Count);
-				Pop who = this.unemployedAdults.RemoveAt(which);
-				who.acquireJob(job);
+				if (!this.TryFindVeteran(job, out Pop who)) {
+					int idx = this.randomPopSelector.Next(
+						this.unemployedAdults[Competency.Novice].Count
+					);
+					who = this.unemployedAdults[Competency.Novice].RemoveAt(idx);
+				}
+				who.AcquireJob(job);
 				this.employedAdults.Add(who);
 				newRecruits.Add(who);
-				if (this.unemployedAdults.Count == 0) {
+				if (this.CountUnemployed() == 0) {
 					break;
 				}
 			}
-			this.EmitSignal(SignalName.PopCountUpdated, this.PopCount(), this.unemployedAdults.Count);
+			this.EmitSignal(SignalName.PopCountUpdated, this.PopCount(), this.CountUnemployed());
 			return newRecruits;
 		}
 
-		public int GetUnemployment() {
-			return this.unemployedAdults.Count;
+		public List<Pop> RecruitPops(int n) {
+			List<Pop> recruits = new List<Pop>(n);
+			if (this.CountUnemployed() >= n) {
+				foreach (Competency c in this.unemployedAdults.Keys) {
+					while (n > 0 && !this.unemployedAdults[c].IsEmpty) {
+						recruits.Add(this.unemployedAdults[c].Remove());
+						n -= 1;
+					}
+				}
+			}
+			return recruits;
 		}
 
 		public void PopGrow() {

@@ -1,4 +1,4 @@
-class_name Main extends Node2D
+extends Node2D
 
 func _ready():
 	%PlayButton.pressed.connect(self._on_play_pressed)

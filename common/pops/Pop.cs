@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using C5;
 using Godot;
 using ProjectArchaetech.resources;
@@ -52,7 +53,7 @@ namespace ProjectArchaetech.common {
             }
         }
 
-        public void acquireJob(JobData job) {
+        public void AcquireJob(JobData job) {
             if (!this.xp.Contains(job)) {
                 while (this.xp.Count >= 3) {
                     this.xp.Remove(this.workedJobs.Dequeue());
@@ -68,8 +69,21 @@ namespace ProjectArchaetech.common {
             }
         }
 
-        public Competency GetCompetencyOf(JobData job) {
-            return this.xp[job].Item1;
+        public bool GetCompetencyOf(JobData job, out Competency c) {
+            if (this.workedJobs.Contains(job)) {
+                c = this.xp[job].Item1;
+                return true;
+            }
+            c = 0;
+            return false;
+        }
+
+        public bool GetCompetencyOf(JobData job, ref IEnumerable<double> xp) {
+            if (this.workedJobs.Contains(job)) {
+                xp = xp.Append<double>(this.xp[job].Item2);
+                return true;
+            }
+            return false;
         }
     }
 }

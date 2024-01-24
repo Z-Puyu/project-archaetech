@@ -36,12 +36,14 @@ namespace ProjectArchaetech.common.components {
                     currNWorkers += this.workers[job][(int) competency].Count;
                 }
                 if (currNWorkers < this.employmentCap[job] && 
-                    Global.PopManager.GetUnemployment() > 0) {
+                    Global.PopManager.CountUnemployed() > 0) {
                     int shortage = this.employmentCap[job] - currNWorkers;
-                    int nRecruited = Math.Min(shortage, Global.PopManager.GetUnemployment());
+                    int nRecruited = Math.Min(shortage, Global.PopManager.CountUnemployed());
                     List<Pop> newRecruits = Global.PopManager.PopFindJobs(job, nRecruited);
                     foreach (Pop pop in newRecruits) {
-                        this.workers[job][(int) pop.GetCompetencyOf(job)].Add(pop);
+                        if (pop.GetCompetencyOf(job, out Competency c)) {
+                             this.workers[job][(int) c].Add(pop);
+                        }
                     }
                 }
 			}

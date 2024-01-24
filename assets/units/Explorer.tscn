@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://common/units/Explorer.gd" id="1_88nln"]
 [ext_resource type="Texture2D" uid="uid://cwtfdb6jceq3e" path="res://gfx/map-objects/Explorer.png" id="2_ji2vs"]
-[ext_resource type="Resource" uid="uid://b0fs7hjq7eekl" path="res://common/units/Explorer.tres" id="2_qmr3n"]
+[ext_resource type="Resource" uid="uid://b0fs7hjq7eekl" path="res://common/units/Scout.tres" id="2_qmr3n"]
 
 [node name="Explorer" type="Node2D"]
 show_behind_parent = true

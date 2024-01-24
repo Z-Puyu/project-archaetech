@@ -20,6 +20,10 @@ namespace ProjectArchaetech.resources {
 			this.type = ResourceType.CommonRaw;
 		}
 
+		public void Use(double amount) {
+			Global.ResManager.Consume(this, amount);
+		}
+		
 		public override string ToString() {
 			return this.name;
 		}
