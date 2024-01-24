@@ -70,12 +70,6 @@ namespace ProjectArchaetech.common {
 			}
 		}
 
-		private void Consume(Dictionary<ResourceData, int> affectedResources) {
-			foreach (ResourceData res in affectedResources.Keys) {
-				this.Consume(res, affectedResources[res]);
-			}
-		}
-
 		public Dictionary<ResourceData, double> TakeAway(Dictionary<ResourceData, double> resources) {
 			Dictionary<ResourceData, double> taken = new Dictionary<ResourceData, double>();
 			foreach (ResourceData res in resources.Keys) {

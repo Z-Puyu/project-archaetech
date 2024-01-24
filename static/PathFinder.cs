@@ -30,7 +30,7 @@ namespace ProjectArchaetech {
         private readonly HashDictionary<Vector2I, List<Vector2I>> adjacency;
         private readonly double unitLength;
         private readonly C5.HashSet<Vector2I> visited;
-        private readonly TreeDictionary<int, IEnumerable<Vector2I>> pq;
+        private readonly TreeDictionary<int, IEnumerable<ValueTuple<Cell, int>>> pq;
 
         public PathFinder(Map map, HashDictionary<Vector2I, Cell> nodes) {
             this.map = map;
@@ -40,7 +40,7 @@ namespace ProjectArchaetech {
                 this.ConnectNeighbours(pos);
             }
             this.unitLength = map.GetDistance(new Vector2I(0, 0), new Vector2I(0, 1));
-            this.pq = new TreeDictionary<int, IEnumerable<Vector2I>>();
+            this.pq = new TreeDictionary<int, IEnumerable<ValueTuple<Cell, int>>>();
         }
 
         private double ComputeCost(Vector2I from, Vector2I to) {
@@ -97,24 +97,27 @@ namespace ProjectArchaetech {
             }
         }
 
-        public IEnumerable<Vector2I> FindPath(Vector2I from, Vector2I to) {
-            List<Vector2I> initPath = [from];
+        public IEnumerable<ValueTuple<Cell, int>> FindPath(Vector2I from, Vector2I to) {
+            List<ValueTuple<Cell, int>> initPath = [new (this.map.GetCell(from), 0)];
             this.pq.Add(0, initPath);
             this.visited.Add(from);
             
             while (!this.pq.IsEmpty) {
-                C5.KeyValuePair<int, IEnumerable<Vector2I>> curr = this.pq.DeleteMin();
-                Vector2I currPos = curr.Value.Last();
-                if (currPos == to) {
+                C5.KeyValuePair<int, IEnumerable<ValueTuple<Cell, int>>> curr = this.pq.DeleteMin();
+                ValueTuple<Cell, int> currPos = curr.Value.Last();
+                if (currPos.Item1.Pos == to) {
                     return curr.Value; // Reached!
                 }
-                foreach (Vector2I u in this.adjacency[currPos]) {
+                foreach (Vector2I u in this.adjacency[currPos.Item1.Pos]) {
                     if (this.visited.Contains(u)) {
                         continue;
                     }
                     this.visited.Add(u);
                     int cost = curr.Key + this.CostBetween(from, u, to);
-                    this.pq.Add(cost, curr.Value.Append(u));
+                    this.pq.Add(cost, curr.Value.Append(new (
+                        this.map.GetCell(u), 
+                        (int) Math.Ceiling(this.ComputeCost(currPos.Item1.Pos, u))
+                    )));
                 }
             }
 

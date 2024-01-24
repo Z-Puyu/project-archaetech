@@ -90,5 +90,7 @@
     <Content Include="static\PopManager.cs" />
     <Content Include="static\BuildingManager.cs" />
     <Content Include="static\ResourceManager.cs" />
+    <Content Include="common\units\Unit.cs" />
+    <Content Include="common\components\MovementFunctionality.cs" />
   </ItemGroup>
 </Project>

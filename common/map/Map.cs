@@ -70,6 +70,10 @@ namespace ProjectArchaetech.common {
 			return this.MapToLocal(from).DistanceTo(this.MapToLocal(to));
 		}
 
+		public Cell GetCell(Vector2I pos) {
+			return this.Grid[pos];
+		}
+
 		private void SelectCell(InputEvent e) {
 			Vector2 mousePos = ((InputEventMouse) this.MakeInputLocal(e)).Position;
 			Vector2I mapCoords = this.LocalToMap(mousePos);

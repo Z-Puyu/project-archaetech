@@ -1,15 +1,18 @@
 using Godot;
 using Godot.Collections;
 using MonoCustomResourceRegistry;
-using ProjectArchaetech.resources;
 
-namespace ProjectArchaetech.common {
+namespace ProjectArchaetech.resources {
     [RegisteredType(nameof(Tech), "", nameof(Resource)), GlobalClass]
     public partial class UnitData : Resource{
         [Export]
         public string Name { get; set; }
         [Export]
+        public Texture2D Icon { get; set; }
+        [Export]
         public double Speed { get; set; }
+        [Export]
+        public int PopCost { get; set; }
         [Export]
         public Dictionary<ResourceData, int> Cost { get; set; }
 
