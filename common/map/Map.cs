@@ -17,14 +17,6 @@ namespace ProjectArchaetech.common {
 			Cells
 		}
 
-		private enum Terrain {
-			Plains,
-			Ocean,
-			Forest,
-			Desert,
-			Mountains
-		}
-
 		private readonly Dictionary<Vector2I, Cell> grid;
 		private readonly HashDictionary<Vector2I, Cell> navigableLand;
 		private readonly HashDictionary<Vector2I, Cell> navigableWater;
@@ -67,6 +59,15 @@ namespace ProjectArchaetech.common {
 					}
 				}
 			}
+		}
+
+		public TerrainData GetTerrain(Vector2I pos) {
+			return (TerrainData) this.GetCellTileData((int) Layer.Land, pos)
+				.GetCustomData("terrain");
+		}
+
+		public double GetDistance(Vector2I from, Vector2I to) {
+			return this.MapToLocal(from).DistanceTo(this.MapToLocal(to));
 		}
 
 		private void SelectCell(InputEvent e) {

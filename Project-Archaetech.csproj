@@ -82,5 +82,8 @@
     <Content Include="interface\events\EventOptionButton.cs" />
     <Content Include="static\events\GameEventFiredEvent.cs" />
     <Content Include="interface\events\EventPopups.cs" />
+    <Content Include="static\PathFinder.cs" />
+    <Content Include="common\terrain\TerrainData.cs" />
+    <Content Include="common\terrain\TerrainType.cs" />
   </ItemGroup>
 </Project>
